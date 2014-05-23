@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Android-Jigsaw-Puzzle.iml" filepath="$PROJECT_DIR$/Android-Jigsaw-Puzzle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/draw/draw.iml" filepath="$PROJECT_DIR$/draw/draw.iml" />
     </modules>
   </component>
 </project>
