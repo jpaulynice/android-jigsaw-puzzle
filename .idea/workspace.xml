@@ -2,12 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="333188e4-3711-41db-8a68-9715123dc1ae" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.settings/org.eclipse.jdt.core.prefs" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gitignore" afterPath="$PROJECT_DIR$/.gitignore" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Android-Jigsaw-Puzzle.iml" afterPath="$PROJECT_DIR$/Android-Jigsaw-Puzzle.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/draw/draw.iml" afterPath="$PROJECT_DIR$/draw/draw.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/README.md" afterPath="$PROJECT_DIR$/README.md" />
     </list>
     <ignored path="Android-Jigsaw-Puzzle.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -98,10 +93,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name=".gitignore" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name=".gitignore" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="7" selection-start="95" selection-end="95" vertical-scroll-proportion="0.30150753" vertical-offset="0" max-vertical-offset="405">
+            <state line="8" column="7" selection-start="95" selection-end="95" vertical-scroll-proportion="-4.8" vertical-offset="0" max-vertical-offset="405">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="README.md" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/README.md">
+          <provider editor-type-id="MarkdownPreviewEditor">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="102" selection-start="193" selection-end="193" vertical-scroll-proportion="0.15151516" vertical-offset="0" max-vertical-offset="396">
               <folding />
             </state>
           </provider>
@@ -831,6 +838,7 @@
         <option value="$PROJECT_DIR$/src/com/jigsaw/dao/BaseDao.java" />
         <option value="$PROJECT_DIR$/src/com/jigsaw/dao/impl/BaseDaoImpl.java" />
         <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -1316,7 +1324,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.gitignore">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="7" selection-start="95" selection-end="95" vertical-scroll-proportion="0.30150753" vertical-offset="0" max-vertical-offset="405">
+        <state line="8" column="7" selection-start="95" selection-end="95" vertical-scroll-proportion="-4.8" vertical-offset="0" max-vertical-offset="405">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="MarkdownPreviewEditor">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="102" selection-start="193" selection-end="193" vertical-scroll-proportion="0.15151516" vertical-offset="0" max-vertical-offset="396">
           <folding />
         </state>
       </provider>
