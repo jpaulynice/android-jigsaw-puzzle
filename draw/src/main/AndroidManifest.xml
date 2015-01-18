@@ -1,20 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.jigdraw.draw" >
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-
-
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.jigdraw.draw">
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme">
         <activity
-            android:name="com.jigdraw.draw.MainActivity"
+            android:name=".activity.MainActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -6,5 +6,5 @@
     For more on layout aliases, see:
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
-    <item type="layout" name="activity_jigsaw_list">@layout/activity_main</item>
+    <item name="activity_jigsaw_list" type="layout">@layout/activity_main</item>
 </resources>

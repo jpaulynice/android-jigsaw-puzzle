@@ -1,5 +1,6 @@
 buildscript {
     repositories {
+        mavenLocal()
         mavenCentral()
     }
     dependencies {
@@ -9,6 +10,7 @@ buildscript {
 apply plugin: 'android'
 
 repositories {
+    mavenLocal()
     mavenCentral()
 }
 
@@ -32,4 +34,5 @@ android {
 
 dependencies {
     compile 'com.android.support:support-v4:19.0.0'
+    compile 'com.squareup.picasso:picasso:2.4.0'
 }

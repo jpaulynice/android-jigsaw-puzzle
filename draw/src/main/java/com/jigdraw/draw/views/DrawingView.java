@@ -1,4 +1,4 @@
-package com.jigdraw.draw;
+package com.jigdraw.draw.views;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -13,33 +13,26 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.jigdraw.draw.R;
+
 /**
  * Created by Jay Paulynice on 1/16/15.
  */
-public class DrawingView extends View{
-    //drawing path
+public class DrawingView extends View {
     private Path drawPath;
-    //drawing and canvas paint
     private Paint drawPaint, canvasPaint;
-    //initial color
     private int paintColor = 0xFF660000;
-    //canvas
     private Canvas drawCanvas;
-    //canvas bitmap
     private Bitmap canvasBitmap;
-    //brush sizes
     private float brushSize, lastBrushSize;
-    //erase flag
-    private boolean erase=false;
+    private boolean erase = false;
 
-    public DrawingView(Context context, AttributeSet attrs){
+    public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setupDrawing();
     }
 
-    //setup drawing
-    private void setupDrawing(){
-
+    private void setupDrawing() {
         //prepare for drawing and setup paint stroke properties
         brushSize = getResources().getInteger(R.integer.medium_size);
         lastBrushSize = brushSize;
@@ -54,7 +47,6 @@ public class DrawingView extends View{
         canvasPaint = new Paint(Paint.DITHER_FLAG);
     }
 
-    //size assigned to view
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -62,14 +54,12 @@ public class DrawingView extends View{
         drawCanvas = new Canvas(canvasBitmap);
     }
 
-    //draw the view - will be called after touch event
     @Override
     protected void onDraw(Canvas canvas) {
         canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
         canvas.drawPath(drawPath, drawPaint);
     }
 
-    //register user touches as drawing action
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         float touchX = event.getX();
@@ -96,38 +86,34 @@ public class DrawingView extends View{
 
     }
 
-    //update color
-    public void setColor(String newColor){
+    public void setColor(String newColor) {
         invalidate();
         paintColor = Color.parseColor(newColor);
         drawPaint.setColor(paintColor);
     }
 
-    //set brush size
-    public void setBrushSize(float newSize){
+    public void setBrushSize(float newSize) {
         float pixelAmount = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 newSize, getResources().getDisplayMetrics());
-        brushSize=pixelAmount;
+        brushSize = pixelAmount;
         drawPaint.setStrokeWidth(brushSize);
     }
 
-    //get and set last brush size
-    public void setLastBrushSize(float lastSize){
-        lastBrushSize=lastSize;
-    }
-    public float getLastBrushSize(){
+    public float getLastBrushSize() {
         return lastBrushSize;
     }
 
-    //set erase true or false
-    public void setErase(boolean isErase){
-        erase=isErase;
-        if(erase) drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+    public void setLastBrushSize(float lastSize) {
+        lastBrushSize = lastSize;
+    }
+
+    public void setErase(boolean isErase) {
+        erase = isErase;
+        if (erase) drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         else drawPaint.setXfermode(null);
     }
 
-    //start new drawing
-    public void startNew(){
+    public void startNew() {
         drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
     }
