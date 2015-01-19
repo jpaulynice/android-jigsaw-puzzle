@@ -2,11 +2,8 @@
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:dither="true"
     android:shape="oval">
-
     <size
         android:width="@dimen/large_brush"
         android:height="@dimen/large_brush" />
-
     <solid android:color="#FF666666" />
-
 </shape>

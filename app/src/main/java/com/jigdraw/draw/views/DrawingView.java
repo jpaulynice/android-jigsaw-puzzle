@@ -16,6 +16,9 @@ import android.widget.ImageButton;
 
 import com.jigdraw.draw.R;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Created by Jay Paulynice on 1/16/15.
  */
