@@ -1,1 +1,1 @@
-include ':draw'
+include ':app'
