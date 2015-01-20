@@ -12,15 +12,13 @@ import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageButton;
 
 import com.jigdraw.draw.R;
 
-import java.util.Arrays;
-import java.util.List;
-
 /**
- * Created by Jay Paulynice on 1/16/15.
+ * Custom view to represent the drawing canvas the user use to draw.
+ *
+ * Created by Jay Paulynice
  */
 public class DrawingView extends View {
     private Path drawPath;

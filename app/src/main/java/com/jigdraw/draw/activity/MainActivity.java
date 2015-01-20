@@ -17,19 +17,34 @@ import android.widget.Toast;
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.views.DrawingView;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 /**
- * Main activity class
+ * Main activity class represents all the activities that a user starts with
+ * such as create a new drawing, save the current drawing, choose eraser and
+ * brush sizes etc.
  *
  * @author Jay Paulynice
  */
 public class MainActivity extends Activity implements OnClickListener {
+    /**
+     * activity class for logging
+     */
     private static final String TAG = "MainActivity";
+
+    /**
+     * the drawing view
+     */
     private DrawingView drawView;
+
+    /**
+     * buttons for drawing
+     */
     private ImageButton currPaint, eraseBtn, newBtn, saveBtn;
+
+    /**
+     * brush sizes
+     */
     private float smallBrush, mediumBrush, largeBrush, largestBrush;
 
     @Override
@@ -56,32 +71,32 @@ public class MainActivity extends Activity implements OnClickListener {
         }
     }
 
+    /**
+     * Handle the change of the brush size
+     *
+     * @param view the current brush view
+     */
     public void handleBrushSize(View view) {
+        float bSize = mediumBrush;
         if (view.getId() == R.id.small_brush) {
             Log.d(TAG, "small brush clicked.");
-            drawView.setErase(false);
-            drawView.setBrushSize(smallBrush);
-            drawView.setLastBrushSize(smallBrush);
-        } else if (view.getId() == R.id.medium_brush) {
-            Log.d(TAG, "medium brush clicked.");
-            drawView.setErase(false);
-            drawView.setBrushSize(mediumBrush);
-            drawView.setLastBrushSize(mediumBrush);
+            bSize = smallBrush;
         } else if (view.getId() == R.id.large_brush) {
             Log.d(TAG, "large brush clicked.");
-            drawView.setErase(false);
-            drawView.setBrushSize(largeBrush);
-            drawView.setLastBrushSize(largeBrush);
+            bSize = largeBrush;
         } else if (view.getId() == R.id.largest_brush) {
             Log.d(TAG, "largest brush clicked.");
-            drawView.setErase(false);
-            drawView.setBrushSize(largestBrush);
-            drawView.setLastBrushSize(largestBrush);
+            bSize = largestBrush;
         }
+        drawView.setErase(false);
+        drawView.setBrushSize(bSize);
+        drawView.setLastBrushSize(bSize);
     }
 
     /**
-     * @param view
+     * Handles the change of color chosen
+     *
+     * @param view the view for the color chosen
      */
     public void paintClicked(View view) {
         drawView.setErase(false);
@@ -101,6 +116,11 @@ public class MainActivity extends Activity implements OnClickListener {
         }
     }
 
+    /**
+     * Set the brushes to the color chosen
+     *
+     * @param color the chosen color
+     */
     public void setBrushColor(String color) {
         ImageButton a = (ImageButton) findViewById(R.id.small_brush);
         ImageButton b = (ImageButton) findViewById(R.id.medium_brush);
@@ -113,6 +133,9 @@ public class MainActivity extends Activity implements OnClickListener {
         d.setBackgroundColor(Color.parseColor(color));
     }
 
+    /**
+     * Initialize all the ui components
+     */
     private void init() {
         setContentView(R.layout.activity_main);
 
@@ -122,17 +145,26 @@ public class MainActivity extends Activity implements OnClickListener {
         initButtons();
     }
 
+    /**
+     * Initialize the layout and set current color to first one
+     */
     private void initLayout() {
         LinearLayout paintLayout = (LinearLayout) findViewById(R.id.paint_colors);
         currPaint = (ImageButton) paintLayout.getChildAt(0);
         currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
     }
 
+    /**
+     * Initialize the drawing view
+     */
     private void initView() {
         drawView = (DrawingView) findViewById(R.id.drawing);
         drawView.setBrushSize(mediumBrush);
     }
 
+    /**
+     * Initialize the brushes
+     */
     private void initBrushes() {
         smallBrush = getResources().getInteger(R.integer.small_size);
         mediumBrush = getResources().getInteger(R.integer.medium_size);
@@ -140,6 +172,9 @@ public class MainActivity extends Activity implements OnClickListener {
         largestBrush = getResources().getInteger(R.integer.largest_size);
     }
 
+    /**
+     * Initialize the buttons
+     */
     private void initButtons() {
         //erase button
         eraseBtn = (ImageButton) findViewById(R.id.erase_btn);
@@ -154,10 +189,16 @@ public class MainActivity extends Activity implements OnClickListener {
         saveBtn.setOnClickListener(this);
     }
 
+    /**
+     * Set erase to true on eraser click
+     */
     private void handleEraseButton() {
         drawView.setErase(true);
     }
 
+    /**
+     * Handle the new button click
+     */
     private void handleNewButton() {
         //new button
         AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
@@ -177,6 +218,9 @@ public class MainActivity extends Activity implements OnClickListener {
         newDialog.show();
     }
 
+    /**
+     * Handle the save button click
+     */
     private void handleSaveButton() {
         //save drawing
         AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
