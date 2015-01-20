@@ -17,23 +17,60 @@ import com.jigdraw.draw.R;
 
 /**
  * Custom view to represent the drawing canvas the user use to draw.
- *
+ * <p/>
  * Created by Jay Paulynice
  */
 public class DrawingView extends View {
+    /**
+     * the draw path
+     */
     private Path drawPath;
+
+    /**
+     * draw and canvas paint
+     */
     private Paint drawPaint, canvasPaint;
+
+    /**
+     * default color
+     */
     private int paintColor = 0xFF660000;
+
+    /**
+     * the drawing canvas
+     */
     private Canvas drawCanvas;
+
+    /**
+     * the canvas bitmap
+     */
     private Bitmap canvasBitmap;
+
+    /**
+     * current and last brush size
+     */
     private float brushSize, lastBrushSize;
+
+    /**
+     * whether erase is set
+     */
     private boolean erase = false;
 
+    /**
+     * Create new drawing view with context and attributes and
+     * setting up the default parameters.
+     *
+     * @param context the context
+     * @param attrs the attributes
+     */
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
         setupDrawing();
     }
 
+    /**
+     * Init parameters
+     */
     private void setupDrawing() {
         //prepare for drawing and setup paint stroke properties
         brushSize = getResources().getInteger(R.integer.medium_size);
@@ -66,7 +103,7 @@ public class DrawingView extends View {
     public boolean onTouchEvent(MotionEvent event) {
         float touchX = event.getX();
         float touchY = event.getY();
-        //respond to down, move and up events
+
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 drawPath.moveTo(touchX, touchY);
@@ -88,12 +125,22 @@ public class DrawingView extends View {
 
     }
 
+    /**
+     * Set new color for drawing
+     *
+     * @param newColor the new color
+     */
     public void setColor(String newColor) {
         invalidate();
         paintColor = Color.parseColor(newColor);
         drawPaint.setColor(paintColor);
     }
 
+    /**
+     * Set new brush size for drawing
+     *
+     * @param newSize the new color
+     */
     public void setBrushSize(float newSize) {
         float pixelAmount = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 newSize, getResources().getDisplayMetrics());
@@ -101,20 +148,36 @@ public class DrawingView extends View {
         drawPaint.setStrokeWidth(brushSize);
     }
 
+    /**
+     * @return last brush size
+     */
     public float getLastBrushSize() {
         return lastBrushSize;
     }
 
+    /**
+     * Set last brush size
+     *
+     * @param lastSize the brush size
+     */
     public void setLastBrushSize(float lastSize) {
         lastBrushSize = lastSize;
     }
 
+    /**
+     * Set erase to true when the erase button is clicked.
+     *
+     * @param isErase {@code true} if erase is clicked {@code false} otherwise
+     */
     public void setErase(boolean isErase) {
         erase = isErase;
         if (erase) drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         else drawPaint.setXfermode(null);
     }
 
+    /**
+     * Create new canvas
+     */
     public void startNew() {
         drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
