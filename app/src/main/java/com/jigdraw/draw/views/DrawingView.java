@@ -16,44 +16,30 @@ import android.view.View;
 import com.jigdraw.draw.R;
 
 /**
- * Custom view to represent the drawing canvas the user use to draw.
+ * Custom view to represent the drawing view the user use to draw.
  * <p/>
  * Created by Jay Paulynice
  */
 public class DrawingView extends View {
-    /**
-     * the draw path
-     */
+    /** the draw path */
     private Path drawPath;
 
-    /**
-     * draw and canvas paint
-     */
+    /** draw and canvas paint */
     private Paint drawPaint, canvasPaint;
 
-    /**
-     * default color
-     */
+    /** default color */
     private int paintColor = 0xFF660000;
 
-    /**
-     * the drawing canvas
-     */
+    /** the drawing canvas */
     private Canvas drawCanvas;
 
-    /**
-     * the canvas bitmap
-     */
+    /** the canvas bitmap */
     private Bitmap canvasBitmap;
 
-    /**
-     * current and last brush size
-     */
+    /** current and last brush size */
     private float brushSize, lastBrushSize;
 
-    /**
-     * whether erase is set
-     */
+    /** whether erase is set */
     private boolean erase = false;
 
     /**
@@ -87,19 +73,6 @@ public class DrawingView extends View {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
-        drawCanvas = new Canvas(canvasBitmap);
-    }
-
-    @Override
-    protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
-        canvas.drawPath(drawPath, drawPaint);
-    }
-
-    @Override
     public boolean onTouchEvent(MotionEvent event) {
         float touchX = event.getX();
         float touchY = event.getY();
@@ -123,6 +96,19 @@ public class DrawingView extends View {
         invalidate();
         return true;
 
+    }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        canvasBitmap = Bitmap.createBitmap(w, h, Bitmap.Config.ARGB_8888);
+        drawCanvas = new Canvas(canvasBitmap);
+    }
+
+    @Override
+    protected void onDraw(Canvas canvas) {
+        canvas.drawBitmap(canvasBitmap, 0, 0, canvasPaint);
+        canvas.drawPath(drawPath, drawPaint);
     }
 
     /**
@@ -171,7 +157,8 @@ public class DrawingView extends View {
      */
     public void setErase(boolean isErase) {
         erase = isErase;
-        if (erase) drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
+        if (erase)
+            drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
         else drawPaint.setXfermode(null);
     }
 
@@ -181,5 +168,12 @@ public class DrawingView extends View {
     public void startNew() {
         drawCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
         invalidate();
+    }
+
+    /**
+     * @return the paint color
+     */
+    public int getPaintColor() {
+        return paintColor;
     }
 }

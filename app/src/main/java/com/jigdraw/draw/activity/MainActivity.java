@@ -31,26 +31,19 @@ import java.util.UUID;
  * @author Jay Paulynice
  */
 public class MainActivity extends Activity implements OnClickListener {
-    /**
-     * activity class for logging
-     */
+    /** activity class for logging */
     private static final String TAG = "MainActivity";
 
-    /**
-     * the drawing view
-     */
+    /** custom drawing view */
     private DrawingView drawView;
 
-    /**
-     * buttons for drawing
-     */
+    /** buttons for drawing */
     private ImageButton currPaint, eraseBtn, newBtn, saveBtn;
 
-    /**
-     * brush sizes
-     */
+    /** brush sizes */
     private float smallBrush, mediumBrush, largeBrush, largestBrush;
 
+    /** list of brushes */
     private List<ImageButton> brushes = new ArrayList<ImageButton>();
 
     @Override
@@ -128,7 +121,7 @@ public class MainActivity extends Activity implements OnClickListener {
      * @param color the chosen color
      */
     public void setBrushColor(int color) {
-        if(brushes.isEmpty()){
+        if (brushes.isEmpty()) {
             brushes = Arrays.asList((ImageButton) findViewById(R.id.small_brush),
                     (ImageButton) findViewById(R.id.medium_brush),
                     (ImageButton) findViewById(R.id.large_brush),
@@ -151,6 +144,7 @@ public class MainActivity extends Activity implements OnClickListener {
         initView();
         initLayout();
         initButtons();
+        setBrushColor(drawView.getPaintColor());
     }
 
     /**
@@ -160,7 +154,6 @@ public class MainActivity extends Activity implements OnClickListener {
         LinearLayout paintLayout = (LinearLayout) findViewById(R.id.paint_colors);
         currPaint = (ImageButton) paintLayout.getChildAt(0);
         currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-        setBrushColor(currPaint.getSolidColor());
     }
 
     /**
