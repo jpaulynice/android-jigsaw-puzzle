@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -17,6 +18,9 @@ import android.widget.Toast;
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.views.DrawingView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -46,6 +50,8 @@ public class MainActivity extends Activity implements OnClickListener {
      * brush sizes
      */
     private float smallBrush, mediumBrush, largeBrush, largestBrush;
+
+    private List<ImageButton> brushes = new ArrayList<ImageButton>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,7 +118,7 @@ public class MainActivity extends Activity implements OnClickListener {
             currPaint = (ImageButton) view;
 
             Log.d(TAG, "setting brush color..." + color);
-            setBrushColor(color);
+            setBrushColor(Color.parseColor(color));
         }
     }
 
@@ -121,16 +127,18 @@ public class MainActivity extends Activity implements OnClickListener {
      *
      * @param color the chosen color
      */
-    public void setBrushColor(String color) {
-        ImageButton a = (ImageButton) findViewById(R.id.small_brush);
-        ImageButton b = (ImageButton) findViewById(R.id.medium_brush);
-        ImageButton c = (ImageButton) findViewById(R.id.large_brush);
-        ImageButton d = (ImageButton) findViewById(R.id.largest_brush);
+    public void setBrushColor(int color) {
+        if(brushes.isEmpty()){
+            brushes = Arrays.asList((ImageButton) findViewById(R.id.small_brush),
+                    (ImageButton) findViewById(R.id.medium_brush),
+                    (ImageButton) findViewById(R.id.large_brush),
+                    (ImageButton) findViewById(R.id.largest_brush));
+        }
 
-        a.setBackgroundColor(Color.parseColor(color));
-        b.setBackgroundColor(Color.parseColor(color));
-        c.setBackgroundColor(Color.parseColor(color));
-        d.setBackgroundColor(Color.parseColor(color));
+        for (ImageButton im : brushes) {
+            GradientDrawable d = (GradientDrawable) im.getDrawable();
+            d.setColor(color);
+        }
     }
 
     /**
@@ -139,9 +147,9 @@ public class MainActivity extends Activity implements OnClickListener {
     private void init() {
         setContentView(R.layout.activity_main);
 
-        initLayout();
         initBrushes();
         initView();
+        initLayout();
         initButtons();
     }
 
@@ -152,6 +160,7 @@ public class MainActivity extends Activity implements OnClickListener {
         LinearLayout paintLayout = (LinearLayout) findViewById(R.id.paint_colors);
         currPaint = (ImageButton) paintLayout.getChildAt(0);
         currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+        setBrushColor(currPaint.getSolidColor());
     }
 
     /**
