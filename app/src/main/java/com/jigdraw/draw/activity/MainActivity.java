@@ -25,13 +25,13 @@ import java.util.UUID;
 
 /**
  * Main activity class represents all the activities that a user starts with
- * such as create a new drawing, save the current drawing, choose eraser and
- * brush sizes etc.
+ * such as draw, choose to create a new drawing, save the current drawing,
+ * choose eraser and brush sizes etc.
  *
  * @author Jay Paulynice
  */
 public class MainActivity extends Activity implements OnClickListener {
-    /** activity class for logging */
+    /** activity name for logging */
     private static final String TAG = "MainActivity";
 
     /** custom drawing view */
@@ -76,6 +76,7 @@ public class MainActivity extends Activity implements OnClickListener {
      * @param view the current brush view
      */
     public void handleBrushSize(View view) {
+        //default to medium brush
         float bSize = mediumBrush;
         if (view.getId() == R.id.small_brush) {
             Log.d(TAG, "small brush clicked.");
@@ -121,16 +122,22 @@ public class MainActivity extends Activity implements OnClickListener {
      * @param color the chosen color
      */
     public void setBrushColor(int color) {
-        if (brushes.isEmpty()) {
-            brushes = Arrays.asList((ImageButton) findViewById(R.id.small_brush),
-                    (ImageButton) findViewById(R.id.medium_brush),
-                    (ImageButton) findViewById(R.id.large_brush),
-                    (ImageButton) findViewById(R.id.largest_brush));
-        }
-
+        initBrushList();
         for (ImageButton im : brushes) {
             GradientDrawable d = (GradientDrawable) im.getDrawable();
             d.setColor(color);
+        }
+    }
+
+    /**
+     * Make a list of the brushes
+     */
+    private void initBrushList() {
+        if (brushes.isEmpty()) {
+            brushes.addAll(Arrays.asList((ImageButton) findViewById(R.id.small_brush),
+                    (ImageButton) findViewById(R.id.medium_brush),
+                    (ImageButton) findViewById(R.id.large_brush),
+                    (ImageButton) findViewById(R.id.largest_brush)));
         }
     }
 
@@ -230,23 +237,7 @@ public class MainActivity extends Activity implements OnClickListener {
         saveDialog.setMessage("Save drawing to device Gallery?");
         saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                //save drawing
-                drawView.setDrawingCacheEnabled(true);
-                //attempt to save
-                String imgSaved = MediaStore.Images.Media.insertImage(
-                        getContentResolver(), drawView.getDrawingCache(),
-                        UUID.randomUUID().toString() + ".png", "drawing");
-                //feedback
-                if (imgSaved != null) {
-                    Toast savedToast = Toast.makeText(getApplicationContext(),
-                            "Drawing saved to Gallery!", Toast.LENGTH_SHORT);
-                    savedToast.show();
-                } else {
-                    Toast unsavedToast = Toast.makeText(getApplicationContext(),
-                            "Oops! Image could not be saved.", Toast.LENGTH_SHORT);
-                    unsavedToast.show();
-                }
-                drawView.destroyDrawingCache();
+                saveImage();
             }
         });
         saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -255,5 +246,26 @@ public class MainActivity extends Activity implements OnClickListener {
             }
         });
         saveDialog.show();
+    }
+
+    /**
+     * Save the drawing and give user feedback whether the image
+     * * is saved or not
+     */
+    private void saveImage() {
+        drawView.setDrawingCacheEnabled(true);
+        String imgSaved = MediaStore.Images.Media.insertImage(
+                getContentResolver(), drawView.getDrawingCache(),
+                UUID.randomUUID().toString() + ".png", "drawing");
+        if (imgSaved != null) {
+            Toast savedToast = Toast.makeText(getApplicationContext(),
+                    "Drawing saved to Gallery!", Toast.LENGTH_SHORT);
+            savedToast.show();
+        } else {
+            Toast unsavedToast = Toast.makeText(getApplicationContext(),
+                    "Oops! Image could not be saved.", Toast.LENGTH_SHORT);
+            unsavedToast.show();
+        }
+        drawView.destroyDrawingCache();
     }
 }

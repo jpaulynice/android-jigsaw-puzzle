@@ -1,11 +1,11 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#ff080808"
-    android:onClick="handleBrushSize"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="#ff080808"
+              android:onClick="handleBrushSize"
+              android:orientation="vertical"
+              tools:context=".MainActivity">
 
     <!-- Top Buttons -->
     <LinearLayout
@@ -19,21 +19,21 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:contentDescription="@string/start_new"
-            android:src="@drawable/new_pic" />
+            android:src="@drawable/new_pic"/>
 
         <ImageButton
             android:id="@+id/erase_btn"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:contentDescription="@string/erase"
-            android:src="@drawable/eraser" />
+            android:src="@drawable/eraser"/>
 
         <ImageButton
             android:id="@+id/save_btn"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:contentDescription="@string/save"
-            android:src="@drawable/save" />
+            android:src="@drawable/save"/>
     </LinearLayout>
 
     <!-- Custom View -->
@@ -46,7 +46,7 @@
         android:layout_marginRight="5dp"
         android:layout_marginTop="3dp"
         android:layout_weight="1"
-        android:background="#FFFFFFFF" />
+        android:background="#FFFFFFFF"/>
 
     <!-- Color Palette -->
     <LinearLayout
@@ -70,7 +70,7 @@
                 android:contentDescription="@string/paint"
                 android:onClick="paintClicked"
                 android:src="@drawable/paint"
-                android:tag="#FF660000" />
+                android:tag="#FF660000"/>
 
             <ImageButton
                 android:layout_width="@dimen/large_brush"
@@ -80,7 +80,7 @@
                 android:contentDescription="@string/paint"
                 android:onClick="paintClicked"
                 android:src="@drawable/paint"
-                android:tag="#FFFF0000" />
+                android:tag="#FFFF0000"/>
 
             <ImageButton
                 android:layout_width="@dimen/large_brush"
@@ -90,7 +90,7 @@
                 android:contentDescription="@string/paint"
                 android:onClick="paintClicked"
                 android:src="@drawable/paint"
-                android:tag="#FFFF6600" />
+                android:tag="#FFFF6600"/>
 
             <ImageButton
                 android:layout_width="@dimen/large_brush"
@@ -100,7 +100,7 @@
                 android:contentDescription="@string/paint"
                 android:onClick="paintClicked"
                 android:src="@drawable/paint"
-                android:tag="#FFFFCC00" />
+                android:tag="#FFFFCC00"/>
 
             <ImageButton
                 android:layout_width="@dimen/large_brush"
@@ -110,7 +110,7 @@
                 android:contentDescription="@string/paint"
                 android:onClick="paintClicked"
                 android:src="@drawable/paint"
-                android:tag="#FF009900" />
+                android:tag="#FF009900"/>
 
             <ImageButton
                 android:layout_width="@dimen/large_brush"
@@ -120,7 +120,7 @@
                 android:contentDescription="@string/paint"
                 android:onClick="paintClicked"
                 android:src="@drawable/paint"
-                android:tag="#FF009999" />
+                android:tag="#FF009999"/>
         </LinearLayout>
 
         <!-- Bottom Row -->
@@ -137,7 +137,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/sml"
                 android:onClick="handleBrushSize"
-                android:src="@drawable/small" />
+                android:src="@drawable/small"/>
 
             <ImageButton
                 android:id="@+id/medium_brush"
@@ -147,7 +147,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/med"
                 android:onClick="handleBrushSize"
-                android:src="@drawable/medium" />
+                android:src="@drawable/medium"/>
 
             <ImageButton
                 android:id="@+id/large_brush"
@@ -157,7 +157,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/lrg"
                 android:onClick="handleBrushSize"
-                android:src="@drawable/large" />
+                android:src="@drawable/large"/>
 
             <ImageButton
                 android:id="@+id/largest_brush"
@@ -166,7 +166,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/lrg"
                 android:onClick="handleBrushSize"
-                android:src="@drawable/largest" />
+                android:src="@drawable/largest"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

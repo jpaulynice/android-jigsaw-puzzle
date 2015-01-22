@@ -17,7 +17,7 @@ import com.jigdraw.draw.R;
 
 /**
  * Custom view to represent the drawing view the user use to draw.
- * <p/>
+ *
  * Created by Jay Paulynice
  */
 public class DrawingView extends View {
@@ -47,7 +47,7 @@ public class DrawingView extends View {
      * setting up the default parameters.
      *
      * @param context the context
-     * @param attrs   the attributes
+     * @param attrs the attributes
      */
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -95,7 +95,6 @@ public class DrawingView extends View {
         //redraw
         invalidate();
         return true;
-
     }
 
     @Override
