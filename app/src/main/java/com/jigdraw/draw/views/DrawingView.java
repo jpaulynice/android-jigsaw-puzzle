@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
+import android.graphics.Xfermode;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -17,7 +18,7 @@ import com.jigdraw.draw.R;
 
 /**
  * Custom view to represent the drawing view the user use to draw.
- *
+ * <p/>
  * Created by Jay Paulynice
  */
 public class DrawingView extends View {
@@ -47,7 +48,7 @@ public class DrawingView extends View {
      * setting up the default parameters.
      *
      * @param context the context
-     * @param attrs the attributes
+     * @param attrs   the attributes
      */
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -127,9 +128,8 @@ public class DrawingView extends View {
      * @param newSize the new color
      */
     public void setBrushSize(float newSize) {
-        float pixelAmount = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
+        brushSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 newSize, getResources().getDisplayMetrics());
-        brushSize = pixelAmount;
         drawPaint.setStrokeWidth(brushSize);
     }
 
@@ -156,9 +156,8 @@ public class DrawingView extends View {
      */
     public void setErase(boolean isErase) {
         erase = isErase;
-        if (erase)
-            drawPaint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.CLEAR));
-        else drawPaint.setXfermode(null);
+        Xfermode xfermode = erase ? new PorterDuffXfermode(PorterDuff.Mode.CLEAR) : null;
+        drawPaint.setXfermode(xfermode);
     }
 
     /**
