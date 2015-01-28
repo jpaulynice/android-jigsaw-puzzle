@@ -44,7 +44,7 @@ public class MainActivity extends Activity implements OnClickListener {
     private float smallBrush, mediumBrush, largeBrush, largestBrush;
 
     /** list of brushes */
-    private List<ImageButton> brushes = new ArrayList<ImageButton>();
+    private List<ImageButton> brushes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -257,6 +257,11 @@ public class MainActivity extends Activity implements OnClickListener {
         String imgSaved = MediaStore.Images.Media.insertImage(
                 getContentResolver(), drawView.getDrawingCache(),
                 UUID.randomUUID().toString() + ".png", "drawing");
+        toast(imgSaved);
+        drawView.destroyDrawingCache();
+    }
+
+    private void toast(String imgSaved) {
         String feedback;
         if (imgSaved != null) {
             feedback = "Drawing saved to Gallery!";
@@ -266,6 +271,5 @@ public class MainActivity extends Activity implements OnClickListener {
         Toast toast = Toast.makeText(getApplicationContext(),
                 feedback, Toast.LENGTH_SHORT);
         toast.show();
-        drawView.destroyDrawingCache();
     }
 }
