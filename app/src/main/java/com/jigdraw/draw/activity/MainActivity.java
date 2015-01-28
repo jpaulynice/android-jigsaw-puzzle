@@ -257,13 +257,13 @@ public class MainActivity extends Activity implements OnClickListener {
         String imgSaved = MediaStore.Images.Media.insertImage(
                 getContentResolver(), drawView.getDrawingCache(),
                 UUID.randomUUID().toString() + ".png", "drawing");
-        toast(imgSaved);
+        toast(imgSaved != null);
         drawView.destroyDrawingCache();
     }
 
-    private void toast(String imgSaved) {
+    private void toast(boolean saved) {
         String feedback;
-        if (imgSaved != null) {
+        if (saved) {
             feedback = "Drawing saved to Gallery!";
         } else {
             feedback = "Oops! Image could not be saved.";
