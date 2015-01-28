@@ -59,17 +59,30 @@ public class ImageDaoImpl implements ImageDao {
     @Override
     public ImageEntity find(int id) {
         SQLiteDatabase db = mdb.getReadableDatabase();
+        Log.d(TAG, "fetching image with id: " + id);
+
+        String selection = "rowid = " + id;
         String[] col = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN};
-        Cursor cursor = db.query(TABLE_NAME, col, null, null, null, null, null);
+
+        Log.d(TAG, "querying db...");
+        Cursor cursor = db.query(TABLE_NAME, col, selection, null, null, null, null);
 
         ImageEntity entity = null;
         if (cursor != null && cursor.moveToFirst()) {
+
             String name = cursor.getString(cursor.getColumnIndex(NAME_COLUMN));
+            Log.d(TAG, "image name: " + name);
+
             String base64String = cursor.getString(cursor.getColumnIndex(IMAGE_COLUMN));
+            Log.d(TAG, "image source: " + base64String);
+
             String desc = cursor.getString(cursor.getColumnIndex(DESC_COLUMN));
+            Log.d(TAG, "image desc: " + desc);
 
             entity = new ImageEntity(base64ToBitmap(base64String), name, desc);
             cursor.close();
+        } else {
+            Log.d(TAG, "No results found for the selection: " + selection);
         }
         db.close();
 

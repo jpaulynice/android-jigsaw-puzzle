@@ -174,4 +174,12 @@ public class DrawingView extends View {
     public int getPaintColor() {
         return paintColor;
     }
+
+    public Bitmap getCanvasBitmap() {
+        return canvasBitmap;
+    }
+
+    public Canvas getDrawCanvas() {
+        return drawCanvas;
+    }
 }

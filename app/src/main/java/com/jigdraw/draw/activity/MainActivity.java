@@ -58,6 +58,9 @@ public class MainActivity extends Activity implements OnClickListener {
         dao = new ImageDaoImpl(getApplicationContext());
         super.onCreate(savedInstanceState);
         init();
+
+        //test get image from db
+        dao.find(1);
     }
 
     @Override
