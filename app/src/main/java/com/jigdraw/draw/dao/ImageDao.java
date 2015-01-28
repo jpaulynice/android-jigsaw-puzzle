@@ -10,6 +10,8 @@ import com.jigdraw.draw.db.ImageDB;
 import com.jigdraw.draw.util.Base64Util;
 
 /**
+ * Persistence layer for image storage and retrieval
+ *
  * Created by Jay Paulynice
  */
 public class ImageDao {
@@ -22,10 +24,23 @@ public class ImageDao {
     private static final String DESC_COLUMN = "desc";
     private ImageDB mdb;
 
+    /**
+     * Create new dao object with given context
+     *
+     * @param context the application context
+     */
     public ImageDao(Context context) {
         mdb = new ImageDB(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
+    /**
+     * Save the bitmap image in database by first converting to base 64
+     * representation then save
+     *
+     * @param bitmap image to save
+     * @param id     unique id for the image
+     * @param desc   description
+     */
     public void saveImageInDB(Bitmap bitmap, String id, String desc) {
         SQLiteDatabase db = mdb.getWritableDatabase();
 
@@ -38,9 +53,14 @@ public class ImageDao {
         db.close();
     }
 
+    /**
+     * Retrieve base64 representation then convert to bitmap image
+     *
+     * @param col columns for query
+     * @return bitmap image
+     */
     public Bitmap getImageFromDB(String[] col) {
         SQLiteDatabase db = mdb.getReadableDatabase();
-
         Cursor cursor = db.query(TABLE_NAME, col, null, null, null, null, null);
         String base64String = null;
         if (cursor != null) {
@@ -51,7 +71,6 @@ public class ImageDao {
             cursor.close();
         }
         db.close();
-
         return base64String != null ? Base64Util.base64ToBitmap(base64String) : null;
     }
 }
