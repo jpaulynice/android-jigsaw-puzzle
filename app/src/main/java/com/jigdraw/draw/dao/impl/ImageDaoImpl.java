@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.jigdraw.draw.dao.ImageDao;
 import com.jigdraw.draw.db.ImageDB;
@@ -23,7 +24,9 @@ import static com.jigdraw.draw.util.DBUtil.TABLE_NAME;
  * Created by Jay Paulynice
  */
 public class ImageDaoImpl implements ImageDao {
+    private static final String TAG = "ImageDaoImpl";
     private final ImageDB mdb;
+
 
     /**
      * Create new dao object with given context
@@ -35,7 +38,8 @@ public class ImageDaoImpl implements ImageDao {
     }
 
     @Override
-    public void create(ImageEntity entity) {
+    public long create(ImageEntity entity) {
+        Log.d(TAG, "getting database...");
         SQLiteDatabase db = mdb.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
@@ -43,8 +47,13 @@ public class ImageDaoImpl implements ImageDao {
         cv.put(IMAGE_COLUMN, bitMapToBase64(entity.getImage()));
         cv.put(DESC_COLUMN, entity.getDesc());
 
-        db.insert(TABLE_NAME, null, cv);
+        Log.d(TAG, "calling insert method...");
+        long id = db.insert(TABLE_NAME, null, cv);
+        Log.d(TAG, "returned id: " + id);
+
         db.close();
+
+        return id;
     }
 
     @Override

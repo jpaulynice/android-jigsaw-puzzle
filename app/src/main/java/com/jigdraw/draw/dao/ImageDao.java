@@ -12,9 +12,10 @@ public interface ImageDao {
     /**
      * Save the given image entity
      *
-     * @param entity image to save
+     * @param entity the entity to save
+     * @return id of the created entity
      */
-    public void create(ImageEntity entity);
+    public long create(ImageEntity entity);
 
     /**
      * Get image entity from db matching id

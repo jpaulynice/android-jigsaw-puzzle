@@ -3,10 +3,10 @@ package com.jigdraw.draw.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -16,6 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.jigdraw.draw.R;
+import com.jigdraw.draw.dao.ImageDao;
+import com.jigdraw.draw.dao.impl.ImageDaoImpl;
+import com.jigdraw.draw.model.ImageEntity;
 import com.jigdraw.draw.views.DrawingView;
 
 import java.util.ArrayList;
@@ -46,8 +49,13 @@ public class MainActivity extends Activity implements OnClickListener {
     /** list of brushes */
     private List<ImageButton> brushes = new ArrayList<>();
 
+    /** image data access */
+    private ImageDao dao;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        dao = new ImageDaoImpl(getApplicationContext());
         super.onCreate(savedInstanceState);
         init();
     }
@@ -249,20 +257,28 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     /**
-     * Save the drawing and give user feedback whether the image
-     * * is saved or not
+     * Save the drawing and give user feedback
      */
     private void saveImage() {
         drawView.setDrawingCacheEnabled(true);
-        String imgSaved = MediaStore.Images.Media.insertImage(
-                getContentResolver(), drawView.getDrawingCache(),
-                UUID.randomUUID().toString() + ".png", "drawing");
-        toast(imgSaved != null);
+        Bitmap bitmap = drawView.getDrawingCache();
+        String name = UUID.randomUUID().toString() + ".png";
+        String desc = "jigsaw image saved";
+        ImageEntity entity = new ImageEntity(bitmap, name, desc);
+
+        Log.d(TAG, "image name to save in db: " + name);
+        long id = dao.create(entity);
+        toast(id > 0L);
         drawView.destroyDrawingCache();
     }
 
+    /**
+     * Get feedback if image is saved or not
+     *
+     * @param saved whether the image was saved
+     */
     private void toast(boolean saved) {
-        String feedback = saved ? "Drawing saved to Gallery!" :
+        String feedback = saved ? "Drawing saved.!" :
                 "Oops! Image could not be saved.";
         Toast toast = Toast.makeText(getApplicationContext(),
                 feedback, Toast.LENGTH_SHORT);
