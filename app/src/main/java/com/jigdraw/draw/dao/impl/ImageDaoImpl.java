@@ -20,7 +20,6 @@ import static com.jigdraw.draw.util.DBUtil.TABLE_NAME;
 /**
  * Default implementation for {@link com.jigdraw.draw.dao.ImageDao} layer for image storage
  * and retrieval
- * <p/>
  *
  * @author Jay Paulynice
  */

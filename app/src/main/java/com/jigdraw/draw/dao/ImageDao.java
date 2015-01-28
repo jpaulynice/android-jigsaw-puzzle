@@ -4,7 +4,6 @@ import com.jigdraw.draw.model.ImageEntity;
 
 /**
  * Persistence interface for image storage and retrieval
- * <p/>
  *
  * @author Jay Paulynice
  */

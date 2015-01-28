@@ -2,7 +2,6 @@ package com.jigdraw.draw.util;
 
 /**
  * Constants for database and tables
- * <p/>
  *
  * @author Jay Paulynice
  */

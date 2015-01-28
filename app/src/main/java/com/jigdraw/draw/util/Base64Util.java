@@ -9,7 +9,6 @@ import java.io.ByteArrayOutputStream;
 /**
  * Utilities class for converting image from base 64 to bitmap
  * and bitmap to base 64
- * <p/>
  *
  * @author Jay Paulynice
  */
