@@ -17,7 +17,7 @@ public class ImageDB extends SQLiteOpenHelper {
      * Create new image db object with the following parameters
      *
      * @param context the application context
-     * @param name the database name
+     * @param name    the database name
      * @param factory the sqlite cursor factory
      * @param version the database version
      */
