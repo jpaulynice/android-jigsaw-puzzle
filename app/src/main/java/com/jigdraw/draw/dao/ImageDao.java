@@ -16,7 +16,7 @@ public class ImageDao {
 
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "ImageDb";
-    private static final String TABLE_NAME = "images";
+    private static final String TABLE_NAME = "jigsaw_images";
     private static final String NAME_COLUMN = "name";
     private static final String IMAGE_COLUMN = "img";
     private static final String DESC_COLUMN = "desc";
