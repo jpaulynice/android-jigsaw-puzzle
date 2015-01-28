@@ -11,8 +11,6 @@ import com.jigdraw.draw.model.ImageEntity;
 
 import static com.jigdraw.draw.util.Base64Util.base64ToBitmap;
 import static com.jigdraw.draw.util.Base64Util.bitMapToBase64;
-import static com.jigdraw.draw.util.DBUtil.DATABASE_NAME;
-import static com.jigdraw.draw.util.DBUtil.DATABASE_VERSION;
 import static com.jigdraw.draw.util.DBUtil.DESC_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.IMAGE_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.NAME_COLUMN;
@@ -33,7 +31,7 @@ public class ImageDaoImpl implements ImageDao {
      * @param context the application context
      */
     public ImageDaoImpl(Context context) {
-        mdb = new ImageDB(context, DATABASE_NAME, null, DATABASE_VERSION);
+        mdb = new ImageDB(context);
     }
 
     @Override

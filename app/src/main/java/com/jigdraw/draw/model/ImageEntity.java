@@ -3,7 +3,8 @@ package com.jigdraw.draw.model;
 import android.graphics.Bitmap;
 
 /**
- * Created by julespaulynice on 1/28/15.
+ * Entity to encapsulate image database
+ * Created by Jay Paulynice
  */
 public class ImageEntity {
     private Bitmap image;
