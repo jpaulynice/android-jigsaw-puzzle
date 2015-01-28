@@ -1,6 +1,6 @@
 package com.jigdraw.draw.dao;
 
-import android.graphics.Bitmap;
+import com.jigdraw.draw.model.ImageEntity;
 
 /**
  * Persistence interface for image storage and retrieval
@@ -10,20 +10,39 @@ import android.graphics.Bitmap;
 public interface ImageDao {
 
     /**
-     * Save the bitmap image in database by first converting to base 64
-     * representation then save
+     * Save the given image entity
      *
-     * @param bitmap image to save
-     * @param id     unique id for the image
-     * @param desc   description
+     * @param entity image to save
      */
-    public void saveImageInDB(Bitmap bitmap, String id, String desc);
+    public void create(ImageEntity entity);
 
     /**
-     * Retrieve base64 representation then convert to bitmap image
+     * Get image entity from db matching id
      *
-     * @param col columns for query
-     * @return bitmap image
+     * @param id unique id for the image
+     * @return image entity
      */
-    public Bitmap getImageFromDB(String[] col);
+    public ImageEntity find(int id);
+
+    /**
+     * Update given image entity
+     *
+     * @param entity image to update
+     * @return update image
+     */
+    public ImageEntity update(ImageEntity entity);
+
+    /**
+     * Delete the image entity with the given id
+     *
+     * @param id the id of the image to delete
+     */
+    public void delete(int id);
+
+    /**
+     * Delete the specified image entity
+     *
+     * @param entity image to delete
+     */
+    public void delete(ImageEntity entity);
 }

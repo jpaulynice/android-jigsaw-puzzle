@@ -4,12 +4,13 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Bitmap;
 
 import com.jigdraw.draw.dao.ImageDao;
 import com.jigdraw.draw.db.ImageDB;
-import com.jigdraw.draw.util.Base64Util;
+import com.jigdraw.draw.model.ImageEntity;
 
+import static com.jigdraw.draw.util.Base64Util.base64ToBitmap;
+import static com.jigdraw.draw.util.Base64Util.bitMapToBase64;
 import static com.jigdraw.draw.util.DBUtil.DATABASE_NAME;
 import static com.jigdraw.draw.util.DBUtil.DATABASE_VERSION;
 import static com.jigdraw.draw.util.DBUtil.DESC_COLUMN;
@@ -36,31 +37,51 @@ public class ImageDaoImpl implements ImageDao {
     }
 
     @Override
-    public void saveImageInDB(Bitmap bitmap, String id, String desc) {
+    public void create(ImageEntity entity) {
         SQLiteDatabase db = mdb.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
-        cv.put(NAME_COLUMN, id);
-        cv.put(IMAGE_COLUMN, Base64Util.bitMapToBase64(bitmap));
-        cv.put(DESC_COLUMN, desc);
+        cv.put(NAME_COLUMN, entity.getName());
+        cv.put(IMAGE_COLUMN, bitMapToBase64(entity.getImage()));
+        cv.put(DESC_COLUMN, entity.getDesc());
 
         db.insert(TABLE_NAME, null, cv);
         db.close();
     }
 
     @Override
-    public Bitmap getImageFromDB(String[] col) {
+    public ImageEntity find(int id) {
         SQLiteDatabase db = mdb.getReadableDatabase();
+        String[] col = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN};
         Cursor cursor = db.query(TABLE_NAME, col, null, null, null, null, null);
-        String base64String = null;
-        if (cursor != null) {
-            cursor.moveToFirst();
-            do {
-                base64String = cursor.getString(cursor.getColumnIndex(IMAGE_COLUMN));
-            } while (cursor.moveToNext());
+
+        ImageEntity entity = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            String name = cursor.getString(cursor.getColumnIndex(NAME_COLUMN));
+            String base64String = cursor.getString(cursor.getColumnIndex(IMAGE_COLUMN));
+            String desc = cursor.getString(cursor.getColumnIndex(DESC_COLUMN));
+
+            entity = new ImageEntity(base64ToBitmap(base64String), name, desc);
             cursor.close();
         }
         db.close();
-        return base64String != null ? Base64Util.base64ToBitmap(base64String) : null;
+
+        return entity;
+    }
+
+    @Override
+    public ImageEntity update(ImageEntity entity) {
+        //TODO: add implementation
+        return null;
+    }
+
+    @Override
+    public void delete(int id) {
+        //TODO: add implementation
+    }
+
+    @Override
+    public void delete(ImageEntity entity) {
+        //TODO: add implementation
     }
 }

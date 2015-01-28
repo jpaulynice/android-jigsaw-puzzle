@@ -262,12 +262,8 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     private void toast(boolean saved) {
-        String feedback;
-        if (saved) {
-            feedback = "Drawing saved to Gallery!";
-        } else {
-            feedback = "Oops! Image could not be saved.";
-        }
+        String feedback = saved ? "Drawing saved to Gallery!" :
+                "Oops! Image could not be saved.";
         Toast toast = Toast.makeText(getApplicationContext(),
                 feedback, Toast.LENGTH_SHORT);
         toast.show();

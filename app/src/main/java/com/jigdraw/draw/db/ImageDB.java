@@ -18,7 +18,7 @@ public class ImageDB extends SQLiteOpenHelper {
      *
      * @param context the application context
      * @param name    the database name
-     * @param factory the sqlite cursor factory
+     * @param factory the cursor factory
      * @param version the database version
      */
     public ImageDB(Context context, String name, CursorFactory factory, int version) {
