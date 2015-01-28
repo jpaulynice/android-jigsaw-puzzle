@@ -13,7 +13,8 @@ import static com.jigdraw.draw.util.DBUtil.DATABASE_VERSION;
  * Image database class that extends the {@link SQLiteOpenHelper}
  * for database manipulations.
  * <p/>
- * Created by Jay Paulynice
+ *
+ * @author Jay Paulynice
  */
 public class ImageDB extends SQLiteOpenHelper {
     private static final String TAG = "ImageDB";

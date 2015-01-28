@@ -19,7 +19,8 @@ import com.jigdraw.draw.R;
 /**
  * Custom view to represent the drawing view the user use to draw.
  * <p/>
- * Created by Jay Paulynice
+ *
+ * @author Jay Paulynice
  */
 public class DrawingView extends View {
     /** the draw path */

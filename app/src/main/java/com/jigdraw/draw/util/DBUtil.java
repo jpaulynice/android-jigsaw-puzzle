@@ -3,7 +3,8 @@ package com.jigdraw.draw.util;
 /**
  * Constants for database and tables
  * <p/>
- * Created by Jay Paulynice
+ *
+ * @author Jay Paulynice
  */
 public class DBUtil {
     public static final int DATABASE_VERSION = 1;

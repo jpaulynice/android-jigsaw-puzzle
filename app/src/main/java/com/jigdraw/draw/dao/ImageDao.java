@@ -5,7 +5,8 @@ import com.jigdraw.draw.model.ImageEntity;
 /**
  * Persistence interface for image storage and retrieval
  * <p/>
- * Created by Jay Paulynice
+ *
+ * @author Jay Paulynice
  */
 public interface ImageDao {
 

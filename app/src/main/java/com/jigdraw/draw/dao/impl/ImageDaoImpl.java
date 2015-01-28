@@ -21,7 +21,8 @@ import static com.jigdraw.draw.util.DBUtil.TABLE_NAME;
  * Default implementation for {@link com.jigdraw.draw.dao.ImageDao} layer for image storage
  * and retrieval
  * <p/>
- * Created by Jay Paulynice
+ *
+ * @author Jay Paulynice
  */
 public class ImageDaoImpl implements ImageDao {
     private static final String TAG = "ImageDaoImpl";
@@ -39,7 +40,6 @@ public class ImageDaoImpl implements ImageDao {
 
     @Override
     public long create(ImageEntity entity) {
-        Log.d(TAG, "getting database...");
         SQLiteDatabase db = mdb.getWritableDatabase();
 
         ContentValues cv = new ContentValues();
@@ -47,10 +47,8 @@ public class ImageDaoImpl implements ImageDao {
         cv.put(IMAGE_COLUMN, bitMapToBase64(entity.getImage()));
         cv.put(DESC_COLUMN, entity.getDesc());
 
-        Log.d(TAG, "calling insert method...");
         long id = db.insert(TABLE_NAME, null, cv);
-        Log.d(TAG, "returned id: " + id);
-
+        Log.d(TAG, "successfully saved image...id: " + id);
         db.close();
 
         return id;
@@ -59,27 +57,20 @@ public class ImageDaoImpl implements ImageDao {
     @Override
     public ImageEntity find(int id) {
         SQLiteDatabase db = mdb.getReadableDatabase();
-        Log.d(TAG, "fetching image with id: " + id);
 
         String selection = "rowid = " + id;
         String[] col = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN};
-
-        Log.d(TAG, "querying db...");
         Cursor cursor = db.query(TABLE_NAME, col, selection, null, null, null, null);
 
         ImageEntity entity = null;
         if (cursor != null && cursor.moveToFirst()) {
-
             String name = cursor.getString(cursor.getColumnIndex(NAME_COLUMN));
-            Log.d(TAG, "image name: " + name);
-
             String base64String = cursor.getString(cursor.getColumnIndex(IMAGE_COLUMN));
-            Log.d(TAG, "image source: " + base64String);
-
             String desc = cursor.getString(cursor.getColumnIndex(DESC_COLUMN));
-            Log.d(TAG, "image desc: " + desc);
 
             entity = new ImageEntity(base64ToBitmap(base64String), name, desc);
+            Log.d(TAG, "image entity found with: " + entity.toString());
+
             cursor.close();
         } else {
             Log.d(TAG, "No results found for the selection: " + selection);
