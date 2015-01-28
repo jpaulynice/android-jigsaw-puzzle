@@ -17,7 +17,7 @@ public class ImageDB extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table jigsaw (id int, image blob);");
+        db.execSQL("create table jigsaw (name TEXT, img TEXT);");
     }
 
     @Override
