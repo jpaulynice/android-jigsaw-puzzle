@@ -49,11 +49,10 @@ public class ImageEntity {
 
         ImageEntity entity = (ImageEntity) o;
 
-        if (!desc.equals(entity.desc)) return false;
-        if (!image.equals(entity.image)) return false;
-        if (!name.equals(entity.name)) return false;
+        return desc.equals(entity.desc) &&
+                image.equals(entity.image) &&
+                name.equals(entity.name);
 
-        return true;
     }
 
     @Override

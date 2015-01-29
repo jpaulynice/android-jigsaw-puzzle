@@ -8,7 +8,6 @@ import com.jigdraw.draw.model.ImageEntity;
  * @author Jay Paulynice
  */
 public interface ImageDao {
-
     /**
      * Save the given image entity
      *

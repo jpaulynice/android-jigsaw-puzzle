@@ -5,6 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.jigdraw.draw.util.DBUtil;
+
 import static com.jigdraw.draw.util.DBUtil.DATABASE_NAME;
 import static com.jigdraw.draw.util.DBUtil.DATABASE_VERSION;
 
@@ -15,7 +17,7 @@ import static com.jigdraw.draw.util.DBUtil.DATABASE_VERSION;
  *
  * @author Jay Paulynice
  */
-public class ImageDB extends SQLiteOpenHelper {
+public class DBHelper extends SQLiteOpenHelper {
     private static final String TAG = "ImageDB";
 
     /**
@@ -23,20 +25,20 @@ public class ImageDB extends SQLiteOpenHelper {
      *
      * @param context the application context
      */
-    public ImageDB(Context context) {
+    public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         Log.d(TAG, "creating table jigsaw_images...");
-        db.execSQL("create table if not exists jigsaw_images (name TEXT, img TEXT, desc TEXT);");
+        db.execSQL(DBUtil.CREATE_JIGSAW_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.d(TAG, "dropping table jigsaw_images...");
-        db.execSQL("drop table jigsaw_images if exists;");
+        Log.d(TAG, "Upgrading database from " + oldVersion + "to " + newVersion);
+        db.execSQL(DBUtil.DROP_JIGSAW_TABLE);
         onCreate(db);
     }
 }

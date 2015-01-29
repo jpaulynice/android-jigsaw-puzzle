@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.jigdraw.draw.dao.ImageDao;
-import com.jigdraw.draw.db.ImageDB;
+import com.jigdraw.draw.db.DBHelper;
 import com.jigdraw.draw.model.ImageEntity;
 
 import static com.jigdraw.draw.util.Base64Util.base64ToBitmap;
@@ -18,15 +18,13 @@ import static com.jigdraw.draw.util.DBUtil.NAME_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.TABLE_NAME;
 
 /**
- * Default implementation for {@link com.jigdraw.draw.dao.ImageDao} layer for image storage
- * and retrieval
+ * Default implementation for {@link com.jigdraw.draw.dao.ImageDao}
  *
  * @author Jay Paulynice
  */
 public class ImageDaoImpl implements ImageDao {
     private static final String TAG = "ImageDaoImpl";
-    private final ImageDB mdb;
-
+    private final DBHelper mdb;
 
     /**
      * Create new dao object with given context
@@ -34,7 +32,7 @@ public class ImageDaoImpl implements ImageDao {
      * @param context the application context
      */
     public ImageDaoImpl(Context context) {
-        mdb = new ImageDB(context);
+        mdb = new DBHelper(context);
     }
 
     @Override

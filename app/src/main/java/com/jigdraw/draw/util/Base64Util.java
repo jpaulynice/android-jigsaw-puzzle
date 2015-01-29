@@ -35,6 +35,7 @@ public class Base64Util {
      */
     public static Bitmap base64ToBitmap(String base64String) {
         byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);
-        return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+        return BitmapFactory.decodeByteArray(decodedString, 0,
+                decodedString.length);
     }
 }
