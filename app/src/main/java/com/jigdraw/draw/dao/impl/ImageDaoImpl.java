@@ -9,7 +9,6 @@ import android.util.Log;
 import com.jigdraw.draw.dao.ImageDao;
 import com.jigdraw.draw.db.DBHelper;
 import com.jigdraw.draw.model.ImageEntity;
-import com.jigdraw.draw.util.DBUtil;
 
 import static com.jigdraw.draw.util.Base64Util.base64ToBitmap;
 import static com.jigdraw.draw.util.DBUtil.DESC_COLUMN;
@@ -80,6 +79,6 @@ public class ImageDaoImpl implements ImageDao {
     @Override
     public boolean delete(long id) {
         Log.d(TAG, "Deleting entity with id: " + id);
-        return db.delete(TABLE_NAME, DBUtil.getIdSelection(id), null) > 0;
+        return db.delete(TABLE_NAME, getIdSelection(id), null) > 0;
     }
 }
