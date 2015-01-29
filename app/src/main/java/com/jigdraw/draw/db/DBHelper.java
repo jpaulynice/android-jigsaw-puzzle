@@ -18,10 +18,10 @@ import static com.jigdraw.draw.util.DBUtil.DATABASE_VERSION;
  * @author Jay Paulynice
  */
 public class DBHelper extends SQLiteOpenHelper {
-    private static final String TAG = "ImageDB";
+    private static final String TAG = "DBHelper";
 
     /**
-     * Create new image db object with the following parameters
+     * Create new image db helper with the following parameters
      *
      * @param context the application context
      */
