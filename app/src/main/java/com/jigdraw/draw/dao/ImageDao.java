@@ -22,7 +22,7 @@ public interface ImageDao {
      * @param id unique id for the image
      * @return image entity
      */
-    public ImageEntity find(int id);
+    public ImageEntity find(long id);
 
     /**
      * Update given image entity
@@ -30,19 +30,12 @@ public interface ImageDao {
      * @param entity image to update
      * @return update image
      */
-    public ImageEntity update(ImageEntity entity);
+    public boolean update(ImageEntity entity);
 
     /**
      * Delete the image entity with the given id
      *
      * @param id the id of the image to delete
      */
-    public void delete(int id);
-
-    /**
-     * Delete the specified image entity
-     *
-     * @param entity image to delete
-     */
-    public void delete(ImageEntity entity);
+    public boolean delete(long id);
 }

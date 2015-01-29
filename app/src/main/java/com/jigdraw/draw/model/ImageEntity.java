@@ -8,6 +8,7 @@ import android.graphics.Bitmap;
  * @author Jay Paulynice
  */
 public class ImageEntity {
+    private long id;
     private Bitmap image;
     private String name;
     private String desc;
@@ -16,6 +17,14 @@ public class ImageEntity {
         this.image = image;
         this.name = name;
         this.desc = desc;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 
     public Bitmap getImage() {

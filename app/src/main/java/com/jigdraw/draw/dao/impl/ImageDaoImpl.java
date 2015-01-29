@@ -9,13 +9,15 @@ import android.util.Log;
 import com.jigdraw.draw.dao.ImageDao;
 import com.jigdraw.draw.db.DBHelper;
 import com.jigdraw.draw.model.ImageEntity;
+import com.jigdraw.draw.util.DBUtil;
 
 import static com.jigdraw.draw.util.Base64Util.base64ToBitmap;
-import static com.jigdraw.draw.util.Base64Util.bitMapToBase64;
 import static com.jigdraw.draw.util.DBUtil.DESC_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.IMAGE_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.NAME_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.TABLE_NAME;
+import static com.jigdraw.draw.util.DBUtil.getIdSelection;
+import static com.jigdraw.draw.util.EntityUtil.entityToContentValues;
 
 /**
  * Default implementation for {@link com.jigdraw.draw.dao.ImageDao}
@@ -24,7 +26,8 @@ import static com.jigdraw.draw.util.DBUtil.TABLE_NAME;
  */
 public class ImageDaoImpl implements ImageDao {
     private static final String TAG = "ImageDaoImpl";
-    private final DBHelper mdb;
+    private SQLiteDatabase db;
+
 
     /**
      * Create new dao object with given context
@@ -32,32 +35,24 @@ public class ImageDaoImpl implements ImageDao {
      * @param context the application context
      */
     public ImageDaoImpl(Context context) {
-        mdb = new DBHelper(context);
+        DBHelper mdb = new DBHelper(context);
+        db = mdb.getWritableDatabase();
     }
 
     @Override
     public long create(ImageEntity entity) {
-        SQLiteDatabase db = mdb.getWritableDatabase();
-
-        ContentValues cv = new ContentValues();
-        cv.put(NAME_COLUMN, entity.getName());
-        cv.put(IMAGE_COLUMN, bitMapToBase64(entity.getImage()));
-        cv.put(DESC_COLUMN, entity.getDesc());
-
-        long id = db.insert(TABLE_NAME, null, cv);
+        long id = db.insert(TABLE_NAME, null, entityToContentValues(entity));
         Log.d(TAG, "successfully saved image...id: " + id);
-        db.close();
 
         return id;
     }
 
     @Override
-    public ImageEntity find(int id) {
-        SQLiteDatabase db = mdb.getReadableDatabase();
-
-        String selection = "rowid = " + id;
+    public ImageEntity find(long id) {
         String[] col = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN};
-        Cursor cursor = db.query(TABLE_NAME, col, selection, null, null, null, null);
+        Cursor cursor = db.query(TABLE_NAME, col, getIdSelection(id),
+                null, null, null,
+                null);
 
         ImageEntity entity = null;
         if (cursor != null && cursor.moveToFirst()) {
@@ -70,26 +65,22 @@ public class ImageDaoImpl implements ImageDao {
 
             cursor.close();
         } else {
-            Log.d(TAG, "No results found for the selection: " + selection);
+            Log.d(TAG, "No results found for entity with id: " + id);
         }
-        db.close();
 
         return entity;
     }
 
     @Override
-    public ImageEntity update(ImageEntity entity) {
-        //TODO: add implementation
-        return null;
+    public boolean update(ImageEntity entity) {
+        Log.d(TAG, "Updating entity with id: " + entity.getId());
+        ContentValues cv = entityToContentValues(entity);
+        return db.update(TABLE_NAME, cv, getIdSelection(entity.getId()), null) > 0;
     }
 
     @Override
-    public void delete(int id) {
-        //TODO: add implementation
-    }
-
-    @Override
-    public void delete(ImageEntity entity) {
-        //TODO: add implementation
+    public boolean delete(long id) {
+        Log.d(TAG, "Deleting entity with id: " + id);
+        return db.delete(TABLE_NAME, DBUtil.getIdSelection(id), null) > 0;
     }
 }
