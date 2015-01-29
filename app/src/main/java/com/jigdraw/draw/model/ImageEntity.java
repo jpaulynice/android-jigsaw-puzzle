@@ -2,6 +2,8 @@ package com.jigdraw.draw.model;
 
 import android.graphics.Bitmap;
 
+import com.jigdraw.draw.util.Base64Util;
+
 /**
  * Entity to encapsulate image attributes
  *
@@ -75,7 +77,7 @@ public class ImageEntity {
     @Override
     public String toString() {
         return "ImageEntity{" +
-                "image=" + image +
+                "image string=" + Base64Util.bitMapToBase64(image) +
                 ", name='" + name + '\'' +
                 ", desc='" + desc + '\'' +
                 '}';
