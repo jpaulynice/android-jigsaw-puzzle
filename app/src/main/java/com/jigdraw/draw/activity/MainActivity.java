@@ -245,7 +245,7 @@ public class MainActivity extends Activity implements OnClickListener {
         //save drawing
         AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
         saveDialog.setTitle("Save drawing");
-        saveDialog.setMessage("Save drawing to device Gallery?");
+        saveDialog.setMessage("Do you want to save the drawing?");
         saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 saveImage();

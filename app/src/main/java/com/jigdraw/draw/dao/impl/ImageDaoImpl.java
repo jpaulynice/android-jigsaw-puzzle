@@ -28,7 +28,6 @@ public class ImageDaoImpl implements ImageDao {
     private static final String TAG = "ImageDaoImpl";
     private SQLiteDatabase db;
 
-
     /**
      * Create new dao object with given context
      *
