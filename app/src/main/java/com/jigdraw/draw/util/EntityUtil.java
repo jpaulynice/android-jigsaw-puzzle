@@ -10,10 +10,19 @@ import static com.jigdraw.draw.util.DBUtil.IMAGE_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.NAME_COLUMN;
 
 /**
+ * Utilities class to convert from {@link ImageEntity} to
+ * {@link ContentValues} for database persistence.
+ *
  * @author Jay Paulynice
  */
 public class EntityUtil {
 
+    /**
+     * Convert the given image entity to content values
+     *
+     * @param entity the entity to convert
+     * @return content values object
+     */
     public static ContentValues entityToContentValues(ImageEntity entity) {
         ContentValues cv = new ContentValues();
         cv.put(NAME_COLUMN, entity.getName());

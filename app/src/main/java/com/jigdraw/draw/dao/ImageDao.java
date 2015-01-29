@@ -3,7 +3,7 @@ package com.jigdraw.draw.dao;
 import com.jigdraw.draw.model.ImageEntity;
 
 /**
- * Persistence interface for image storage and retrieval
+ * Simple interface for {@link ImageEntity} data access
  *
  * @author Jay Paulynice
  */
