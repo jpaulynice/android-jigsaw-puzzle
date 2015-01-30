@@ -256,7 +256,7 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     /**
-     * Save the drawing and give user feedback
+     * Create jigsaw and give user feedback
      */
     private void createJigsaw() {
         drawView.setDrawingCacheEnabled(true);
@@ -270,13 +270,13 @@ public class MainActivity extends Activity implements OnClickListener {
     }
 
     /**
-     * Get feedback if image is saved or not
+     * Get feedback if jigsaw is created or not
      *
      * @param saved whether the image was saved
      */
     private void toast(boolean saved) {
         String feedback = saved ? "Jigsaw successfully created." :
-                "Oops! Image could not be saved.";
+                "Oops! Unable to create jigsaw.";
         Toast toast = Toast.makeText(getApplicationContext(),
                 feedback, Toast.LENGTH_SHORT);
         toast.show();
