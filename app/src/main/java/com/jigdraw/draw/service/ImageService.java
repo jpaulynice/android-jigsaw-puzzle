@@ -1,20 +1,20 @@
-package com.jigdraw.draw.dao;
+package com.jigdraw.draw.service;
 
 import com.jigdraw.draw.model.ImageEntity;
 
 /**
- * Simple interface for {@link ImageEntity} data access
+ * Simple interface for dao wrapper
  *
  * @author Jay Paulynice
  */
-public interface ImageDao {
+public interface ImageService {
     /**
      * Save the given image entity
      *
      * @param entity the entity to save
      * @return id of the created entity
      */
-    public long create(ImageEntity entity);
+    public long insert(ImageEntity entity);
 
     /**
      * Get image entity from db matching id
@@ -22,7 +22,7 @@ public interface ImageDao {
      * @param id unique id for the image
      * @return image entity
      */
-    public ImageEntity find(long id);
+    public ImageEntity query(long id);
 
     /**
      * Update given image entity
@@ -30,12 +30,12 @@ public interface ImageDao {
      * @param entity image to update
      * @return update image
      */
-    public int update(ImageEntity entity);
+    public boolean update(ImageEntity entity);
 
     /**
      * Delete the image entity with the given id
      *
      * @param id the id of the image to delete
      */
-    public int delete(long id);
+    public boolean delete(long id);
 }

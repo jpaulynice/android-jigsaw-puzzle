@@ -16,9 +16,9 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.jigdraw.draw.R;
-import com.jigdraw.draw.dao.ImageDao;
-import com.jigdraw.draw.dao.impl.ImageDaoImpl;
 import com.jigdraw.draw.model.ImageEntity;
+import com.jigdraw.draw.service.ImageService;
+import com.jigdraw.draw.service.impl.ImageServiceImpl;
 import com.jigdraw.draw.views.DrawingView;
 
 import java.util.ArrayList;
@@ -50,17 +50,17 @@ public class MainActivity extends Activity implements OnClickListener {
     private List<ImageButton> brushes = new ArrayList<>();
 
     /** image data access */
-    private ImageDao dao;
+    private ImageService imageService;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        dao = new ImageDaoImpl(getApplicationContext());
+        imageService = new ImageServiceImpl(getApplicationContext());
         super.onCreate(savedInstanceState);
         init();
 
         //test get image from db
-        dao.find(1);
+        imageService.query(1);
     }
 
     @Override
@@ -270,7 +270,7 @@ public class MainActivity extends Activity implements OnClickListener {
         ImageEntity entity = new ImageEntity(bitmap, name, desc);
 
         Log.d(TAG, "image name to save in db: " + name);
-        long id = dao.create(entity);
+        long id = imageService.insert(entity);
         toast(id > 0L);
         drawView.destroyDrawingCache();
     }

@@ -70,15 +70,15 @@ public class ImageDaoImpl implements ImageDao {
     }
 
     @Override
-    public boolean update(ImageEntity entity) {
+    public int update(ImageEntity entity) {
         Log.d(TAG, "Updating entity with id: " + entity.getId());
         ContentValues cv = entityToContentValues(entity);
-        return db.update(TABLE_NAME, cv, getIdSelection(entity.getId()), null) > 0;
+        return db.update(TABLE_NAME, cv, getIdSelection(entity.getId()), null);
     }
 
     @Override
-    public boolean delete(long id) {
+    public int delete(long id) {
         Log.d(TAG, "Deleting entity with id: " + id);
-        return db.delete(TABLE_NAME, getIdSelection(id), null) > 0;
+        return db.delete(TABLE_NAME, getIdSelection(id), null);
     }
 }
