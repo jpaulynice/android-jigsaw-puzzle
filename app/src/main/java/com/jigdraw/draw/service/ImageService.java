@@ -8,7 +8,6 @@ import com.jigdraw.draw.model.ImageEntity;
  * @author Jay Paulynice
  */
 public interface ImageService {
-
     public long insert(ImageEntity entity);
 
     public ImageEntity query(long id);

@@ -16,15 +16,13 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.jigdraw.draw.R;
-import com.jigdraw.draw.model.ImageEntity;
-import com.jigdraw.draw.service.ImageService;
-import com.jigdraw.draw.service.impl.ImageServiceImpl;
+import com.jigdraw.draw.model.Difficulty;
+import com.jigdraw.draw.service.JigsawService;
 import com.jigdraw.draw.views.DrawingView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Main activity class represents all the activities that a user starts with
@@ -50,17 +48,14 @@ public class MainActivity extends Activity implements OnClickListener {
     private List<ImageButton> brushes = new ArrayList<>();
 
     /** image data access */
-    private ImageService imageService;
+    private JigsawService jigsaw;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        imageService = new ImageServiceImpl(getApplicationContext());
+        jigsaw = new JigsawService(getApplicationContext());
         super.onCreate(savedInstanceState);
         init();
-
-        //test get image from db
-        imageService.query(1);
     }
 
     @Override
@@ -244,11 +239,12 @@ public class MainActivity extends Activity implements OnClickListener {
     private void handleSaveButton() {
         //save drawing
         AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
-        saveDialog.setTitle("Save drawing");
-        saveDialog.setMessage("Do you want to save the drawing?");
+        saveDialog.setTitle("Create Jigsaw From Image");
+        saveDialog.setMessage("Do you want to create a jigsaw with the " +
+                "current Image?");
         saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                saveImage();
+                createJigsaw();
             }
         });
         saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -262,16 +258,14 @@ public class MainActivity extends Activity implements OnClickListener {
     /**
      * Save the drawing and give user feedback
      */
-    private void saveImage() {
+    private void createJigsaw() {
         drawView.setDrawingCacheEnabled(true);
         Bitmap bitmap = drawView.getDrawingCache();
-        String name = UUID.randomUUID().toString() + ".png";
-        String desc = "jigsaw image saved";
-        ImageEntity entity = new ImageEntity(bitmap, name, desc);
 
-        Log.d(TAG, "image name to save in db: " + name);
-        long id = imageService.insert(entity);
-        toast(id > 0L);
+        //create an easy jigsaw
+        boolean created = jigsaw.createJigsaw(bitmap, Difficulty.EASY);
+
+        toast(created);
         drawView.destroyDrawingCache();
     }
 
@@ -281,7 +275,7 @@ public class MainActivity extends Activity implements OnClickListener {
      * @param saved whether the image was saved
      */
     private void toast(boolean saved) {
-        String feedback = saved ? "Drawing saved.!" :
+        String feedback = saved ? "Jigsaw successfully created." :
                 "Oops! Image could not be saved.";
         Toast toast = Toast.makeText(getApplicationContext(),
                 feedback, Toast.LENGTH_SHORT);
