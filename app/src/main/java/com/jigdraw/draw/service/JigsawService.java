@@ -34,8 +34,8 @@ public class JigsawService {
         int x_slices = w / slices;
         int y_slices = h / slices;
 
-        for (int y = 0; y + y_slices < h; y += y_slices) {
-            for (int x = 0; x + x_slices < w; x += x_slices) {
+        for (int y = 0; y + y_slices <= h; y += y_slices) {
+            for (int x = 0; x + x_slices <= w; x += x_slices) {
 
                 String name = "tile-" + x + "-" + y + ".png";
                 String desc = "sub image " + name;
