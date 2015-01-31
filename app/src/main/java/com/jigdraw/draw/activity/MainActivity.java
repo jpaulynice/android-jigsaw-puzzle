@@ -263,7 +263,7 @@ public class MainActivity extends Activity implements OnClickListener {
         Bitmap bitmap = drawView.getDrawingCache();
 
         //create an easy jigsaw
-        boolean created = jigsaw.createJigsaw(bitmap, Difficulty.EASY);
+        boolean created = jigsaw.createJigsaw(bitmap, Difficulty.HARD);
 
         toast(created);
         drawView.destroyDrawingCache();

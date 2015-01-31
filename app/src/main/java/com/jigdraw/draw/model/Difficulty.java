@@ -8,12 +8,14 @@ package com.jigdraw.draw.model;
 public enum Difficulty {
     EASY, MEDIUM, HARD;
 
-    public static Difficulty valueOf(int val) {
-        Difficulty[] values = Difficulty.values();
-        return values[val];
-    }
-
-    public static int getMatrixByDifficulty(Difficulty level) {
+    /**
+     * Given level of difficulty return the number of rows and columns
+     * for the jigsaw
+     *
+     * @param level the difficulty level
+     * @return the number of rows/columns
+     */
+    public static int getNumberOfPieces(Difficulty level) {
         switch (level) {
             case EASY:
                 return 2;
