@@ -20,32 +20,30 @@ public class JigsawService {
     }
 
     public boolean createJigsaw(Bitmap original, Difficulty level) {
-        int row = 2;
-        int col = 2;
+        sliceImage(original, Difficulty.getMatrixByDifficulty(level));
+        return true;
+    }
 
+    private void sliceImage(Bitmap original, int numberOfSlices) {
         int w = original.getWidth();
         int h = original.getHeight();
 
-        int newW = w / col;
-        int newH = h / row;
+        int xslice = w / numberOfSlices;
+        int yslice = h / numberOfSlices;
 
-        int x = 0;
-        int y;
+        for (int i = 0; i < h; i += yslice) {
+            for (int j = 0; j < w; j += xslice) {
 
-        for (int i = 0; i < row; i++) {
-            y = 0;
-            for (int j = 0; j < col; j++) {
-                Bitmap sub = Bitmap.createBitmap(original, x, y, newH, newH);
-                String name = "original" + i + j + ".png";
-                String desc = "sub image " + i + j;
+                int mx = Math.min(i + xslice, w);
+                int my = Math.min(j + yslice, h);
+
+                Bitmap sub = Bitmap.createBitmap(original, mx, my, xslice, yslice);
+                String name = "tile-" + i + "-" + j + ".png";
+                String desc = "sub image " + name;
                 ImageEntity entity = new ImageEntity(sub, name, desc);
 
                 service.insert(entity);
-                y += newW;
             }
-            x += newH;
         }
-
-        return true;
     }
 }
