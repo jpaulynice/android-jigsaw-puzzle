@@ -24,6 +24,4 @@ public class DBUtil {
     public static String getIdSelection(final long id) {
         return ID_SELECTION + id;
     }
-
-
 }
