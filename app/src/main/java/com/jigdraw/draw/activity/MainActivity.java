@@ -18,6 +18,7 @@ import android.widget.Toast;
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.model.Difficulty;
 import com.jigdraw.draw.service.JigsawService;
+import com.jigdraw.draw.service.impl.JigsawServiceImpl;
 import com.jigdraw.draw.views.DrawingView;
 
 import java.util.ArrayList;
@@ -53,7 +54,7 @@ public class MainActivity extends Activity implements OnClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        jigsaw = new JigsawService(getApplicationContext());
+        jigsaw = new JigsawServiceImpl(getApplicationContext());
         super.onCreate(savedInstanceState);
         init();
     }
