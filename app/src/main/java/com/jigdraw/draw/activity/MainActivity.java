@@ -109,17 +109,28 @@ public class MainActivity extends Activity implements OnClickListener {
         drawView.setBrushSize(drawView.getLastBrushSize());
 
         if (view != currPaint) {
-            ImageButton imgView = (ImageButton) view;
-            String color = view.getTag().toString();
-            drawView.setColor(color);
-            //update ui
-            imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-            currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
-            currPaint = (ImageButton) view;
-
-            Log.d(TAG, "setting brush color..." + color);
+            String color = changeColor(view);
             setBrushColor(Color.parseColor(color));
         }
+    }
+
+    /**
+     * Change to selected color
+     *
+     * @param view the image button clicked
+     * @return the color to set
+     */
+    private String changeColor(View view) {
+        ImageButton imgView = (ImageButton) view;
+        String color = view.getTag().toString();
+        drawView.setColor(color);
+
+        //update ui
+        imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
+        currPaint = (ImageButton) view;
+
+        return color;
     }
 
     /**
