@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import com.jigdraw.draw.model.Difficulty;
 
 /**
- * Service to do jigsaw manipulations
+ * Simple interface for jigsaw manipulations.
  *
  * @author Jay Paulynice
  */
@@ -15,7 +15,7 @@ public interface JigsawService {
      *
      * @param original the original image
      * @param level    difficulty level
-     * @return true if no errors
+     * @return {@code} if no errors
      */
     public boolean createJigsaw(Bitmap original, Difficulty level);
 }
