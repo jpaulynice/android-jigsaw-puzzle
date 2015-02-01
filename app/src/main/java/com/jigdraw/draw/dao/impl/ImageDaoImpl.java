@@ -25,7 +25,10 @@ import static com.jigdraw.draw.util.EntityUtil.entityToContentValues;
  * @author Jay Paulynice
  */
 public class ImageDaoImpl implements ImageDao {
+    /** tag name for logging */
     private static final String TAG = "ImageDaoImpl";
+
+    /** database */
     private SQLiteDatabase db;
 
     /**
@@ -48,11 +51,15 @@ public class ImageDaoImpl implements ImageDao {
 
     @Override
     public ImageEntity find(long id) {
-        String[] col = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN};
-        Cursor cursor = db.query(TABLE_NAME, col, getIdSelection(id),
+        String[] cols = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN};
+        Cursor cursor = db.query(TABLE_NAME, cols, getIdSelection(id),
                 null, null, null,
                 null);
 
+        return getEntityFromCursor(cursor);
+    }
+
+    private ImageEntity getEntityFromCursor(Cursor cursor) {
         ImageEntity entity = null;
         if (cursor != null && cursor.moveToFirst()) {
             String name = cursor.getString(cursor.getColumnIndex(NAME_COLUMN));
@@ -63,10 +70,7 @@ public class ImageDaoImpl implements ImageDao {
             Log.d(TAG, "image entity found with: " + entity.toString());
 
             cursor.close();
-        } else {
-            Log.d(TAG, "No results found for entity with id: " + id);
         }
-
         return entity;
     }
 

@@ -12,10 +12,13 @@ import com.jigdraw.draw.util.Base64Util;
 public class ImageEntity {
     /** the image */
     private final Bitmap image;
+
     /** the name of the entity */
     private final String name;
+
     /** the description for the entity */
     private final String desc;
+
     /** the id of the image */
     private int id;
 

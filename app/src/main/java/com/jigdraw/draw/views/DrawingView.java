@@ -52,13 +52,13 @@ public class DrawingView extends View {
      */
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setupDrawing();
+        init();
     }
 
     /**
      * Init parameters
      */
-    private void setupDrawing() {
+    private void init() {
         //prepare for drawing and setup paint stroke properties
         brushSize = getResources().getInteger(R.integer.medium_size);
         lastBrushSize = brushSize;
@@ -173,13 +173,5 @@ public class DrawingView extends View {
      */
     public int getPaintColor() {
         return paintColor;
-    }
-
-    public Bitmap getCanvasBitmap() {
-        return canvasBitmap;
-    }
-
-    public Canvas getDrawCanvas() {
-        return drawCanvas;
     }
 }
