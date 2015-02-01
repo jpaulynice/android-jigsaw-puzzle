@@ -12,16 +12,17 @@ import static com.jigdraw.draw.util.DBUtil.DATABASE_VERSION;
 
 
 /**
- * Image database class that extends the {@link SQLiteOpenHelper}
- * for database manipulations.
+ * Database helper that extends the {@link SQLiteOpenHelper} for database
+ * manipulations.
  *
  * @author Jay Paulynice
  */
 public class DBHelper extends SQLiteOpenHelper {
+    /** tag name for logging */
     private static final String TAG = "DBHelper";
 
     /**
-     * Create new image db helper with the following parameters
+     * Create new db helper given application context
      *
      * @param context the application context
      */
@@ -31,7 +32,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d(TAG, "creating table jigsaw_images...");
+        Log.d(TAG, "creating table jigsaw_images if it doesn't exist");
         db.execSQL(DBUtil.CREATE_JIGSAW_TABLE);
     }
 

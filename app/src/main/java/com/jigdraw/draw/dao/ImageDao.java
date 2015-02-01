@@ -3,7 +3,7 @@ package com.jigdraw.draw.dao;
 import com.jigdraw.draw.model.ImageEntity;
 
 /**
- * Simple interface for {@link ImageEntity} data access
+ * Simple interface for {@link ImageEntity} CRUD operations
  *
  * @author Jay Paulynice
  */

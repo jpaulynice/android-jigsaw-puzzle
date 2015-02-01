@@ -10,22 +10,33 @@ import com.jigdraw.draw.util.Base64Util;
  * @author Jay Paulynice
  */
 public class ImageEntity {
-    private long id;
-    private Bitmap image;
-    private String name;
-    private String desc;
+    /** the image */
+    private final Bitmap image;
+    /** the name of the entity */
+    private final String name;
+    /** the description for the entity */
+    private final String desc;
+    /** the id of the image */
+    private int id;
 
+    /**
+     * Create new image entity given the parameters
+     *
+     * @param image the image as bitmap
+     * @param name  the name
+     * @param desc  the description
+     */
     public ImageEntity(Bitmap image, String name, String desc) {
         this.image = image;
         this.name = name;
         this.desc = desc;
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -33,24 +44,12 @@ public class ImageEntity {
         return image;
     }
 
-    public void setImage(Bitmap image) {
-        this.image = image;
-    }
-
     public String getDesc() {
         return desc;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

@@ -19,7 +19,8 @@ import static com.jigdraw.draw.util.DBUtil.getIdSelection;
 import static com.jigdraw.draw.util.EntityUtil.entityToContentValues;
 
 /**
- * Default implementation for {@link com.jigdraw.draw.dao.ImageDao}
+ * Default implementation for {@link com.jigdraw.draw.dao.ImageDao}. Provides
+ * CRUD database operations for {@link com.jigdraw.draw.model.ImageEntity}
  *
  * @author Jay Paulynice
  */

@@ -10,8 +10,8 @@ import static com.jigdraw.draw.util.DBUtil.IMAGE_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.NAME_COLUMN;
 
 /**
- * Utilities class to convert from {@link ImageEntity} to
- * {@link ContentValues} for database persistence.
+ * Utilities class to convert from {@link ImageEntity} to {@link ContentValues}
+ * for database persistence.
  *
  * @author Jay Paulynice
  */
