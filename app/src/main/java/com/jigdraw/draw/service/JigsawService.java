@@ -15,7 +15,7 @@ public interface JigsawService {
      *
      * @param original the original image
      * @param level    difficulty level
-     * @return {@code} if no errors
+     * @return {@code true} if no errors
      */
     public boolean createJigsaw(Bitmap original, Difficulty level);
 }
