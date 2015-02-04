@@ -51,13 +51,13 @@ public class JigsawServiceImpl implements JigsawService {
         int w = original.getWidth();
         int h = original.getHeight();
 
-        int x_slices = w / n;
-        int y_slices = h / n;
+        int tile_width = w / n;
+        int tile_height = h / n;
 
-        for (int y = 0; y + y_slices <= h; y += y_slices) {
-            for (int x = 0; x + x_slices <= w; x += x_slices) {
-                Bitmap sub = Bitmap.createBitmap(original, x, y, x_slices,
-                        y_slices);
+        for (int y = 0; y + tile_height <= h; y += tile_height) {
+            for (int x = 0; x + tile_width <= w; x += tile_width) {
+                Bitmap sub = Bitmap.createBitmap(original, x, y, tile_width,
+                        tile_height);
                 saveTile(sub, x, y);
             }
         }
