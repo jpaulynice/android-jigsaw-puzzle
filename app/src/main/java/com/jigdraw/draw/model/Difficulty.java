@@ -12,11 +12,11 @@ public enum Difficulty {
      * Given level of difficulty return the number of rows and columns
      * for the jigsaw
      *
-     * @param level the difficulty level
+     * @param difficulty the difficulty level
      * @return the number of rows/columns
      */
-    public static int getNumberOfPieces(Difficulty level) {
-        switch (level) {
+    public static int getNumberOfPieces(Difficulty difficulty) {
+        switch (difficulty) {
             case EASY:
                 return 2;
             case MEDIUM:
