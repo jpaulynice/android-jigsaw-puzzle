@@ -65,7 +65,6 @@ public class ImageEntity {
         return desc.equals(entity.desc) &&
                 image.equals(entity.image) &&
                 name.equals(entity.name);
-
     }
 
     @Override
