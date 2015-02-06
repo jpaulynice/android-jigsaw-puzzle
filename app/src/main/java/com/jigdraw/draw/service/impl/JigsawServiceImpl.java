@@ -56,9 +56,9 @@ public class JigsawServiceImpl implements JigsawService {
 
         for (int y = 0; y + tile_height <= h; y += tile_height) {
             for (int x = 0; x + tile_width <= w; x += tile_width) {
-                Bitmap sub = Bitmap.createBitmap(original, x, y, tile_width,
+                Bitmap tile = Bitmap.createBitmap(original, x, y, tile_width,
                         tile_height);
-                saveTile(sub, x, y);
+                saveTile(tile, x, y);
             }
         }
     }
@@ -73,32 +73,21 @@ public class JigsawServiceImpl implements JigsawService {
         String originalDesc = "original image " + originalName;
         Log.d(TAG, "image name: " + originalName);
 
-        saveEntity(original, originalName, originalDesc);
+        service.insert(new ImageEntity(original, originalName, originalDesc));
     }
 
     /**
      * Save created tile in the database
      *
-     * @param sub   the tile to save
+     * @param tile   the tile to save
      * @param xTile the tile's x coordinate
      * @param yTile the tile's y coordinate
      */
-    private void saveTile(Bitmap sub, int xTile, int yTile) {
+    private void saveTile(Bitmap tile, int xTile, int yTile) {
         String name = "tile-" + xTile + "-" + yTile + ".png";
         String desc = "sub image " + name;
         Log.d(TAG, "image name: " + name);
 
-        saveEntity(sub, name, desc);
-    }
-
-    /**
-     * Create and save an image entity
-     *
-     * @param image the image field
-     * @param name  the name field
-     * @param desc  the description field
-     */
-    private void saveEntity(Bitmap image, String name, String desc) {
-        service.insert(new ImageEntity(image, name, desc));
+        service.insert(new ImageEntity(tile, name, desc));
     }
 }
