@@ -99,8 +99,6 @@ public class JigsawServiceImpl implements JigsawService {
      * @param desc  the description field
      */
     private void saveEntity(Bitmap image, String name, String desc) {
-        ImageEntity originalEntity = new ImageEntity(image, name,
-                desc);
-        service.insert(originalEntity);
+        service.insert(new ImageEntity(image, name, desc));
     }
 }
