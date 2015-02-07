@@ -10,12 +10,5 @@ import com.jigdraw.draw.model.Difficulty;
  * @author Jay Paulynice
  */
 public interface JigsawService {
-    /**
-     * Create jigsaw by taking original image and difficulty level
-     *
-     * @param original the original image
-     * @param level    difficulty level
-     * @return {@code true} if no errors
-     */
     public boolean createJigsaw(Bitmap original, Difficulty level);
 }

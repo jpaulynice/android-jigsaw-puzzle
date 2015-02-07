@@ -12,6 +12,7 @@ import com.jigdraw.draw.model.ImageEntity;
 
 import static com.jigdraw.draw.util.Base64Util.base64ToBitmap;
 import static com.jigdraw.draw.util.DBUtil.DESC_COLUMN;
+import static com.jigdraw.draw.util.DBUtil.ID_SELECTION;
 import static com.jigdraw.draw.util.DBUtil.IMAGE_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.NAME_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.TABLE_NAME;
@@ -52,8 +53,8 @@ public class ImageDaoImpl implements ImageDao {
     @Override
     public ImageEntity find(long id) {
         String[] cols = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN};
-        Cursor cursor = db.query(TABLE_NAME, cols, getIdSelection(id),
-                null, null, null,
+        Cursor cursor = db.query(TABLE_NAME, cols, ID_SELECTION,
+                getIdSelection(id), null, null,
                 null);
 
         return getEntityFromCursor(cursor);
@@ -63,7 +64,8 @@ public class ImageDaoImpl implements ImageDao {
         ImageEntity entity = null;
         if (cursor != null && cursor.moveToFirst()) {
             String name = cursor.getString(cursor.getColumnIndex(NAME_COLUMN));
-            String base64String = cursor.getString(cursor.getColumnIndex(IMAGE_COLUMN));
+            String base64String = cursor.getString(cursor.getColumnIndex
+                    (IMAGE_COLUMN));
             String desc = cursor.getString(cursor.getColumnIndex(DESC_COLUMN));
 
             entity = new ImageEntity(base64ToBitmap(base64String), name, desc);
@@ -78,12 +80,14 @@ public class ImageDaoImpl implements ImageDao {
     public int update(ImageEntity entity) {
         Log.d(TAG, "Updating entity with id: " + entity.getId());
         ContentValues cv = entityToContentValues(entity);
-        return db.update(TABLE_NAME, cv, getIdSelection(entity.getId()), null);
+        return db.update(TABLE_NAME, cv, ID_SELECTION,
+                getIdSelection(entity.getId()));
     }
 
     @Override
     public int delete(long id) {
         Log.d(TAG, "Deleting entity with id: " + id);
-        return db.delete(TABLE_NAME, getIdSelection(id), null);
+        return db.delete(TABLE_NAME, ID_SELECTION,
+                getIdSelection(id));
     }
 }

@@ -17,9 +17,8 @@ import java.util.UUID;
  * @author Jay Paulynice
  */
 public class JigsawServiceImpl implements JigsawService {
-
     /** class name for logging */
-    private static final String TAG = "JigsawService";
+    private static final String TAG = "JigsawServiceImpl";
 
     /** image db service */
     private ImageService service;
@@ -35,7 +34,7 @@ public class JigsawServiceImpl implements JigsawService {
 
     @Override
     public boolean createJigsaw(Bitmap original, Difficulty level) {
-        sliceImage(original, Difficulty.getNumberOfPieces(level));
+        createImageTiles(original, Difficulty.getNumberOfPieces(level));
         return true;
     }
 
@@ -45,7 +44,7 @@ public class JigsawServiceImpl implements JigsawService {
      * @param original the original image to slice up
      * @param n        how many slices to cut the image into
      */
-    private void sliceImage(Bitmap original, int n) {
+    private void createImageTiles(Bitmap original, int n) {
         saveOriginal(original);
 
         int w = original.getWidth();
@@ -79,12 +78,12 @@ public class JigsawServiceImpl implements JigsawService {
     /**
      * Save created tile in the database
      *
-     * @param tile   the tile to save
-     * @param xTile the tile's x coordinate
-     * @param yTile the tile's y coordinate
+     * @param tile the tile to save
+     * @param x    the tile's x coordinate
+     * @param y    the tile's y coordinate
      */
-    private void saveTile(Bitmap tile, int xTile, int yTile) {
-        String name = "tile-" + xTile + "-" + yTile + ".png";
+    private void saveTile(Bitmap tile, int x, int y) {
+        String name = "tile-" + x + "-" + y + ".png";
         String desc = "sub image " + name;
         Log.d(TAG, "image name: " + name);
 

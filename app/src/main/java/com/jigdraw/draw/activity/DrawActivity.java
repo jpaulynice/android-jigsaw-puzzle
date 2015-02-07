@@ -32,7 +32,7 @@ import java.util.List;
  *
  * @author Jay Paulynice
  */
-public class MainActivity extends Activity implements OnClickListener {
+public class DrawActivity extends Activity implements OnClickListener {
     /** activity name for logging */
     private static final String TAG = "MainActivity";
 
@@ -49,12 +49,12 @@ public class MainActivity extends Activity implements OnClickListener {
     private List<ImageButton> brushes = new ArrayList<>();
 
     /** image data access */
-    private JigsawService jigsaw;
+    private JigsawService service;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        jigsaw = new JigsawServiceImpl(getApplicationContext());
+        service = new JigsawServiceImpl(getApplicationContext());
         super.onCreate(savedInstanceState);
         init();
     }
@@ -126,12 +126,24 @@ public class MainActivity extends Activity implements OnClickListener {
         String color = view.getTag().toString();
         drawView.setColor(color);
 
-        //update ui
-        imgView.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
-        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint));
-        currPaint = (ImageButton) view;
+        updateUI(imgView, view);
 
         return color;
+    }
+
+    /**
+     * Update UI with new selected color
+     *
+     * @param imgView the image view
+     * @param view    the view
+     */
+    private void updateUI(ImageButton imgView, View view) {
+        //update ui
+        imgView.setImageDrawable(getResources().getDrawable(R.drawable
+                .paint_pressed));
+        currPaint.setImageDrawable(getResources().getDrawable(R.drawable
+                .paint));
+        currPaint = (ImageButton) view;
     }
 
     /**
@@ -152,7 +164,8 @@ public class MainActivity extends Activity implements OnClickListener {
      */
     private void initBrushList() {
         if (brushes.isEmpty()) {
-            brushes.addAll(Arrays.asList((ImageButton) findViewById(R.id.small_brush),
+            brushes.addAll(Arrays.asList((ImageButton) findViewById(R.id
+                            .small_brush),
                     (ImageButton) findViewById(R.id.medium_brush),
                     (ImageButton) findViewById(R.id.large_brush),
                     (ImageButton) findViewById(R.id.largest_brush)));
@@ -176,9 +189,11 @@ public class MainActivity extends Activity implements OnClickListener {
      * Initialize the layout and set current color to first one
      */
     private void initLayout() {
-        LinearLayout paintLayout = (LinearLayout) findViewById(R.id.paint_colors);
+        LinearLayout paintLayout = (LinearLayout) findViewById(R.id
+                .paint_colors);
         currPaint = (ImageButton) paintLayout.getChildAt(0);
-        currPaint.setImageDrawable(getResources().getDrawable(R.drawable.paint_pressed));
+        currPaint.setImageDrawable(getResources().getDrawable(R.drawable
+                .paint_pressed));
     }
 
     /**
@@ -230,7 +245,8 @@ public class MainActivity extends Activity implements OnClickListener {
         //new button
         AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
         newDialog.setTitle("New drawing");
-        newDialog.setMessage("Start new drawing (you will lose the current drawing)?");
+        newDialog.setMessage("Start new drawing (you will lose the current " +
+                "drawing)?");
         newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
                 drawView.startNew();
@@ -275,7 +291,7 @@ public class MainActivity extends Activity implements OnClickListener {
         Bitmap bitmap = drawView.getDrawingCache();
 
         //create an easy jigsaw
-        boolean created = jigsaw.createJigsaw(bitmap, Difficulty.HARD);
+        boolean created = service.createJigsaw(bitmap, Difficulty.EASY);
 
         toast(created);
         drawView.destroyDrawingCache();

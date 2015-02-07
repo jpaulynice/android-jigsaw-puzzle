@@ -9,6 +9,7 @@ import android.graphics.Path;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Xfermode;
+import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -74,7 +75,7 @@ public class DrawingView extends View {
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
         float touchX = event.getX();
         float touchY = event.getY();
 
@@ -156,7 +157,8 @@ public class DrawingView extends View {
      */
     public void setErase(boolean isErase) {
         erase = isErase;
-        Xfermode xfermode = erase ? new PorterDuffXfermode(PorterDuff.Mode.CLEAR) : null;
+        Xfermode xfermode = erase ? new PorterDuffXfermode(PorterDuff.Mode
+                .CLEAR) : null;
         drawPaint.setXfermode(xfermode);
     }
 
