@@ -2,7 +2,6 @@ Android-Jigsaw-Puzzle
 =====================
 
 [![Build Status](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle.svg)](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle)
-[![Coverage Status](https://coveralls.io/repos/julesbond007/Android-Jigsaw-Puzzle/badge.svg)](https://coveralls.io/r/julesbond007/Android-Jigsaw-Puzzle)
 
 Android jigsaw puzzle game...in progress!
 
