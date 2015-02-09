@@ -19,7 +19,7 @@ public class DBUtil {
     public static final String DROP_JIGSAW_TABLE = "drop table jigsaw_images " +
             "if exists;";
 
-    public static String ID_SELECTION = "rowid = ";
+    public static String ID_SELECTION = "rowid = ?";
 
     public static String[] getIdSelection(final long id) {
         return new String[]{String.valueOf(id)};
