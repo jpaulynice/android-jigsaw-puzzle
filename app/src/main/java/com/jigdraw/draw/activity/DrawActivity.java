@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class DrawActivity extends Activity implements OnClickListener {
     /** activity name for logging */
-    private static final String TAG = "MainActivity";
+    private static final String TAG = "DrawActivity";
 
     /** custom drawing view */
     private DrawingView drawView;
@@ -138,7 +138,6 @@ public class DrawActivity extends Activity implements OnClickListener {
      * @param view    the view
      */
     private void updateUI(ImageButton imgView, View view) {
-        //update ui
         imgView.setImageDrawable(getResources().getDrawable(R.drawable
                 .paint_pressed));
         currPaint.setImageDrawable(getResources().getDrawable(R.drawable
@@ -164,8 +163,8 @@ public class DrawActivity extends Activity implements OnClickListener {
      */
     private void initBrushList() {
         if (brushes.isEmpty()) {
-            brushes.addAll(Arrays.asList((ImageButton) findViewById(R.id
-                            .small_brush),
+            brushes.addAll(Arrays.asList(
+                    (ImageButton) findViewById(R.id.small_brush),
                     (ImageButton) findViewById(R.id.medium_brush),
                     (ImageButton) findViewById(R.id.large_brush),
                     (ImageButton) findViewById(R.id.largest_brush)));

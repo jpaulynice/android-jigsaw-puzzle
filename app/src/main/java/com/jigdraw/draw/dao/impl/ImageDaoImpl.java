@@ -63,17 +63,20 @@ public class ImageDaoImpl implements ImageDao {
     private ImageEntity getEntityFromCursor(Cursor cursor) {
         ImageEntity entity = null;
         if (cursor != null && cursor.moveToFirst()) {
-            String name = cursor.getString(cursor.getColumnIndex(NAME_COLUMN));
-            String base64String = cursor.getString(cursor.getColumnIndex
-                    (IMAGE_COLUMN));
-            String desc = cursor.getString(cursor.getColumnIndex(DESC_COLUMN));
-
-            entity = new ImageEntity(base64ToBitmap(base64String), name, desc);
+            entity = getEntity(cursor);
             Log.d(TAG, "image entity found with: " + entity.toString());
-
             cursor.close();
         }
         return entity;
+    }
+
+    private ImageEntity getEntity(Cursor cursor) {
+        String name = cursor.getString(cursor.getColumnIndex(NAME_COLUMN));
+        String base64String = cursor.getString(cursor.getColumnIndex
+                (IMAGE_COLUMN));
+        String desc = cursor.getString(cursor.getColumnIndex(DESC_COLUMN));
+
+        return new ImageEntity(base64ToBitmap(base64String), name, desc);
     }
 
     @Override
