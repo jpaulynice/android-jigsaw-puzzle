@@ -72,7 +72,7 @@ public class JigsawServiceImpl implements JigsawService {
         String originalDesc = "original image " + originalName;
         Log.d(TAG, "image name: " + originalName);
 
-        service.insert(new ImageEntity(original, originalName, originalDesc));
+        saveEntity(original, originalName, originalDesc);
     }
 
     /**
@@ -87,6 +87,10 @@ public class JigsawServiceImpl implements JigsawService {
         String desc = "sub image " + name;
         Log.d(TAG, "image name: " + name);
 
-        service.insert(new ImageEntity(tile, name, desc));
+        saveEntity(tile, name, desc);
+    }
+
+    private void saveEntity(Bitmap image, String name, String desc) {
+        service.insert(new ImageEntity(image, name, desc));
     }
 }
