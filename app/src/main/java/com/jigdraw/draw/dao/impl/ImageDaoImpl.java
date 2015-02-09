@@ -14,8 +14,8 @@ import static com.jigdraw.draw.util.Base64Util.base64ToBitmap;
 import static com.jigdraw.draw.util.DBUtil.DESC_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.ID_SELECTION;
 import static com.jigdraw.draw.util.DBUtil.IMAGE_COLUMN;
+import static com.jigdraw.draw.util.DBUtil.JIGSAW_TABLE;
 import static com.jigdraw.draw.util.DBUtil.NAME_COLUMN;
-import static com.jigdraw.draw.util.DBUtil.TABLE_NAME;
 import static com.jigdraw.draw.util.DBUtil.getIdSelection;
 import static com.jigdraw.draw.util.EntityUtil.entityToContentValues;
 
@@ -44,7 +44,7 @@ public class ImageDaoImpl implements ImageDao {
 
     @Override
     public long create(ImageEntity entity) {
-        long id = db.insert(TABLE_NAME, null, entityToContentValues(entity));
+        long id = db.insert(JIGSAW_TABLE, null, entityToContentValues(entity));
         Log.d(TAG, "successfully saved image...id: " + id);
 
         return id;
@@ -53,7 +53,7 @@ public class ImageDaoImpl implements ImageDao {
     @Override
     public ImageEntity find(long id) {
         String[] cols = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN};
-        Cursor cursor = db.query(TABLE_NAME, cols, ID_SELECTION,
+        Cursor cursor = db.query(JIGSAW_TABLE, cols, ID_SELECTION,
                 getIdSelection(id), null, null,
                 null);
 
@@ -83,14 +83,14 @@ public class ImageDaoImpl implements ImageDao {
     public int update(ImageEntity entity) {
         Log.d(TAG, "Updating entity with id: " + entity.getId());
         ContentValues cv = entityToContentValues(entity);
-        return db.update(TABLE_NAME, cv, ID_SELECTION,
+        return db.update(JIGSAW_TABLE, cv, ID_SELECTION,
                 getIdSelection(entity.getId()));
     }
 
     @Override
     public int delete(long id) {
         Log.d(TAG, "Deleting entity with id: " + id);
-        return db.delete(TABLE_NAME, ID_SELECTION,
+        return db.delete(JIGSAW_TABLE, ID_SELECTION,
                 getIdSelection(id));
     }
 }
