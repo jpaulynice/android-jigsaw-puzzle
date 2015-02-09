@@ -90,6 +90,13 @@ public class JigsawServiceImpl implements JigsawService {
         saveEntity(tile, name, desc);
     }
 
+    /**
+     * Create an image entity with the give parameters and save
+     *
+     * @param image the bitmap image
+     * @param name  the name
+     * @param desc  the description
+     */
     private void saveEntity(Bitmap image, String name, String desc) {
         service.insert(new ImageEntity(image, name, desc));
     }
