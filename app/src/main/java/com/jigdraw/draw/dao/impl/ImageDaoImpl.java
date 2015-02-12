@@ -64,7 +64,7 @@ public class ImageDaoImpl implements ImageDao {
         ImageEntity entity = null;
         if (cursor != null && cursor.moveToFirst()) {
             entity = getEntity(cursor);
-            Log.d(TAG, "image entity found with: " + entity.toString());
+            Log.d(TAG, "image entity found with name: " + entity.getName());
             cursor.close();
         }
         return entity;

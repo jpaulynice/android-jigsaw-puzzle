@@ -3,6 +3,7 @@ package com.jigdraw.draw.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -182,6 +183,12 @@ public class DrawActivity extends Activity implements OnClickListener {
         initLayout();
         initButtons();
         setBrushColor(drawView.getPaintColor());
+
+        /*
+        ImageEntity entity = imgserv.query(1);
+        Drawable d = new BitmapDrawable(getResources(),entity.getImage());
+        drawView.setBackgroundDrawable(d);
+        */
     }
 
     /**
@@ -294,6 +301,15 @@ public class DrawActivity extends Activity implements OnClickListener {
 
         toast(created);
         drawView.destroyDrawingCache();
+
+        startJigsaw();
+    }
+
+    private void startJigsaw() {
+        Intent myIntent = new Intent(getApplicationContext(),
+                JigsawActivity.class);
+        startActivity(myIntent);
+        finish();
     }
 
     /**

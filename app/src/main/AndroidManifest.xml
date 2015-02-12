@@ -8,21 +8,29 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:label="@string/app_name">
         <activity
             android:name=".activity.DrawActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
+
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <provider
             android:name=".provider.ImageProvider"
             android:authorities="com.jigdraw.draw.provider.jigsaw">
         </provider>
+
+        <activity
+            android:name=".activity.JigsawActivity"
+            android:label="@string/title_activity_jigsaw"
+            android:theme="@style/Theme.AppCompat">
+        </activity>
     </application>
 
 </manifest>
