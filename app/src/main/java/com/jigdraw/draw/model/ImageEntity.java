@@ -18,11 +18,9 @@ public class ImageEntity {
 
     /** the description for the entity */
     private final String desc;
-
+    private final long originalId;
     /** the id of the image */
     private int id;
-
-    private long originalId;
 
     /**
      * Create new image entity given the parameters
@@ -56,6 +54,10 @@ public class ImageEntity {
 
     public String getName() {
         return name;
+    }
+
+    public long getOriginalId() {
+        return originalId;
     }
 
     @Override

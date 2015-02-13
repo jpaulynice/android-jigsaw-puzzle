@@ -11,6 +11,9 @@ import android.widget.ImageView;
 
 import com.jigdraw.draw.model.ImageEntity;
 import com.jigdraw.draw.service.ImageService;
+import com.jigdraw.draw.service.impl.ImageServiceImpl;
+
+import java.util.List;
 
 public class ImageAdapter extends BaseAdapter {
     ImageService imgserv;
@@ -19,14 +22,17 @@ public class ImageAdapter extends BaseAdapter {
 
     public ImageAdapter(Context c, long id) {
         mContext = c;
-        ImageEntity entity = imgserv.query(3);
-        Drawable d = new BitmapDrawable(entity.getImage());
+        imgserv = new ImageServiceImpl(c);
+        List<ImageEntity> entities = imgserv.findTiles(id);
 
-        mThumbIds[0] = d;
-        mThumbIds[1] = d;
-        mThumbIds[2] = d;
-        mThumbIds[3] = d;
-        mThumbIds[4] = d;
+        mThumbIds = new Drawable[entities.size()];
+
+        int n = 0;
+        for (ImageEntity e : entities) {
+            Drawable d = new BitmapDrawable(e.getImage());
+            mThumbIds[n] = d;
+            n++;
+        }
     }
 
     public int getCount() {

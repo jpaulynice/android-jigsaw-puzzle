@@ -12,15 +12,17 @@ public class DBUtil {
     public static final String NAME_COLUMN = "name";
     public static final String IMAGE_COLUMN = "img";
     public static final String DESC_COLUMN = "desc";
+    public static final String ORIGINAL_COLUMN = "original";
 
     public static final String CREATE_JIGSAW_TABLE = "create table if not " +
-            "exists jigsaw_images (name TEXT, img TEXT, " +
-            "desc TEXT, original INTEGER);";
+            "exists jigsaw_images (name TEXT, img TEXT, desc TEXT, original INTEGER);";
 
     public static final String DROP_JIGSAW_TABLE = "drop table jigsaw_images " +
             "if exists;";
 
     public static String ID_SELECTION = "rowid = ?";
+
+    public static String ORIGINAL_SELECTION = "original = ?";
 
     public static String[] getIdSelection(final long id) {
         return new String[]{String.valueOf(id)};

@@ -19,6 +19,8 @@ import static com.jigdraw.draw.util.DBUtil.ID_SELECTION;
 import static com.jigdraw.draw.util.DBUtil.IMAGE_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.JIGSAW_TABLE;
 import static com.jigdraw.draw.util.DBUtil.NAME_COLUMN;
+import static com.jigdraw.draw.util.DBUtil.ORIGINAL_COLUMN;
+import static com.jigdraw.draw.util.DBUtil.ORIGINAL_SELECTION;
 import static com.jigdraw.draw.util.DBUtil.getIdSelection;
 import static com.jigdraw.draw.util.EntityUtil.entityToContentValues;
 
@@ -53,10 +55,12 @@ public class ImageDaoImpl implements ImageDao {
         return id;
     }
 
-    public List<ImageEntity> getByParentId(long id) {
-        String[] cols = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN};
-        Cursor cursor = db.query(JIGSAW_TABLE, cols, "originalId = ",
-                new String[]{String.valueOf(id)}, null, null,
+    @Override
+    public List<ImageEntity> findTiles(long id) {
+        String[] cols = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN,
+                ORIGINAL_COLUMN};
+        Cursor cursor = db.query(JIGSAW_TABLE, cols, ORIGINAL_SELECTION,
+                getIdSelection(id), null, null,
                 null);
         List<ImageEntity> entities = new ArrayList<>();
         if (cursor != null) {
@@ -71,7 +75,7 @@ public class ImageDaoImpl implements ImageDao {
 
     @Override
     public ImageEntity find(long id) {
-        String[] cols = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN};
+        String[] cols = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN, ORIGINAL_COLUMN};
         Cursor cursor = db.query(JIGSAW_TABLE, cols, ID_SELECTION,
                 getIdSelection(id), null, null,
                 null);
@@ -94,9 +98,9 @@ public class ImageDaoImpl implements ImageDao {
         String base64String = cursor.getString(cursor.getColumnIndex
                 (IMAGE_COLUMN));
         String desc = cursor.getString(cursor.getColumnIndex(DESC_COLUMN));
+        long id = cursor.getLong(cursor.getColumnIndex(ORIGINAL_COLUMN));
 
-        //TODO: fix me
-        return new ImageEntity(base64ToBitmap(base64String), name, desc, 0);
+        return new ImageEntity(base64ToBitmap(base64String), name, desc, id);
     }
 
     @Override

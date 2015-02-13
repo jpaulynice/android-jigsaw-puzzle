@@ -7,6 +7,8 @@ import com.jigdraw.draw.dao.impl.ImageDaoImpl;
 import com.jigdraw.draw.model.ImageEntity;
 import com.jigdraw.draw.service.ImageService;
 
+import java.util.List;
+
 /**
  * Default implementation for {@link com.jigdraw.draw.service.ImageService}
  *
@@ -22,6 +24,11 @@ public class ImageServiceImpl implements ImageService {
     @Override
     public long insert(ImageEntity entity) {
         return dao.create(entity);
+    }
+
+    @Override
+    public List<ImageEntity> findTiles(long id) {
+        return dao.findTiles(id);
     }
 
     @Override
