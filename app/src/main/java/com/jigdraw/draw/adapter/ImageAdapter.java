@@ -16,7 +16,7 @@ import com.jigdraw.draw.service.impl.ImageServiceImpl;
 import java.util.List;
 
 public class ImageAdapter extends BaseAdapter {
-    ImageService imgserv;
+    private ImageService imgserv;
     private Context mContext;
     private Drawable[] mThumbIds;
 

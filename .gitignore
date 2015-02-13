@@ -25,5 +25,11 @@ proguard/
 
 # Log Files
 *.log
+
+
+# IDE
+.classpath
+.settings/
+.project
 .idea/
 *.iml

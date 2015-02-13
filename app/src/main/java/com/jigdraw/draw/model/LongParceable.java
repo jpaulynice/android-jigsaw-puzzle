@@ -3,9 +3,6 @@ package com.jigdraw.draw.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-/**
- * Created by julespaulynice on 2/12/15.
- */
 public class LongParceable implements Parcelable {
     public static final Parcelable.Creator<LongParceable> CREATOR = new Parcelable.Creator<LongParceable>() {
         @Override
@@ -18,19 +15,18 @@ public class LongParceable implements Parcelable {
             return new LongParceable[size];
         }
     };
-    private long mData;
-
-
-    private LongParceable(Parcel in) {
-        mData = in.readLong();
-    }
+    private long data;
 
     public LongParceable(long in) {
-        mData = in;
+        data = in;
     }
 
-    public long getmData() {
-        return mData;
+    private LongParceable(Parcel in) {
+        data = in.readLong();
+    }
+
+    public long getData() {
+        return data;
     }
 
     @Override
@@ -40,6 +36,6 @@ public class LongParceable implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeLong(mData);
+        dest.writeLong(data);
     }
 }
