@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.model.Difficulty;
+import com.jigdraw.draw.model.LongParceable;
 import com.jigdraw.draw.service.JigsawService;
 import com.jigdraw.draw.service.impl.JigsawServiceImpl;
 import com.jigdraw.draw.views.DrawingView;
@@ -183,12 +184,6 @@ public class DrawActivity extends Activity implements OnClickListener {
         initLayout();
         initButtons();
         setBrushColor(drawView.getPaintColor());
-
-        /*
-        ImageEntity entity = imgserv.query(1);
-        Drawable d = new BitmapDrawable(getResources(),entity.getImage());
-        drawView.setBackgroundDrawable(d);
-        */
     }
 
     /**
@@ -297,17 +292,18 @@ public class DrawActivity extends Activity implements OnClickListener {
         Bitmap bitmap = drawView.getDrawingCache();
 
         //create an easy jigsaw
-        boolean created = service.createJigsaw(bitmap, Difficulty.EASY);
+        long createdId = service.createJigsaw(bitmap, Difficulty.EASY);
 
-        toast(created);
+        toast(createdId > 0);
         drawView.destroyDrawingCache();
 
-        startJigsaw();
+        startJigsaw(createdId);
     }
 
-    private void startJigsaw() {
+    private void startJigsaw(long id) {
         Intent myIntent = new Intent(getApplicationContext(),
-                JigsawActivity.class);
+                JigsawActivity.class).putExtra("originalId",
+                new LongParceable(id));
         startActivity(myIntent);
         finish();
     }

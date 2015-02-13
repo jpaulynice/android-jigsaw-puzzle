@@ -10,5 +10,5 @@ import com.jigdraw.draw.model.Difficulty;
  * @author Jay Paulynice
  */
 public interface JigsawService {
-    public boolean createJigsaw(Bitmap original, Difficulty level);
+    public long createJigsaw(Bitmap original, Difficulty level);
 }

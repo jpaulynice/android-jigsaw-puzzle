@@ -33,9 +33,8 @@ public class JigsawServiceImpl implements JigsawService {
     }
 
     @Override
-    public boolean createJigsaw(Bitmap original, Difficulty level) {
-        createImageTiles(original, Difficulty.getNumberOfPieces(level));
-        return true;
+    public long createJigsaw(Bitmap original, Difficulty level) {
+        return createImageTiles(original, Difficulty.getNumberOfPieces(level));
     }
 
     /**
@@ -44,8 +43,8 @@ public class JigsawServiceImpl implements JigsawService {
      * @param original the original image to slice up
      * @param n        how many slices to cut the image into
      */
-    private void createImageTiles(Bitmap original, int n) {
-        saveOriginal(original);
+    private long createImageTiles(Bitmap original, int n) {
+        long originalId = saveOriginal(original);
 
         int w = original.getWidth();
         int h = original.getHeight();
@@ -57,9 +56,11 @@ public class JigsawServiceImpl implements JigsawService {
             for (int x = 0; x + tile_width <= w; x += tile_width) {
                 Bitmap tile = Bitmap.createBitmap(original, x, y, tile_width,
                         tile_height);
-                saveTile(tile, x, y);
+                saveTile(tile, x, y, originalId);
             }
         }
+
+        return originalId;
     }
 
     /**
@@ -67,12 +68,12 @@ public class JigsawServiceImpl implements JigsawService {
      *
      * @param original image to save
      */
-    private void saveOriginal(Bitmap original) {
+    private long saveOriginal(Bitmap original) {
         String originalName = UUID.randomUUID() + ".png";
         String originalDesc = "original image " + originalName;
         Log.d(TAG, "image name: " + originalName);
 
-        saveEntity(original, originalName, originalDesc);
+        return saveEntity(original, originalName, originalDesc, 0);
     }
 
     /**
@@ -82,12 +83,12 @@ public class JigsawServiceImpl implements JigsawService {
      * @param x    the tile's x coordinate
      * @param y    the tile's y coordinate
      */
-    private void saveTile(Bitmap tile, int x, int y) {
+    private void saveTile(Bitmap tile, int x, int y, long originalId) {
         String name = "tile-" + x + "-" + y + ".png";
         String desc = "sub image " + name;
         Log.d(TAG, "image name: " + name);
 
-        saveEntity(tile, name, desc);
+        saveEntity(tile, name, desc, originalId);
     }
 
     /**
@@ -97,7 +98,8 @@ public class JigsawServiceImpl implements JigsawService {
      * @param name  the name
      * @param desc  the description
      */
-    private void saveEntity(Bitmap image, String name, String desc) {
-        service.insert(new ImageEntity(image, name, desc));
+    private long saveEntity(Bitmap image, String name, String desc,
+                            long originalId) {
+        return service.insert(new ImageEntity(image, name, desc, originalId));
     }
 }

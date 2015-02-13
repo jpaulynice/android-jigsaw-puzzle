@@ -22,6 +22,8 @@ public class ImageEntity {
     /** the id of the image */
     private int id;
 
+    private long originalId;
+
     /**
      * Create new image entity given the parameters
      *
@@ -29,10 +31,11 @@ public class ImageEntity {
      * @param name  the name
      * @param desc  the description
      */
-    public ImageEntity(Bitmap image, String name, String desc) {
+    public ImageEntity(Bitmap image, String name, String desc, long originalId) {
         this.image = image;
         this.name = name;
         this.desc = desc;
+        this.originalId = originalId;
     }
 
     public int getId() {

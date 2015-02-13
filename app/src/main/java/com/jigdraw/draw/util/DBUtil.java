@@ -14,7 +14,8 @@ public class DBUtil {
     public static final String DESC_COLUMN = "desc";
 
     public static final String CREATE_JIGSAW_TABLE = "create table if not " +
-            "exists jigsaw_images (name TEXT, img TEXT, desc TEXT);";
+            "exists jigsaw_images (name TEXT, img TEXT, " +
+            "desc TEXT, original INTEGER);";
 
     public static final String DROP_JIGSAW_TABLE = "drop table jigsaw_images " +
             "if exists;";

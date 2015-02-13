@@ -10,6 +10,7 @@ import android.widget.GridView;
 
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.adapter.ImageAdapter;
+import com.jigdraw.draw.model.LongParceable;
 
 public class JigsawActivity extends Activity implements View.OnClickListener {
 
@@ -18,8 +19,11 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jigsaw);
 
+        LongParceable p = getIntent().getExtras().getParcelable
+                ("originalId");
+
         GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this));
+        gridview.setAdapter(new ImageAdapter(this, p.getmData()));
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
@@ -39,7 +43,6 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
         }

@@ -1,33 +1,32 @@
 package com.jigdraw.draw.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.jigdraw.draw.R;
+import com.jigdraw.draw.model.ImageEntity;
+import com.jigdraw.draw.service.ImageService;
 
 public class ImageAdapter extends BaseAdapter {
+    ImageService imgserv;
     private Context mContext;
-    // references to our images
-    private Integer[] mThumbIds = {
-            R.drawable.brush, R.drawable.brush,
-            R.drawable.brush, R.drawable.brush,
-            R.drawable.brush, R.drawable.brush,
-            R.drawable.brush, R.drawable.brush,
-            R.drawable.brush, R.drawable.brush,
-            R.drawable.brush, R.drawable.brush,
-            R.drawable.brush, R.drawable.brush,
-            R.drawable.brush, R.drawable.brush,
-            R.drawable.brush, R.drawable.brush,
-            R.drawable.brush, R.drawable.brush,
-            R.drawable.brush, R.drawable.brush
-    };
+    private Drawable[] mThumbIds;
 
-    public ImageAdapter(Context c) {
+    public ImageAdapter(Context c, long id) {
         mContext = c;
+        ImageEntity entity = imgserv.query(3);
+        Drawable d = new BitmapDrawable(entity.getImage());
+
+        mThumbIds[0] = d;
+        mThumbIds[1] = d;
+        mThumbIds[2] = d;
+        mThumbIds[3] = d;
+        mThumbIds[4] = d;
     }
 
     public int getCount() {
@@ -42,7 +41,6 @@ public class ImageAdapter extends BaseAdapter {
         return 0;
     }
 
-    // create a new ImageView for each item referenced by the Adapter
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
         if (convertView == null) {  // if it's not recycled, initialize some attributes
@@ -54,7 +52,7 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageResource(mThumbIds[position]);
+        imageView.setImageDrawable(mThumbIds[position]);
         return imageView;
     }
 }

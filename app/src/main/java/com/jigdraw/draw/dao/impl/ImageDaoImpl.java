@@ -10,6 +10,9 @@ import com.jigdraw.draw.dao.ImageDao;
 import com.jigdraw.draw.db.DBHelper;
 import com.jigdraw.draw.model.ImageEntity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static com.jigdraw.draw.util.Base64Util.base64ToBitmap;
 import static com.jigdraw.draw.util.DBUtil.DESC_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.ID_SELECTION;
@@ -50,6 +53,22 @@ public class ImageDaoImpl implements ImageDao {
         return id;
     }
 
+    public List<ImageEntity> getByParentId(long id) {
+        String[] cols = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN};
+        Cursor cursor = db.query(JIGSAW_TABLE, cols, "originalId = ",
+                new String[]{String.valueOf(id)}, null, null,
+                null);
+        List<ImageEntity> entities = new ArrayList<>();
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                ImageEntity entity = getEntity(cursor);
+                entities.add(entity);
+            }
+        }
+
+        return entities;
+    }
+
     @Override
     public ImageEntity find(long id) {
         String[] cols = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN};
@@ -76,7 +95,8 @@ public class ImageDaoImpl implements ImageDao {
                 (IMAGE_COLUMN));
         String desc = cursor.getString(cursor.getColumnIndex(DESC_COLUMN));
 
-        return new ImageEntity(base64ToBitmap(base64String), name, desc);
+        //TODO: fix me
+        return new ImageEntity(base64ToBitmap(base64String), name, desc, 0);
     }
 
     @Override
