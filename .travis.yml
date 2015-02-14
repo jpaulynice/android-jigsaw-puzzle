@@ -11,6 +11,6 @@ before_script:
 before_install:
     - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
     - echo yes | android update sdk --filter android-18 --no-ui --force > /dev/null
-    - echo yes | android update sdk --filter sysimg-218--no-ui --force > /dev/null
+    - echo yes | android update sdk --filter sysimg-18--no-ui --force > /dev/null
     - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
     - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
