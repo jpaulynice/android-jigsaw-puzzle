@@ -15,12 +15,12 @@ public class DBUtil {
     public static final String IMAGE_COLUMN = "img";
     public static final String DESC_COLUMN = "desc";
     public static final String ORIGINAL_COLUMN = "original";
-    public static final String CREATE_JIGSAW_TABLE = "create table if not " +
-            "exists " + JIGSAW_TABLE +
-            "(" + NAME_COLUMN + " TEXT, " +
-            "(" + IMAGE_COLUMN + " TEXT, " +
-            "(" + DESC_COLUMN + " TEXT, " +
-            "(" + ORIGINAL_COLUMN + " INTEGER, ";
+    public static final String CREATE_JIGSAW_TABLE = "create table if not" +
+            " exists " + JIGSAW_TABLE + " (" +
+            NAME_COLUMN + " TEXT," +
+            IMAGE_COLUMN + " TEXT," +
+            DESC_COLUMN + " TEXT," +
+            ORIGINAL_COLUMN + " INTEGER);";
     public static String ID_SELECTION = "rowid = ?";
 
     public static String ORIGINAL_SELECTION = "original = ?";
