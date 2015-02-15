@@ -40,7 +40,6 @@ public class ImageAdapter extends BaseAdapter {
         numColumns = (int) Math.sqrt(size);
         mThumbIds = new Bitmap[size];
 
-        //add the images to the thumbs list
         int n = 0;
         for (Bitmap b : bitmaps) {
             mThumbIds[n] = b;
@@ -52,7 +51,6 @@ public class ImageAdapter extends BaseAdapter {
         List<Bitmap> ramdomArrangement = new ArrayList<>();
         Random r = new Random();
 
-        //build a list with random arrangements
         for (ImageEntity e : entities) {
             int index = r.nextInt(entities.size());
 
