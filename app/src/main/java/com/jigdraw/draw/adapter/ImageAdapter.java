@@ -17,19 +17,19 @@ import java.util.Collections;
 import java.util.List;
 
 public class ImageAdapter extends BaseAdapter {
-    private ImageService imgserv;
+    private ImageService imgServ;
     private Context mContext;
     private Bitmap[] mThumbIds;
     private int numColumns;
 
     public ImageAdapter(Context c, long id) {
         mContext = c;
-        imgserv = new ImageServiceImpl(c);
+        imgServ = new ImageServiceImpl(c);
         initJigsaw(id);
     }
 
     private void initJigsaw(long id) {
-        List<ImageEntity> entities = imgserv.findTiles(id);
+        List<ImageEntity> entities = imgServ.findTiles(id);
         initThumbnails(entities, entities.size());
     }
 
@@ -46,22 +46,22 @@ public class ImageAdapter extends BaseAdapter {
         }
     }
 
-    public int getNumColumns() {
-        return numColumns;
-    }
-
+    @Override
     public int getCount() {
         return mThumbIds.length;
     }
 
+    @Override
     public Object getItem(int position) {
         return mThumbIds[position];
     }
 
+    @Override
     public long getItemId(int position) {
         return 0;
     }
 
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
         Bitmap d = mThumbIds[position];
@@ -79,5 +79,9 @@ public class ImageAdapter extends BaseAdapter {
         imageView.setImageDrawable(new BitmapDrawable(mContext.getResources()
                 , d));
         return imageView;
+    }
+
+    public int getNumColumns() {
+        return numColumns;
     }
 }
