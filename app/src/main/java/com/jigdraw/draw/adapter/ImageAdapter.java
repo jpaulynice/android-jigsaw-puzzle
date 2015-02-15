@@ -13,10 +13,8 @@ import com.jigdraw.draw.model.ImageEntity;
 import com.jigdraw.draw.service.ImageService;
 import com.jigdraw.draw.service.impl.ImageServiceImpl;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class ImageAdapter extends BaseAdapter {
     private ImageService imgserv;
@@ -31,34 +29,21 @@ public class ImageAdapter extends BaseAdapter {
     }
 
     private void initJigsaw(long id) {
-        List<ImageEntity> entities = new LinkedList<>(imgserv.findTiles(id));
-        List<Bitmap> ramdomArrangement = getRandomArrangement(entities);
-        initThumbnails(ramdomArrangement, entities.size());
+        List<ImageEntity> entities = imgserv.findTiles(id);
+        initThumbnails(entities, entities.size());
     }
 
-    private void initThumbnails(List<Bitmap> bitmaps, int size) {
+    private void initThumbnails(List<ImageEntity> entities, int size) {
         numColumns = (int) Math.sqrt(size);
         mThumbIds = new Bitmap[size];
 
+        Collections.shuffle(entities);
+
         int n = 0;
-        for (Bitmap b : bitmaps) {
-            mThumbIds[n] = b;
+        for (ImageEntity entity : entities) {
+            mThumbIds[n] = entity.getImage();
             n++;
         }
-    }
-
-    private List<Bitmap> getRandomArrangement(List<ImageEntity> entities) {
-        List<Bitmap> ramdomArrangement = new ArrayList<>();
-        Random r = new Random();
-
-        for (ImageEntity e : entities) {
-            int index = r.nextInt(entities.size());
-
-            Bitmap d = entities.get(index).getImage();
-            ramdomArrangement.add(d);
-            entities.remove(d);
-        }
-        return ramdomArrangement;
     }
 
     public int getNumColumns() {
@@ -91,7 +76,8 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageDrawable(new BitmapDrawable(d));
+        imageView.setImageDrawable(new BitmapDrawable(mContext.getResources()
+                , d));
         return imageView;
     }
 }
