@@ -15,10 +15,10 @@ import java.io.ByteArrayOutputStream;
 public class Base64Util {
 
     /**
-     * Convert image to base 64 string from bitmap
+     * Convert bitmap to to base 64 string
      *
-     * @param bitmap the image to convert to base 64
-     * @return base64 representation of the bitmap
+     * @param bitmap the bitmap to convert
+     * @return base64 string
      */
     public static String bitMapToBase64(Bitmap bitmap) {
         ByteArrayOutputStream os = new ByteArrayOutputStream();
@@ -28,10 +28,10 @@ public class Base64Util {
     }
 
     /**
-     * Convert base 64 string to bitmap image
+     * Convert base 64 string to bitmap
      *
-     * @param base64String the string to convert to bitmap
-     * @return bitmap representation of the base 64 string
+     * @param base64String the string to convert
+     * @return bitmap image
      */
     public static Bitmap base64ToBitmap(String base64String) {
         byte[] decodedString = Base64.decode(base64String, Base64.DEFAULT);

@@ -17,7 +17,10 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jigsaw);
+        initGridView();
+    }
 
+    private void initGridView() {
         LongParceable p = getIntent().getExtras().getParcelable("originalId");
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
@@ -27,7 +30,7 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-
+                //TODO: drag and drop to solve puzzle
             }
         });
     }
@@ -41,6 +44,6 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-
+        //TODO: do work
     }
 }
