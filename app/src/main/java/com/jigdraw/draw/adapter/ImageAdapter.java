@@ -30,7 +30,6 @@ public class ImageAdapter extends BaseAdapter {
         LinkedList<ImageEntity> entities = new LinkedList<>(imgserv.findTiles(id));
         List<Bitmap> ramdomArrangement = new ArrayList<>();
 
-
         numColumns = (int) Math.sqrt(entities.size());
 
         mThumbIds = new Bitmap[entities.size()];
