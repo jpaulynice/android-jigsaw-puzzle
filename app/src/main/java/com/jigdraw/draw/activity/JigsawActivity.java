@@ -18,11 +18,12 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jigsaw);
 
-        LongParceable p = getIntent().getExtras().getParcelable
-                ("originalId");
+        LongParceable p = getIntent().getExtras().getParcelable("originalId");
 
         GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this, p.getData()));
+        ImageAdapter adapter = new ImageAdapter(this, p.getData());
+        gridview.setAdapter(adapter);
+        gridview.setNumColumns(adapter.getNumColumns());
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {

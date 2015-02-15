@@ -8,12 +8,12 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name">
+        android:label="@string/app_name"
+        android:theme="@android:style/Theme.Holo.Light.DarkActionBar">
         <activity
             android:name=".activity.DrawActivity"
             android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -28,8 +28,8 @@
 
         <activity
             android:name=".activity.JigsawActivity"
-            android:label="@string/title_activity_jigsaw"
-            android:theme="@style/Theme.AppCompat">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
         </activity>
     </application>
 
