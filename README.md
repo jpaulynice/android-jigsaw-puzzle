@@ -5,14 +5,8 @@ Android-Jigsaw-Puzzle
 
 Android jigsaw puzzle game...in progress!
 
-![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/homepage.png)
+![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/orignal_drawing.png)
 
 
-I'm on a boat:
-
-![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/boat.png)
-
-I'm on a boat with orange:
-
-![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/boat_orange.png)
-
+The tiled up jigsaw...the solved view
+![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/tiled_jigsaw.png)
