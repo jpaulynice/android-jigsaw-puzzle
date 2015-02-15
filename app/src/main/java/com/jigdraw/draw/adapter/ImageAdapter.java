@@ -13,7 +13,10 @@ import com.jigdraw.draw.model.ImageEntity;
 import com.jigdraw.draw.service.ImageService;
 import com.jigdraw.draw.service.impl.ImageServiceImpl;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class ImageAdapter extends BaseAdapter {
     private ImageService imgserv;
@@ -24,16 +27,29 @@ public class ImageAdapter extends BaseAdapter {
     public ImageAdapter(Context c, long id) {
         mContext = c;
         imgserv = new ImageServiceImpl(c);
-        List<ImageEntity> entities = imgserv.findTiles(id);
+        LinkedList<ImageEntity> entities = new LinkedList<>(imgserv.findTiles(id));
+        List<Bitmap> ramdomArrangement = new ArrayList<>();
+
 
         numColumns = (int) Math.sqrt(entities.size());
 
         mThumbIds = new Bitmap[entities.size()];
 
-        int n = 0;
+        Random r = new Random();
+
+        //build a list with random arrangements
         for (ImageEntity e : entities) {
-            Bitmap d = e.getImage();
-            mThumbIds[n] = d;
+            int index = r.nextInt(entities.size());
+
+            Bitmap d = entities.get(index).getImage();
+            ramdomArrangement.add(d);
+            entities.remove(d);
+        }
+
+        //add the images to the thumbs list
+        int n = 0;
+        for (Bitmap b : ramdomArrangement) {
+            mThumbIds[n] = b;
             n++;
         }
     }
