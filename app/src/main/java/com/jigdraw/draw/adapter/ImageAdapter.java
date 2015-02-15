@@ -27,13 +27,29 @@ public class ImageAdapter extends BaseAdapter {
     public ImageAdapter(Context c, long id) {
         mContext = c;
         imgserv = new ImageServiceImpl(c);
-        LinkedList<ImageEntity> entities = new LinkedList<>(imgserv.findTiles(id));
+        initJigsaw(id);
+    }
+
+    private void initJigsaw(long id) {
+        List<ImageEntity> entities = new LinkedList<>(imgserv.findTiles(id));
+        List<Bitmap> ramdomArrangement = getRandomArrangement(entities);
+        initThumbnails(ramdomArrangement, entities.size());
+    }
+
+    private void initThumbnails(List<Bitmap> bitmaps, int size) {
+        numColumns = (int) Math.sqrt(size);
+        mThumbIds = new Bitmap[size];
+
+        //add the images to the thumbs list
+        int n = 0;
+        for (Bitmap b : bitmaps) {
+            mThumbIds[n] = b;
+            n++;
+        }
+    }
+
+    private List<Bitmap> getRandomArrangement(List<ImageEntity> entities) {
         List<Bitmap> ramdomArrangement = new ArrayList<>();
-
-        numColumns = (int) Math.sqrt(entities.size());
-
-        mThumbIds = new Bitmap[entities.size()];
-
         Random r = new Random();
 
         //build a list with random arrangements
@@ -44,13 +60,7 @@ public class ImageAdapter extends BaseAdapter {
             ramdomArrangement.add(d);
             entities.remove(d);
         }
-
-        //add the images to the thumbs list
-        int n = 0;
-        for (Bitmap b : ramdomArrangement) {
-            mThumbIds[n] = b;
-            n++;
-        }
+        return ramdomArrangement;
     }
 
     public int getNumColumns() {
