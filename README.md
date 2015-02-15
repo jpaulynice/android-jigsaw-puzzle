@@ -5,7 +5,7 @@ Android-Jigsaw-Puzzle
 
 Android jigsaw puzzle game...in progress!
 
-![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/orignal_drawing.png)
+![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/original_drawing.png)
 
 
 The tiled up jigsaw...the solved view
