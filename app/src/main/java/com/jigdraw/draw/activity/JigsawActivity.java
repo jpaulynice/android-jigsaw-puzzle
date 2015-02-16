@@ -2,6 +2,7 @@ package com.jigdraw.draw.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,7 +12,14 @@ import com.jigdraw.draw.R;
 import com.jigdraw.draw.adapter.ImageAdapter;
 import com.jigdraw.draw.model.LongParceable;
 
+/**
+ * Represents the jigsaw puzzle solving activity.
+ *
+ * @author Jay Paulynice
+ */
 public class JigsawActivity extends Activity implements View.OnClickListener {
+    /** activity name for logging */
+    private static final String TAG = "JigsawActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +31,7 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
     private void initGridView() {
         LongParceable p = getIntent().getExtras().getParcelable("originalId");
 
+        Log.d(TAG, "initializing jigsaw grid view...");
         GridView gridview = (GridView) findViewById(R.id.gridview);
         ImageAdapter adapter = new ImageAdapter(this, p.getData());
         gridview.setAdapter(adapter);
@@ -30,6 +39,7 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Log.d(TAG, "clicked element at position: " + position);
                 //TODO: drag and drop to solve puzzle
             }
         });

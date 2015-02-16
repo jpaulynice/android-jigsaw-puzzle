@@ -3,6 +3,7 @@ package com.jigdraw.draw.adapter;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,44 +17,54 @@ import com.jigdraw.draw.service.impl.ImageServiceImpl;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Adapter for our jigsaw puzzle grid view
+ *
+ * @author Jay Paulynice
+ */
 public class ImageAdapter extends BaseAdapter {
+    private static final String TAG = "ImageAdapter";
     private ImageService imgServ;
-    private Context mContext;
-    private Bitmap[] mThumbIds;
+    private Context context;
+    private Bitmap[] tiles;
     private int numColumns;
 
-    public ImageAdapter(Context c, long id) {
-        mContext = c;
-        imgServ = new ImageServiceImpl(c);
+    public ImageAdapter(Context context, long id) {
+        this.context = context;
+        this.imgServ = new ImageServiceImpl(context);
         initJigsaw(id);
     }
 
     private void initJigsaw(long id) {
+        Log.d(TAG, "fetching tiles with original image id: " + id);
         List<ImageEntity> entities = imgServ.findTiles(id);
-        initThumbnails(entities, entities.size());
+
+        Log.d(TAG, "found " + entities.size() + " tiles");
+        initThumbnails(entities);
     }
 
-    private void initThumbnails(List<ImageEntity> entities, int size) {
+    private void initThumbnails(List<ImageEntity> entities) {
+        int size = entities.size();
         numColumns = (int) Math.sqrt(size);
-        mThumbIds = new Bitmap[size];
+        tiles = new Bitmap[size];
 
         Collections.shuffle(entities);
 
         int n = 0;
         for (ImageEntity entity : entities) {
-            mThumbIds[n] = entity.getImage();
+            tiles[n] = entity.getImage();
             n++;
         }
     }
 
     @Override
     public int getCount() {
-        return mThumbIds.length;
+        return tiles.length;
     }
 
     @Override
     public Object getItem(int position) {
-        return mThumbIds[position];
+        return tiles[position];
     }
 
     @Override
@@ -64,9 +75,9 @@ public class ImageAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView;
-        Bitmap d = mThumbIds[position];
+        Bitmap d = tiles[position];
         if (convertView == null) {
-            imageView = new ImageView(mContext);
+            imageView = new ImageView(context);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             imageView.setLayoutParams(new GridView.LayoutParams(d
                     .getWidth(),
@@ -76,7 +87,7 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageDrawable(new BitmapDrawable(mContext.getResources()
+        imageView.setImageDrawable(new BitmapDrawable(context.getResources()
                 , d));
         return imageView;
     }
