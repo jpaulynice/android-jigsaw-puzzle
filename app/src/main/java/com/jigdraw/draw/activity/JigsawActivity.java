@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.adapter.ImageAdapter;
@@ -38,8 +39,11 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
         gridview.setNumColumns(adapter.getNumColumns());
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, final View itemView,
+                                    int position, long id) {
                 Log.d(TAG, "clicked element at position: " + position);
+                Toast.makeText(getApplicationContext(), "position: " + position,
+                        Toast.LENGTH_SHORT).show();
                 //TODO: drag and drop to solve puzzle
             }
         });

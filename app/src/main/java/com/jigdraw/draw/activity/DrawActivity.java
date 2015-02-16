@@ -291,7 +291,7 @@ public class DrawActivity extends Activity implements OnClickListener {
         drawView.setDrawingCacheEnabled(true);
         Bitmap bitmap = drawView.getDrawingCache();
 
-        long createdId = service.createJigsaw(bitmap, Difficulty.MEDIUM);
+        long createdId = service.createJigsaw(bitmap, Difficulty.HARD);
 
         toast(createdId > 0);
         drawView.destroyDrawingCache();
