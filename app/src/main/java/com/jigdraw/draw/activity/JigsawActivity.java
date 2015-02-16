@@ -10,8 +10,8 @@ import android.widget.GridView;
 import android.widget.Toast;
 
 import com.jigdraw.draw.R;
-import com.jigdraw.draw.adapter.ImageAdapter;
 import com.jigdraw.draw.model.LongParceable;
+import com.jigdraw.draw.tasks.JigsawLoader;
 
 /**
  * Represents the jigsaw puzzle solving activity.
@@ -31,14 +31,12 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
 
     private void initGridView() {
         LongParceable p = getIntent().getExtras().getParcelable("originalId");
+        GridView gridView = (GridView) findViewById(R.id.gridview);
 
-        Log.d(TAG, "initializing jigsaw grid view...");
-        GridView gridview = (GridView) findViewById(R.id.gridview);
-        ImageAdapter adapter = new ImageAdapter(this, p.getData());
-        gridview.setAdapter(adapter);
-        gridview.setNumColumns(adapter.getNumColumns());
+        JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
+        task.execute(p.getData());
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, final View itemView,
                                     int position, long id) {
                 Log.d(TAG, "clicked element at position: " + position);

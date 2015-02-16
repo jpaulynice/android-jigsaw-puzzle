@@ -3,7 +3,6 @@ package com.jigdraw.draw.activity;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
@@ -18,9 +17,7 @@ import android.widget.Toast;
 
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.model.Difficulty;
-import com.jigdraw.draw.model.LongParceable;
-import com.jigdraw.draw.service.JigsawService;
-import com.jigdraw.draw.service.impl.JigsawServiceImpl;
+import com.jigdraw.draw.tasks.JigsawGenerator;
 import com.jigdraw.draw.views.DrawingView;
 
 import java.util.ArrayList;
@@ -50,13 +47,8 @@ public class DrawActivity extends Activity implements OnClickListener {
     /** list of brushes */
     private List<ImageButton> brushes = new ArrayList<>();
 
-    /** image data access */
-    private JigsawService service;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        service = new JigsawServiceImpl(getApplicationContext());
         super.onCreate(savedInstanceState);
         init();
     }
@@ -291,30 +283,19 @@ public class DrawActivity extends Activity implements OnClickListener {
         drawView.setDrawingCacheEnabled(true);
         Bitmap bitmap = drawView.getDrawingCache();
 
-        long createdId = service.createJigsaw(bitmap, Difficulty.HARD);
-
-        toast(createdId > 0);
+        JigsawGenerator task = new JigsawGenerator(getApplicationContext(),
+                Difficulty.HARD);
+        toast();
+        task.execute(bitmap.copy(bitmap.getConfig(), true));
         drawView.destroyDrawingCache();
-
-        startJigsaw(createdId);
-    }
-
-    private void startJigsaw(long id) {
-        Intent myIntent = new Intent(getApplicationContext(),
-                JigsawActivity.class).putExtra("originalId",
-                new LongParceable(id));
-        startActivity(myIntent);
-        finish();
     }
 
     /**
      * Get feedback if jigsaw is created or not
      *
-     * @param saved whether the image was saved
      */
-    private void toast(boolean saved) {
-        String feedback = saved ? "Jigsaw successfully created." :
-                "Oops! Unable to create jigsaw.";
+    private void toast() {
+        String feedback = "Loading jigsaw puzzle...";
         Toast toast = Toast.makeText(getApplicationContext(),
                 feedback, Toast.LENGTH_SHORT);
         toast.show();
