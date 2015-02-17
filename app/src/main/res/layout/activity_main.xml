@@ -19,21 +19,21 @@
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:contentDescription="@string/start_new"
-            android:src="@drawable/new_pic"/>
+            android:src="@drawable/new_img"/>
 
         <ImageButton
             android:id="@+id/erase_btn"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:contentDescription="@string/erase"
-            android:src="@drawable/eraser"/>
+            android:src="@drawable/erase"/>
 
         <ImageButton
             android:id="@+id/save_btn"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:contentDescription="@string/save"
-            android:src="@drawable/save"/>
+            android:src="@drawable/jigsaw"/>
     </LinearLayout>
 
     <!-- Custom View -->
