@@ -13,11 +13,16 @@ Medium difficulty level which is 4x4 square jigsaw
 ![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/jigsaw_puzzle.png)
 
 
+Solved medium level jigsaw
+
+![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/tiled_jigsaw.png)
+
+
 Hard difficulty level which is 8x8 square jigsaw
 
 ![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/hard_puzzle.png)
 
 
-Solved medium level jigsaw
+Solved hard level jigsaw
 
-![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/tiled_jigsaw.png)
+![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/hard_solved.png)

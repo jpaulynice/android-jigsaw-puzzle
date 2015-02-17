@@ -11,7 +11,6 @@ import com.jigdraw.draw.service.ImageService;
 import com.jigdraw.draw.service.impl.ImageServiceImpl;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -35,7 +34,7 @@ public class JigsawLoader extends AsyncTask<Long, Integer, List<Bitmap>> {
     @Override
     protected List<Bitmap> doInBackground(Long[] params) {
         List<ImageEntity> entities = service.findTiles(params[0]);
-        Collections.shuffle(entities);
+        //Collections.shuffle(entities);
         List<Bitmap> tiles = new ArrayList<>();
 
         for (ImageEntity entity : entities) {
