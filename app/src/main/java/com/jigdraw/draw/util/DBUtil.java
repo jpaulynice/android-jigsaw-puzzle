@@ -15,11 +15,6 @@ public class DBUtil {
     /** jigsaw table */
     public static final String JIGSAW_TABLE = "jigsaw_images";
 
-    /** drop jigsaw_images table */
-    public static final String DROP_JIGSAW_TABLE =
-            "drop table " + JIGSAW_TABLE + " if exists;";
-
-
     /** table columns */
     public static final String NAME_COLUMN = "name";
     public static final String IMAGE_COLUMN = "img";
@@ -33,6 +28,10 @@ public class DBUtil {
             IMAGE_COLUMN + " TEXT," +
             DESC_COLUMN + " TEXT," +
             ORIGINAL_COLUMN + " INTEGER);";
+
+    /** drop jigsaw_images table */
+    public static final String DROP_JIGSAW_TABLE =
+            "drop table " + JIGSAW_TABLE + " if exists;";
 
     /** for querying like in prepared statements */
     public static final String ID_SELECTION = "rowid = ?";
