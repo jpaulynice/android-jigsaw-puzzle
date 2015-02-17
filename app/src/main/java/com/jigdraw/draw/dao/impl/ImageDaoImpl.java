@@ -21,7 +21,7 @@ import static com.jigdraw.draw.util.DBUtil.JIGSAW_TABLE;
 import static com.jigdraw.draw.util.DBUtil.NAME_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.ORIGINAL_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.ORIGINAL_SELECTION;
-import static com.jigdraw.draw.util.DBUtil.getIdSelection;
+import static com.jigdraw.draw.util.DBUtil.getIdArguments;
 import static com.jigdraw.draw.util.EntityUtil.entityToContentValues;
 
 /**
@@ -60,7 +60,7 @@ public class ImageDaoImpl implements ImageDao {
         String[] cols = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN,
                 ORIGINAL_COLUMN};
         Cursor cursor = db.query(JIGSAW_TABLE, cols, ORIGINAL_SELECTION,
-                getIdSelection(id), null, null,
+                getIdArguments(id), null, null,
                 null);
         List<ImageEntity> entities = new ArrayList<>();
         if (cursor != null) {
@@ -77,7 +77,7 @@ public class ImageDaoImpl implements ImageDao {
     public ImageEntity find(long id) {
         String[] cols = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN, ORIGINAL_COLUMN};
         Cursor cursor = db.query(JIGSAW_TABLE, cols, ID_SELECTION,
-                getIdSelection(id), null, null,
+                getIdArguments(id), null, null,
                 null);
 
         return getEntityFromCursor(cursor);
@@ -108,13 +108,13 @@ public class ImageDaoImpl implements ImageDao {
         Log.d(TAG, "Updating entity with id: " + entity.getId());
         ContentValues cv = entityToContentValues(entity);
         return db.update(JIGSAW_TABLE, cv, ID_SELECTION,
-                getIdSelection(entity.getId()));
+                getIdArguments(entity.getId()));
     }
 
     @Override
     public int delete(long id) {
         Log.d(TAG, "Deleting entity with id: " + id);
         return db.delete(JIGSAW_TABLE, ID_SELECTION,
-                getIdSelection(id));
+                getIdArguments(id));
     }
 }
