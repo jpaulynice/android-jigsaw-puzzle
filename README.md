@@ -3,6 +3,12 @@ Android-Jigsaw-Puzzle
 
 [![Build Status](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle.svg)](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle)
 
+
+Better Icons...
+
+![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/original_drawing.png)
+
+
 Android jigsaw puzzle game...Here the user creates a drawing.
 
 ![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/original_drawing.png)
