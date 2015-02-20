@@ -21,6 +21,11 @@ public class DBUtil {
     public static final String DESC_COLUMN = "desc";
     public static final String ORIGINAL_COLUMN = "original";
 
+    public static String[] ALL_COLUMNS = new String[]{NAME_COLUMN,
+            IMAGE_COLUMN,
+            DESC_COLUMN,
+            ORIGINAL_COLUMN};
+
     /** create jigsaw_images table */
     public static final String CREATE_JIGSAW_TABLE = "create table if not" +
             " exists " + JIGSAW_TABLE + " (" +

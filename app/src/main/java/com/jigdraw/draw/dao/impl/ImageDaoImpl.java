@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.jigdraw.draw.util.Base64Util.base64ToBitmap;
+import static com.jigdraw.draw.util.DBUtil.ALL_COLUMNS;
 import static com.jigdraw.draw.util.DBUtil.DESC_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.ID_SELECTION;
 import static com.jigdraw.draw.util.DBUtil.IMAGE_COLUMN;
@@ -57,9 +58,7 @@ public class ImageDaoImpl implements ImageDao {
 
     @Override
     public List<ImageEntity> findTiles(long id) {
-        String[] cols = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN,
-                ORIGINAL_COLUMN};
-        Cursor cursor = db.query(JIGSAW_TABLE, cols, ORIGINAL_SELECTION,
+        Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ORIGINAL_SELECTION,
                 getIdArguments(id), null, null,
                 null);
         List<ImageEntity> entities = new ArrayList<>();
@@ -75,8 +74,7 @@ public class ImageDaoImpl implements ImageDao {
 
     @Override
     public ImageEntity find(long id) {
-        String[] cols = new String[]{NAME_COLUMN, IMAGE_COLUMN, DESC_COLUMN, ORIGINAL_COLUMN};
-        Cursor cursor = db.query(JIGSAW_TABLE, cols, ID_SELECTION,
+        Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ID_SELECTION,
                 getIdArguments(id), null, null,
                 null);
 
