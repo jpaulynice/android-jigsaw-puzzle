@@ -284,7 +284,7 @@ public class DrawActivity extends Activity implements OnClickListener {
         Bitmap bitmap = drawView.getDrawingCache();
 
         JigsawGenerator task = new JigsawGenerator(getApplicationContext(),
-                Difficulty.HARD);
+                Difficulty.EASY);
         toast();
         task.execute(bitmap.copy(bitmap.getConfig(), true));
         drawView.destroyDrawingCache();

@@ -34,8 +34,9 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
 
         JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
 
-        LongParceable p = getIntent().getExtras().getParcelable("originalId");
-        task.execute(p.getData());
+        LongParceable longParceable = getIntent().getExtras().getParcelable
+                ("originalId");
+        task.execute(longParceable.getData());
 
         gridView.setOnDragListener(new JigsawGridView.OnDragListener() {
             @Override
