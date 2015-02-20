@@ -6,12 +6,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
-import android.widget.Toast;
 
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.model.LongParceable;
 import com.jigdraw.draw.tasks.JigsawLoader;
+import com.jigdraw.draw.views.JigsawGridView;
 
 /**
  * Represents the jigsaw puzzle solving activity.
@@ -30,19 +29,31 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
     }
 
     private void initGridView() {
-        LongParceable p = getIntent().getExtras().getParcelable("originalId");
-        GridView gridView = (GridView) findViewById(R.id.gridview);
+        final JigsawGridView gridView = (JigsawGridView) findViewById(R.id
+                .dynamic_grid);
 
         JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
+
+        LongParceable p = getIntent().getExtras().getParcelable("originalId");
         task.execute(p.getData());
 
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, final View itemView,
-                                    int position, long id) {
-                Log.d(TAG, "clicked element at position: " + position);
-                Toast.makeText(getApplicationContext(), "position: " + position,
-                        Toast.LENGTH_SHORT).show();
-                //TODO: drag and drop to solve puzzle
+        gridView.setOnDragListener(new JigsawGridView.OnDragListener() {
+            @Override
+            public void onDragStarted(int position) {
+                Log.d(TAG, "dragging starts...position: " + position);
+            }
+
+            @Override
+            public void onDragPositionsChanged(int oldPosition, int newPosition) {
+                Log.d(TAG, String.format("drag changed from %d to %d",
+                        oldPosition, newPosition));
+            }
+        });
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                gridView.startEditMode(position);
+                return true;
             }
         });
     }

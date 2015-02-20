@@ -5,7 +5,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.widget.GridView;
 
-import com.jigdraw.draw.adapter.ImageAdapter;
+import com.jigdraw.draw.adapter.impl.ImageGridAdapter;
 import com.jigdraw.draw.model.ImageEntity;
 import com.jigdraw.draw.service.ImageService;
 import com.jigdraw.draw.service.impl.ImageServiceImpl;
@@ -47,7 +47,8 @@ public class JigsawLoader extends AsyncTask<Long, Integer, List<Bitmap>> {
 
     @Override
     protected void onPostExecute(List<Bitmap> tiles) {
-        ImageAdapter adapter = new ImageAdapter(context, tiles);
+        ImageGridAdapter adapter = new ImageGridAdapter(context, tiles,
+                (int) Math.sqrt(tiles.size()));
 
         gridView.setAdapter(adapter);
         gridView.setNumColumns((int) Math.sqrt(tiles.size()));

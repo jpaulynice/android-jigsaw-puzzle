@@ -20,5 +20,5 @@
 
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-
+    <dimen name="dgv_overlap_if_switch_straight_line">16dp</dimen>
 </resources>
