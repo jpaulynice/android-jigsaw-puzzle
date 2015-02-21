@@ -258,36 +258,44 @@ public class DrawActivity extends Activity implements OnClickListener {
      * Handle the save button click
      */
     private void handleSaveButton() {
-        //save drawing
-        AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
-        saveDialog.setTitle("Create Jigsaw From Image");
-        saveDialog.setMessage("Do you want to create a jigsaw with the " +
-                "current Image?");
-        saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+        CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose difficulty:");
+        builder.setItems(levels, new DialogInterface.OnClickListener() {
+            @Override
             public void onClick(DialogInterface dialog, int which) {
-                createJigsaw();
+                createJigsaw(which);
             }
         });
-        saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
-        saveDialog.show();
+        builder.show();
     }
 
     /**
      * Create jigsaw and give user feedback
      */
-    private void createJigsaw() {
+    private void createJigsaw(int which) {
         drawView.setDrawingCacheEnabled(true);
         Bitmap bitmap = drawView.getDrawingCache();
 
         JigsawGenerator task = new JigsawGenerator(getApplicationContext(),
-                Difficulty.EASY);
+                getLevel(which));
         toast();
         task.execute(bitmap.copy(bitmap.getConfig(), true));
         drawView.destroyDrawingCache();
+    }
+
+    private Difficulty getLevel(int which) {
+        switch (which) {
+            case 0:
+                return Difficulty.EASY;
+            case 1:
+                return Difficulty.MEDIUM;
+            case 2:
+                return Difficulty.HARD;
+            default:
+                throw new IllegalArgumentException("Unknown level");
+        }
     }
 
     /**
