@@ -38,6 +38,14 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
                 ("originalId");
         task.execute(longParceable.getData());
 
+        gridView.setOnDropListener(new JigsawGridView.OnDropListener() {
+            @Override
+            public void onActionDrop() {
+                Log.d(TAG, "dropped element");
+                gridView.stopEditMode();
+            }
+        });
+
         gridView.setOnDragListener(new JigsawGridView.OnDragListener() {
             @Override
             public void onDragStarted(int position) {
