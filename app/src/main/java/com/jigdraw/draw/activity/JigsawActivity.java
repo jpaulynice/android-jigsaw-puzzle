@@ -17,7 +17,7 @@ import com.jigdraw.draw.views.JigsawGridView;
  *
  * @author Jay Paulynice
  */
-public class JigsawActivity extends Activity implements View.OnClickListener {
+public class JigsawActivity extends Activity {
     /** activity name for logging */
     private static final String TAG = "JigsawActivity";
 
@@ -53,7 +53,8 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
             }
 
             @Override
-            public void onDragPositionsChanged(int oldPosition, int newPosition) {
+            public void onDragPositionsChanged(int oldPosition,
+                                               int newPosition) {
                 Log.d(TAG, String.format("drag changed from %d to %d",
                         oldPosition, newPosition));
             }
@@ -71,10 +72,5 @@ public class JigsawActivity extends Activity implements View.OnClickListener {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
-    }
-
-    @Override
-    public void onClick(View v) {
-        //TODO: do work
     }
 }

@@ -38,7 +38,8 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.d(TAG, "Upgrading database from " + oldVersion + "to " + newVersion);
+        Log.d(TAG, "Upgrading database from " + oldVersion + "to " +
+                newVersion);
         db.execSQL(DBUtil.DROP_JIGSAW_TABLE);
         onCreate(db);
     }

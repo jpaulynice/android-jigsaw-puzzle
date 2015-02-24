@@ -4,6 +4,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class LongParceable implements Parcelable {
+    private long data;
+
     public static final Parcelable.Creator<LongParceable> CREATOR = new Parcelable.Creator<LongParceable>() {
         @Override
         public LongParceable createFromParcel(Parcel in) {
@@ -15,8 +17,6 @@ public class LongParceable implements Parcelable {
             return new LongParceable[size];
         }
     };
-    private long data;
-
     public LongParceable(long in) {
         data = in;
     }
