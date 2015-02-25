@@ -68,7 +68,6 @@ public class ImageDaoImpl implements ImageDao {
                 entities.add(entity);
             }
         }
-
         return entities;
     }
 
