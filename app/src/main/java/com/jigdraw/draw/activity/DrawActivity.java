@@ -279,23 +279,10 @@ public class DrawActivity extends Activity implements OnClickListener {
         Bitmap bitmap = drawView.getDrawingCache();
 
         JigsawGenerator task = new JigsawGenerator(getApplicationContext(),
-                getLevel(which));
+                Difficulty.getLevel(which));
         toast();
         task.execute(bitmap.copy(bitmap.getConfig(), true));
         drawView.destroyDrawingCache();
-    }
-
-    private Difficulty getLevel(int which) {
-        switch (which) {
-            case 0:
-                return Difficulty.EASY;
-            case 1:
-                return Difficulty.MEDIUM;
-            case 2:
-                return Difficulty.HARD;
-            default:
-                throw new IllegalArgumentException("Unknown level");
-        }
     }
 
     /**

@@ -26,4 +26,17 @@ public enum Difficulty {
         }
         return 2;
     }
+
+    public static Difficulty getLevel(int which) {
+        switch (which) {
+            case 0:
+                return EASY;
+            case 1:
+                return MEDIUM;
+            case 2:
+                return HARD;
+            default:
+                throw new IllegalArgumentException("Unknown level");
+        }
+    }
 }
