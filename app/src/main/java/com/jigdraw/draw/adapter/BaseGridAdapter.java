@@ -7,7 +7,6 @@ import com.jigdraw.draw.util.GridUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public abstract class BaseGridAdapter extends AbstractGridAdapter {
     private Context mContext;
 
@@ -29,7 +28,6 @@ public abstract class BaseGridAdapter extends AbstractGridAdapter {
         addAllStableId(items);
         this.mItems.addAll(items);
     }
-
 
     public void set(List<?> items) {
         clear();
@@ -61,13 +59,11 @@ public abstract class BaseGridAdapter extends AbstractGridAdapter {
         notifyDataSetChanged();
     }
 
-
     public void remove(Object item) {
         mItems.remove(item);
         removeStableID(item);
         notifyDataSetChanged();
     }
-
 
     @Override
     public int getCount() {

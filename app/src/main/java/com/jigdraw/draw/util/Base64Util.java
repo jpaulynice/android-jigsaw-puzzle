@@ -7,8 +7,8 @@ import android.util.Base64;
 import java.io.ByteArrayOutputStream;
 
 /**
- * Utilities class for converting image from base 64 to bitmap
- * and bitmap to base 64
+ * Utilities class for converting image from base 64 to bitmap and bitmap to
+ * base 64
  *
  * @author Jay Paulynice
  */

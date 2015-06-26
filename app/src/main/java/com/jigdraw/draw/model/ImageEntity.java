@@ -26,8 +26,8 @@ public class ImageEntity {
      * Create new image entity given the parameters
      *
      * @param image the image as bitmap
-     * @param name  the name
-     * @param desc  the description
+     * @param name the name
+     * @param desc the description
      */
     public ImageEntity(Bitmap image, String name, String desc, long originalId) {
         this.image = image;
@@ -62,14 +62,15 @@ public class ImageEntity {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof ImageEntity)) return false;
+        if (this == o)
+            return true;
+        if (!(o instanceof ImageEntity))
+            return false;
 
         ImageEntity entity = (ImageEntity) o;
 
-        return desc.equals(entity.desc) &&
-                image.equals(entity.image) &&
-                name.equals(entity.name);
+        return desc.equals(entity.desc) && image.equals(entity.image)
+                && name.equals(entity.name);
     }
 
     @Override
@@ -82,10 +83,8 @@ public class ImageEntity {
 
     @Override
     public String toString() {
-        return "ImageEntity{" +
-                "image string=" + Base64Util.bitMapToBase64(image) +
-                ", name='" + name + '\'' +
-                ", desc='" + desc + '\'' +
-                '}';
+        return "ImageEntity{" + "image string="
+                + Base64Util.bitMapToBase64(image) + ", name='" + name + '\''
+                + ", desc='" + desc + '\'' + '}';
     }
 }

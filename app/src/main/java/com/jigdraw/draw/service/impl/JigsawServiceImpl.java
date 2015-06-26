@@ -41,7 +41,7 @@ public class JigsawServiceImpl implements JigsawService {
      * Slice original image into tiles then save in the db
      *
      * @param original the original image to slice up
-     * @param n        how many slices to cut the image into
+     * @param n how many slices to cut the image into
      */
     private long createImageTiles(Bitmap original, int n) {
         long originalId = saveOriginal(original);
@@ -80,8 +80,8 @@ public class JigsawServiceImpl implements JigsawService {
      * Save created tile in the database
      *
      * @param tile the tile to save
-     * @param x    the tile's x coordinate
-     * @param y    the tile's y coordinate
+     * @param x the tile's x coordinate
+     * @param y the tile's y coordinate
      */
     private void saveTile(Bitmap tile, int x, int y, long originalId) {
         String name = "tile-" + x + "-" + y + ".png";
@@ -95,11 +95,11 @@ public class JigsawServiceImpl implements JigsawService {
      * Create an image entity with the give parameters and save
      *
      * @param image the bitmap image
-     * @param name  the name
-     * @param desc  the description
+     * @param name the name
+     * @param desc the description
      */
     private long saveEntity(Bitmap image, String name, String desc,
-                            long originalId) {
+            long originalId) {
         return service.insert(new ImageEntity(image, name, desc, originalId));
     }
 }
