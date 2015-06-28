@@ -20,7 +20,6 @@ import com.jigdraw.draw.model.enums.Difficulty;
 import com.jigdraw.draw.tasks.JigsawGenerator;
 import com.jigdraw.draw.views.DrawingView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,7 +35,6 @@ public class DrawActivity extends Activity implements OnClickListener {
     private DrawingView drawView;
     private ImageButton currPaint, eraseBtn, newBtn, saveBtn;
     private float smallBrush, mediumBrush, largeBrush, largestBrush;
-    private List<ImageButton> brushes = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -117,7 +115,7 @@ public class DrawActivity extends Activity implements OnClickListener {
      * Update UI with new selected color
      *
      * @param imgView the image view
-     * @param view the view
+     * @param view    the view
      */
     private void updateUI(ImageButton imgView, View view) {
         imgView.setImageDrawable(getResources().getDrawable(
@@ -133,7 +131,7 @@ public class DrawActivity extends Activity implements OnClickListener {
      * @param color the chosen color
      */
     private void setBrushColor(int color) {
-        for (ImageButton im : brushes) {
+        for (ImageButton im : getBrushes()) {
             GradientDrawable d = (GradientDrawable) im.getDrawable();
             d.setColor(color);
         }
@@ -142,13 +140,12 @@ public class DrawActivity extends Activity implements OnClickListener {
     /**
      * Make a list of the brushes
      */
-    private void initBrushList() {
-        brushes.addAll(Arrays.asList(
-                (ImageButton) findViewById(R.id.small_brush),
+    private List<ImageButton> getBrushes() {
+        return Arrays.asList((ImageButton) findViewById(R.id
+                        .small_brush),
                 (ImageButton) findViewById(R.id.medium_brush),
                 (ImageButton) findViewById(R.id.large_brush),
-                (ImageButton) findViewById(R.id.largest_brush)));
-        setBrushColor(drawView.getPaintColor());
+                (ImageButton) findViewById(R.id.largest_brush));
     }
 
     /**
@@ -161,7 +158,7 @@ public class DrawActivity extends Activity implements OnClickListener {
         initView();
         initLayout();
         initButtons();
-        initBrushList();
+        setBrushColor(drawView.getPaintColor());
     }
 
     /**
@@ -245,7 +242,7 @@ public class DrawActivity extends Activity implements OnClickListener {
      * Handle the save button click
      */
     private void handleSaveButton() {
-        CharSequence levels[] = new CharSequence[] { "Easy", "Medium", "Hard" };
+        CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose difficulty:");
@@ -266,7 +263,7 @@ public class DrawActivity extends Activity implements OnClickListener {
         Bitmap bitmap = drawView.getDrawingCache();
 
         JigsawGenerator task = new JigsawGenerator(getApplicationContext(),
-                Difficulty.getLevel(which));
+                Difficulty.fromValue(which));
 
         shortToast("Loading jigsaw puzzle...");
         task.execute(bitmap.copy(bitmap.getConfig(), true));
@@ -275,7 +272,6 @@ public class DrawActivity extends Activity implements OnClickListener {
 
     /**
      * Create short toast and show message
-     *
      */
     private void shortToast(String message) {
         Toast toast = Toast.makeText(getApplicationContext(), message,

@@ -8,9 +8,7 @@ import java.util.List;
 public abstract class AbstractGridAdapter extends BaseAdapter implements
         GridAdapter {
     public static final int INVALID_ID = -1;
-
     private int nextStableId = 0;
-
     private HashMap<Object, Integer> mIdMap = new HashMap<>();
 
     @Override
@@ -35,13 +33,5 @@ public abstract class AbstractGridAdapter extends BaseAdapter implements
         }
         Object item = getItem(position);
         return mIdMap.get(item);
-    }
-
-    protected void clearStableIdMap() {
-        mIdMap.clear();
-    }
-
-    protected void removeStableID(Object item) {
-        mIdMap.remove(item);
     }
 }

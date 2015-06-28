@@ -17,11 +17,11 @@ import java.util.List;
  *
  * @author Jay Paulynice
  */
-public class ImageGridAdapter extends BaseGridAdapter {
+public class JigsawGridAdapter extends BaseGridAdapter {
     private Context context;
     private List<Bitmap> tiles;
 
-    public ImageGridAdapter(Context context, List<Bitmap> tiles, int count) {
+    public JigsawGridAdapter(Context context, List<Bitmap> tiles, int count) {
         super(context, tiles, count);
         this.context = context;
         this.tiles = tiles;

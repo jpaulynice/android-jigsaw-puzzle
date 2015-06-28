@@ -2,21 +2,14 @@ package com.jigdraw.draw.adapter;
 
 import android.content.Context;
 
-import com.jigdraw.draw.util.GridUtil;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public abstract class BaseGridAdapter extends AbstractGridAdapter {
     private Context mContext;
-
-    private ArrayList<Object> mItems = new ArrayList<Object>();
+    private ArrayList<Object> mItems = new ArrayList<>();
     private int mColumnCount;
-
-    protected BaseGridAdapter(Context context, int columnCount) {
-        this.mContext = context;
-        this.mColumnCount = columnCount;
-    }
 
     public BaseGridAdapter(Context context, List<?> items, int columnCount) {
         mContext = context;
@@ -27,42 +20,6 @@ public abstract class BaseGridAdapter extends AbstractGridAdapter {
     private void init(List<?> items) {
         addAllStableId(items);
         this.mItems.addAll(items);
-    }
-
-    public void set(List<?> items) {
-        clear();
-        init(items);
-        notifyDataSetChanged();
-    }
-
-    public void clear() {
-        clearStableIdMap();
-        mItems.clear();
-        notifyDataSetChanged();
-    }
-
-    public void add(Object item) {
-        addStableId(item);
-        mItems.add(item);
-        notifyDataSetChanged();
-    }
-
-    public void add(int position, Object item) {
-        addStableId(item);
-        mItems.add(position, item);
-        notifyDataSetChanged();
-    }
-
-    public void add(List<?> items) {
-        addAllStableId(items);
-        this.mItems.addAll(items);
-        notifyDataSetChanged();
-    }
-
-    public void remove(Object item) {
-        mItems.remove(item);
-        removeStableID(item);
-        notifyDataSetChanged();
     }
 
     @Override
@@ -80,15 +37,10 @@ public abstract class BaseGridAdapter extends AbstractGridAdapter {
         return mColumnCount;
     }
 
-    public void setColumnCount(int columnCount) {
-        this.mColumnCount = columnCount;
-        notifyDataSetChanged();
-    }
-
     @Override
     public void reorderItems(int originalPosition, int newPosition) {
         if (newPosition < getCount()) {
-            GridUtil.reorder(mItems, originalPosition, newPosition);
+            Collections.swap(mItems, originalPosition, newPosition);
             notifyDataSetChanged();
         }
     }
@@ -96,10 +48,6 @@ public abstract class BaseGridAdapter extends AbstractGridAdapter {
     @Override
     public boolean canReorder(int position) {
         return true;
-    }
-
-    public List<Object> getItems() {
-        return mItems;
     }
 
     protected Context getContext() {

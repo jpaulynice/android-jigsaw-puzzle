@@ -13,16 +13,16 @@ public enum Difficulty {
         this.value = value;
     }
 
-    public static Difficulty getLevel(int which) {
+    public static Difficulty fromValue(int which) {
         switch (which) {
-        case 0:
-            return EASY;
-        case 1:
-            return MEDIUM;
-        case 2:
-            return HARD;
-        default:
-            throw new IllegalArgumentException("Unknown level");
+            case 0:
+                return EASY;
+            case 1:
+                return MEDIUM;
+            case 2:
+                return HARD;
+            default:
+                throw new IllegalArgumentException("Unknown level");
         }
     }
 

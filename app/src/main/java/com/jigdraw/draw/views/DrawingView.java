@@ -36,7 +36,7 @@ public class DrawingView extends View {
      * default parameters.
      *
      * @param context the context
-     * @param attrs the attributes
+     * @param attrs   the attributes
      */
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -47,7 +47,6 @@ public class DrawingView extends View {
      * Init parameters
      */
     private void init() {
-        // prepare for drawing and setup paint stroke properties
         brushSize = getResources().getInteger(R.integer.medium_size);
         lastBrushSize = brushSize;
         drawPath = new Path();
@@ -67,19 +66,19 @@ public class DrawingView extends View {
         float touchY = event.getY();
 
         switch (event.getAction()) {
-        case MotionEvent.ACTION_DOWN:
-            drawPath.moveTo(touchX, touchY);
-            break;
-        case MotionEvent.ACTION_MOVE:
-            drawPath.lineTo(touchX, touchY);
-            break;
-        case MotionEvent.ACTION_UP:
-            drawPath.lineTo(touchX, touchY);
-            drawCanvas.drawPath(drawPath, drawPaint);
-            drawPath.reset();
-            break;
-        default:
-            return false;
+            case MotionEvent.ACTION_DOWN:
+                drawPath.moveTo(touchX, touchY);
+                break;
+            case MotionEvent.ACTION_MOVE:
+                drawPath.lineTo(touchX, touchY);
+                break;
+            case MotionEvent.ACTION_UP:
+                drawPath.lineTo(touchX, touchY);
+                drawCanvas.drawPath(drawPath, drawPaint);
+                drawPath.reset();
+                break;
+            default:
+                return false;
         }
         // redraw
         invalidate();
