@@ -20,31 +20,28 @@ import java.util.List;
 public class ImageGridAdapter extends BaseGridAdapter {
     private Context context;
     private List<Bitmap> tiles;
-    private int count;
 
     public ImageGridAdapter(Context context, List<Bitmap> tiles, int count) {
         super(context, tiles, count);
-        this.count = count;
         this.context = context;
         this.tiles = tiles;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView;
+        ImageView view;
         Bitmap d = tiles.get(position);
         if (convertView == null) {
-            imageView = new ImageView(context);
-            imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setLayoutParams(new GridView.LayoutParams(d.getWidth(), d
+            view = new ImageView(context);
+            view.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            view.setLayoutParams(new GridView.LayoutParams(d.getWidth(), d
                     .getHeight()));
-            imageView.setPadding(1, 1, 1, 1);
+            view.setPadding(1, 1, 1, 1);
         } else {
-            imageView = (ImageView) convertView;
+            view = (ImageView) convertView;
         }
+        view.setImageDrawable(new BitmapDrawable(context.getResources(), d));
 
-        imageView
-                .setImageDrawable(new BitmapDrawable(context.getResources(), d));
-        return imageView;
+        return view;
     }
 }

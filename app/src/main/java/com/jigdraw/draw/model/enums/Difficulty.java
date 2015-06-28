@@ -8,8 +8,8 @@ package com.jigdraw.draw.model.enums;
 public enum Difficulty {
     EASY(2), MEDIUM(4), HARD(8);
     private int value;
-    
-    Difficulty(int value){
+
+    Difficulty(int value) {
         this.value = value;
     }
 
@@ -25,8 +25,8 @@ public enum Difficulty {
             throw new IllegalArgumentException("Unknown level");
         }
     }
-    
-    public int getValue(){
+
+    public int getValue() {
         return value;
     }
 }
