@@ -17,6 +17,7 @@ public class LongParceable implements Parcelable {
             return new LongParceable[size];
         }
     };
+
     public LongParceable(long in) {
         data = in;
     }

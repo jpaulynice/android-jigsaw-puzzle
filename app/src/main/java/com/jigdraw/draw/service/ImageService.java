@@ -10,13 +10,13 @@ import java.util.List;
  * @author Jay Paulynice
  */
 public interface ImageService {
-    public long insert(ImageEntity entity);
+    public Long insert(ImageEntity entity);
 
-    public ImageEntity query(long id);
+    public ImageEntity query(Long id);
 
-    public List<ImageEntity> findTiles(long id);
+    public List<ImageEntity> findTiles(Long id);
 
     public boolean update(ImageEntity entity);
 
-    public boolean delete(long id);
+    public boolean delete(Long id);
 }

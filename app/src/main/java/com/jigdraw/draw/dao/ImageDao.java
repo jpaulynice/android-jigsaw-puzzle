@@ -10,13 +10,13 @@ import java.util.List;
  * @author Jay Paulynice
  */
 public interface ImageDao {
-    public long create(ImageEntity entity);
+    public Long create(ImageEntity entity);
 
-    public ImageEntity find(long id);
+    public ImageEntity find(Long id);
 
-    public List<ImageEntity> findTiles(long id);
+    public List<ImageEntity> findTiles(Long id);
 
     public int update(ImageEntity entity);
 
-    public int delete(long id);
+    public int delete(Long id);
 }

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.jigdraw.draw.model.Difficulty;
+import com.jigdraw.draw.model.enums.Difficulty;
 import com.jigdraw.draw.model.ImageEntity;
 import com.jigdraw.draw.service.ImageService;
 import com.jigdraw.draw.service.JigsawService;
@@ -17,10 +17,7 @@ import java.util.UUID;
  * @author Jay Paulynice
  */
 public class JigsawServiceImpl implements JigsawService {
-    /** class name for logging */
     private static final String TAG = "JigsawServiceImpl";
-
-    /** image db service */
     private ImageService service;
 
     /**
@@ -34,17 +31,17 @@ public class JigsawServiceImpl implements JigsawService {
 
     @Override
     public long createJigsaw(Bitmap original, Difficulty level) {
-        return createImageTiles(original, Difficulty.getNumberOfPieces(level));
+        return createImageTiles(original, level.getValue());
     }
 
     /**
      * Slice original image into tiles then save in the db
      *
      * @param original the original image to slice up
-     * @param n        how many slices to cut the image into
+     * @param n how many slices to cut the image into
      */
     private long createImageTiles(Bitmap original, int n) {
-        long originalId = saveOriginal(original);
+        Long originalId = saveOriginal(original);
 
         int w = original.getWidth();
         int h = original.getHeight();
@@ -68,22 +65,22 @@ public class JigsawServiceImpl implements JigsawService {
      *
      * @param original image to save
      */
-    private long saveOriginal(Bitmap original) {
+    private Long saveOriginal(Bitmap original) {
         String originalName = UUID.randomUUID() + ".png";
         String originalDesc = "original image " + originalName;
         Log.d(TAG, "image name: " + originalName);
 
-        return saveEntity(original, originalName, originalDesc, 0);
+        return saveEntity(original, originalName, originalDesc, null);
     }
 
     /**
      * Save created tile in the database
      *
      * @param tile the tile to save
-     * @param x    the tile's x coordinate
-     * @param y    the tile's y coordinate
+     * @param x the tile's x coordinate
+     * @param y the tile's y coordinate
      */
-    private void saveTile(Bitmap tile, int x, int y, long originalId) {
+    private void saveTile(Bitmap tile, int x, int y, Long originalId) {
         String name = "tile-" + x + "-" + y + ".png";
         String desc = "sub image " + name;
         Log.d(TAG, "image name: " + name);
@@ -95,11 +92,11 @@ public class JigsawServiceImpl implements JigsawService {
      * Create an image entity with the give parameters and save
      *
      * @param image the bitmap image
-     * @param name  the name
-     * @param desc  the description
+     * @param name the name
+     * @param desc the description
      */
-    private long saveEntity(Bitmap image, String name, String desc,
-                            long originalId) {
+    private Long saveEntity(Bitmap image, String name, String desc,
+                               Long originalId) {
         return service.insert(new ImageEntity(image, name, desc, originalId));
     }
 }

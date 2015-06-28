@@ -22,17 +22,18 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public long insert(ImageEntity entity) {
-        return dao.create(entity);
+    public Long insert(ImageEntity entity) {
+        Long id = dao.create(entity);
+        return id == null ? null : new Long(id);
     }
 
     @Override
-    public List<ImageEntity> findTiles(long id) {
+    public List<ImageEntity> findTiles(Long id) {
         return dao.findTiles(id);
     }
 
     @Override
-    public ImageEntity query(long id) {
+    public ImageEntity query(Long id) {
         return dao.find(id);
     }
 
@@ -42,7 +43,7 @@ public class ImageServiceImpl implements ImageService {
     }
 
     @Override
-    public boolean delete(long id) {
+    public boolean delete(Long id) {
         return dao.delete(id) > 0;
     }
 }

@@ -15,9 +15,9 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Class to load jigsaw pieces from the sqlite database asynchronously
- * returning a list of {@link com.jigdraw.draw.model.ImageEntity} objects
- * that were created from an original image with id
+ * Class to load jigsaw pieces from the sqlite database asynchronously returning
+ * a list of {@link com.jigdraw.draw.model.ImageEntity} objects that were
+ * created from an original image with id
  *
  * @author Jay Paulynice
  */

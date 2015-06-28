@@ -2,7 +2,7 @@ package com.jigdraw.draw.service;
 
 import android.graphics.Bitmap;
 
-import com.jigdraw.draw.model.Difficulty;
+import com.jigdraw.draw.model.enums.Difficulty;
 
 /**
  * Simple interface for jigsaw manipulations.

@@ -16,7 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.jigdraw.draw.R;
-import com.jigdraw.draw.model.Difficulty;
+import com.jigdraw.draw.model.enums.Difficulty;
 import com.jigdraw.draw.tasks.JigsawGenerator;
 import com.jigdraw.draw.views.DrawingView;
 

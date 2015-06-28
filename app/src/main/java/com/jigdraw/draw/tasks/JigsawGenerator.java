@@ -6,7 +6,7 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import com.jigdraw.draw.activity.JigsawActivity;
-import com.jigdraw.draw.model.Difficulty;
+import com.jigdraw.draw.model.enums.Difficulty;
 import com.jigdraw.draw.model.LongParceable;
 import com.jigdraw.draw.service.JigsawService;
 import com.jigdraw.draw.service.impl.JigsawServiceImpl;
@@ -39,9 +39,8 @@ public class JigsawGenerator extends AsyncTask<Bitmap, Integer, Long> {
     }
 
     private void startJigsaw(long id) {
-        Intent intent = new Intent(context,
-                JigsawActivity.class).putExtra("originalId",
-                new LongParceable(id));
+        Intent intent = new Intent(context, JigsawActivity.class).putExtra(
+                "originalId", new LongParceable(id));
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         context.startActivity(intent);
     }

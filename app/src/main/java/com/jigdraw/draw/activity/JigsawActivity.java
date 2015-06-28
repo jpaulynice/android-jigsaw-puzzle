@@ -28,13 +28,12 @@ public class JigsawActivity extends Activity {
     }
 
     private void initGridView() {
-        final JigsawGridView gridView = (JigsawGridView) findViewById(R.id
-                .dynamic_grid);
+        final JigsawGridView gridView = (JigsawGridView) findViewById(R.id.dynamic_grid);
 
         JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
 
-        LongParceable longParceable = getIntent().getExtras().getParcelable
-                ("originalId");
+        LongParceable longParceable = getIntent().getExtras().getParcelable(
+                "originalId");
         task.execute(longParceable.getData());
 
         gridView.setOnDropListener(new JigsawGridView.OnDropListener() {
@@ -52,15 +51,15 @@ public class JigsawActivity extends Activity {
             }
 
             @Override
-            public void onDragPositionsChanged(int oldPosition,
-                                               int newPosition) {
+            public void onDragPositionsChanged(int oldPosition, int newPosition) {
                 Log.d(TAG, String.format("drag changed from %d to %d",
                         oldPosition, newPosition));
             }
         });
         gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                    int position, long id) {
                 gridView.startEditMode(position);
                 return true;
             }

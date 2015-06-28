@@ -36,16 +36,15 @@ public class ImageGridAdapter extends BaseGridAdapter {
         if (convertView == null) {
             imageView = new ImageView(context);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            imageView.setLayoutParams(new GridView.LayoutParams(d
-                    .getWidth(),
-                    d.getHeight()));
+            imageView.setLayoutParams(new GridView.LayoutParams(d.getWidth(), d
+                    .getHeight()));
             imageView.setPadding(1, 1, 1, 1);
         } else {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageDrawable(new BitmapDrawable(context.getResources()
-                , d));
+        imageView
+                .setImageDrawable(new BitmapDrawable(context.getResources(), d));
         return imageView;
     }
 }

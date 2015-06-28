@@ -32,10 +32,7 @@ import static com.jigdraw.draw.util.EntityUtil.entityToContentValues;
  * @author Jay Paulynice
  */
 public class ImageDaoImpl implements ImageDao {
-    /** tag name for logging */
     private static final String TAG = "ImageDaoImpl";
-
-    /** database */
     private SQLiteDatabase db;
 
     /**
@@ -49,18 +46,17 @@ public class ImageDaoImpl implements ImageDao {
     }
 
     @Override
-    public long create(ImageEntity entity) {
-        long id = db.insert(JIGSAW_TABLE, null, entityToContentValues(entity));
+    public Long create(ImageEntity entity) {
+        Long id = db.insert(JIGSAW_TABLE, null, entityToContentValues(entity));
         Log.d(TAG, "successfully saved image...id: " + id);
 
         return id;
     }
 
     @Override
-    public List<ImageEntity> findTiles(long id) {
+    public List<ImageEntity> findTiles(Long id) {
         Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ORIGINAL_SELECTION,
-                getIdArguments(id), null, null,
-                null);
+                getIdArguments(id), null, null, null);
         List<ImageEntity> entities = new ArrayList<>();
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -72,10 +68,9 @@ public class ImageDaoImpl implements ImageDao {
     }
 
     @Override
-    public ImageEntity find(long id) {
+    public ImageEntity find(Long id) {
         Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ID_SELECTION,
-                getIdArguments(id), null, null,
-                null);
+                getIdArguments(id), null, null, null);
 
         return getEntityFromCursor(cursor);
     }
@@ -92,8 +87,8 @@ public class ImageDaoImpl implements ImageDao {
 
     private ImageEntity getEntity(Cursor cursor) {
         String name = cursor.getString(cursor.getColumnIndex(NAME_COLUMN));
-        String base64String = cursor.getString(cursor.getColumnIndex
-                (IMAGE_COLUMN));
+        String base64String = cursor.getString(cursor
+                .getColumnIndex(IMAGE_COLUMN));
         String desc = cursor.getString(cursor.getColumnIndex(DESC_COLUMN));
         long id = cursor.getLong(cursor.getColumnIndex(ORIGINAL_COLUMN));
 
@@ -109,9 +104,8 @@ public class ImageDaoImpl implements ImageDao {
     }
 
     @Override
-    public int delete(long id) {
+    public int delete(Long id) {
         Log.d(TAG, "Deleting entity with id: " + id);
-        return db.delete(JIGSAW_TABLE, ID_SELECTION,
-                getIdArguments(id));
+        return db.delete(JIGSAW_TABLE, ID_SELECTION, getIdArguments(id));
     }
 }
