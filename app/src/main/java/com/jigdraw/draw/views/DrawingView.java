@@ -23,33 +23,20 @@ import com.jigdraw.draw.R;
  * @author Jay Paulynice
  */
 public class DrawingView extends View {
-    /** the draw path */
     private Path drawPath;
-
-    /** draw and canvas paint */
     private Paint drawPaint, canvasPaint;
-
-    /** default color */
     private int paintColor = 0xFF660000;
-
-    /** the drawing canvas */
     private Canvas drawCanvas;
-
-    /** the canvas bitmap */
     private Bitmap canvasBitmap;
-
-    /** current and last brush size */
     private float brushSize, lastBrushSize;
-
-    /** whether erase is set */
     private boolean erase = false;
 
     /**
-     * Create new drawing view with context and attributes and
-     * setting up the default parameters.
+     * Create new drawing view with context and attributes and setting up the
+     * default parameters.
      *
      * @param context the context
-     * @param attrs   the attributes
+     * @param attrs the attributes
      */
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -60,7 +47,7 @@ public class DrawingView extends View {
      * Init parameters
      */
     private void init() {
-        //prepare for drawing and setup paint stroke properties
+        // prepare for drawing and setup paint stroke properties
         brushSize = getResources().getInteger(R.integer.medium_size);
         lastBrushSize = brushSize;
         drawPath = new Path();
@@ -80,21 +67,21 @@ public class DrawingView extends View {
         float touchY = event.getY();
 
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                drawPath.moveTo(touchX, touchY);
-                break;
-            case MotionEvent.ACTION_MOVE:
-                drawPath.lineTo(touchX, touchY);
-                break;
-            case MotionEvent.ACTION_UP:
-                drawPath.lineTo(touchX, touchY);
-                drawCanvas.drawPath(drawPath, drawPaint);
-                drawPath.reset();
-                break;
-            default:
-                return false;
+        case MotionEvent.ACTION_DOWN:
+            drawPath.moveTo(touchX, touchY);
+            break;
+        case MotionEvent.ACTION_MOVE:
+            drawPath.lineTo(touchX, touchY);
+            break;
+        case MotionEvent.ACTION_UP:
+            drawPath.lineTo(touchX, touchY);
+            drawCanvas.drawPath(drawPath, drawPaint);
+            drawPath.reset();
+            break;
+        default:
+            return false;
         }
-        //redraw
+        // redraw
         invalidate();
         return true;
     }
@@ -157,8 +144,8 @@ public class DrawingView extends View {
      */
     public void setErase(boolean isErase) {
         erase = isErase;
-        Xfermode xfermode = erase ? new PorterDuffXfermode(PorterDuff.Mode
-                .CLEAR) : null;
+        Xfermode xfermode = erase ? new PorterDuffXfermode(
+                PorterDuff.Mode.CLEAR) : null;
         drawPaint.setXfermode(xfermode);
     }
 

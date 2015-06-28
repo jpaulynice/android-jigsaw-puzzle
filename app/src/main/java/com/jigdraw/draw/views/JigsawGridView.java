@@ -38,7 +38,6 @@ import java.util.Stack;
 
 public class JigsawGridView extends GridView {
     private static final int INVALID_ID = -1;
-
     private static final int MOVE_DURATION = 300;
     private static final int SMOOTH_SCROLL_AMOUNT_AT_EDGE = 8;
 
@@ -994,4 +993,3 @@ public class JigsawGridView extends GridView {
         }
     }
 }
-

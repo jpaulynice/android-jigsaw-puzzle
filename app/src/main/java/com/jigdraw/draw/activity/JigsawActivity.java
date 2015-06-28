@@ -18,7 +18,6 @@ import com.jigdraw.draw.views.JigsawGridView;
  * @author Jay Paulynice
  */
 public class JigsawActivity extends Activity {
-    /** activity name for logging */
     private static final String TAG = "JigsawActivity";
 
     @Override

@@ -10,13 +10,6 @@ public class GridUtil {
         list.add(indexTwo, obj);
     }
 
-    public static void swap(List list, int firstIndex, int secondIndex) {
-        Object firstObject = list.get(firstIndex);
-        Object secondObject = list.get(secondIndex);
-        list.set(firstIndex, secondObject);
-        list.set(secondIndex, firstObject);
-    }
-
     public static float getViewX(View view) {
         return Math.abs((view.getRight() - view.getLeft()) / 2);
     }

@@ -32,19 +32,10 @@ import java.util.List;
  * @author Jay Paulynice
  */
 public class DrawActivity extends Activity implements OnClickListener {
-    /** activity name for logging */
     private static final String TAG = "DrawActivity";
-
-    /** custom drawing view */
     private DrawingView drawView;
-
-    /** buttons for drawing */
     private ImageButton currPaint, eraseBtn, newBtn, saveBtn;
-
-    /** brush sizes */
     private float smallBrush, mediumBrush, largeBrush, largestBrush;
-
-    /** list of brushes */
     private List<ImageButton> brushes = new ArrayList<>();
 
     @Override
@@ -77,16 +68,13 @@ public class DrawActivity extends Activity implements OnClickListener {
      * @param view the current brush view
      */
     public void handleBrushSize(View view) {
-        //default to medium brush
+        // default to medium brush
         float bSize = mediumBrush;
         if (view.getId() == R.id.small_brush) {
-            Log.d(TAG, "small brush clicked.");
             bSize = smallBrush;
         } else if (view.getId() == R.id.large_brush) {
-            Log.d(TAG, "large brush clicked.");
             bSize = largeBrush;
         } else if (view.getId() == R.id.largest_brush) {
-            Log.d(TAG, "largest brush clicked.");
             bSize = largestBrush;
         }
         drawView.setErase(false);
@@ -129,13 +117,13 @@ public class DrawActivity extends Activity implements OnClickListener {
      * Update UI with new selected color
      *
      * @param imgView the image view
-     * @param view    the view
+     * @param view the view
      */
     private void updateUI(ImageButton imgView, View view) {
-        imgView.setImageDrawable(getResources().getDrawable(R.drawable
-                .paint_pressed));
-        currPaint.setImageDrawable(getResources().getDrawable(R.drawable
-                .paint));
+        imgView.setImageDrawable(getResources().getDrawable(
+                R.drawable.paint_pressed));
+        currPaint
+                .setImageDrawable(getResources().getDrawable(R.drawable.paint));
         currPaint = (ImageButton) view;
     }
 
@@ -144,8 +132,7 @@ public class DrawActivity extends Activity implements OnClickListener {
      *
      * @param color the chosen color
      */
-    public void setBrushColor(int color) {
-        initBrushList();
+    private void setBrushColor(int color) {
         for (ImageButton im : brushes) {
             GradientDrawable d = (GradientDrawable) im.getDrawable();
             d.setColor(color);
@@ -156,13 +143,12 @@ public class DrawActivity extends Activity implements OnClickListener {
      * Make a list of the brushes
      */
     private void initBrushList() {
-        if (brushes.isEmpty()) {
-            brushes.addAll(Arrays.asList(
-                    (ImageButton) findViewById(R.id.small_brush),
-                    (ImageButton) findViewById(R.id.medium_brush),
-                    (ImageButton) findViewById(R.id.large_brush),
-                    (ImageButton) findViewById(R.id.largest_brush)));
-        }
+        brushes.addAll(Arrays.asList(
+                (ImageButton) findViewById(R.id.small_brush),
+                (ImageButton) findViewById(R.id.medium_brush),
+                (ImageButton) findViewById(R.id.large_brush),
+                (ImageButton) findViewById(R.id.largest_brush)));
+        setBrushColor(drawView.getPaintColor());
     }
 
     /**
@@ -175,18 +161,17 @@ public class DrawActivity extends Activity implements OnClickListener {
         initView();
         initLayout();
         initButtons();
-        setBrushColor(drawView.getPaintColor());
+        initBrushList();
     }
 
     /**
      * Initialize the layout and set current color to first one
      */
     private void initLayout() {
-        LinearLayout paintLayout = (LinearLayout) findViewById(R.id
-                .paint_colors);
+        LinearLayout paintLayout = (LinearLayout) findViewById(R.id.paint_colors);
         currPaint = (ImageButton) paintLayout.getChildAt(0);
-        currPaint.setImageDrawable(getResources().getDrawable(R.drawable
-                .paint_pressed));
+        currPaint.setImageDrawable(getResources().getDrawable(
+                R.drawable.paint_pressed));
     }
 
     /**
@@ -211,15 +196,15 @@ public class DrawActivity extends Activity implements OnClickListener {
      * Initialize the buttons
      */
     private void initButtons() {
-        //erase button
+        // erase button
         eraseBtn = (ImageButton) findViewById(R.id.erase_btn);
         eraseBtn.setOnClickListener(this);
 
-        //new button
+        // new button
         newBtn = (ImageButton) findViewById(R.id.new_btn);
         newBtn.setOnClickListener(this);
 
-        //save button
+        // save button
         saveBtn = (ImageButton) findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(this);
     }
@@ -235,22 +220,24 @@ public class DrawActivity extends Activity implements OnClickListener {
      * Handle the new button click
      */
     private void handleNewButton() {
-        //new button
+        // new button
         AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
         newDialog.setTitle("New drawing");
-        newDialog.setMessage("Start new drawing (you will lose the current " +
-                "drawing)?");
-        newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                drawView.startNew();
-                dialog.dismiss();
-            }
-        });
-        newDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.cancel();
-            }
-        });
+        newDialog.setMessage("Start new drawing (you will lose the current "
+                + "drawing)?");
+        newDialog.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        drawView.startNew();
+                        dialog.dismiss();
+                    }
+                });
+        newDialog.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
         newDialog.show();
     }
 
@@ -258,7 +245,7 @@ public class DrawActivity extends Activity implements OnClickListener {
      * Handle the save button click
      */
     private void handleSaveButton() {
-        CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
+        CharSequence levels[] = new CharSequence[] { "Easy", "Medium", "Hard" };
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Choose difficulty:");
@@ -280,19 +267,19 @@ public class DrawActivity extends Activity implements OnClickListener {
 
         JigsawGenerator task = new JigsawGenerator(getApplicationContext(),
                 Difficulty.getLevel(which));
-        toast();
+
+        shortToast("Loading jigsaw puzzle...");
         task.execute(bitmap.copy(bitmap.getConfig(), true));
         drawView.destroyDrawingCache();
     }
 
     /**
-     * Get feedback if jigsaw is created or not
+     * Create short toast and show message
      *
      */
-    private void toast() {
-        String feedback = "Loading jigsaw puzzle...";
-        Toast toast = Toast.makeText(getApplicationContext(),
-                feedback, Toast.LENGTH_SHORT);
+    private void shortToast(String message) {
+        Toast toast = Toast.makeText(getApplicationContext(), message,
+                Toast.LENGTH_SHORT);
         toast.show();
     }
 }
