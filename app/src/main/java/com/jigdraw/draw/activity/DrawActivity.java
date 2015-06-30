@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.model.enums.Difficulty;
@@ -23,6 +22,8 @@ import com.jigdraw.draw.views.DrawingView;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.jigdraw.draw.util.ToastUtil.shortToast;
+
 /**
  * Main activity class represents all the activities that a user starts with
  * such as draw, choose to create a new drawing, save the current drawing,
@@ -31,9 +32,16 @@ import java.util.List;
  * @author Jay Paulynice
  */
 public class DrawActivity extends Activity implements OnClickListener {
+    /** Class name for logging */
     private static final String TAG = "DrawActivity";
+
+    /** Custom view for drawing */
     private DrawingView drawView;
+
+    /** Top menu buttons */
     private ImageButton currPaint, eraseBtn, newBtn, saveBtn;
+
+    /** Pain brush sizes */
     private float smallBrush, mediumBrush, largeBrush, largestBrush;
 
     @Override
@@ -265,17 +273,8 @@ public class DrawActivity extends Activity implements OnClickListener {
         JigsawGenerator task = new JigsawGenerator(getApplicationContext(),
                 Difficulty.fromValue(which));
 
-        shortToast("Loading jigsaw puzzle...");
+        shortToast(getApplicationContext(), "Loading jigsaw puzzle...");
         task.execute(bitmap.copy(bitmap.getConfig(), true));
         drawView.destroyDrawingCache();
-    }
-
-    /**
-     * Create short toast and show message
-     */
-    private void shortToast(String message) {
-        Toast toast = Toast.makeText(getApplicationContext(), message,
-                Toast.LENGTH_SHORT);
-        toast.show();
     }
 }

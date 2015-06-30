@@ -18,6 +18,7 @@ import com.jigdraw.draw.views.JigsawGridView;
  * @author Jay Paulynice
  */
 public class JigsawActivity extends Activity {
+    /** Class name for logging */
     private static final String TAG = "JigsawActivity";
 
     @Override
@@ -35,6 +36,15 @@ public class JigsawActivity extends Activity {
         LongParceable longParceable = getIntent().getExtras().getParcelable(
                 "originalId");
         task.execute(longParceable.getData());
+
+        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view,
+                                           int position, long id) {
+                gridView.startEditMode(position);
+                return true;
+            }
+        });
 
         gridView.setOnDropListener(new JigsawGridView.OnDropListener() {
             @Override
@@ -54,14 +64,6 @@ public class JigsawActivity extends Activity {
             public void onDragPositionsChanged(int oldPosition, int newPosition) {
                 Log.d(TAG, String.format("drag changed from %d to %d",
                         oldPosition, newPosition));
-            }
-        });
-        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view,
-                    int position, long id) {
-                gridView.startEditMode(position);
-                return true;
             }
         });
     }
