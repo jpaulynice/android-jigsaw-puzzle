@@ -4,9 +4,10 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 
-import com.jigdraw.draw.model.enums.Difficulty;
+import com.jigdraw.draw.dao.ImageDao;
+import com.jigdraw.draw.dao.impl.ImageDaoImpl;
 import com.jigdraw.draw.model.ImageEntity;
-import com.jigdraw.draw.service.ImageService;
+import com.jigdraw.draw.model.enums.Difficulty;
 import com.jigdraw.draw.service.JigsawService;
 
 import java.util.UUID;
@@ -17,8 +18,11 @@ import java.util.UUID;
  * @author Jay Paulynice
  */
 public class JigsawServiceImpl implements JigsawService {
+    /** Class name for logging */
     private static final String TAG = "JigsawServiceImpl";
-    private ImageService service;
+
+    /** Image entity dao */
+    private ImageDao dao;
 
     /**
      * Create new jigsaw service given context
@@ -26,11 +30,11 @@ public class JigsawServiceImpl implements JigsawService {
      * @param context the application context
      */
     public JigsawServiceImpl(Context context) {
-        service = new ImageServiceImpl(context);
+        dao = new ImageDaoImpl(context);
     }
 
     @Override
-    public long createJigsaw(Bitmap original, Difficulty level) {
+    public long create(Bitmap original, Difficulty level) {
         return createImageTiles(original, level.getValue());
     }
 
@@ -38,7 +42,7 @@ public class JigsawServiceImpl implements JigsawService {
      * Slice original image into tiles then save in the db
      *
      * @param original the original image to slice up
-     * @param n how many slices to cut the image into
+     * @param n        how many slices to cut the image into
      */
     private long createImageTiles(Bitmap original, int n) {
         Long originalId = saveOriginal(original);
@@ -77,8 +81,8 @@ public class JigsawServiceImpl implements JigsawService {
      * Save created tile in the database
      *
      * @param tile the tile to save
-     * @param x the tile's x coordinate
-     * @param y the tile's y coordinate
+     * @param x    the tile's x coordinate
+     * @param y    the tile's y coordinate
      */
     private void saveTile(Bitmap tile, int x, int y, Long originalId) {
         String name = "tile-" + x + "-" + y + ".png";
@@ -92,11 +96,11 @@ public class JigsawServiceImpl implements JigsawService {
      * Create an image entity with the give parameters and save
      *
      * @param image the bitmap image
-     * @param name the name
-     * @param desc the description
+     * @param name  the name
+     * @param desc  the description
      */
     private Long saveEntity(Bitmap image, String name, String desc,
-                               Long originalId) {
-        return service.insert(new ImageEntity(image, name, desc, originalId));
+                            Long originalId) {
+        return dao.create(new ImageEntity(image, name, desc, originalId));
     }
 }

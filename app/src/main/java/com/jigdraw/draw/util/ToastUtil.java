@@ -12,6 +12,10 @@ import android.widget.Toast;
 public class ToastUtil {
     /**
      * Create short toast and show message
+     * *
+     *
+     * @param context the context
+     * @param message the message
      */
     public static void shortToast(Context context, String message) {
         Toast toast = Toast.makeText(context, message,

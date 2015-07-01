@@ -32,7 +32,10 @@ import static com.jigdraw.draw.util.EntityUtil.entityToContentValues;
  * @author Jay Paulynice
  */
 public class ImageDaoImpl implements ImageDao {
+    /** Class name for logging */
     private static final String TAG = "ImageDaoImpl";
+
+    /** SQLite database */
     private SQLiteDatabase db;
 
     /**

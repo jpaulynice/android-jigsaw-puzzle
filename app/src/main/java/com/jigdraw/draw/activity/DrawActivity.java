@@ -41,7 +41,7 @@ public class DrawActivity extends Activity implements OnClickListener {
     /** Top menu buttons */
     private ImageButton currPaint, eraseBtn, newBtn, saveBtn;
 
-    /** Pain brush sizes */
+    /** Paint brush sizes */
     private float smallBrush, mediumBrush, largeBrush, largestBrush;
 
     @Override

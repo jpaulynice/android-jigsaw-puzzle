@@ -5,10 +5,10 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.widget.GridView;
 
-import com.jigdraw.draw.adapter.impl.JigsawGridAdapter;
+import com.jigdraw.draw.adapter.JigsawGridAdapter;
+import com.jigdraw.draw.dao.ImageDao;
+import com.jigdraw.draw.dao.impl.ImageDaoImpl;
 import com.jigdraw.draw.model.ImageEntity;
-import com.jigdraw.draw.service.ImageService;
-import com.jigdraw.draw.service.impl.ImageServiceImpl;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,19 +22,24 @@ import java.util.List;
  * @author Jay Paulynice
  */
 public class JigsawLoader extends AsyncTask<Long, Integer, List<Bitmap>> {
-    private ImageService service;
+    /** Image dao */
+    private ImageDao dao;
+
+    /** The grid view */
     private GridView gridView;
+
+    /** The application context */
     private Context context;
 
     public JigsawLoader(Context context, GridView gridView) {
         this.context = context;
         this.gridView = gridView;
-        this.service = new ImageServiceImpl(context);
+        this.dao = new ImageDaoImpl(context);
     }
 
     @Override
     protected List<Bitmap> doInBackground(Long[] params) {
-        List<ImageEntity> entities = service.findTiles(params[0]);
+        List<ImageEntity> entities = dao.findTiles(params[0]);
         Collections.shuffle(entities);
         List<Bitmap> tiles = new ArrayList<>();
 
@@ -47,10 +52,11 @@ public class JigsawLoader extends AsyncTask<Long, Integer, List<Bitmap>> {
 
     @Override
     protected void onPostExecute(List<Bitmap> tiles) {
+        int pieces = (int) Math.sqrt(tiles.size());
         JigsawGridAdapter adapter = new JigsawGridAdapter(context, tiles,
-                (int) Math.sqrt(tiles.size()));
+                pieces);
 
         gridView.setAdapter(adapter);
-        gridView.setNumColumns((int) Math.sqrt(tiles.size()));
+        gridView.setNumColumns(pieces);
     }
 }

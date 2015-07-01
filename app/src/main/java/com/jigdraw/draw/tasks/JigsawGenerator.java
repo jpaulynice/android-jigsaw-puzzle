@@ -6,8 +6,8 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 
 import com.jigdraw.draw.activity.JigsawActivity;
-import com.jigdraw.draw.model.enums.Difficulty;
 import com.jigdraw.draw.model.LongParceable;
+import com.jigdraw.draw.model.enums.Difficulty;
 import com.jigdraw.draw.service.JigsawService;
 import com.jigdraw.draw.service.impl.JigsawServiceImpl;
 
@@ -18,8 +18,13 @@ import com.jigdraw.draw.service.impl.JigsawServiceImpl;
  * @author Jay Paulynice
  */
 public class JigsawGenerator extends AsyncTask<Bitmap, Integer, Long> {
+    /** Jigsaw service */
     private JigsawService service;
+
+    /** Difficulty level */
     private Difficulty level;
+
+    /** Application context */
     private Context context;
 
     public JigsawGenerator(Context context, Difficulty level) {
@@ -30,7 +35,7 @@ public class JigsawGenerator extends AsyncTask<Bitmap, Integer, Long> {
 
     @Override
     protected Long doInBackground(Bitmap... params) {
-        return service.createJigsaw(params[0], level);
+        return service.create(params[0], level);
     }
 
     @Override
