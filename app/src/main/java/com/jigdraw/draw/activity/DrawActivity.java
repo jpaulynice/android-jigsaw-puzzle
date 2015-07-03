@@ -148,7 +148,7 @@ public class DrawActivity extends Activity implements OnClickListener {
     /**
      * Make a list of the brushes
      */
-    private List<ImageButton> getBrushes() {
+    public List<ImageButton> getBrushes() {
         return Arrays.asList((ImageButton) findViewById(R.id
                         .small_brush),
                 (ImageButton) findViewById(R.id.medium_brush),
@@ -249,7 +249,7 @@ public class DrawActivity extends Activity implements OnClickListener {
     /**
      * Handle the save button click
      */
-    private void handleSaveButton() {
+    public void handleSaveButton() {
         CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -266,7 +266,7 @@ public class DrawActivity extends Activity implements OnClickListener {
     /**
      * Create jigsaw and give user feedback
      */
-    private void createJigsaw(int which) {
+    public void createJigsaw(int which) {
         drawView.setDrawingCacheEnabled(true);
         Bitmap bitmap = drawView.getDrawingCache();
 
