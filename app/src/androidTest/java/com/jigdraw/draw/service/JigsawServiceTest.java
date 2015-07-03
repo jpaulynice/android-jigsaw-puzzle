@@ -1,11 +1,10 @@
-package com.jigdraw.service;
+package com.jigdraw.draw.service;
 
 import android.graphics.Bitmap;
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
 
 import com.jigdraw.draw.model.enums.Difficulty;
-import com.jigdraw.draw.service.JigsawService;
 import com.jigdraw.draw.service.impl.JigsawServiceImpl;
 
 public class JigsawServiceTest extends AndroidTestCase {

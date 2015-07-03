@@ -1,9 +1,7 @@
-package com.jigdraw.db;
+package com.jigdraw.draw.db;
 
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
-
-import com.jigdraw.draw.db.JigsawDB;
 
 public class JigsawDBTest extends AndroidTestCase {
     private JigsawDB db;

@@ -1,4 +1,4 @@
-package com.jigdraw.application;
+package com.jigdraw.draw.application;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

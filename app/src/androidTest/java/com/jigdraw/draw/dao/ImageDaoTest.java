@@ -1,10 +1,9 @@
-package com.jigdraw.dao;
+package com.jigdraw.draw.dao;
 
 import android.graphics.Bitmap;
 import android.test.AndroidTestCase;
 import android.test.RenamingDelegatingContext;
 
-import com.jigdraw.draw.dao.ImageDao;
 import com.jigdraw.draw.dao.impl.ImageDaoImpl;
 import com.jigdraw.draw.model.ImageEntity;
 
