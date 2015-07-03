@@ -34,7 +34,7 @@ public class JigsawServiceImpl implements JigsawService {
     }
 
     @Override
-    public long create(Bitmap original, Difficulty level) {
+    public Long create(Bitmap original, Difficulty level) {
         return createImageTiles(original, level.getValue());
     }
 
@@ -44,7 +44,7 @@ public class JigsawServiceImpl implements JigsawService {
      * @param original the original image to slice up
      * @param n        how many slices to cut the image into
      */
-    private long createImageTiles(Bitmap original, int n) {
+    private Long createImageTiles(Bitmap original, int n) {
         Long originalId = saveOriginal(original);
 
         int w = original.getWidth();

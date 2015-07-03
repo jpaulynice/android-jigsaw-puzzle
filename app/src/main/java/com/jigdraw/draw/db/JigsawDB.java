@@ -17,7 +17,7 @@ import static com.jigdraw.draw.util.DBUtil.DATABASE_VERSION;
  *
  * @author Jay Paulynice
  */
-public class DBHelper extends SQLiteOpenHelper {
+public class JigsawDB extends SQLiteOpenHelper {
     /** tag name for logging */
     private static final String TAG = "DBHelper";
 
@@ -26,7 +26,7 @@ public class DBHelper extends SQLiteOpenHelper {
      *
      * @param context the application context
      */
-    public DBHelper(Context context) {
+    public JigsawDB(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 

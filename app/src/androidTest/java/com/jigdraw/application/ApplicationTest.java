@@ -1,10 +1,10 @@
-package com.jigdraw.draw.activity;
+package com.jigdraw.application;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
 
 /**
- * Test class
+ * Test application class
  *
  * @author Jay Paulynice
  */

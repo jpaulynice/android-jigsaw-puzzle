@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.jigdraw.draw.dao.ImageDao;
-import com.jigdraw.draw.db.DBHelper;
+import com.jigdraw.draw.db.JigsawDB;
 import com.jigdraw.draw.model.ImageEntity;
 
 import java.util.ArrayList;
@@ -16,6 +16,7 @@ import java.util.List;
 import static com.jigdraw.draw.util.Base64Util.base64ToBitmap;
 import static com.jigdraw.draw.util.DBUtil.ALL_COLUMNS;
 import static com.jigdraw.draw.util.DBUtil.DESC_COLUMN;
+import static com.jigdraw.draw.util.DBUtil.ID_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.ID_SELECTION;
 import static com.jigdraw.draw.util.DBUtil.IMAGE_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.JIGSAW_TABLE;
@@ -44,7 +45,7 @@ public class ImageDaoImpl implements ImageDao {
      * @param context the application context
      */
     public ImageDaoImpl(Context context) {
-        DBHelper mdb = new DBHelper(context);
+        JigsawDB mdb = new JigsawDB(context);
         db = mdb.getWritableDatabase();
     }
 
@@ -93,9 +94,15 @@ public class ImageDaoImpl implements ImageDao {
         String base64String = cursor.getString(cursor
                 .getColumnIndex(IMAGE_COLUMN));
         String desc = cursor.getString(cursor.getColumnIndex(DESC_COLUMN));
-        long id = cursor.getLong(cursor.getColumnIndex(ORIGINAL_COLUMN));
+        Long originalId = cursor.getLong(cursor.getColumnIndex
+                (ORIGINAL_COLUMN));
+        Long id = cursor.getLong(cursor.getColumnIndex(ID_COLUMN));
 
-        return new ImageEntity(base64ToBitmap(base64String), name, desc, id);
+        ImageEntity entity = new ImageEntity(base64ToBitmap(base64String),
+                name, desc, originalId);
+        entity.setId(id);
+
+        return entity;
     }
 
     @Override

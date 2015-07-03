@@ -29,10 +29,10 @@ public class JigsawActivity extends Activity {
     }
 
     private void initGridView() {
-        final JigsawGridView gridView = (JigsawGridView) findViewById(R.id.dynamic_grid);
-
+        final JigsawGridView gridView = (JigsawGridView) findViewById(R.id
+                .dynamic_grid);
+        
         JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
-
         LongParceable longParceable = getIntent().getExtras().getParcelable(
                 "originalId");
         task.execute(longParceable.getData());
@@ -61,7 +61,8 @@ public class JigsawActivity extends Activity {
             }
 
             @Override
-            public void onDragPositionsChanged(int oldPosition, int newPosition) {
+            public void onDragPositionsChanged(int oldPosition,
+                                               int newPosition) {
                 Log.d(TAG, String.format("drag changed from %d to %d",
                         oldPosition, newPosition));
             }

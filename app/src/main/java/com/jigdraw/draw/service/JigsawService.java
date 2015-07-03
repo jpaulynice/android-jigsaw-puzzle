@@ -17,5 +17,5 @@ public interface JigsawService {
      * @param level    difficulty level
      * @return the id of the original image once saved
      */
-    public long create(Bitmap original, Difficulty level);
+    public Long create(Bitmap original, Difficulty level);
 }
