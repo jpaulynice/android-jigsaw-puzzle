@@ -69,6 +69,72 @@ public class DrawActivity extends Activity implements OnClickListener {
     }
 
     /**
+     * Set erase to true on eraser click
+     */
+    public void handleEraseButton() {
+        drawView.setErase(true);
+    }
+
+    /**
+     * Handle the new button click
+     */
+    public void handleNewButton() {
+        // new button
+        AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
+        newDialog.setTitle("New drawing");
+        newDialog.setMessage("Start new drawing (you will lose the current "
+                + "drawing)?");
+        newDialog.setPositiveButton("Yes",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        drawView.startNew();
+                        dialog.dismiss();
+                    }
+                });
+        newDialog.setNegativeButton("Cancel",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                });
+        newDialog.show();
+    }
+
+    /**
+     * Handle the save button click
+     */
+    public void handleSaveButton() {
+        CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Choose difficulty:");
+        builder.setItems(levels, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                createJigsaw(which);
+            }
+        });
+        builder.show();
+    }
+
+    /**
+     * Create jigsaw and give user feedback
+     * 
+     * @param which the selected option in dialog
+     */
+    public void createJigsaw(int which) {
+        drawView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = drawView.getDrawingCache();
+
+        JigsawGenerator task = new JigsawGenerator(getApplicationContext(),
+                Difficulty.fromValue(which));
+
+        shortToast(getApplicationContext(), "Loading jigsaw puzzle...");
+        task.execute(bitmap.copy(bitmap.getConfig(), true));
+        drawView.destroyDrawingCache();
+    }
+
+    /**
      * Handle the change of the brush size
      *
      * @param view the current brush view
@@ -212,69 +278,5 @@ public class DrawActivity extends Activity implements OnClickListener {
         // save button
         saveBtn = (ImageButton) findViewById(R.id.save_btn);
         saveBtn.setOnClickListener(this);
-    }
-
-    /**
-     * Set erase to true on eraser click
-     */
-    private void handleEraseButton() {
-        drawView.setErase(true);
-    }
-
-    /**
-     * Handle the new button click
-     */
-    private void handleNewButton() {
-        // new button
-        AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
-        newDialog.setTitle("New drawing");
-        newDialog.setMessage("Start new drawing (you will lose the current "
-                + "drawing)?");
-        newDialog.setPositiveButton("Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        drawView.startNew();
-                        dialog.dismiss();
-                    }
-                });
-        newDialog.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.cancel();
-                    }
-                });
-        newDialog.show();
-    }
-
-    /**
-     * Handle the save button click
-     */
-    public void handleSaveButton() {
-        CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Choose difficulty:");
-        builder.setItems(levels, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                createJigsaw(which);
-            }
-        });
-        builder.show();
-    }
-
-    /**
-     * Create jigsaw and give user feedback
-     */
-    public void createJigsaw(int which) {
-        drawView.setDrawingCacheEnabled(true);
-        Bitmap bitmap = drawView.getDrawingCache();
-
-        JigsawGenerator task = new JigsawGenerator(getApplicationContext(),
-                Difficulty.fromValue(which));
-
-        shortToast(getApplicationContext(), "Loading jigsaw puzzle...");
-        task.execute(bitmap.copy(bitmap.getConfig(), true));
-        drawView.destroyDrawingCache();
     }
 }
