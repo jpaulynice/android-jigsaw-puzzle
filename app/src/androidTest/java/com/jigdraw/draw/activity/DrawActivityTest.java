@@ -34,17 +34,12 @@ public class DrawActivityTest extends
 
     @MediumTest
     public void testControlsVisible() {
-        View save = activity.findViewById(R.id.save_btn);
-        assertTrue(View.VISIBLE == save.getVisibility());
-
-        View newB = activity.findViewById(R.id.new_btn);
-        assertTrue(View.VISIBLE == newB.getVisibility());
-
-        View erase = activity.findViewById(R.id.erase_btn);
-        assertTrue(View.VISIBLE == erase.getVisibility());
-        
         for(ImageButton b: activity.getBrushes()){
             assertTrue(View.VISIBLE == b.getVisibility());
+        }
+        
+        for(View v: activity.getMenuButtons()){
+            assertTrue(View.VISIBLE == v.getVisibility());
         }
     }
 }

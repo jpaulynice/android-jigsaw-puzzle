@@ -38,11 +38,8 @@ public class DrawActivity extends Activity implements OnClickListener {
     /** Custom view for drawing */
     private DrawingView drawView;
 
-    /** Top menu buttons */
-    private ImageButton currPaint, eraseBtn, newBtn, saveBtn;
-
-    /** Paint brush sizes */
-    private float smallBrush, mediumBrush, largeBrush, largestBrush;
+    /** Current paint */
+    private ImageButton currPaint;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,13 +138,13 @@ public class DrawActivity extends Activity implements OnClickListener {
      */
     public void handleBrushSize(View view) {
         // default to medium brush
-        float bSize = mediumBrush;
+        float bSize = getResources().getInteger(R.integer.medium_size);
         if (view.getId() == R.id.small_brush) {
-            bSize = smallBrush;
+            bSize = getResources().getInteger(R.integer.small_size);
         } else if (view.getId() == R.id.large_brush) {
-            bSize = largeBrush;
+            bSize = getResources().getInteger(R.integer.large_size);
         } else if (view.getId() == R.id.largest_brush) {
-            bSize = largestBrush;
+            bSize = getResources().getInteger(R.integer.largest_size);
         }
         drawView.setErase(false);
         drawView.setBrushSize(bSize);
@@ -228,10 +225,8 @@ public class DrawActivity extends Activity implements OnClickListener {
     private void init() {
         setContentView(R.layout.activity_main);
 
-        initBrushes();
-        initView();
+        initViews();
         initLayout();
-        initButtons();
         setBrushColor(drawView.getPaintColor());
     }
 
@@ -246,37 +241,22 @@ public class DrawActivity extends Activity implements OnClickListener {
     }
 
     /**
-     * Initialize the drawing view
+     * Initialize views
      */
-    private void initView() {
+    private void initViews() {
         drawView = (DrawingView) findViewById(R.id.drawing);
-        drawView.setBrushSize(mediumBrush);
-    }
-
-    /**
-     * Initialize the brushes
-     */
-    private void initBrushes() {
-        smallBrush = getResources().getInteger(R.integer.small_size);
-        mediumBrush = getResources().getInteger(R.integer.medium_size);
-        largeBrush = getResources().getInteger(R.integer.large_size);
-        largestBrush = getResources().getInteger(R.integer.largest_size);
+        drawView.setBrushSize(getResources().getInteger(R.integer.medium_size));
+        
+        for(View view: getMenuButtons()){
+            view.setOnClickListener(this);
+        }
     }
 
     /**
      * Initialize the buttons
      */
-    private void initButtons() {
-        // erase button
-        eraseBtn = (ImageButton) findViewById(R.id.erase_btn);
-        eraseBtn.setOnClickListener(this);
-
-        // new button
-        newBtn = (ImageButton) findViewById(R.id.new_btn);
-        newBtn.setOnClickListener(this);
-
-        // save button
-        saveBtn = (ImageButton) findViewById(R.id.save_btn);
-        saveBtn.setOnClickListener(this);
+    public List<View> getMenuButtons() {
+       return Arrays.asList(findViewById(R.id.erase_btn), 
+               findViewById(R.id.new_btn), findViewById(R.id.save_btn));
     }
 }
