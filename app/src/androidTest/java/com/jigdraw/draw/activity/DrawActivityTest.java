@@ -1,8 +1,6 @@
 package com.jigdraw.draw.activity;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.SmallTest;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -26,12 +24,10 @@ public class DrawActivityTest extends
         activity = getActivity();
     }
 
-    @SmallTest
     public void testActivityNotNull() {
         assertNotNull(activity);
     }
 
-    @MediumTest
     public void testControlsVisible() {
         for (ImageButton b : activity.getBrushes()) {
             assertTrue(View.VISIBLE == b.getVisibility());
