@@ -13,22 +13,8 @@
         android:orientation="horizontal">
     </LinearLayout>
 
-    <!--
-    <GridView
-        android:id="@+id/gridview"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="3dp"
-        android:layout_weight="1"
-        android:horizontalSpacing="1dp"
-        android:verticalSpacing="1dp"/>-->
-
     <com.jigdraw.draw.views.JigsawGridView
-        android:id="@+id/dynamic_grid"
+        android:id="@+id/jigsaw_grid"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:layout_marginBottom="20dp"

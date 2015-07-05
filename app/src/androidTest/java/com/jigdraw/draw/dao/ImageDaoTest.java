@@ -7,6 +7,8 @@ import android.test.RenamingDelegatingContext;
 import com.jigdraw.draw.dao.impl.ImageDaoImpl;
 import com.jigdraw.draw.model.ImageEntity;
 
+import java.util.List;
+
 public class ImageDaoTest extends AndroidTestCase {
     private ImageDao dao;
 
@@ -43,6 +45,12 @@ public class ImageDaoTest extends AndroidTestCase {
         Long id = dao.create(createImageEntity());
         dao.delete(id);
         assertNull(dao.find(id));
+    }
+
+    public void testFindOriginals() {
+        dao.create(createImageEntity());
+        List<ImageEntity> originals = dao.findAllOriginals();
+        assertFalse(originals.isEmpty());
     }
 
     private ImageEntity createImageEntity() {

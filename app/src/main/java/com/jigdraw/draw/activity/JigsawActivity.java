@@ -1,9 +1,7 @@
 package com.jigdraw.draw.activity;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 
@@ -17,7 +15,7 @@ import com.jigdraw.draw.views.JigsawGridView;
  *
  * @author Jay Paulynice
  */
-public class JigsawActivity extends Activity {
+public class JigsawActivity extends BaseJigsawActivity {
     /** Class name for logging */
     private static final String TAG = "JigsawActivity";
 
@@ -30,7 +28,7 @@ public class JigsawActivity extends Activity {
 
     private void initGridView() {
         final JigsawGridView gridView = (JigsawGridView) findViewById(R.id
-                .dynamic_grid);
+                .jigsaw_grid);
         
         JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
         LongParceable longParceable = getIntent().getExtras().getParcelable(
@@ -67,11 +65,5 @@ public class JigsawActivity extends Activity {
                         oldPosition, newPosition));
             }
         });
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
     }
 }

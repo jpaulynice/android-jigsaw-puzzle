@@ -61,14 +61,7 @@ public class ImageDaoImpl implements ImageDao {
     public List<ImageEntity> findTiles(Long id) {
         Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ORIGINAL_SELECTION,
                 getIdArguments(id), null, null, null);
-        List<ImageEntity> entities = new ArrayList<>();
-        if (cursor != null) {
-            while (cursor.moveToNext()) {
-                ImageEntity entity = getEntity(cursor);
-                entities.add(entity);
-            }
-        }
-        return entities;
+        return getAllFromCursor(cursor);
     }
 
     @Override
@@ -78,6 +71,30 @@ public class ImageDaoImpl implements ImageDao {
 
         return getEntityFromCursor(cursor);
     }
+
+    @Override
+    public int update(ImageEntity entity) {
+        Log.d(TAG, "Updating entity with id: " + entity.getId());
+        ContentValues cv = entityToContentValues(entity);
+        return db.update(JIGSAW_TABLE, cv, ID_SELECTION,
+                getIdArguments(entity.getId()));
+    }
+
+    @Override
+    public int delete(Long id) {
+        Log.d(TAG, "Deleting entity with id: " + id);
+        return db.delete(JIGSAW_TABLE, ID_SELECTION, getIdArguments(id));
+    }
+
+    @Override
+    public List<ImageEntity> findAllOriginals() {
+        Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS,
+                "original is null",
+                null, null, null, null);
+
+        return getAllFromCursor(cursor);
+    }
+
 
     private ImageEntity getEntityFromCursor(Cursor cursor) {
         ImageEntity entity = null;
@@ -105,17 +122,14 @@ public class ImageDaoImpl implements ImageDao {
         return entity;
     }
 
-    @Override
-    public int update(ImageEntity entity) {
-        Log.d(TAG, "Updating entity with id: " + entity.getId());
-        ContentValues cv = entityToContentValues(entity);
-        return db.update(JIGSAW_TABLE, cv, ID_SELECTION,
-                getIdArguments(entity.getId()));
-    }
-
-    @Override
-    public int delete(Long id) {
-        Log.d(TAG, "Deleting entity with id: " + id);
-        return db.delete(JIGSAW_TABLE, ID_SELECTION, getIdArguments(id));
+    private List<ImageEntity> getAllFromCursor(Cursor cursor) {
+        List<ImageEntity> entities = new ArrayList<>();
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                ImageEntity entity = getEntity(cursor);
+                entities.add(entity);
+            }
+        }
+        return entities;
     }
 }

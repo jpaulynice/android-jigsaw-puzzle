@@ -17,7 +17,6 @@ public class JigsawActivityTest extends
 
     public JigsawActivityTest() {
         super(JigsawActivity.class);
-
     }
 
     @Override

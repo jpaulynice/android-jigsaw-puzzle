@@ -49,4 +49,12 @@ public interface ImageDao {
      * @return 1 for success and 0 for fail
      */
     public int delete(Long id);
+
+    /**
+     * Find all the original images for history
+     * *
+     *
+     * @return list of images user created
+     */
+    public List<ImageEntity> findAllOriginals();
 }

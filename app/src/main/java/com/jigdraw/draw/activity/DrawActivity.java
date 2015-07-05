@@ -1,6 +1,5 @@
 package com.jigdraw.draw.activity;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
@@ -8,7 +7,6 @@ import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
@@ -31,7 +29,7 @@ import static com.jigdraw.draw.util.ToastUtil.shortToast;
  *
  * @author Jay Paulynice
  */
-public class DrawActivity extends Activity implements OnClickListener {
+public class DrawActivity extends BaseJigsawActivity implements OnClickListener {
     /** Class name for logging */
     private static final String TAG = "DrawActivity";
 
@@ -45,12 +43,6 @@ public class DrawActivity extends Activity implements OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
     }
 
     @Override
@@ -116,7 +108,7 @@ public class DrawActivity extends Activity implements OnClickListener {
 
     /**
      * Create jigsaw and give user feedback
-     * 
+     *
      * @param which the selected option in dialog
      */
     public void createJigsaw(int which) {
@@ -246,8 +238,8 @@ public class DrawActivity extends Activity implements OnClickListener {
     private void initViews() {
         drawView = (DrawingView) findViewById(R.id.drawing);
         drawView.setBrushSize(getResources().getInteger(R.integer.medium_size));
-        
-        for(View view: getMenuButtons()){
+
+        for (View view : getMenuButtons()) {
             view.setOnClickListener(this);
         }
     }
@@ -256,7 +248,7 @@ public class DrawActivity extends Activity implements OnClickListener {
      * Initialize the buttons
      */
     public List<View> getMenuButtons() {
-       return Arrays.asList(findViewById(R.id.erase_btn), 
-               findViewById(R.id.new_btn), findViewById(R.id.save_btn));
+        return Arrays.asList(findViewById(R.id.erase_btn),
+                findViewById(R.id.new_btn), findViewById(R.id.save_btn));
     }
 }
