@@ -40,8 +40,8 @@ public class JigsawHistoryActivity extends ListActivity {
         JigsawHistoryLoader task = new JigsawHistoryLoader
                 (getApplicationContext(), lv);
         task.execute();
-        shortToast(getApplicationContext(), "Loading drawing history...");
 
+        shortToast(getApplicationContext(), "Loading drawing history...");
         lv.setLongClickable(true);
 
         lv.setOnItemLongClickListener(new OnItemLongClickListener() {
