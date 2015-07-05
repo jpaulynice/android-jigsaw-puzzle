@@ -28,16 +28,16 @@ public class JigsawListAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView view;
-        Bitmap d = tiles.get(position);
         if (convertView == null) {
+            Bitmap d = tiles.get(position);
             view = new ImageView(context);
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            view.setLayoutParams(new ListView.LayoutParams(d.getWidth(), d
-                    .getHeight()));
+            view.setLayoutParams(new ListView.LayoutParams(d.getWidth() / 10, d
+                    .getHeight() / 10));
+            view.setImageDrawable(new BitmapDrawable(context.getResources(), d));
         } else {
             view = (ImageView) convertView;
         }
-        view.setImageDrawable(new BitmapDrawable(context.getResources(), d));
 
         return view;
     }

@@ -1,5 +1,6 @@
 package com.jigdraw.draw.activity;
 
+import android.app.ActionBar;
 import android.app.ListActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -21,6 +22,10 @@ public class JigsawHistoryActivity extends ListActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         init();
+        ActionBar bar = getActionBar();
+        if (bar != null) {
+            bar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override

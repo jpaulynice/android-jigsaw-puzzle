@@ -100,7 +100,6 @@ public class ImageDaoImpl implements ImageDao {
         ImageEntity entity = null;
         if (cursor != null && cursor.moveToFirst()) {
             entity = getEntity(cursor);
-            Log.d(TAG, "image entity found with name: " + entity.getName());
             cursor.close();
         }
         return entity;
@@ -115,6 +114,7 @@ public class ImageDaoImpl implements ImageDao {
                 (ORIGINAL_COLUMN));
         Long id = cursor.getLong(cursor.getColumnIndex(ID_COLUMN));
 
+        Log.d(TAG, "image entity found with name: " + name);
         ImageEntity entity = new ImageEntity(base64ToBitmap(base64String),
                 name, desc, originalId);
         entity.setId(id);
@@ -129,6 +129,7 @@ public class ImageDaoImpl implements ImageDao {
                 ImageEntity entity = getEntity(cursor);
                 entities.add(entity);
             }
+            cursor.close();
         }
         return entities;
     }

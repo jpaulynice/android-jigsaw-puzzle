@@ -1,5 +1,6 @@
 package com.jigdraw.draw.activity;
 
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
@@ -43,6 +44,10 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         init();
+        ActionBar bar = getActionBar();
+        if (bar != null) {
+            bar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 
     @Override

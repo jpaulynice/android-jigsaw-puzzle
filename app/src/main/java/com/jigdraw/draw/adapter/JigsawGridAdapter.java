@@ -28,17 +28,18 @@ public class JigsawGridAdapter extends BaseGridAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView view;
-        Bitmap d = tiles.get(position);
         if (convertView == null) {
+            Bitmap d = tiles.get(position);
+
             view = new ImageView(context);
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);
             view.setLayoutParams(new GridView.LayoutParams(d.getWidth(), d
                     .getHeight()));
             view.setPadding(1, 1, 1, 1);
+            view.setImageDrawable(new BitmapDrawable(context.getResources(), d));
         } else {
             view = (ImageView) convertView;
         }
-        view.setImageDrawable(new BitmapDrawable(context.getResources(), d));
 
         return view;
     }
