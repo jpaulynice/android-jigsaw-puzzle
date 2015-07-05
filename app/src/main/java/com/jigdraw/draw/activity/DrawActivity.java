@@ -216,8 +216,6 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      */
     private void init() {
         setContentView(R.layout.activity_main);
-        initMenuBar();
-
         initViews();
         initLayout();
         setBrushColor(drawView.getPaintColor());
