@@ -32,8 +32,8 @@ public class JigsawListAdapter extends BaseAdapter {
             Bitmap d = tiles.get(position);
             view = new ImageView(context);
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);
-            view.setLayoutParams(new ListView.LayoutParams(d.getWidth() / 10, d
-                    .getHeight() / 10));
+            view.setLayoutParams(new ListView.LayoutParams(d.getWidth(), d
+                    .getHeight()));
             view.setImageDrawable(new BitmapDrawable(context.getResources(), d));
         } else {
             view = (ImageView) convertView;

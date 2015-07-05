@@ -3,6 +3,7 @@ package com.jigdraw.draw.activity;
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -17,15 +18,14 @@ import com.jigdraw.draw.tasks.JigsawHistoryLoader;
 import static com.jigdraw.draw.util.ToastUtil.shortToast;
 
 public class JigsawHistoryActivity extends ListActivity {
+    /** Class name for logging */
+    private static final String TAG = "JigsawHistoryActivity";
+    
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         init();
-        ActionBar bar = getActionBar();
-        if (bar != null) {
-            bar.setDisplayHomeAsUpEnabled(true);
-        }
     }
 
     @Override
@@ -36,32 +36,41 @@ public class JigsawHistoryActivity extends ListActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //TODO: implement
+        Log.d(TAG, "menu item selected: " + item.getItemId());
         return true;
     }
 
     public void init() {
+        initMenuBar();
+
+        Log.d(TAG, "initializing history list view...");
         ListView lv = getListView();
         JigsawHistoryLoader task = new JigsawHistoryLoader
                 (getApplicationContext(), lv);
-        task.execute();
 
         shortToast(getApplicationContext(), "Loading drawing history...");
-        lv.setLongClickable(true);
+        task.execute();
 
+        lv.setLongClickable(true);
         lv.setOnItemLongClickListener(new OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            final int pos, long id) {
                 return true;
             }
         });
-
         lv.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,
                                     final int pos, long id) {
-                //TODO: implement
+                Log.d(TAG, "clicked element with id: " + id);
             }
         });
+    }
+
+    private void initMenuBar() {
+        ActionBar bar = getActionBar();
+        if (bar != null) {
+            bar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 }

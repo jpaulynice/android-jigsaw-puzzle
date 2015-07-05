@@ -95,7 +95,6 @@ public class ImageDaoImpl implements ImageDao {
         return getAllFromCursor(cursor);
     }
 
-
     private ImageEntity getEntityFromCursor(Cursor cursor) {
         ImageEntity entity = null;
         if (cursor != null && cursor.moveToFirst()) {

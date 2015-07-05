@@ -1,5 +1,6 @@
 package com.jigdraw.draw.activity;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
@@ -23,5 +24,12 @@ public abstract class BaseJigsawActivity extends Activity {
                 return true;
         }
         return false;
+    }
+
+    public void initMenuBar() {
+        ActionBar bar = getActionBar();
+        if (bar != null) {
+            bar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 }

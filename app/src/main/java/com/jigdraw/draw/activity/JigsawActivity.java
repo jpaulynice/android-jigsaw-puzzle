@@ -1,6 +1,5 @@
 package com.jigdraw.draw.activity;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,14 +24,12 @@ public class JigsawActivity extends BaseJigsawActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jigsaw);
         initGridView();
-
-        ActionBar bar = getActionBar();
-        if (bar != null) {
-            bar.setDisplayHomeAsUpEnabled(true);
-        }
     }
 
     private void initGridView() {
+        initMenuBar();
+
+        Log.d(TAG, "initializing jigsaw grid view");
         final JigsawGridView gridView = (JigsawGridView) findViewById(R.id
                 .jigsaw_grid);
         
