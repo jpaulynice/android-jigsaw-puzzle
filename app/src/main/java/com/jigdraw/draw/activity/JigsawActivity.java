@@ -32,7 +32,7 @@ public class JigsawActivity extends BaseJigsawActivity {
         Log.d(TAG, "initializing jigsaw grid view");
         final JigsawGridView gridView = (JigsawGridView) findViewById(R.id
                 .jigsaw_grid);
-        
+
         JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
         LongParceable longParceable = getIntent().getExtras().getParcelable(
                 "originalId");

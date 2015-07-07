@@ -87,6 +87,79 @@ public class JigsawGridView extends GridView {
     };
 
     private View mMobileView;
+    private OnScrollListener mScrollListener = new OnScrollListener() {
+
+        private int mPreviousFirstVisibleItem = -1;
+        private int mPreviousVisibleItemCount = -1;
+        private int mCurrentFirstVisibleItem;
+        private int mCurrentVisibleItemCount;
+        private int mCurrentScrollState;
+
+        @Override
+        public void onScrollStateChanged(AbsListView view, int scrollState) {
+            mCurrentScrollState = scrollState;
+            mScrollState = scrollState;
+            isScrollCompleted();
+            if (mUserScrollListener != null) {
+                mUserScrollListener.onScrollStateChanged(view, scrollState);
+            }
+        }
+
+        public void onScroll(AbsListView view, int firstVisibleItem,
+                             int visibleItemCount, int totalItemCount) {
+            mCurrentFirstVisibleItem = firstVisibleItem;
+            mCurrentVisibleItemCount = visibleItemCount;
+
+            mPreviousFirstVisibleItem = (mPreviousFirstVisibleItem == -1) ? mCurrentFirstVisibleItem
+                    : mPreviousFirstVisibleItem;
+            mPreviousVisibleItemCount = (mPreviousVisibleItemCount == -1) ? mCurrentVisibleItemCount
+                    : mPreviousVisibleItemCount;
+
+            checkAndHandleFirstVisibleCellChange();
+            checkAndHandleLastVisibleCellChange();
+
+            mPreviousFirstVisibleItem = mCurrentFirstVisibleItem;
+            mPreviousVisibleItemCount = mCurrentVisibleItemCount;
+
+            if (mUserScrollListener != null) {
+                mUserScrollListener.onScroll(view, firstVisibleItem,
+                        visibleItemCount, totalItemCount);
+            }
+        }
+
+        private void isScrollCompleted() {
+            if (mCurrentVisibleItemCount > 0
+                    && mCurrentScrollState == SCROLL_STATE_IDLE) {
+                if (mCellIsMobile && mIsMobileScrolling) {
+                    handleMobileCellScroll();
+                } else if (mIsWaitingForScrollFinish) {
+                    touchEventsEnded();
+                }
+            }
+        }
+
+        public void checkAndHandleFirstVisibleCellChange() {
+            if (mCurrentFirstVisibleItem != mPreviousFirstVisibleItem) {
+                if (mCellIsMobile && mMobileItemId != INVALID_ID) {
+                    updateNeighborViewsForId(mMobileItemId);
+                    handleCellSwitch();
+                }
+            }
+        }
+
+        public void checkAndHandleLastVisibleCellChange() {
+            int currentLastVisibleItem = mCurrentFirstVisibleItem
+                    + mCurrentVisibleItemCount;
+            int previousLastVisibleItem = mPreviousFirstVisibleItem
+                    + mPreviousVisibleItemCount;
+            if (currentLastVisibleItem != previousLastVisibleItem) {
+                if (mCellIsMobile && mMobileItemId != INVALID_ID) {
+                    updateNeighborViewsForId(mMobileItemId);
+                    handleCellSwitch();
+                }
+            }
+        }
+    };
 
     public JigsawGridView(Context context) {
         super(context);
@@ -103,9 +176,98 @@ public class JigsawGridView extends GridView {
         init(context);
     }
 
+    public static boolean isPreLollipop() {
+        return Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP;
+    }
+
     @Override
     public void setOnScrollListener(OnScrollListener scrollListener) {
         this.mUserScrollListener = scrollListener;
+    }
+
+    @Override
+    protected void dispatchDraw(@NonNull Canvas canvas) {
+        super.dispatchDraw(canvas);
+        if (mHoverCell != null) {
+            mHoverCell.draw(canvas);
+        }
+    }
+
+    @Override
+    public boolean onTouchEvent(@NonNull MotionEvent event) {
+        switch (event.getAction() & MotionEvent.ACTION_MASK) {
+            case MotionEvent.ACTION_DOWN:
+                mDownX = (int) event.getX();
+                mDownY = (int) event.getY();
+                mActivePointerId = event.getPointerId(0);
+                if (mIsEditMode && isEnabled()) {
+                    layoutChildren();
+                    int position = pointToPosition(mDownX, mDownY);
+                    startDragAtPosition(position);
+                } else if (!isEnabled()) {
+                    return false;
+                }
+
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+                if (mActivePointerId == INVALID_ID) {
+                    break;
+                }
+
+                int pointerIndex = event.findPointerIndex(mActivePointerId);
+
+                mLastEventY = (int) event.getY(pointerIndex);
+                mLastEventX = (int) event.getX(pointerIndex);
+                int deltaY = mLastEventY - mDownY;
+                int deltaX = mLastEventX - mDownX;
+
+                if (mCellIsMobile) {
+                    mHoverCellCurrentBounds.offsetTo(mHoverCellOriginalBounds.left
+                            + deltaX + mTotalOffsetX, mHoverCellOriginalBounds.top
+                            + deltaY + mTotalOffsetY);
+                    mHoverCell.setBounds(mHoverCellCurrentBounds);
+                    invalidate();
+                    handleCellSwitch();
+                    mIsMobileScrolling = false;
+                    handleMobileCellScroll();
+                    return false;
+                }
+                break;
+
+            case MotionEvent.ACTION_UP:
+                touchEventsEnded();
+
+                if (mHoverCell != null) {
+                    if (mDropListener != null) {
+                        mDropListener.onActionDrop();
+                    }
+                }
+                break;
+
+            case MotionEvent.ACTION_CANCEL:
+                touchEventsCancelled();
+
+                if (mHoverCell != null) {
+                    if (mDropListener != null) {
+                        mDropListener.onActionDrop();
+                    }
+                }
+                break;
+
+            case MotionEvent.ACTION_POINTER_UP:
+                pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+                final int pointerId = event.getPointerId(pointerIndex);
+                if (pointerId == mActivePointerId) {
+                    touchEventsEnded();
+                }
+                break;
+
+            default:
+                break;
+        }
+
+        return super.onTouchEvent(event);
     }
 
     public void setOnDropListener(OnDropListener dropListener) {
@@ -226,83 +388,6 @@ public class JigsawGridView extends GridView {
         return null;
     }
 
-    @Override
-    public boolean onTouchEvent(@NonNull MotionEvent event) {
-        switch (event.getAction() & MotionEvent.ACTION_MASK) {
-            case MotionEvent.ACTION_DOWN:
-                mDownX = (int) event.getX();
-                mDownY = (int) event.getY();
-                mActivePointerId = event.getPointerId(0);
-                if (mIsEditMode && isEnabled()) {
-                    layoutChildren();
-                    int position = pointToPosition(mDownX, mDownY);
-                    startDragAtPosition(position);
-                } else if (!isEnabled()) {
-                    return false;
-                }
-
-                break;
-
-            case MotionEvent.ACTION_MOVE:
-                if (mActivePointerId == INVALID_ID) {
-                    break;
-                }
-
-                int pointerIndex = event.findPointerIndex(mActivePointerId);
-
-                mLastEventY = (int) event.getY(pointerIndex);
-                mLastEventX = (int) event.getX(pointerIndex);
-                int deltaY = mLastEventY - mDownY;
-                int deltaX = mLastEventX - mDownX;
-
-                if (mCellIsMobile) {
-                    mHoverCellCurrentBounds.offsetTo(mHoverCellOriginalBounds.left
-                            + deltaX + mTotalOffsetX, mHoverCellOriginalBounds.top
-                            + deltaY + mTotalOffsetY);
-                    mHoverCell.setBounds(mHoverCellCurrentBounds);
-                    invalidate();
-                    handleCellSwitch();
-                    mIsMobileScrolling = false;
-                    handleMobileCellScroll();
-                    return false;
-                }
-                break;
-
-            case MotionEvent.ACTION_UP:
-                touchEventsEnded();
-
-                if (mHoverCell != null) {
-                    if (mDropListener != null) {
-                        mDropListener.onActionDrop();
-                    }
-                }
-                break;
-
-            case MotionEvent.ACTION_CANCEL:
-                touchEventsCancelled();
-
-                if (mHoverCell != null) {
-                    if (mDropListener != null) {
-                        mDropListener.onActionDrop();
-                    }
-                }
-                break;
-
-            case MotionEvent.ACTION_POINTER_UP:
-                pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
-                final int pointerId = event.getPointerId(pointerIndex);
-                if (pointerId == mActivePointerId) {
-                    touchEventsEnded();
-                }
-                break;
-
-            default:
-                break;
-        }
-
-        return super.onTouchEvent(event);
-    }
-
     private void startDragAtPosition(int position) {
         mTotalOffsetY = 0;
         mTotalOffsetX = 0;
@@ -405,17 +490,19 @@ public class JigsawGridView extends GridView {
                 });
         hoverViewAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
-            public void onAnimationStart(Animator animation) {
-                mHoverAnimation = true;
-                updateEnableState();
-            }
-
-            @Override
             public void onAnimationEnd(Animator animation) {
                 mHoverAnimation = false;
                 updateEnableState();
                 reset(mobileView);
             }
+
+            @Override
+            public void onAnimationStart(Animator animation) {
+                mHoverAnimation = true;
+                updateEnableState();
+            }
+
+
         });
         hoverViewAnimator.start();
     }
@@ -443,10 +530,6 @@ public class JigsawGridView extends GridView {
 
     private boolean isPostHoneycomb() {
         return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
-    }
-
-    public static boolean isPreLollipop() {
-        return Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP;
     }
 
     private void touchEventsCancelled() {
@@ -545,128 +628,6 @@ public class JigsawGridView extends GridView {
 
             switchCellAnimator.animateSwitchCell(originalPosition,
                     targetPosition);
-        }
-    }
-
-    private interface SwitchCellAnimator {
-        void animateSwitchCell(final int originalPosition,
-                               final int targetPosition);
-    }
-
-    private class PreHoneycombCellAnimator implements SwitchCellAnimator {
-        private int mDeltaY;
-        private int mDeltaX;
-
-        public PreHoneycombCellAnimator(int deltaX, int deltaY) {
-            mDeltaX = deltaX;
-            mDeltaY = deltaY;
-        }
-
-        @Override
-        public void animateSwitchCell(int originalPosition, int targetPosition) {
-            mTotalOffsetY += mDeltaY;
-            mTotalOffsetX += mDeltaX;
-        }
-    }
-
-    private class KitKatSwitchCellAnimator implements SwitchCellAnimator {
-
-        private int mDeltaY;
-        private int mDeltaX;
-
-        public KitKatSwitchCellAnimator(int deltaX, int deltaY) {
-            mDeltaX = deltaX;
-            mDeltaY = deltaY;
-        }
-
-        @Override
-        public void animateSwitchCell(final int originalPosition,
-                                      final int targetPosition) {
-            assert mMobileView != null;
-            getViewTreeObserver().addOnPreDrawListener(
-                    new AnimateSwitchViewOnPreDrawListener(mMobileView,
-                            originalPosition, targetPosition));
-            mMobileView = getViewForId(mMobileItemId);
-        }
-
-        private class AnimateSwitchViewOnPreDrawListener implements
-                ViewTreeObserver.OnPreDrawListener {
-
-            private final View mPreviousMobileView;
-            private final int mOriginalPosition;
-            private final int mTargetPosition;
-
-            AnimateSwitchViewOnPreDrawListener(final View previousMobileView,
-                                               final int originalPosition, final int targetPosition) {
-                mPreviousMobileView = previousMobileView;
-                mOriginalPosition = originalPosition;
-                mTargetPosition = targetPosition;
-            }
-
-            @Override
-            public boolean onPreDraw() {
-                getViewTreeObserver().removeOnPreDrawListener(this);
-
-                mTotalOffsetY += mDeltaY;
-                mTotalOffsetX += mDeltaX;
-
-                animateReorder(mOriginalPosition, mTargetPosition);
-
-                mPreviousMobileView.setVisibility(View.VISIBLE);
-
-                if (mMobileView != null) {
-                    mMobileView.setVisibility(View.INVISIBLE);
-                }
-                return true;
-            }
-        }
-    }
-
-    private class LSwitchCellAnimator implements SwitchCellAnimator {
-
-        private int mDeltaY;
-        private int mDeltaX;
-
-        public LSwitchCellAnimator(int deltaX, int deltaY) {
-            mDeltaX = deltaX;
-            mDeltaY = deltaY;
-        }
-
-        @Override
-        public void animateSwitchCell(final int originalPosition,
-                                      final int targetPosition) {
-            getViewTreeObserver().addOnPreDrawListener(
-                    new AnimateSwitchViewOnPreDrawListener(originalPosition,
-                            targetPosition));
-        }
-
-        private class AnimateSwitchViewOnPreDrawListener implements
-                ViewTreeObserver.OnPreDrawListener {
-            private final int mOriginalPosition;
-            private final int mTargetPosition;
-
-            AnimateSwitchViewOnPreDrawListener(final int originalPosition,
-                                               final int targetPosition) {
-                mOriginalPosition = originalPosition;
-                mTargetPosition = targetPosition;
-            }
-
-            @Override
-            public boolean onPreDraw() {
-                getViewTreeObserver().removeOnPreDrawListener(this);
-
-                mTotalOffsetY += mDeltaY;
-                mTotalOffsetX += mDeltaX;
-
-                animateReorder(mOriginalPosition, mTargetPosition);
-
-                assert mMobileView != null;
-                mMobileView.setVisibility(View.VISIBLE);
-                mMobileView = getViewForId(mMobileItemId);
-                assert mMobileView != null;
-                mMobileView.setVisibility(View.INVISIBLE);
-                return true;
-            }
         }
     }
 
@@ -790,12 +751,9 @@ public class JigsawGridView extends GridView {
         return animSetXY;
     }
 
-    @Override
-    protected void dispatchDraw(@NonNull Canvas canvas) {
-        super.dispatchDraw(canvas);
-        if (mHoverCell != null) {
-            mHoverCell.draw(canvas);
-        }
+    private interface SwitchCellAnimator {
+        void animateSwitchCell(final int originalPosition,
+                               final int targetPosition);
     }
 
     public interface OnDropListener {
@@ -803,83 +761,129 @@ public class JigsawGridView extends GridView {
     }
 
     public interface OnDragListener {
+        void onDragStarted(int position);
 
-        public void onDragStarted(int position);
-
-        public void onDragPositionsChanged(int oldPosition, int newPosition);
+        void onDragPositionsChanged(int oldPosition, int newPosition);
     }
 
-    private OnScrollListener mScrollListener = new OnScrollListener() {
+    private class PreHoneycombCellAnimator implements SwitchCellAnimator {
+        private int mDeltaY;
+        private int mDeltaX;
 
-        private int mPreviousFirstVisibleItem = -1;
-        private int mPreviousVisibleItemCount = -1;
-        private int mCurrentFirstVisibleItem;
-        private int mCurrentVisibleItemCount;
-        private int mCurrentScrollState;
+        public PreHoneycombCellAnimator(int deltaX, int deltaY) {
+            mDeltaX = deltaX;
+            mDeltaY = deltaY;
+        }
 
-        public void onScroll(AbsListView view, int firstVisibleItem,
-                             int visibleItemCount, int totalItemCount) {
-            mCurrentFirstVisibleItem = firstVisibleItem;
-            mCurrentVisibleItemCount = visibleItemCount;
+        @Override
+        public void animateSwitchCell(int originalPosition, int targetPosition) {
+            mTotalOffsetY += mDeltaY;
+            mTotalOffsetX += mDeltaX;
+        }
+    }
 
-            mPreviousFirstVisibleItem = (mPreviousFirstVisibleItem == -1) ? mCurrentFirstVisibleItem
-                    : mPreviousFirstVisibleItem;
-            mPreviousVisibleItemCount = (mPreviousVisibleItemCount == -1) ? mCurrentVisibleItemCount
-                    : mPreviousVisibleItemCount;
+    private class KitKatSwitchCellAnimator implements SwitchCellAnimator {
 
-            checkAndHandleFirstVisibleCellChange();
-            checkAndHandleLastVisibleCellChange();
+        private int mDeltaY;
+        private int mDeltaX;
 
-            mPreviousFirstVisibleItem = mCurrentFirstVisibleItem;
-            mPreviousVisibleItemCount = mCurrentVisibleItemCount;
+        public KitKatSwitchCellAnimator(int deltaX, int deltaY) {
+            mDeltaX = deltaX;
+            mDeltaY = deltaY;
+        }
 
-            if (mUserScrollListener != null) {
-                mUserScrollListener.onScroll(view, firstVisibleItem,
-                        visibleItemCount, totalItemCount);
+        private class AnimateSwitchViewOnPreDrawListener implements
+                ViewTreeObserver.OnPreDrawListener {
+
+            private final View mPreviousMobileView;
+            private final int mOriginalPosition;
+            private final int mTargetPosition;
+
+            AnimateSwitchViewOnPreDrawListener(final View previousMobileView,
+                                               final int originalPosition, final int targetPosition) {
+                mPreviousMobileView = previousMobileView;
+                mOriginalPosition = originalPosition;
+                mTargetPosition = targetPosition;
+            }
+
+            @Override
+            public boolean onPreDraw() {
+                getViewTreeObserver().removeOnPreDrawListener(this);
+
+                mTotalOffsetY += mDeltaY;
+                mTotalOffsetX += mDeltaX;
+
+                animateReorder(mOriginalPosition, mTargetPosition);
+
+                mPreviousMobileView.setVisibility(View.VISIBLE);
+
+                if (mMobileView != null) {
+                    mMobileView.setVisibility(View.INVISIBLE);
+                }
+                return true;
             }
         }
 
         @Override
-        public void onScrollStateChanged(AbsListView view, int scrollState) {
-            mCurrentScrollState = scrollState;
-            mScrollState = scrollState;
-            isScrollCompleted();
-            if (mUserScrollListener != null) {
-                mUserScrollListener.onScrollStateChanged(view, scrollState);
+        public void animateSwitchCell(final int originalPosition,
+                                      final int targetPosition) {
+            assert mMobileView != null;
+            getViewTreeObserver().addOnPreDrawListener(
+                    new AnimateSwitchViewOnPreDrawListener(mMobileView,
+                            originalPosition, targetPosition));
+            mMobileView = getViewForId(mMobileItemId);
+        }
+
+
+    }
+
+    private class LSwitchCellAnimator implements SwitchCellAnimator {
+
+        private int mDeltaY;
+        private int mDeltaX;
+
+        public LSwitchCellAnimator(int deltaX, int deltaY) {
+            mDeltaX = deltaX;
+            mDeltaY = deltaY;
+        }
+
+        private class AnimateSwitchViewOnPreDrawListener implements
+                ViewTreeObserver.OnPreDrawListener {
+            private final int mOriginalPosition;
+            private final int mTargetPosition;
+
+            AnimateSwitchViewOnPreDrawListener(final int originalPosition,
+                                               final int targetPosition) {
+                mOriginalPosition = originalPosition;
+                mTargetPosition = targetPosition;
+            }
+
+            @Override
+            public boolean onPreDraw() {
+                getViewTreeObserver().removeOnPreDrawListener(this);
+
+                mTotalOffsetY += mDeltaY;
+                mTotalOffsetX += mDeltaX;
+
+                animateReorder(mOriginalPosition, mTargetPosition);
+
+                assert mMobileView != null;
+                mMobileView.setVisibility(View.VISIBLE);
+                mMobileView = getViewForId(mMobileItemId);
+                assert mMobileView != null;
+                mMobileView.setVisibility(View.INVISIBLE);
+                return true;
             }
         }
 
-        private void isScrollCompleted() {
-            if (mCurrentVisibleItemCount > 0
-                    && mCurrentScrollState == SCROLL_STATE_IDLE) {
-                if (mCellIsMobile && mIsMobileScrolling) {
-                    handleMobileCellScroll();
-                } else if (mIsWaitingForScrollFinish) {
-                    touchEventsEnded();
-                }
-            }
+        @Override
+        public void animateSwitchCell(final int originalPosition,
+                                      final int targetPosition) {
+            getViewTreeObserver().addOnPreDrawListener(
+                    new AnimateSwitchViewOnPreDrawListener(originalPosition,
+                            targetPosition));
         }
 
-        public void checkAndHandleFirstVisibleCellChange() {
-            if (mCurrentFirstVisibleItem != mPreviousFirstVisibleItem) {
-                if (mCellIsMobile && mMobileItemId != INVALID_ID) {
-                    updateNeighborViewsForId(mMobileItemId);
-                    handleCellSwitch();
-                }
-            }
-        }
 
-        public void checkAndHandleLastVisibleCellChange() {
-            int currentLastVisibleItem = mCurrentFirstVisibleItem
-                    + mCurrentVisibleItemCount;
-            int previousLastVisibleItem = mPreviousFirstVisibleItem
-                    + mPreviousVisibleItemCount;
-            if (currentLastVisibleItem != previousLastVisibleItem) {
-                if (mCellIsMobile && mMobileItemId != INVALID_ID) {
-                    updateNeighborViewsForId(mMobileItemId);
-                    handleCellSwitch();
-                }
-            }
-        }
-    };
+    }
 }

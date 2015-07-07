@@ -24,8 +24,8 @@ public class ImageEntity {
      * Create new image entity given the parameters
      *
      * @param image the image as bitmap
-     * @param name  the name
-     * @param desc  the description
+     * @param name the name
+     * @param desc the description
      */
     public ImageEntity(Bitmap image, String name, String desc, Long originalId) {
         this.image = image;
@@ -46,28 +46,28 @@ public class ImageEntity {
         return image;
     }
 
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
     public String getDesc() {
         return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc;
     }
 
     public String getName() {
         return name;
     }
 
-    public Long getOriginalId() {
-        return originalId;
-    }
-
-    public void setImage(Bitmap image) {
-        this.image = image;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc;
+    public Long getOriginalId() {
+        return originalId;
     }
 
     public void setOriginalId(Long originalId) {

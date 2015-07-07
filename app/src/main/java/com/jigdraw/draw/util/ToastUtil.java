@@ -5,7 +5,6 @@ import android.widget.Toast;
 
 /**
  * Utils for toasting messages
- * *
  *
  * @author Jay Paulynice
  */

@@ -36,7 +36,7 @@ public class DrawingView extends View {
      * default parameters.
      *
      * @param context the context
-     * @param attrs   the attributes
+     * @param attrs the attributes
      */
     public DrawingView(Context context, AttributeSet attrs) {
         super(context, attrs);

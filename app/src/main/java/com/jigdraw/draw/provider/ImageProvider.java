@@ -28,6 +28,7 @@ public class ImageProvider extends ContentProvider {
     static final int IMAGES = 1;
     static final int IMAGES_ID = 2;
     static final UriMatcher uriMatcher;
+    private static HashMap<String, String> map;
 
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -35,7 +36,6 @@ public class ImageProvider extends ContentProvider {
         uriMatcher.addURI(PROVIDER_NAME, "jisaw_images/#", IMAGES_ID);
     }
 
-    private static HashMap<String, String> map;
     private SQLiteDatabase db;
 
     @Override
@@ -70,6 +70,18 @@ public class ImageProvider extends ContentProvider {
     }
 
     @Override
+    public String getType(Uri uri) {
+        switch (uriMatcher.match(uri)) {
+            case IMAGES:
+                return "vnd.android.cursor.dir/vnd.example.jigsaw_images";
+            case IMAGES_ID:
+                return "vnd.android.cursor.item/vnd.example.jigsaw_images";
+            default:
+                throw new IllegalArgumentException("Unsupported URI: " + uri);
+        }
+    }
+
+    @Override
     public Uri insert(Uri uri, ContentValues values) {
         long row = db.insert(JIGSAW_TABLE, "", values);
 
@@ -79,31 +91,6 @@ public class ImageProvider extends ContentProvider {
             return newUri;
         }
         throw new SQLException("Fail to add a new record into " + uri);
-    }
-
-    @Override
-    public int update(Uri uri, ContentValues values, String selection,
-                      String[] selectionArgs) {
-        int count;
-
-        switch (uriMatcher.match(uri)) {
-            case IMAGES:
-                count = db.update(JIGSAW_TABLE, values, selection, selectionArgs);
-                break;
-            case IMAGES_ID:
-                count = db.update(
-                        JIGSAW_TABLE,
-                        values,
-                        ID_SELECTION
-                                + uri.getLastPathSegment()
-                                + (!TextUtils.isEmpty(selection) ? " AND ("
-                                + selection + ')' : ""), selectionArgs);
-                break;
-            default:
-                throw new IllegalArgumentException("Unsupported URI " + uri);
-        }
-        getContext().getContentResolver().notifyChange(uri, null);
-        return count;
     }
 
     @Override
@@ -131,14 +118,27 @@ public class ImageProvider extends ContentProvider {
     }
 
     @Override
-    public String getType(Uri uri) {
+    public int update(Uri uri, ContentValues values, String selection,
+                      String[] selectionArgs) {
+        int count;
+
         switch (uriMatcher.match(uri)) {
             case IMAGES:
-                return "vnd.android.cursor.dir/vnd.example.jigsaw_images";
+                count = db.update(JIGSAW_TABLE, values, selection, selectionArgs);
+                break;
             case IMAGES_ID:
-                return "vnd.android.cursor.item/vnd.example.jigsaw_images";
+                count = db.update(
+                        JIGSAW_TABLE,
+                        values,
+                        ID_SELECTION
+                                + uri.getLastPathSegment()
+                                + (!TextUtils.isEmpty(selection) ? " AND ("
+                                + selection + ')' : ""), selectionArgs);
+                break;
             default:
-                throw new IllegalArgumentException("Unsupported URI: " + uri);
+                throw new IllegalArgumentException("Unsupported URI " + uri);
         }
+        getContext().getContentResolver().notifyChange(uri, null);
+        return count;
     }
 }

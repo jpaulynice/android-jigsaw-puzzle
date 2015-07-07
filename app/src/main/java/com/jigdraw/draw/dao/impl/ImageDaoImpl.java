@@ -23,6 +23,7 @@ import static com.jigdraw.draw.util.DBUtil.JIGSAW_TABLE;
 import static com.jigdraw.draw.util.DBUtil.NAME_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.ORIGINAL_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.ORIGINAL_SELECTION;
+import static com.jigdraw.draw.util.DBUtil.ORIGINAL_SELECTION_NULL;
 import static com.jigdraw.draw.util.DBUtil.getIdArguments;
 import static com.jigdraw.draw.util.EntityUtil.entityToContentValues;
 
@@ -58,18 +59,18 @@ public class ImageDaoImpl implements ImageDao {
     }
 
     @Override
-    public List<ImageEntity> findTiles(Long id) {
-        Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ORIGINAL_SELECTION,
-                getIdArguments(id), null, null, null);
-        return getAllFromCursor(cursor);
-    }
-
-    @Override
     public ImageEntity find(Long id) {
         Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ID_SELECTION,
                 getIdArguments(id), null, null, null);
 
         return getEntityFromCursor(cursor);
+    }
+
+    @Override
+    public List<ImageEntity> findTiles(Long id) {
+        Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ORIGINAL_SELECTION,
+                getIdArguments(id), null, null, null);
+        return getAllFromCursor(cursor);
     }
 
     @Override
@@ -89,7 +90,7 @@ public class ImageDaoImpl implements ImageDao {
     @Override
     public List<ImageEntity> findAllOriginals() {
         Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS,
-                "original is null",
+                ORIGINAL_SELECTION_NULL,
                 null, null, null, null);
 
         return getAllFromCursor(cursor);

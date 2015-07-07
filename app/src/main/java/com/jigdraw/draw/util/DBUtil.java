@@ -15,9 +15,6 @@ public class DBUtil {
     public static final String DESC_COLUMN = "desc";
     public static final String ORIGINAL_COLUMN = "original";
 
-    public static String[] ALL_COLUMNS = new String[]{ID_COLUMN, NAME_COLUMN,
-            IMAGE_COLUMN, DESC_COLUMN, ORIGINAL_COLUMN};
-
     /** create jigsaw_images table */
     public static final String CREATE_JIGSAW_TABLE = "create table if not"
             + " exists " + JIGSAW_TABLE + " ("
@@ -32,7 +29,16 @@ public class DBUtil {
 
     /** for querying like in prepared statements */
     public static final String ID_SELECTION = "id = ?";
+
+    /** original image selection */
     public static final String ORIGINAL_SELECTION = "original = ?";
+
+    /** original image selection is null */
+    public static final String ORIGINAL_SELECTION_NULL = "original is null";
+
+    /** all columns selection */
+    public static String[] ALL_COLUMNS = new String[]{ID_COLUMN, NAME_COLUMN,
+            IMAGE_COLUMN, DESC_COLUMN, ORIGINAL_COLUMN};
 
     /** arguments to set for the prepared statements */
     public static String[] getIdArguments(final Long id) {

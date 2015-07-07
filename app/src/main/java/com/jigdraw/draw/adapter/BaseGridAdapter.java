@@ -34,16 +34,16 @@ public abstract class BaseGridAdapter extends AbstractGridAdapter {
     }
 
     @Override
-    public int getColumnCount() {
-        return columns;
-    }
-
-    @Override
     public void reorderItems(int originalPosition, int newPosition) {
         if (newPosition < getCount()) {
             Collections.swap(items, originalPosition, newPosition);
             notifyDataSetChanged();
         }
+    }
+
+    @Override
+    public int getColumnCount() {
+        return columns;
     }
 
     @Override

@@ -178,7 +178,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * Update UI with new selected color
      *
      * @param imgView the image view
-     * @param view    the view
+     * @param view the view
      */
     private void updateUI(ImageButton imgView, View view) {
         imgView.setImageDrawable(getResources().getDrawable(

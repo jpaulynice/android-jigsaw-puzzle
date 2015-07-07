@@ -20,7 +20,7 @@ import static com.jigdraw.draw.util.ToastUtil.shortToast;
 public class JigsawHistoryActivity extends ListActivity {
     /** Class name for logging */
     private static final String TAG = "JigsawHistoryActivity";
-    
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -26,6 +26,21 @@ public class JigsawListAdapter extends BaseAdapter {
     }
 
     @Override
+    public int getCount() {
+        return tiles.size();
+    }
+
+    @Override
+    public Object getItem(int position) {
+        return tiles.get(position);
+    }
+
+    @Override
+    public final long getItemId(int position) {
+        return position;
+    }
+
+    @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView view;
         if (convertView == null) {
@@ -40,21 +55,6 @@ public class JigsawListAdapter extends BaseAdapter {
         }
 
         return view;
-    }
-
-    @Override
-    public final long getItemId(int position) {
-        return position;
-    }
-
-    @Override
-    public int getCount() {
-        return tiles.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return tiles.get(position);
     }
 
     protected Context getContext() {
