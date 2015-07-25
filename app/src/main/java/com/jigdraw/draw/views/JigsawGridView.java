@@ -883,7 +883,5 @@ public class JigsawGridView extends GridView {
                     new AnimateSwitchViewOnPreDrawListener(originalPosition,
                             targetPosition));
         }
-
-
     }
 }

@@ -11,13 +11,17 @@ import com.jigdraw.draw.tasks.JigsawLoader;
 import com.jigdraw.draw.views.JigsawGridView;
 
 /**
- * Represents the jigsaw puzzle solving activity.
+ * Represents the jigsaw puzzle solving activity.  After a user creates a
+ * drawing then selects the difficulty of the jigsaw and this activity starts.
  *
  * @author Jay Paulynice
  */
 public class JigsawActivity extends BaseJigsawActivity {
     /** Class name for logging */
     private static final String TAG = "JigsawActivity";
+
+    /** The original image id to look up for jigsaw */
+    private static final String ORIGINAL_IMG_ID = "originalId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +39,7 @@ public class JigsawActivity extends BaseJigsawActivity {
 
         JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
         LongParceable longParceable = getIntent().getExtras().getParcelable(
-                "originalId");
+                ORIGINAL_IMG_ID);
         task.execute(longParceable.getData());
 
         gridView.setOnItemLongClickListener(getOnItemLongClickListener

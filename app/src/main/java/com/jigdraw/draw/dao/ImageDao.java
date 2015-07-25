@@ -38,7 +38,7 @@ public interface ImageDao {
      * Update the given image entity
      *
      * @param entity the entity to update
-     * @return 1 for success and 0 for fail
+     * @return number of rows updated
      */
     int update(ImageEntity entity);
 
@@ -46,7 +46,7 @@ public interface ImageDao {
      * Delete the entity by id
      *
      * @param id the id of the entity
-     * @return 1 for success and 0 for fail
+     * @return number of rows deleted
      */
     int delete(Long id);
 
@@ -55,5 +55,5 @@ public interface ImageDao {
      *
      * @return list of images user created
      */
-    List<ImageEntity> findAllOriginals();
+    List<ImageEntity> getHistory();
 }

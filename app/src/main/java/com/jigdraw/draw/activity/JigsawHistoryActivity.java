@@ -17,12 +17,18 @@ import android.widget.ListView;
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.tasks.JigsawHistoryLoader;
 
+/**
+ * History activity to see list of jigsaw images created.
+ *
+ * @author Jay Paulynice
+ */
 public class JigsawHistoryActivity extends ListActivity {
     /** Class name for logging */
     private static final String TAG = "JigsawHistoryActivity";
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "Staring jigsaw history activity...");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
         init();
@@ -52,19 +58,27 @@ public class JigsawHistoryActivity extends ListActivity {
         task.execute();
 
         lv.setLongClickable(true);
-        lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+        lv.setOnItemLongClickListener(getOnItemLongClickListener());
+        lv.setOnItemClickListener(getOnItemClickListener());
+    }
+
+    private OnItemLongClickListener getOnItemLongClickListener() {
+        return new OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            final int pos, long id) {
                 return true;
             }
-        });
-        lv.setOnItemClickListener(new OnItemClickListener() {
+        };
+    }
+
+    private OnItemClickListener getOnItemClickListener() {
+        return new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,
                                     final int pos, long id) {
                 Log.d(TAG, "clicked element with id: " + id);
             }
-        });
+        };
     }
 
     private void initMenuBar() {

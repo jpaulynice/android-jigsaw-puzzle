@@ -88,7 +88,7 @@ public class ImageDaoImpl implements ImageDao {
     }
 
     @Override
-    public List<ImageEntity> findAllOriginals() {
+    public List<ImageEntity> getHistory() {
         Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS,
                 ORIGINAL_SELECTION_NULL,
                 null, null, null, null);

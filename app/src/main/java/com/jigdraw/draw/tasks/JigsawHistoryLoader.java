@@ -13,6 +13,11 @@ import com.jigdraw.draw.model.ImageEntity;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Async task to load a user's drawing history to show in the history list
+ *
+ * @author Jay Paulynice
+ */
 public class JigsawHistoryLoader extends AsyncTask<Long, Integer,
         List<Bitmap>> {
     private ImageDao dao;
@@ -27,7 +32,7 @@ public class JigsawHistoryLoader extends AsyncTask<Long, Integer,
 
     @Override
     protected List<Bitmap> doInBackground(Long[] params) {
-        List<ImageEntity> data = dao.findAllOriginals();
+        List<ImageEntity> data = dao.getHistory();
         List<Bitmap> bitmaps = new ArrayList<>();
         for (ImageEntity entity : data) {
             bitmaps.add(entity.getImage());
