@@ -49,7 +49,7 @@ public class ImageDaoTest extends AndroidTestCase {
 
     public void testFindOriginals() {
         dao.create(createImageEntity());
-        List<ImageEntity> originals = dao.findAllOriginals();
+        List<ImageEntity> originals = dao.getHistory();
         assertFalse(originals.isEmpty());
     }
 
