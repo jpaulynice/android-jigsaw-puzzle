@@ -1,14 +1,14 @@
 package com.jigdraw.draw.db;
 
+import static com.jigdraw.draw.util.DBUtil.DATABASE_NAME;
+import static com.jigdraw.draw.util.DBUtil.DATABASE_VERSION;
+
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 import com.jigdraw.draw.util.DBUtil;
-
-import static com.jigdraw.draw.util.DBUtil.DATABASE_NAME;
-import static com.jigdraw.draw.util.DBUtil.DATABASE_VERSION;
 
 
 /**

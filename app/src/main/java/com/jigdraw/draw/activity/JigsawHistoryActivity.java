@@ -1,5 +1,7 @@
 package com.jigdraw.draw.activity;
 
+import static com.jigdraw.draw.util.ToastUtil.shortToast;
+
 import android.app.ActionBar;
 import android.app.ListActivity;
 import android.os.Bundle;
@@ -14,8 +16,6 @@ import android.widget.ListView;
 
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.tasks.JigsawHistoryLoader;
-
-import static com.jigdraw.draw.util.ToastUtil.shortToast;
 
 public class JigsawHistoryActivity extends ListActivity {
     /** Class name for logging */

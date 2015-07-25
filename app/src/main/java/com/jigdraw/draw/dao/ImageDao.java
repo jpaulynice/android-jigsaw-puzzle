@@ -51,7 +51,7 @@ public interface ImageDao {
     int delete(Long id);
 
     /**
-     * Find all the original images for history *
+     * Find all the original images for history
      *
      * @return list of images user created
      */

@@ -21,14 +21,14 @@ public class JigsawActivity extends BaseJigsawActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "Starting jigsaw activity...");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_jigsaw);
+        initMenuBar();
         initGridView();
     }
 
     private void initGridView() {
-        initMenuBar();
-
         Log.d(TAG, "initializing jigsaw grid view");
         final JigsawGridView gridView = (JigsawGridView) findViewById(R.id
                 .jigsaw_grid);
@@ -38,24 +38,37 @@ public class JigsawActivity extends BaseJigsawActivity {
                 "originalId");
         task.execute(longParceable.getData());
 
-        gridView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+        gridView.setOnItemLongClickListener(getOnItemLongClickListener
+                (gridView));
+        gridView.setOnDropListener(getOnDropListener(gridView));
+        gridView.setOnDragListener(getOnDragListener());
+    }
+
+    private JigsawGridView.OnItemLongClickListener getOnItemLongClickListener(
+            final JigsawGridView gridView) {
+        return new AdapterView.OnItemLongClickListener() {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view,
                                            int position, long id) {
                 gridView.startEditMode(position);
                 return true;
             }
-        });
+        };
+    }
 
-        gridView.setOnDropListener(new JigsawGridView.OnDropListener() {
+    private JigsawGridView.OnDropListener getOnDropListener(
+            final JigsawGridView gridView) {
+        return new JigsawGridView.OnDropListener() {
             @Override
             public void onActionDrop() {
                 Log.d(TAG, "dropped element");
                 gridView.stopEditMode();
             }
-        });
+        };
+    }
 
-        gridView.setOnDragListener(new JigsawGridView.OnDragListener() {
+    private JigsawGridView.OnDragListener getOnDragListener() {
+        return new JigsawGridView.OnDragListener() {
             @Override
             public void onDragStarted(int position) {
                 Log.d(TAG, "dragging starts...position: " + position);
@@ -67,6 +80,6 @@ public class JigsawActivity extends BaseJigsawActivity {
                 Log.d(TAG, String.format("drag changed from %d to %d",
                         oldPosition, newPosition));
             }
-        });
+        };
     }
 }

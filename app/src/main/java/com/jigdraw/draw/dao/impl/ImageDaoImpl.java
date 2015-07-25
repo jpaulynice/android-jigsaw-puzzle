@@ -1,18 +1,5 @@
 package com.jigdraw.draw.dao.impl;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
-import com.jigdraw.draw.dao.ImageDao;
-import com.jigdraw.draw.db.JigsawDB;
-import com.jigdraw.draw.model.ImageEntity;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import static com.jigdraw.draw.util.Base64Util.base64ToBitmap;
 import static com.jigdraw.draw.util.DBUtil.ALL_COLUMNS;
 import static com.jigdraw.draw.util.DBUtil.DESC_COLUMN;
@@ -26,6 +13,19 @@ import static com.jigdraw.draw.util.DBUtil.ORIGINAL_SELECTION;
 import static com.jigdraw.draw.util.DBUtil.ORIGINAL_SELECTION_NULL;
 import static com.jigdraw.draw.util.DBUtil.getIdArguments;
 import static com.jigdraw.draw.util.EntityUtil.entityToContentValues;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+
+import com.jigdraw.draw.dao.ImageDao;
+import com.jigdraw.draw.db.JigsawDB;
+import com.jigdraw.draw.model.ImageEntity;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Default implementation for {@link com.jigdraw.draw.dao.ImageDao}. Provides
@@ -93,7 +93,12 @@ public class ImageDaoImpl implements ImageDao {
                 ORIGINAL_SELECTION_NULL,
                 null, null, null, null);
 
-        return getAllFromCursor(cursor);
+        List<ImageEntity> entities = getAllFromCursor(cursor);
+        if (cursor != null) {
+            cursor.close();
+        }
+
+        return entities;
     }
 
     private ImageEntity getEntityFromCursor(Cursor cursor) {
@@ -129,7 +134,6 @@ public class ImageDaoImpl implements ImageDao {
                 ImageEntity entity = getEntity(cursor);
                 entities.add(entity);
             }
-            cursor.close();
         }
         return entities;
     }

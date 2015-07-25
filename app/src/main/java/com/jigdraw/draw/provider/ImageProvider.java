@@ -1,5 +1,8 @@
 package com.jigdraw.draw.provider;
 
+import static com.jigdraw.draw.util.DBUtil.ID_SELECTION;
+import static com.jigdraw.draw.util.DBUtil.JIGSAW_TABLE;
+
 import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
@@ -14,9 +17,6 @@ import android.text.TextUtils;
 import com.jigdraw.draw.db.JigsawDB;
 
 import java.util.HashMap;
-
-import static com.jigdraw.draw.util.DBUtil.ID_SELECTION;
-import static com.jigdraw.draw.util.DBUtil.JIGSAW_TABLE;
 
 /**
  * @author Jay Paulynice

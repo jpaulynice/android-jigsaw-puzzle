@@ -8,6 +8,11 @@ import android.view.MenuItem;
 
 import com.jigdraw.draw.R;
 
+/**
+ * Base activity class for activities that share the menu bar
+ *
+ * @author Jay Paulynice
+ */
 public abstract class BaseJigsawActivity extends Activity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

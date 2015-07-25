@@ -1,11 +1,14 @@
 package com.jigdraw.draw.activity;
 
+import static com.jigdraw.draw.util.ToastUtil.shortToast;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,8 +22,6 @@ import com.jigdraw.draw.views.DrawingView;
 
 import java.util.Arrays;
 import java.util.List;
-
-import static com.jigdraw.draw.util.ToastUtil.shortToast;
 
 /**
  * Main activity class represents all the activities that a user starts with
@@ -41,6 +42,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "Starting draw activity...");
         super.onCreate(savedInstanceState);
         init();
     }
@@ -181,10 +183,11 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * @param view the view
      */
     private void updateUI(ImageButton imgView, View view) {
-        imgView.setImageDrawable(getResources().getDrawable(
-                R.drawable.paint_pressed));
+        imgView.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                R.drawable.paint_pressed, null));
         currPaint
-                .setImageDrawable(getResources().getDrawable(R.drawable.paint));
+                .setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                        (R.drawable.paint), null));
         currPaint = (ImageButton) view;
     }
 
@@ -227,8 +230,8 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     private void initLayout() {
         LinearLayout paintLayout = (LinearLayout) findViewById(R.id.paint_colors);
         currPaint = (ImageButton) paintLayout.getChildAt(0);
-        currPaint.setImageDrawable(getResources().getDrawable(
-                R.drawable.paint_pressed));
+        currPaint.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
+                R.drawable.paint_pressed, null));
     }
 
     /**

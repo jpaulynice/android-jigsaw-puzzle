@@ -1,14 +1,14 @@
 package com.jigdraw.draw.util;
 
-import android.content.ContentValues;
-
-import com.jigdraw.draw.model.ImageEntity;
-
 import static com.jigdraw.draw.util.Base64Util.bitMapToBase64;
 import static com.jigdraw.draw.util.DBUtil.DESC_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.IMAGE_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.NAME_COLUMN;
 import static com.jigdraw.draw.util.DBUtil.ORIGINAL_COLUMN;
+
+import android.content.ContentValues;
+
+import com.jigdraw.draw.model.ImageEntity;
 
 /**
  * Utilities class to convert from {@link ImageEntity} to {@link ContentValues}
