@@ -1,8 +1,8 @@
 language: android
 android:
     components:
-      - build-tools-21.1.2
-      - android-21
+      - build-tools-22.0.1
+      - android-22
 before_script:
   - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
