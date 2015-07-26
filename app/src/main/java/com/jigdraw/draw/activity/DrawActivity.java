@@ -5,15 +5,12 @@ import static com.jigdraw.draw.util.ToastUtil.shortToast;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
-import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.support.v4.content.res.ResourcesCompat;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.model.enums.Difficulty;
@@ -22,6 +19,8 @@ import com.jigdraw.draw.views.DrawingView;
 
 import java.util.Arrays;
 import java.util.List;
+
+import yuku.ambilwarna.AmbilWarnaDialog;
 
 /**
  * Main activity class represents all the activities that a user starts with
@@ -37,9 +36,6 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     /** Custom view for drawing */
     private DrawingView drawView;
 
-    /** Current paint */
-    private ImageButton currPaint;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Starting draw activity...");
@@ -50,13 +46,41 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     @Override
     public void onClick(View view) {
         Log.d(TAG, "view id clicked: " + view.getId());
-        if (view.getId() == R.id.erase_btn) {
+        if (view.getId() == R.id.color_pick) {
+            handleColorPick();
+        } else if (view.getId() == R.id.erase_btn) {
             handleEraseButton();
         } else if (view.getId() == R.id.new_btn) {
             handleNewButton();
         } else if (view.getId() == R.id.save_btn) {
             handleSaveButton();
         }
+    }
+
+    private void handleColorPick() {
+        drawView.setErase(false);
+        drawView.setBrushSize(drawView.getLastBrushSize());
+        openDialog(false);
+    }
+
+    void openDialog(boolean supportsAlpha) {
+        Log.d(TAG, "show color picker dialog...");
+
+        AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, drawView
+                .getPaintColor(),
+                supportsAlpha, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            @Override
+            public void onCancel(AmbilWarnaDialog dialog) {
+                Log.d(TAG, "cancel clicked...");
+            }
+
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                Log.d(TAG, "selected color: " + color);
+                drawView.setColor(color);
+            }
+        });
+        dialog.show();
     }
 
     /**
@@ -146,52 +170,6 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Handles the change of color chosen
-     *
-     * @param view the view for the color chosen
-     */
-    public void paintClicked(View view) {
-        drawView.setErase(false);
-        drawView.setBrushSize(drawView.getLastBrushSize());
-
-        if (view != currPaint) {
-            String color = changeColor(view);
-            setBrushColor(Color.parseColor(color));
-        }
-    }
-
-    /**
-     * Change to selected color
-     *
-     * @param view the image button clicked
-     * @return the color to set
-     */
-    private String changeColor(View view) {
-        ImageButton imgView = (ImageButton) view;
-        String color = view.getTag().toString();
-        drawView.setColor(color);
-
-        updateUI(imgView, view);
-
-        return color;
-    }
-
-    /**
-     * Update UI with new selected color
-     *
-     * @param imgView the image view
-     * @param view the view
-     */
-    private void updateUI(ImageButton imgView, View view) {
-        imgView.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                R.drawable.paint_pressed, null));
-        currPaint
-                .setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                        (R.drawable.paint), null));
-        currPaint = (ImageButton) view;
-    }
-
-    /**
      * Set the brushes to the color chosen
      *
      * @param color the chosen color
@@ -220,18 +198,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     private void init() {
         setContentView(R.layout.activity_main);
         initViews();
-        initLayout();
         setBrushColor(drawView.getPaintColor());
-    }
-
-    /**
-     * Initialize the layout and set current color to first one
-     */
-    private void initLayout() {
-        LinearLayout paintLayout = (LinearLayout) findViewById(R.id.paint_colors);
-        currPaint = (ImageButton) paintLayout.getChildAt(0);
-        currPaint.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
-                R.drawable.paint_pressed, null));
     }
 
     /**
@@ -250,7 +217,8 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * Initialize the buttons
      */
     public List<View> getMenuButtons() {
-        return Arrays.asList(findViewById(R.id.erase_btn),
-                findViewById(R.id.new_btn), findViewById(R.id.save_btn));
+        return Arrays.asList(findViewById(R.id.color_pick), findViewById(R.id
+                .erase_btn), findViewById(R.id.new_btn), findViewById
+                (R.id.save_btn));
     }
 }

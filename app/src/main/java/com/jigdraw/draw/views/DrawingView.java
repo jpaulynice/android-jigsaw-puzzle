@@ -3,7 +3,6 @@ package com.jigdraw.draw.views;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.PorterDuff;
@@ -103,10 +102,10 @@ public class DrawingView extends View {
      *
      * @param newColor the new color
      */
-    public void setColor(String newColor) {
+    public void setColor(int newColor) {
         invalidate();
-        paintColor = Color.parseColor(newColor);
-        drawPaint.setColor(paintColor);
+        paintColor = newColor;
+        drawPaint.setColor(newColor);
     }
 
     /**
