@@ -11,7 +11,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.model.enums.Difficulty;
 import com.jigdraw.draw.tasks.JigsawGenerator;
@@ -78,6 +80,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 Log.d(TAG, "selected color: " + color);
                 drawView.setColor(color);
+                setBrushColor(color);
             }
         });
         dialog.show();
@@ -121,14 +124,17 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     public void handleSaveButton() {
         CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Choose difficulty:");
-        builder.setItems(levels, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                createJigsaw(which);
-            }
-        });
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
+                .title("Difficulty:")
+                .items(levels)
+                .itemsCallback(new MaterialDialog.ListCallback() {
+                    @Override
+                    public void onSelection(MaterialDialog dialog, View view,
+                                            int which, CharSequence text) {
+                        createJigsaw(which);
+                    }
+                });
+
         builder.show();
     }
 
@@ -208,17 +214,11 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         drawView = (DrawingView) findViewById(R.id.drawing);
         drawView.setBrushSize(getResources().getInteger(R.integer.medium_size));
 
-        for (View view : getMenuButtons()) {
+        LinearLayout layout = (LinearLayout) findViewById(R.id.top_options);
+        int count = layout.getChildCount();
+        for (int i = 0; i < count; i++) {
+            View view = layout.getChildAt(i);
             view.setOnClickListener(this);
         }
-    }
-
-    /**
-     * Initialize the buttons
-     */
-    public List<View> getMenuButtons() {
-        return Arrays.asList(findViewById(R.id.color_pick), findViewById(R.id
-                .erase_btn), findViewById(R.id.new_btn), findViewById
-                (R.id.save_btn));
     }
 }

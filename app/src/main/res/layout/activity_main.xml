@@ -7,8 +7,8 @@
               android:orientation="vertical"
               tools:context=".MainActivity">
 
-    <!-- Top Buttons -->
     <LinearLayout
+            android:id="@+id/top_options"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_gravity="center"
@@ -56,6 +56,7 @@
 
     <!-- Brush sizes -->
     <LinearLayout
+            android:id="@+id/all_brushes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

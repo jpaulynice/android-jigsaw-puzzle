@@ -3,6 +3,9 @@ package com.jigdraw.draw.activity;
 import android.test.ActivityInstrumentationTestCase2;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
+
+import com.jigdraw.draw.R;
 
 /**
  * Unit test for draw activity class
@@ -33,8 +36,11 @@ public class DrawActivityTest extends
             assertTrue(View.VISIBLE == b.getVisibility());
         }
 
-        for (View v : activity.getMenuButtons()) {
-            assertTrue(View.VISIBLE == v.getVisibility());
+        LinearLayout layout = (LinearLayout) activity.findViewById(R.id.top_options);
+        int count = layout.getChildCount();
+        for (int i = 0; i < count; i++) {
+            View view = layout.getChildAt(i);
+            assertTrue(View.VISIBLE == view.getVisibility());
         }
     }
 }
