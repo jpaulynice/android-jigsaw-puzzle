@@ -1,5 +1,6 @@
 <resources>
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+        <item name="md_dark_theme">true</item>
     </style>
 </resources>

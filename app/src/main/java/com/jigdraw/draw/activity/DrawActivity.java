@@ -2,8 +2,6 @@ package com.jigdraw.draw.activity;
 
 import static com.jigdraw.draw.util.ToastUtil.shortToast;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
@@ -19,7 +17,7 @@ import com.jigdraw.draw.model.enums.Difficulty;
 import com.jigdraw.draw.tasks.JigsawGenerator;
 import com.jigdraw.draw.views.DrawingView;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
@@ -62,10 +60,10 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     private void handleColorPick() {
         drawView.setErase(false);
         drawView.setBrushSize(drawView.getLastBrushSize());
-        openDialog(false);
+        openColorPickerDialog(false);
     }
 
-    void openDialog(boolean supportsAlpha) {
+    void openColorPickerDialog(boolean supportsAlpha) {
         Log.d(TAG, "show color picker dialog...");
 
         AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, drawView
@@ -97,25 +95,26 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * Handle the new button click
      */
     public void handleNewButton() {
-        // new button
-        AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
-        newDialog.setTitle("New drawing");
-        newDialog.setMessage("Start new drawing (you will lose the current "
-                + "drawing)?");
-        newDialog.setPositiveButton("Yes",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
+        builder.title("New drawing")
+                .callback(new MaterialDialog.ButtonCallback() {
+                    @Override
+                    public void onPositive(MaterialDialog dialog) {
                         drawView.startNew();
                         dialog.dismiss();
                     }
-                });
-        newDialog.setNegativeButton("Cancel",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
+
+                    @Override
+                    public void onNegative(MaterialDialog dialog) {
                         dialog.cancel();
                     }
-                });
-        newDialog.show();
+                })
+                .positiveText("Ok")
+                .negativeText("Cancel")
+                .content(("Start new drawing (you will lose the current "
+                        + "drawing)?"));
+
+        builder.show();
     }
 
     /**
@@ -181,21 +180,15 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * @param color the chosen color
      */
     private void setBrushColor(int color) {
-        for (ImageButton im : getBrushes()) {
+        for (View v : getBottomButtons()) {
+            ImageButton im = (ImageButton) v;
             GradientDrawable d = (GradientDrawable) im.getDrawable();
             d.setColor(color);
         }
     }
 
-    /**
-     * Make a list of the brushes
-     */
-    public List<ImageButton> getBrushes() {
-        return Arrays.asList((ImageButton) findViewById(R.id
-                        .small_brush),
-                (ImageButton) findViewById(R.id.medium_brush),
-                (ImageButton) findViewById(R.id.large_brush),
-                (ImageButton) findViewById(R.id.largest_brush));
+    public List<View> getBottomButtons() {
+        return getLayoutViews(R.id.all_brushes);
     }
 
     /**
@@ -214,11 +207,23 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         drawView = (DrawingView) findViewById(R.id.drawing);
         drawView.setBrushSize(getResources().getInteger(R.integer.medium_size));
 
-        LinearLayout layout = (LinearLayout) findViewById(R.id.top_options);
+        for (View v : getTopButtons()) {
+            v.setOnClickListener(this);
+        }
+    }
+
+    public List<View> getTopButtons() {
+        return getLayoutViews(R.id.top_options);
+    }
+
+    private List<View> getLayoutViews(final int layoutId) {
+        List<View> views = new ArrayList<>();
+        LinearLayout layout = (LinearLayout) findViewById(layoutId);
         int count = layout.getChildCount();
         for (int i = 0; i < count; i++) {
-            View view = layout.getChildAt(i);
-            view.setOnClickListener(this);
+            views.add(layout.getChildAt(i));
         }
+
+        return views;
     }
 }

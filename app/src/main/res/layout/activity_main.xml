@@ -3,7 +3,6 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:background="#ff080808"
-              android:onClick="handleBrushSize"
               android:orientation="vertical"
               tools:context=".MainActivity">
 
@@ -18,27 +17,34 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:contentDescription="@string/paint"
-                android:src="@drawable/colors_pick"/>
+                android:background="@android:color/transparent"
+                android:src="@drawable/colors_pick"
+                android:layout_marginRight="20dp"/>
 
         <ImageButton
                 android:id="@+id/new_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:contentDescription="@string/start_new"
-                android:src="@drawable/new_img"/>
+                android:background="@android:color/transparent"
+                android:src="@drawable/new_img"
+                android:layout_marginRight="20dp"/>
 
         <ImageButton
                 android:id="@+id/erase_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:contentDescription="@string/erase"
-                android:src="@drawable/erase"/>
+                android:background="@android:color/transparent"
+                android:src="@drawable/erase"
+                android:layout_marginRight="20dp"/>
 
         <ImageButton
                 android:id="@+id/save_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:contentDescription="@string/save"
+                android:background="@android:color/transparent"
                 android:src="@drawable/jigsaw"/>
     </LinearLayout>
 
@@ -55,56 +61,50 @@
             android:background="#FFFFFFFF"/>
 
     <!-- Brush sizes -->
+
     <LinearLayout
             android:id="@+id/all_brushes"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:layout_gravity="center">
 
-        <LinearLayout
+        <ImageButton
+                android:id="@+id/small_brush"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:layout_marginTop="10dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/sml"
+                android:onClick="handleBrushSize"
+                android:src="@drawable/small"/>
 
-            <ImageButton
-                    android:id="@+id/small_brush"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/sml"
-                    android:onClick="handleBrushSize"
-                    android:src="@drawable/small"/>
+        <ImageButton
+                android:id="@+id/medium_brush"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/med"
+                android:onClick="handleBrushSize"
+                android:src="@drawable/medium"/>
 
-            <ImageButton
-                    android:id="@+id/medium_brush"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/med"
-                    android:onClick="handleBrushSize"
-                    android:src="@drawable/medium"/>
+        <ImageButton
+                android:id="@+id/large_brush"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:layout_weight="1"
+                android:contentDescription="@string/lrg"
+                android:onClick="handleBrushSize"
+                android:src="@drawable/large"/>
 
-            <ImageButton
-                    android:id="@+id/large_brush"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="6dp"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/lrg"
-                    android:onClick="handleBrushSize"
-                    android:src="@drawable/large"/>
-
-            <ImageButton
-                    android:id="@+id/largest_brush"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:contentDescription="@string/lrg"
-                    android:onClick="handleBrushSize"
-                    android:src="@drawable/largest"/>
-        </LinearLayout>
+        <ImageButton
+                android:id="@+id/largest_brush"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:contentDescription="@string/lrg"
+                android:onClick="handleBrushSize"
+                android:src="@drawable/largest"/>
     </LinearLayout>
 </LinearLayout>

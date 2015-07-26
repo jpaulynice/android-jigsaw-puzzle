@@ -1,11 +1,8 @@
 package com.jigdraw.draw.activity;
 
 import android.test.ActivityInstrumentationTestCase2;
+import android.util.Log;
 import android.view.View;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
-
-import com.jigdraw.draw.R;
 
 /**
  * Unit test for draw activity class
@@ -14,6 +11,7 @@ import com.jigdraw.draw.R;
  */
 public class DrawActivityTest extends
         ActivityInstrumentationTestCase2<DrawActivity> {
+    private static final String TAG = "DrawActivityTest";
     private DrawActivity activity;
 
     public DrawActivityTest() {
@@ -28,19 +26,18 @@ public class DrawActivityTest extends
     }
 
     public void testActivityNotNull() {
+        Log.d(TAG, "testing activity not null...");
         assertNotNull(activity);
     }
 
     public void testControlsVisible() {
-        for (ImageButton b : activity.getBrushes()) {
-            assertTrue(View.VISIBLE == b.getVisibility());
+        Log.d(TAG, "testing ui controls visible...");
+        for (View v : activity.getTopButtons()) {
+            assertTrue(View.VISIBLE == v.getVisibility());
         }
 
-        LinearLayout layout = (LinearLayout) activity.findViewById(R.id.top_options);
-        int count = layout.getChildCount();
-        for (int i = 0; i < count; i++) {
-            View view = layout.getChildAt(i);
-            assertTrue(View.VISIBLE == view.getVisibility());
+        for (View b : activity.getBottomButtons()) {
+            assertTrue(View.VISIBLE == b.getVisibility());
         }
     }
 }
