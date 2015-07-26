@@ -63,9 +63,8 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         openColorPickerDialog(false);
     }
 
-    void openColorPickerDialog(boolean supportsAlpha) {
+    private void openColorPickerDialog(boolean supportsAlpha) {
         Log.d(TAG, "show color picker dialog...");
-
         AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, drawView
                 .getPaintColor(),
                 supportsAlpha, new AmbilWarnaDialog.OnAmbilWarnaListener() {
@@ -113,7 +112,6 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
                 .negativeText("Cancel")
                 .content(("Start new drawing (you will lose the current "
                         + "drawing)?"));
-
         builder.show();
     }
 
