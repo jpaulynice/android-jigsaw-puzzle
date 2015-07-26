@@ -51,9 +51,9 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         } else if (view.getId() == R.id.erase_btn) {
             handleEraseButton();
         } else if (view.getId() == R.id.new_btn) {
-            handleNewButton();
+            openNewDrawingDialog();
         } else if (view.getId() == R.id.save_btn) {
-            handleSaveButton();
+            openCreateJigsawDialog();
         }
     }
 
@@ -93,7 +93,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     /**
      * Handle the new button click
      */
-    public void handleNewButton() {
+    public void openNewDrawingDialog() {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
         builder.title("New drawing")
                 .callback(new MaterialDialog.ButtonCallback() {
@@ -118,7 +118,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     /**
      * Handle the save button click
      */
-    public void handleSaveButton() {
+    public void openCreateJigsawDialog() {
         CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
 
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
