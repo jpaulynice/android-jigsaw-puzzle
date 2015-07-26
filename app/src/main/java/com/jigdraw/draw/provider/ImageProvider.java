@@ -16,8 +16,6 @@ import android.text.TextUtils;
 
 import com.jigdraw.draw.db.JigsawDB;
 
-import java.util.HashMap;
-
 /**
  * @author Jay Paulynice
  */
@@ -28,7 +26,6 @@ public class ImageProvider extends ContentProvider {
     static final int IMAGES = 1;
     static final int IMAGES_ID = 2;
     static final UriMatcher uriMatcher;
-    private static HashMap<String, String> map;
 
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -53,9 +50,6 @@ public class ImageProvider extends ContentProvider {
         queryBuilder.setTables(JIGSAW_TABLE);
 
         switch (uriMatcher.match(uri)) {
-            case IMAGES:
-                queryBuilder.setProjectionMap(map);
-                break;
             case IMAGES_ID:
                 queryBuilder.appendWhere(ID_SELECTION + uri.getLastPathSegment());
                 break;

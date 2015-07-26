@@ -69,7 +69,6 @@ public class JigsawGridView extends GridView {
     private boolean mIsEditMode = false;
     private boolean mHoverAnimation;
     private boolean mReorderAnimation;
-    private boolean mIsEditModeEnabled = true;
 
     private OnScrollListener mUserScrollListener;
     private OnDropListener mDropListener;
@@ -279,8 +278,6 @@ public class JigsawGridView extends GridView {
     }
 
     public void startEditMode(int position) {
-        if (!mIsEditModeEnabled)
-            return;
         requestDisallowInterceptTouchEvent(true);
         if (isPostHoneycomb())
             if (position != -1) {

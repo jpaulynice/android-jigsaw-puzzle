@@ -27,8 +27,8 @@ public class DrawingView extends View {
     private int paintColor = 0xFF660000;
     private Canvas drawCanvas;
     private Bitmap canvasBitmap;
-    private float brushSize, lastBrushSize;
-    private boolean erase = false;
+    private float brushSize;
+    private float lastBrushSize;
 
     /**
      * Create new drawing view with context and attributes and setting up the
@@ -141,8 +141,7 @@ public class DrawingView extends View {
      * @param isErase {@code true} if erase is clicked {@code false} otherwise
      */
     public void setErase(boolean isErase) {
-        erase = isErase;
-        Xfermode xfermode = erase ? new PorterDuffXfermode(
+        Xfermode xfermode = isErase ? new PorterDuffXfermode(
                 PorterDuff.Mode.CLEAR) : null;
         drawPaint.setXfermode(xfermode);
     }

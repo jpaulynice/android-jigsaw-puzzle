@@ -68,9 +68,14 @@ public class ImageDaoImpl implements ImageDao {
 
     @Override
     public List<ImageEntity> findTiles(Long id) {
+        List<ImageEntity> entities = new ArrayList<>();
         Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ORIGINAL_SELECTION,
                 getIdArguments(id), null, null, null);
-        return getAllFromCursor(cursor);
+        entities.addAll(getAllFromCursor(cursor));
+
+        cleanUp(cursor);
+
+        return entities;
     }
 
     @Override
@@ -94,9 +99,8 @@ public class ImageDaoImpl implements ImageDao {
                 null, null, null, null);
 
         List<ImageEntity> entities = getAllFromCursor(cursor);
-        if (cursor != null) {
-            cursor.close();
-        }
+
+        cleanUp(cursor);
 
         return entities;
     }
@@ -105,9 +109,19 @@ public class ImageDaoImpl implements ImageDao {
         ImageEntity entity = null;
         if (cursor != null && cursor.moveToFirst()) {
             entity = getEntity(cursor);
-            cursor.close();
         }
         return entity;
+    }
+
+    private List<ImageEntity> getAllFromCursor(Cursor cursor) {
+        List<ImageEntity> entities = new ArrayList<>();
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                ImageEntity entity = getEntity(cursor);
+                entities.add(entity);
+            }
+        }
+        return entities;
     }
 
     private ImageEntity getEntity(Cursor cursor) {
@@ -127,14 +141,9 @@ public class ImageDaoImpl implements ImageDao {
         return entity;
     }
 
-    private List<ImageEntity> getAllFromCursor(Cursor cursor) {
-        List<ImageEntity> entities = new ArrayList<>();
+    private void cleanUp(Cursor cursor) {
         if (cursor != null) {
-            while (cursor.moveToNext()) {
-                ImageEntity entity = getEntity(cursor);
-                entities.add(entity);
-            }
+            cursor.close();
         }
-        return entities;
     }
 }
