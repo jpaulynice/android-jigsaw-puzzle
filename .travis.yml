@@ -2,7 +2,7 @@ language: android
 sudo: false
 android:
     components:
-      - build-tools-22.0.1
+      - build-tools-23.0.0 rc3
       - android-22
 before_script:
   - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
