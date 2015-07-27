@@ -5,8 +5,6 @@ Android-Jigsaw-Puzzle
 
 Improved UI...added color picker and better dialogs
 
-Better Icons...
-
 ![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/color_picker.png)
 
 Better Icons...
