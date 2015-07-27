@@ -3,6 +3,7 @@ package com.jigdraw.draw.activity;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -14,6 +15,9 @@ import com.jigdraw.draw.R;
  * @author Jay Paulynice
  */
 public abstract class BaseJigsawActivity extends Activity {
+    /** Class name for logging */
+    private static final String TAG = "BaseJigsawActivity";
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main, menu);
@@ -22,6 +26,7 @@ public abstract class BaseJigsawActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Log.d(TAG, "menu item selected: " + item.getItemId());
         switch (item.getItemId()) {
             case R.id.menu_history:
                 startActivity(new Intent(getApplicationContext(),

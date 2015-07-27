@@ -7,7 +7,7 @@
               tools:context="com.jigdraw.draw.activity.JigsawHistoryActivity">
 
     <ListView
-            android:id="@android:id/list"
+            android:id="@+id/history_list"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:background="#ff080808"

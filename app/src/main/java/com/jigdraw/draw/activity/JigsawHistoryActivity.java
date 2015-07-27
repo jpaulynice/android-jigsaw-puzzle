@@ -2,12 +2,8 @@ package com.jigdraw.draw.activity;
 
 import static com.jigdraw.draw.util.ToastUtil.shortToast;
 
-import android.app.ActionBar;
-import android.app.ListActivity;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -22,7 +18,7 @@ import com.jigdraw.draw.tasks.JigsawHistoryLoader;
  *
  * @author Jay Paulynice
  */
-public class JigsawHistoryActivity extends ListActivity {
+public class JigsawHistoryActivity extends BaseJigsawActivity {
     /** Class name for logging */
     private static final String TAG = "JigsawHistoryActivity";
 
@@ -31,26 +27,13 @@ public class JigsawHistoryActivity extends ListActivity {
         Log.d(TAG, "Staring jigsaw history activity...");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
-        init();
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        Log.d(TAG, "menu item selected: " + item.getItemId());
-        return true;
-    }
-
-    public void init() {
         initMenuBar();
+        initViews();
+    }
 
+    private void initViews() {
         Log.d(TAG, "initializing history list view...");
-        ListView lv = getListView();
+        ListView lv = (ListView) findViewById(R.id.history_list);
         JigsawHistoryLoader task = new JigsawHistoryLoader
                 (getApplicationContext(), lv);
 
@@ -79,12 +62,5 @@ public class JigsawHistoryActivity extends ListActivity {
                 Log.d(TAG, "clicked element with id: " + id);
             }
         };
-    }
-
-    private void initMenuBar() {
-        ActionBar bar = getActionBar();
-        if (bar != null) {
-            bar.setDisplayHomeAsUpEnabled(true);
-        }
     }
 }

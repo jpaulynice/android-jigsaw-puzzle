@@ -66,8 +66,12 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     private void openColorPickerDialog(boolean supportsAlpha) {
         Log.d(TAG, "show color picker dialog...");
         AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, drawView
-                .getPaintColor(),
-                supportsAlpha, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+                .getPaintColor(), supportsAlpha, getColorPickerCallback());
+        dialog.show();
+    }
+
+    private AmbilWarnaDialog.OnAmbilWarnaListener getColorPickerCallback() {
+        return new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
                 Log.d(TAG, "cancel clicked...");
@@ -79,35 +83,23 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
                 drawView.setColor(color);
                 setBrushColor(color);
             }
-        });
-        dialog.show();
+        };
     }
 
     /**
      * Set erase to true on eraser click
      */
-    public void handleEraseButton() {
+    private void handleEraseButton() {
         drawView.setErase(true);
     }
 
     /**
      * Handle the new button click
      */
-    public void openNewDrawingDialog() {
+    private void openNewDrawingDialog() {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
         builder.title("New drawing")
-                .callback(new MaterialDialog.ButtonCallback() {
-                    @Override
-                    public void onPositive(MaterialDialog dialog) {
-                        drawView.startNew();
-                        dialog.dismiss();
-                    }
-
-                    @Override
-                    public void onNegative(MaterialDialog dialog) {
-                        dialog.cancel();
-                    }
-                })
+                .callback(getMDCallback())
                 .positiveText("Ok")
                 .negativeText("Cancel")
                 .content(("Start new drawing (you will lose the current "
@@ -115,10 +107,25 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         builder.show();
     }
 
+    private MaterialDialog.ButtonCallback getMDCallback() {
+        return new MaterialDialog.ButtonCallback() {
+            @Override
+            public void onPositive(MaterialDialog dialog) {
+                drawView.startNew();
+                dialog.dismiss();
+            }
+
+            @Override
+            public void onNegative(MaterialDialog dialog) {
+                dialog.cancel();
+            }
+        };
+    }
+
     /**
      * Handle the save button click
      */
-    public void openCreateJigsawDialog() {
+    private void openCreateJigsawDialog() {
         CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
 
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
@@ -140,7 +147,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      *
      * @param which the selected option in dialog
      */
-    public void createJigsaw(int which) {
+    private void createJigsaw(int which) {
         drawView.setDrawingCacheEnabled(true);
         Bitmap bitmap = drawView.getDrawingCache();
 
