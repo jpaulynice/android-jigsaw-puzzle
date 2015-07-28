@@ -7,11 +7,6 @@ Improved UI...added color picker and better dialogs
 
 ![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/color_picker.png)
 
-Better Icons...
-
-![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/better_icons.png)
-
-
 Android jigsaw puzzle game...Here the user creates a drawing.
 
 ![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/original_drawing.png)
