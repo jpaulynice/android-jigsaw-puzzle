@@ -131,15 +131,19 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
                 .title("Difficulty:")
                 .items(levels)
-                .itemsCallback(new MaterialDialog.ListCallback() {
-                    @Override
-                    public void onSelection(MaterialDialog dialog, View view,
-                                            int which, CharSequence text) {
-                        createJigsaw(which);
-                    }
-                });
+                .itemsCallback(getMDListCallback());
 
         builder.show();
+    }
+
+    private MaterialDialog.ListCallback getMDListCallback() {
+        return new MaterialDialog.ListCallback() {
+            @Override
+            public void onSelection(MaterialDialog dialog, View view,
+                                    int which, CharSequence text) {
+                createJigsaw(which);
+            }
+        };
     }
 
     /**
@@ -165,7 +169,6 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * @param view the current brush view
      */
     public void handleBrushSize(View view) {
-        // default to medium brush
         float bSize = getResources().getInteger(R.integer.medium_size);
         if (view.getId() == R.id.small_brush) {
             bSize = getResources().getInteger(R.integer.small_size);
@@ -176,7 +179,6 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         }
         drawView.setErase(false);
         drawView.setBrushSize(bSize);
-        drawView.setLastBrushSize(bSize);
     }
 
     /**

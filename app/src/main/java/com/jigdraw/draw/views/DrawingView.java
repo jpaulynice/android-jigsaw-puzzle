@@ -27,8 +27,7 @@ public class DrawingView extends View {
     private int paintColor = 0xFF660000;
     private Canvas drawCanvas;
     private Bitmap canvasBitmap;
-    private float brushSize;
-    private float lastBrushSize;
+    private float brushSize, lastBrushSize;
 
     /**
      * Create new drawing view with context and attributes and setting up the
@@ -117,6 +116,7 @@ public class DrawingView extends View {
         brushSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 newSize, getResources().getDisplayMetrics());
         drawPaint.setStrokeWidth(brushSize);
+        lastBrushSize = brushSize;
     }
 
     /**
@@ -124,15 +124,6 @@ public class DrawingView extends View {
      */
     public float getLastBrushSize() {
         return lastBrushSize;
-    }
-
-    /**
-     * Set last brush size
-     *
-     * @param lastSize the brush size
-     */
-    public void setLastBrushSize(float lastSize) {
-        lastBrushSize = lastSize;
     }
 
     /**
