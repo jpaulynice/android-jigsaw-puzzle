@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.test.ActivityInstrumentationTestCase2;
 import android.test.RenamingDelegatingContext;
 
-import com.jigdraw.draw.model.LongParceable;
+import com.jigdraw.draw.model.LongParcelable;
 
 /**
  * Unit test for jigsaw activity class
@@ -26,7 +26,7 @@ public class JigsawActivityTest extends
                 (this.getInstrumentation().getTargetContext()
                         .getApplicationContext(), "test_");
         setActivityIntent(new Intent(context, JigsawActivity.class).putExtra(
-                "originalId", new LongParceable(1L)));
+                "originalId", new LongParcelable(1L)));
         activity = getActivity();
     }
 

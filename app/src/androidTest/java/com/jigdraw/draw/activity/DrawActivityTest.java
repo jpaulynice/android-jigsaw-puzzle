@@ -32,11 +32,11 @@ public class DrawActivityTest extends
 
     public void testControlsVisible() {
         Log.d(TAG, "testing ui controls visible...");
-        for (View v : activity.getTopButtons()) {
+        for (View v : activity.getTopOptions()) {
             assertTrue(View.VISIBLE == v.getVisibility());
         }
 
-        for (View b : activity.getBottomButtons()) {
+        for (View b : activity.getBrushes()) {
             assertTrue(View.VISIBLE == b.getVisibility());
         }
     }

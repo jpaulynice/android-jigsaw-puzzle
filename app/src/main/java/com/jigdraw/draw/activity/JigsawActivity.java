@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 
 import com.jigdraw.draw.R;
-import com.jigdraw.draw.model.LongParceable;
+import com.jigdraw.draw.model.LongParcelable;
 import com.jigdraw.draw.tasks.JigsawLoader;
 import com.jigdraw.draw.views.JigsawGridView;
 
@@ -38,7 +38,7 @@ public class JigsawActivity extends BaseJigsawActivity {
                 .jigsaw_grid);
 
         JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
-        LongParceable longParceable = getIntent().getExtras().getParcelable(
+        LongParcelable longParceable = getIntent().getExtras().getParcelable(
                 ORIGINAL_IMG_ID);
         task.execute(longParceable.getData());
 

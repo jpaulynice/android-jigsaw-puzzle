@@ -183,15 +183,15 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * @param color the chosen color
      */
     private void setBrushColor(int color) {
-        for (View v : getBottomButtons()) {
+        for (View v : getBrushes()) {
             ImageButton im = (ImageButton) v;
             GradientDrawable d = (GradientDrawable) im.getDrawable();
             d.setColor(color);
         }
     }
 
-    public List<View> getBottomButtons() {
-        return getLayoutViews(R.id.all_brushes);
+    public List<View> getBrushes() {
+        return getLayoutChildren(R.id.all_brushes);
     }
 
     /**
@@ -210,16 +210,16 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         drawView = (DrawingView) findViewById(R.id.drawing);
         drawView.setBrushSize(getResources().getInteger(R.integer.medium_size));
 
-        for (View v : getTopButtons()) {
+        for (View v : getTopOptions()) {
             v.setOnClickListener(this);
         }
     }
 
-    public List<View> getTopButtons() {
-        return getLayoutViews(R.id.top_options);
+    public List<View> getTopOptions() {
+        return getLayoutChildren(R.id.top_options);
     }
 
-    private List<View> getLayoutViews(final int layoutId) {
+    private List<View> getLayoutChildren(final int layoutId) {
         List<View> views = new ArrayList<>();
         LinearLayout layout = (LinearLayout) findViewById(layoutId);
         int count = layout.getChildCount();

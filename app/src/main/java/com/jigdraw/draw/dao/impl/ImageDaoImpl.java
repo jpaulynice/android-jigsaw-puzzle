@@ -72,9 +72,10 @@ public class ImageDaoImpl implements ImageDao {
         Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ORIGINAL_SELECTION,
                 getIdArguments(id), null, null, null);
         entities.addAll(getAllFromCursor(cursor));
-
         cleanUp(cursor);
 
+        Log.d(TAG,"Found " + entities.size() + " tiles for the original id "
+                + id);
         return entities;
     }
 
@@ -99,9 +100,8 @@ public class ImageDaoImpl implements ImageDao {
                 null, null, null, null);
 
         List<ImageEntity> entities = getAllFromCursor(cursor);
-
         cleanUp(cursor);
-
+        Log.d(TAG, "Found " + entities.size() + " images from history");
         return entities;
     }
 
@@ -125,13 +125,12 @@ public class ImageDaoImpl implements ImageDao {
     }
 
     private ImageEntity getEntity(Cursor cursor) {
-        String name = cursor.getString(cursor.getColumnIndex(NAME_COLUMN));
-        String base64String = cursor.getString(cursor
-                .getColumnIndex(IMAGE_COLUMN));
-        String desc = cursor.getString(cursor.getColumnIndex(DESC_COLUMN));
-        Long originalId = cursor.getLong(cursor.getColumnIndex
-                (ORIGINAL_COLUMN));
-        Long id = cursor.getLong(cursor.getColumnIndex(ID_COLUMN));
+        String name = cursor.getString(getIndex(cursor, NAME_COLUMN));
+        String base64String = cursor.getString(getIndex(cursor,IMAGE_COLUMN));
+        String desc = cursor.getString(getIndex(cursor, DESC_COLUMN));
+
+        Long originalId = cursor.getLong(getIndex(cursor, ORIGINAL_COLUMN));
+        Long id = cursor.getLong(getIndex(cursor, ID_COLUMN));
 
         Log.d(TAG, "image entity found with name: " + name);
         ImageEntity entity = new ImageEntity(base64ToBitmap(base64String),
@@ -139,6 +138,10 @@ public class ImageDaoImpl implements ImageDao {
         entity.setId(id);
 
         return entity;
+    }
+
+    private int getIndex(final Cursor cursor, final String col){
+        return cursor.getColumnIndex(col);
     }
 
     private void cleanUp(Cursor cursor) {
