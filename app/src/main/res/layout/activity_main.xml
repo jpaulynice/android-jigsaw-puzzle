@@ -16,7 +16,7 @@
                 android:id="@+id/color_pick"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:contentDescription="@string/paint"
+                android:contentDescription="@string/options_paint"
                 android:background="@android:color/transparent"
                 android:src="@drawable/colors_pick"
                 android:layout_marginRight="20dp"/>
@@ -25,7 +25,7 @@
                 android:id="@+id/new_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:contentDescription="@string/start_new"
+                android:contentDescription="@string/options_new"
                 android:background="@android:color/transparent"
                 android:src="@drawable/new_img"
                 android:layout_marginRight="20dp"/>
@@ -34,7 +34,7 @@
                 android:id="@+id/erase_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:contentDescription="@string/erase"
+                android:contentDescription="@string/options_erase"
                 android:background="@android:color/transparent"
                 android:src="@drawable/erase"
                 android:layout_marginRight="20dp"/>
@@ -43,7 +43,7 @@
                 android:id="@+id/save_btn"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
-                android:contentDescription="@string/save"
+                android:contentDescription="@string/options_jigsaw"
                 android:background="@android:color/transparent"
                 android:src="@drawable/jigsaw"/>
     </LinearLayout>
@@ -74,7 +74,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1"
-                android:contentDescription="@string/sml"
+                android:contentDescription="@string/brush_sml"
                 android:onClick="handleBrushSize"
                 android:src="@drawable/small"/>
 
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
-                android:contentDescription="@string/med"
+                android:contentDescription="@string/brush_med"
                 android:onClick="handleBrushSize"
                 android:src="@drawable/medium"/>
 
@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:layout_weight="1"
-                android:contentDescription="@string/lrg"
+                android:contentDescription="@string/brush_lrg"
                 android:onClick="handleBrushSize"
                 android:src="@drawable/large"/>
 
@@ -103,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:contentDescription="@string/lrg"
+                android:contentDescription="@string/brush_lrgst"
                 android:onClick="handleBrushSize"
                 android:src="@drawable/largest"/>
     </LinearLayout>

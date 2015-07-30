@@ -78,7 +78,6 @@ public class DrawingView extends View {
             default:
                 return false;
         }
-        // redraw
         invalidate();
         return true;
     }
@@ -113,10 +112,10 @@ public class DrawingView extends View {
      * @param newSize the new color
      */
     public void setBrushSize(float newSize) {
+        lastBrushSize = brushSize;
         brushSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 newSize, getResources().getDisplayMetrics());
         drawPaint.setStrokeWidth(brushSize);
-        lastBrushSize = brushSize;
     }
 
     /**

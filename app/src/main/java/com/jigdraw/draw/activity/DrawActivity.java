@@ -59,7 +59,6 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
 
     private void handleColorPick() {
         drawView.setErase(false);
-        drawView.setBrushSize(drawView.getLastBrushSize());
         openColorPickerDialog(false);
     }
 
@@ -98,12 +97,11 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      */
     private void openNewDrawingDialog() {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
-        builder.title("New drawing")
+        builder.title(R.string.action_new_drawing)
                 .callback(getMDCallback())
-                .positiveText("Ok")
-                .negativeText("Cancel")
-                .content(("Start new drawing (you will lose the current "
-                        + "drawing)?"));
+                .positiveText(R.string.action_ok)
+                .negativeText(R.string.action_cancel)
+                .content((R.string.action_new_q));
         builder.show();
     }
 
@@ -127,12 +125,10 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      */
     private void openCreateJigsawDialog() {
         CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
-
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
-                .title("Difficulty:")
+                .title(R.string.level_difficulty)
                 .items(levels)
                 .itemsCallback(getMDListCallback());
-
         builder.show();
     }
 
