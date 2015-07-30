@@ -119,13 +119,6 @@ public class DrawingView extends View {
     }
 
     /**
-     * @return last brush size
-     */
-    public float getLastBrushSize() {
-        return lastBrushSize;
-    }
-
-    /**
      * Set erase to true when the erase button is clicked.
      *
      * @param isErase {@code true} if erase is clicked {@code false} otherwise
