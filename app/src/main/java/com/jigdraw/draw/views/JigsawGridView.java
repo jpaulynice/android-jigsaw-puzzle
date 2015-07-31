@@ -126,17 +126,6 @@ public class JigsawGridView extends GridView {
             }
         }
 
-        private void isScrollCompleted() {
-            if (mCurrentVisibleItemCount > 0
-                    && mCurrentScrollState == SCROLL_STATE_IDLE) {
-                if (mCellIsMobile && mIsMobileScrolling) {
-                    handleMobileCellScroll();
-                } else if (mIsWaitingForScrollFinish) {
-                    touchEventsEnded();
-                }
-            }
-        }
-
         public void checkAndHandleFirstVisibleCellChange() {
             if (mCurrentFirstVisibleItem != mPreviousFirstVisibleItem) {
                 if (mCellIsMobile && mMobileItemId != INVALID_ID) {
@@ -158,11 +147,31 @@ public class JigsawGridView extends GridView {
                 }
             }
         }
+
+        private void isScrollCompleted() {
+            if (mCurrentVisibleItemCount > 0
+                    && mCurrentScrollState == SCROLL_STATE_IDLE) {
+                if (mCellIsMobile && mIsMobileScrolling) {
+                    handleMobileCellScroll();
+                } else if (mIsWaitingForScrollFinish) {
+                    touchEventsEnded();
+                }
+            }
+        }
     };
 
     public JigsawGridView(Context context) {
         super(context);
         init(context);
+    }
+
+    public void init(Context context) {
+        super.setOnScrollListener(mScrollListener);
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        mSmoothScrollAmountAtEdge = (int) (SMOOTH_SCROLL_AMOUNT_AT_EDGE
+                * metrics.density + 0.5f);
+        mOverlapIfSwitchStraightLine = getResources().getDimensionPixelSize(
+                R.dimen.dgv_overlap_if_switch_straight_line);
     }
 
     public JigsawGridView(Context context, AttributeSet attrs) {
@@ -286,43 +295,26 @@ public class JigsawGridView extends GridView {
         mIsEditMode = true;
     }
 
-    public void stopEditMode() {
-        mIsEditMode = false;
-        requestDisallowInterceptTouchEvent(false);
+    private boolean isPostHoneycomb() {
+        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
     }
 
-    public boolean isEditMode() {
-        return mIsEditMode;
-    }
-
-    @Override
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        this.mUserItemClickListener = listener;
-        super.setOnItemClickListener(mLocalItemClickListener);
-    }
-
-    public void init(Context context) {
-        super.setOnScrollListener(mScrollListener);
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        mSmoothScrollAmountAtEdge = (int) (SMOOTH_SCROLL_AMOUNT_AT_EDGE
-                * metrics.density + 0.5f);
-        mOverlapIfSwitchStraightLine = getResources().getDimensionPixelSize(
-                R.dimen.dgv_overlap_if_switch_straight_line);
-    }
-
-    private void reorderElements(int originalPosition, int targetPosition) {
-        if (mDragListener != null)
-            mDragListener.onDragPositionsChanged(originalPosition,
-                    targetPosition);
-        getAdapterInterface().reorderItems(originalPosition, targetPosition);
-    }
-
-    private int getColumnCount() {
-        return getAdapterInterface().getColumnCount();
-    }
-
-    private GridAdapter getAdapterInterface() {
-        return ((GridAdapter) getAdapter());
+    private void startDragAtPosition(int position) {
+        mTotalOffsetY = 0;
+        mTotalOffsetX = 0;
+        int itemNum = position - getFirstVisiblePosition();
+        View selectedView = getChildAt(itemNum);
+        if (selectedView != null) {
+            mMobileItemId = getAdapter().getItemId(position);
+            mHoverCell = getAndAddHoverView(selectedView);
+            if (isPostHoneycomb())
+                selectedView.setVisibility(View.INVISIBLE);
+            mCellIsMobile = true;
+            updateNeighborViewsForId(mMobileItemId);
+            if (mDragListener != null) {
+                mDragListener.onDragStarted(position);
+            }
+        }
     }
 
     private BitmapDrawable getAndAddHoverView(View v) {
@@ -344,14 +336,6 @@ public class JigsawGridView extends GridView {
         return drawable;
     }
 
-    private Bitmap getBitmapFromView(View v) {
-        Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(),
-                Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(bitmap);
-        v.draw(canvas);
-        return bitmap;
-    }
-
     private void updateNeighborViewsForId(long itemId) {
         idList.clear();
         int draggedPos = getPositionForID(itemId);
@@ -362,6 +346,14 @@ public class JigsawGridView extends GridView {
         }
     }
 
+    private Bitmap getBitmapFromView(View v) {
+        Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(),
+                Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        v.draw(canvas);
+        return bitmap;
+    }
+
     public int getPositionForID(long itemId) {
         View v = getViewForId(itemId);
         if (v == null) {
@@ -369,6 +361,14 @@ public class JigsawGridView extends GridView {
         } else {
             return getPositionForView(v);
         }
+    }
+
+    private GridAdapter getAdapterInterface() {
+        return ((GridAdapter) getAdapter());
+    }
+
+    private long getId(int position) {
+        return getAdapter().getItemId(position);
     }
 
     public View getViewForId(long itemId) {
@@ -385,22 +385,26 @@ public class JigsawGridView extends GridView {
         return null;
     }
 
-    private void startDragAtPosition(int position) {
-        mTotalOffsetY = 0;
-        mTotalOffsetX = 0;
-        int itemNum = position - getFirstVisiblePosition();
-        View selectedView = getChildAt(itemNum);
-        if (selectedView != null) {
-            mMobileItemId = getAdapter().getItemId(position);
-            mHoverCell = getAndAddHoverView(selectedView);
-            if (isPostHoneycomb())
-                selectedView.setVisibility(View.INVISIBLE);
-            mCellIsMobile = true;
-            updateNeighborViewsForId(mMobileItemId);
-            if (mDragListener != null) {
-                mDragListener.onDragStarted(position);
-            }
-        }
+    public void stopEditMode() {
+        mIsEditMode = false;
+        requestDisallowInterceptTouchEvent(false);
+    }
+
+    public boolean isEditMode() {
+        return mIsEditMode;
+    }
+
+    @Override
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mUserItemClickListener = listener;
+        super.setOnItemClickListener(mLocalItemClickListener);
+    }
+
+    private void reorderElements(int originalPosition, int targetPosition) {
+        if (mDragListener != null)
+            mDragListener.onDragPositionsChanged(originalPosition,
+                    targetPosition);
+        getAdapterInterface().reorderItems(originalPosition, targetPosition);
     }
 
     private void handleMobileCellScroll() {
@@ -519,14 +523,6 @@ public class JigsawGridView extends GridView {
             }
         }
         invalidate();
-    }
-
-    private void updateEnableState() {
-        setEnabled(!mHoverAnimation && !mReorderAnimation);
-    }
-
-    private boolean isPostHoneycomb() {
-        return Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB;
     }
 
     private void touchEventsCancelled() {
@@ -680,10 +676,6 @@ public class JigsawGridView extends GridView {
         return new Point(column, row);
     }
 
-    private long getId(int position) {
-        return getAdapter().getItemId(position);
-    }
-
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void animateReorder(final int oldPosition, final int newPosition) {
         boolean isForward = newPosition > oldPosition;
@@ -736,6 +728,10 @@ public class JigsawGridView extends GridView {
         resultSet.start();
     }
 
+    private int getColumnCount() {
+        return getAdapterInterface().getColumnCount();
+    }
+
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private AnimatorSet createTranslationAnimations(View view, float startX,
                                                     float endX, float startY, float endY) {
@@ -746,6 +742,10 @@ public class JigsawGridView extends GridView {
         AnimatorSet animSetXY = new AnimatorSet();
         animSetXY.playTogether(animX, animY);
         return animSetXY;
+    }
+
+    private void updateEnableState() {
+        setEnabled(!mHoverAnimation && !mReorderAnimation);
     }
 
     private interface SwitchCellAnimator {

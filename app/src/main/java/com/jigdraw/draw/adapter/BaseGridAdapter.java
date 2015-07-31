@@ -24,6 +24,14 @@ public abstract class BaseGridAdapter extends AbstractGridAdapter {
     }
 
     @Override
+    public void reorderItems(int originalPosition, int newPosition) {
+        if (newPosition < getCount()) {
+            Collections.swap(items, originalPosition, newPosition);
+            notifyDataSetChanged();
+        }
+    }
+
+    @Override
     public int getCount() {
         return items.size();
     }
@@ -31,14 +39,6 @@ public abstract class BaseGridAdapter extends AbstractGridAdapter {
     @Override
     public Object getItem(int position) {
         return items.get(position);
-    }
-
-    @Override
-    public void reorderItems(int originalPosition, int newPosition) {
-        if (newPosition < getCount()) {
-            Collections.swap(items, originalPosition, newPosition);
-            notifyDataSetChanged();
-        }
     }
 
     @Override

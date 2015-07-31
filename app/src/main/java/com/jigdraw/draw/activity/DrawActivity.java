@@ -43,6 +43,59 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         init();
     }
 
+    /**
+     * Initialize all the ui components
+     */
+    private void init() {
+        setContentView(R.layout.activity_main);
+        initViews();
+        setBrushColor(drawView.getPaintColor());
+    }
+
+    /**
+     * Initialize views
+     */
+    private void initViews() {
+        drawView = (DrawingView) findViewById(R.id.drawing);
+        drawView.setBrushSize(getResources().getInteger(R.integer.medium_size));
+
+        for (View v : getTopOptions()) {
+            v.setOnClickListener(this);
+        }
+    }
+
+    /**
+     * Set the brushes to the color chosen
+     *
+     * @param color the chosen color
+     */
+    private void setBrushColor(int color) {
+        for (View v : getBrushes()) {
+            ImageButton im = (ImageButton) v;
+            GradientDrawable d = (GradientDrawable) im.getDrawable();
+            d.setColor(color);
+        }
+    }
+
+    public List<View> getTopOptions() {
+        return getLayoutChildren(R.id.top_options);
+    }
+
+    public List<View> getBrushes() {
+        return getLayoutChildren(R.id.all_brushes);
+    }
+
+    private List<View> getLayoutChildren(final int layoutId) {
+        List<View> views = new ArrayList<>();
+        LinearLayout layout = (LinearLayout) findViewById(layoutId);
+        int count = layout.getChildCount();
+        for (int i = 0; i < count; i++) {
+            views.add(layout.getChildAt(i));
+        }
+
+        return views;
+    }
+
     @Override
     public void onClick(View view) {
         Log.d(TAG, "view id clicked: " + view.getId());
@@ -60,29 +113,6 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     private void handleColorPick() {
         drawView.setErase(false);
         openColorPickerDialog(false);
-    }
-
-    private void openColorPickerDialog(boolean supportsAlpha) {
-        Log.d(TAG, "show color picker dialog...");
-        AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, drawView
-                .getPaintColor(), supportsAlpha, getColorPickerCallback());
-        dialog.show();
-    }
-
-    private AmbilWarnaDialog.OnAmbilWarnaListener getColorPickerCallback() {
-        return new AmbilWarnaDialog.OnAmbilWarnaListener() {
-            @Override
-            public void onCancel(AmbilWarnaDialog dialog) {
-                Log.d(TAG, "cancel clicked...");
-            }
-
-            @Override
-            public void onOk(AmbilWarnaDialog dialog, int color) {
-                Log.d(TAG, "selected color: " + color);
-                drawView.setColor(color);
-                setBrushColor(color);
-            }
-        };
     }
 
     /**
@@ -105,6 +135,27 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         builder.show();
     }
 
+    /**
+     * Handle the save button click
+     */
+    private void openCreateJigsawDialog() {
+        CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
+        MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
+                .title(R.string.level_difficulty)
+                .items(levels)
+                .itemsCallbackSingleChoice(0, getMDListCallback())
+                .positiveText(R.string.action_ok)
+                .negativeText(R.string.action_cancel);
+        builder.show();
+    }
+
+    private void openColorPickerDialog(boolean supportsAlpha) {
+        Log.d(TAG, "show color picker dialog...");
+        AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, drawView
+                .getPaintColor(), supportsAlpha, getColorPickerCallback());
+        dialog.show();
+    }
+
     private MaterialDialog.ButtonCallback getMDCallback() {
         return new MaterialDialog.ButtonCallback() {
             @Override
@@ -120,20 +171,6 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         };
     }
 
-    /**
-     * Handle the save button click
-     */
-    private void openCreateJigsawDialog() {
-        CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
-                .title(R.string.level_difficulty)
-                .items(levels)
-                .itemsCallbackSingleChoice(0, getMDListCallback())
-                .positiveText(R.string.action_ok)
-                .negativeText(R.string.action_cancel);
-        builder.show();
-    }
-
     private MaterialDialog.ListCallbackSingleChoice getMDListCallback() {
         return new MaterialDialog.ListCallbackSingleChoice() {
             @Override
@@ -141,6 +178,22 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
                                        int which, CharSequence text) {
                 createJigsaw(which);
                 return true;
+            }
+        };
+    }
+
+    private AmbilWarnaDialog.OnAmbilWarnaListener getColorPickerCallback() {
+        return new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            @Override
+            public void onCancel(AmbilWarnaDialog dialog) {
+                Log.d(TAG, "cancel clicked...");
+            }
+
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                Log.d(TAG, "selected color: " + color);
+                drawView.setColor(color);
+                setBrushColor(color);
             }
         };
     }
@@ -178,58 +231,5 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         }
         drawView.setErase(false);
         drawView.setBrushSize(bSize);
-    }
-
-    /**
-     * Set the brushes to the color chosen
-     *
-     * @param color the chosen color
-     */
-    private void setBrushColor(int color) {
-        for (View v : getBrushes()) {
-            ImageButton im = (ImageButton) v;
-            GradientDrawable d = (GradientDrawable) im.getDrawable();
-            d.setColor(color);
-        }
-    }
-
-    public List<View> getBrushes() {
-        return getLayoutChildren(R.id.all_brushes);
-    }
-
-    /**
-     * Initialize all the ui components
-     */
-    private void init() {
-        setContentView(R.layout.activity_main);
-        initViews();
-        setBrushColor(drawView.getPaintColor());
-    }
-
-    /**
-     * Initialize views
-     */
-    private void initViews() {
-        drawView = (DrawingView) findViewById(R.id.drawing);
-        drawView.setBrushSize(getResources().getInteger(R.integer.medium_size));
-
-        for (View v : getTopOptions()) {
-            v.setOnClickListener(this);
-        }
-    }
-
-    public List<View> getTopOptions() {
-        return getLayoutChildren(R.id.top_options);
-    }
-
-    private List<View> getLayoutChildren(final int layoutId) {
-        List<View> views = new ArrayList<>();
-        LinearLayout layout = (LinearLayout) findViewById(layoutId);
-        int count = layout.getChildCount();
-        for (int i = 0; i < count; i++) {
-            views.add(layout.getChildAt(i));
-        }
-
-        return views;
     }
 }

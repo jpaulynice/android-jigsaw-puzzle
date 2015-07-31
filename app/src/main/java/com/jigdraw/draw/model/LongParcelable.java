@@ -12,16 +12,16 @@ import android.os.Parcelable;
 public class LongParcelable implements Parcelable {
     public static final Parcelable.Creator<LongParcelable> CREATOR = new
             Parcelable.Creator<LongParcelable>() {
-        @Override
-        public LongParcelable createFromParcel(Parcel in) {
-            return new LongParcelable(in);
-        }
+                @Override
+                public LongParcelable createFromParcel(Parcel in) {
+                    return new LongParcelable(in);
+                }
 
-        @Override
-        public LongParcelable[] newArray(int size) {
-            return new LongParcelable[size];
-        }
-    };
+                @Override
+                public LongParcelable[] newArray(int size) {
+                    return new LongParcelable[size];
+                }
+            };
     private long data;
 
     public LongParcelable(long in) {

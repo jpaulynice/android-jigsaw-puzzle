@@ -25,6 +25,16 @@ public class ImageDaoTest extends AndroidTestCase {
         assertNotNull(id);
     }
 
+    private ImageEntity createImageEntity() {
+        ImageEntity e = new ImageEntity();
+        e.setName("name");
+        e.setDesc("description");
+        e.setOriginalId(null);
+        e.setImage(Bitmap.createBitmap(20, 20, Bitmap.Config.ARGB_8888));
+
+        return e;
+    }
+
     public void testGet() {
         Long id = dao.create(createImageEntity());
 
@@ -51,15 +61,5 @@ public class ImageDaoTest extends AndroidTestCase {
         dao.create(createImageEntity());
         List<ImageEntity> originals = dao.getHistory();
         assertFalse(originals.isEmpty());
-    }
-
-    private ImageEntity createImageEntity() {
-        ImageEntity e = new ImageEntity();
-        e.setName("name");
-        e.setDesc("description");
-        e.setOriginalId(null);
-        e.setImage(Bitmap.createBitmap(20, 20, Bitmap.Config.ARGB_8888));
-
-        return e;
     }
 }

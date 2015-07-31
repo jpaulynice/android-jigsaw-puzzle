@@ -74,7 +74,7 @@ public class ImageDaoImpl implements ImageDao {
         entities.addAll(getAllFromCursor(cursor));
         cleanUp(cursor);
 
-        Log.d(TAG,"Found " + entities.size() + " tiles for the original id "
+        Log.d(TAG, "Found " + entities.size() + " tiles for the original id "
                 + id);
         return entities;
     }
@@ -105,14 +105,6 @@ public class ImageDaoImpl implements ImageDao {
         return entities;
     }
 
-    private ImageEntity getEntityFromCursor(Cursor cursor) {
-        ImageEntity entity = null;
-        if (cursor != null && cursor.moveToFirst()) {
-            entity = getEntity(cursor);
-        }
-        return entity;
-    }
-
     private List<ImageEntity> getAllFromCursor(Cursor cursor) {
         List<ImageEntity> entities = new ArrayList<>();
         if (cursor != null) {
@@ -124,9 +116,23 @@ public class ImageDaoImpl implements ImageDao {
         return entities;
     }
 
+    private void cleanUp(Cursor cursor) {
+        if (cursor != null) {
+            cursor.close();
+        }
+    }
+
+    private ImageEntity getEntityFromCursor(Cursor cursor) {
+        ImageEntity entity = null;
+        if (cursor != null && cursor.moveToFirst()) {
+            entity = getEntity(cursor);
+        }
+        return entity;
+    }
+
     private ImageEntity getEntity(Cursor cursor) {
         String name = cursor.getString(getIndex(cursor, NAME_COLUMN));
-        String base64String = cursor.getString(getIndex(cursor,IMAGE_COLUMN));
+        String base64String = cursor.getString(getIndex(cursor, IMAGE_COLUMN));
         String desc = cursor.getString(getIndex(cursor, DESC_COLUMN));
 
         Long originalId = cursor.getLong(getIndex(cursor, ORIGINAL_COLUMN));
@@ -140,13 +146,7 @@ public class ImageDaoImpl implements ImageDao {
         return entity;
     }
 
-    private int getIndex(final Cursor cursor, final String col){
+    private int getIndex(final Cursor cursor, final String col) {
         return cursor.getColumnIndex(col);
-    }
-
-    private void cleanUp(Cursor cursor) {
-        if (cursor != null) {
-            cursor.close();
-        }
     }
 }

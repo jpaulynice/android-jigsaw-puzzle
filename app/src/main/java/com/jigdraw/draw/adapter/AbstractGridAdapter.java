@@ -16,14 +16,14 @@ public abstract class AbstractGridAdapter extends BaseAdapter implements
         return true;
     }
 
-    protected void addStableId(Object item) {
-        mIdMap.put(item, nextStableId++);
-    }
-
     protected void addAllStableId(List<?> items) {
         for (Object item : items) {
             addStableId(item);
         }
+    }
+
+    protected void addStableId(Object item) {
+        mIdMap.put(item, nextStableId++);
     }
 
     @Override
