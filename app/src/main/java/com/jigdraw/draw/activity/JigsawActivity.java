@@ -19,6 +19,7 @@ import com.jigdraw.draw.views.JigsawGridView;
 public class JigsawActivity extends BaseJigsawActivity {
     /** The original image id to look up for jigsaw */
     public static final String ORIGINAL_IMG_ID = "originalId";
+
     /** Class name for logging */
     private static final String TAG = "JigsawActivity";
 
