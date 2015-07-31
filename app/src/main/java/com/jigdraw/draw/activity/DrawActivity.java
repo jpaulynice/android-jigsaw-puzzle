@@ -128,16 +128,19 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
                 .title(R.string.level_difficulty)
                 .items(levels)
-                .itemsCallback(getMDListCallback());
+                .itemsCallbackSingleChoice(0, getMDListCallback())
+                .positiveText(R.string.action_ok)
+                .negativeText(R.string.action_cancel);
         builder.show();
     }
 
-    private MaterialDialog.ListCallback getMDListCallback() {
-        return new MaterialDialog.ListCallback() {
+    private MaterialDialog.ListCallbackSingleChoice getMDListCallback() {
+        return new MaterialDialog.ListCallbackSingleChoice() {
             @Override
-            public void onSelection(MaterialDialog dialog, View view,
-                                    int which, CharSequence text) {
+            public boolean onSelection(MaterialDialog dialog, View view,
+                                       int which, CharSequence text) {
                 createJigsaw(which);
+                return true;
             }
         };
     }
