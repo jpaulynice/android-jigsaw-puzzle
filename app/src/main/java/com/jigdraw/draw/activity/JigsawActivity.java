@@ -17,11 +17,10 @@ import com.jigdraw.draw.views.JigsawGridView;
  * @author Jay Paulynice
  */
 public class JigsawActivity extends BaseJigsawActivity {
+    /** The original image id to look up for jigsaw */
+    public static final String ORIGINAL_IMG_ID = "originalId";
     /** Class name for logging */
     private static final String TAG = "JigsawActivity";
-
-    /** The original image id to look up for jigsaw */
-    private static final String ORIGINAL_IMG_ID = "originalId";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +37,9 @@ public class JigsawActivity extends BaseJigsawActivity {
                 .jigsaw_grid);
 
         JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
-        LongParcelable longParceable = getIntent().getExtras().getParcelable(
+        LongParcelable longParcelable = getIntent().getExtras().getParcelable(
                 ORIGINAL_IMG_ID);
-        task.execute(longParceable.getData());
+        task.execute(longParcelable.getData());
 
         gridView.setOnItemLongClickListener(getOnItemLongClickListener
                 (gridView));
