@@ -7,7 +7,7 @@ Improved UI...added color picker and better dialogs
 
 ![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/color_picker.png)
 
-My attempt at drawing Simba
+My attempt at drawing Simba from The Lion King
 
 ![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/simba.png)
 
