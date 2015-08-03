@@ -42,6 +42,10 @@ public class JigsawHistoryActivity extends BaseJigsawActivity {
     public void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Staring jigsaw history activity...");
         super.onCreate(savedInstanceState);
+        init();
+    }
+    
+    private void init(){
         setContentView(R.layout.activity_history);
         initMenuBar();
         initViews();
