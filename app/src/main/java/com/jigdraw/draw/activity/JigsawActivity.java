@@ -43,6 +43,10 @@ public class JigsawActivity extends BaseJigsawActivity {
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Starting jigsaw activity...");
         super.onCreate(savedInstanceState);
+        init();
+    }
+    
+    private void init(){
         setContentView(R.layout.activity_jigsaw);
         initMenuBar();
         initGridView();
