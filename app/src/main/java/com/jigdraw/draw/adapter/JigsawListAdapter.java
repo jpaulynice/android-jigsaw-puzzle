@@ -28,7 +28,7 @@ import android.widget.ListView;
 import java.util.List;
 
 /**
- * Adapter for our jigsaw puzzle grid view
+ * Adapter for our jigsaw puzzle drawing list history view
  *
  * @author Jay Paulynice
  */
