@@ -5,7 +5,7 @@ Android-Jigsaw-Puzzle
 
 This is an Android app where a user can create a drawing then use it to create and solve jigsaw puzzles.  I have been slowly adding features and plan to complete it at some point.  
 
-The project started 3+ years ago when I was just curious about mobile development with Android...I refactor a lot and try to keep my code simple, clean, and well tested.  I plan to add a code style and contributing template at some point, but if you have ideas how to improve it, please feel free to send me a pull request.
+I refactor a lot and try to keep my code simple, clean, and well tested.  I plan to add a code style and contributing template at some point, but if you have ideas how to improve it, please feel free to send me a pull request.
 
 Thanks for looking!
 
