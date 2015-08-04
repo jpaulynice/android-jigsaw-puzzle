@@ -3,7 +3,9 @@ Android-Jigsaw-Puzzle
 
 [![Build Status](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle.svg)](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle)
 
-This is an Android app where a user can draw a picture then use the drawings to create and solve jigsaw puzzles.  I have been slowly adding features and plan to complete it soon.  The project started 3+ years ago when I was just curious about mobile development with Android, but has since gotten a bit of me.  I refactor a lot and try to keep my code simple, clean, and well tested.  All contributions are welcomed!  I plan to add a code style and contributing template at some point.  Thanks for looking!
+This is an Android app where a user can draw a picture then use the drawings to create and solve jigsaw puzzles.  I have been slowly adding features and plan to complete it at some point.  The project started 3+ years ago when I was just curious about mobile development with Android...I refactor a lot and try to keep my code simple, clean, and well tested.  All contributions are welcomed!  I plan to add a code style and contributing template at some point.  
+
+Thanks for looking!
 
 Improved UI...added color picker and better dialogs
 
