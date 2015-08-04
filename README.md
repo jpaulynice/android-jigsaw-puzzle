@@ -9,6 +9,9 @@ I refactor a lot and try to keep my code simple, clean, and well tested.  I plan
 
 Thanks for looking!
 
+#####Demo
+![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/demo.png)
+
 Improved UI...added color picker and better dialogs
 
 ![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/color_picker.png)
