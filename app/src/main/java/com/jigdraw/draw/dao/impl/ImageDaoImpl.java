@@ -78,8 +78,10 @@ public class ImageDaoImpl implements ImageDao {
     public ImageEntity find(Long id) {
         Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ID_SELECTION,
                 getIdArguments(id), null, null, null);
-
-        return getEntityFromCursor(cursor);
+        ImageEntity entity = getEntityFromCursor(cursor);
+        cleanUp(cursor);
+        
+        return entity;
     }
 
     @Override
@@ -99,6 +101,7 @@ public class ImageDaoImpl implements ImageDao {
     public int update(ImageEntity entity) {
         Log.d(TAG, "Updating entity with id: " + entity.getId());
         ContentValues cv = entityToContentValues(entity);
+        
         return db.update(JIGSAW_TABLE, cv, ID_SELECTION,
                 getIdArguments(entity.getId()));
     }
@@ -117,6 +120,7 @@ public class ImageDaoImpl implements ImageDao {
 
         List<ImageEntity> entities = getAllFromCursor(cursor);
         cleanUp(cursor);
+        
         Log.d(TAG, "Found " + entities.size() + " images from history");
         return entities;
     }
