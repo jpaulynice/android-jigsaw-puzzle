@@ -35,7 +35,7 @@ import com.jigdraw.draw.util.DBUtil;
  */
 public class JigsawDB extends SQLiteOpenHelper {
     /** tag name for logging */
-    private static final String TAG = "DBHelper";
+    private static final String TAG = "JigsawDB";
 
     /**
      * Create new db helper given application context
