@@ -45,8 +45,8 @@ public class JigsawActivity extends BaseJigsawActivity {
         super.onCreate(savedInstanceState);
         init();
     }
-    
-    private void init(){
+
+    private void init() {
         setContentView(R.layout.activity_jigsaw);
         initMenuBar();
         initGridView();
@@ -60,6 +60,10 @@ public class JigsawActivity extends BaseJigsawActivity {
         JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
         LongParcelable longParcelable = getIntent().getExtras().getParcelable(
                 ORIGINAL_IMG_ID);
+
+        if (longParcelable == null) {
+            throw new IllegalArgumentException("Parcelable can not be null.");
+        }
         task.execute(longParcelable.getData());
 
         gridView.setOnItemLongClickListener(getOnItemLongClickListener
