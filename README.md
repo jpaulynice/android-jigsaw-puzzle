@@ -3,7 +3,7 @@ Android-Jigsaw-Puzzle
 
 [![Build Status](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle.svg)](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle)
 
-This is an Android app where a user can create a drawing then use it to generate and solve jigsaw puzzles of various difficulty (easy, medium, hard).  I have been slowly adding features and plan to complete it at some point.  
+This is an Android app where a user draws something and use it to generate and solve jigsaw puzzles of various difficulties (easy, medium, hard).  I have been slowly adding features and plan to complete it at some point.  
 
 I refactor a lot and try to keep my code simple, clean, and well tested.  I plan to add a code style and contributing template at some point, but if you have ideas how to improve it, please feel free to send me a pull request.
 
