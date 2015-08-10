@@ -47,7 +47,7 @@ public class JigsawHistoryActivity extends BaseJigsawActivity {
 
     private void init() {
         setContentView(R.layout.activity_history);
-        initMenuBar();
+        enableMenuBarUpButton();
         initViews();
     }
 

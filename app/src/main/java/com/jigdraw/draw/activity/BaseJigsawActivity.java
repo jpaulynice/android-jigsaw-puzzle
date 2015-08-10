@@ -52,7 +52,7 @@ public abstract class BaseJigsawActivity extends Activity {
         return false;
     }
 
-    public void initMenuBar() {
+    public void enableMenuBarUpButton() {
         ActionBar bar = getActionBar();
         if (bar != null) {
             bar.setDisplayHomeAsUpEnabled(true);

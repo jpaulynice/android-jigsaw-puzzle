@@ -17,9 +17,11 @@
 package com.jigdraw.draw.activity;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Chronometer;
 
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.model.LongParcelable;
@@ -39,6 +41,8 @@ public class JigsawActivity extends BaseJigsawActivity {
     /** Class name for logging */
     private static final String TAG = "JigsawActivity";
 
+    private Chronometer chronometer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Starting jigsaw activity...");
@@ -48,7 +52,10 @@ public class JigsawActivity extends BaseJigsawActivity {
 
     private void init() {
         setContentView(R.layout.activity_jigsaw);
-        initMenuBar();
+        enableMenuBarUpButton();
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
         initGridView();
     }
 
