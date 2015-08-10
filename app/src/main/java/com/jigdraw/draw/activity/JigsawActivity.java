@@ -41,6 +41,7 @@ public class JigsawActivity extends BaseJigsawActivity {
     /** Class name for logging */
     private static final String TAG = "JigsawActivity";
 
+    /** Chronometer to display elapsed time */
     private Chronometer chronometer;
 
     @Override
@@ -50,16 +51,29 @@ public class JigsawActivity extends BaseJigsawActivity {
         init();
     }
 
+    /**
+     * Initialize all the views
+     */
     private void init() {
         setContentView(R.layout.activity_jigsaw);
         enableMenuBarUpButton();
+        initTimer();
+        initViews();
+    }
+
+    /**
+     * Initialize the chronometer
+     */
+    private void initTimer(){
         chronometer = (Chronometer) findViewById(R.id.chronometer);
         chronometer.setBase(SystemClock.elapsedRealtime());
         chronometer.start();
-        initGridView();
     }
 
-    private void initGridView() {
+    /**
+     * Initialize the jigsaw grid view
+     */
+    private void initViews() {
         Log.d(TAG, "initializing jigsaw grid view");
         final JigsawGridView gridView = (JigsawGridView) findViewById(R.id
                 .jigsaw_grid);
@@ -73,13 +87,16 @@ public class JigsawActivity extends BaseJigsawActivity {
         }
         task.execute(longParcelable.getData());
 
-        gridView.setOnItemLongClickListener(getOnItemLongClickListener
+        gridView.setOnItemLongClickListener(onItemLongClickListener
                 (gridView));
-        gridView.setOnDropListener(getOnDropListener(gridView));
-        gridView.setOnDragListener(getOnDragListener());
+        gridView.setOnDropListener(onDropListener(gridView));
+        gridView.setOnDragListener(onDragListener());
     }
 
-    private JigsawGridView.OnItemLongClickListener getOnItemLongClickListener(
+    /**
+     * Start edit mode when a view is clicked
+     */
+    private JigsawGridView.OnItemLongClickListener onItemLongClickListener(
             final JigsawGridView gridView) {
         return new AdapterView.OnItemLongClickListener() {
             @Override
@@ -91,7 +108,10 @@ public class JigsawActivity extends BaseJigsawActivity {
         };
     }
 
-    private JigsawGridView.OnDropListener getOnDropListener(
+    /**
+     * Stop edit mode when image is dropped
+     */
+    private JigsawGridView.OnDropListener onDropListener(
             final JigsawGridView gridView) {
         return new JigsawGridView.OnDropListener() {
             @Override
@@ -102,7 +122,10 @@ public class JigsawActivity extends BaseJigsawActivity {
         };
     }
 
-    private JigsawGridView.OnDragListener getOnDragListener() {
+    /**
+     * Listener when drag starts and position changed
+     */
+    private JigsawGridView.OnDragListener onDragListener() {
         return new JigsawGridView.OnDragListener() {
             @Override
             public void onDragStarted(int position) {

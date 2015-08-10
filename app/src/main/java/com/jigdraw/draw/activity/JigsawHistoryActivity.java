@@ -45,12 +45,18 @@ public class JigsawHistoryActivity extends BaseJigsawActivity {
         init();
     }
 
+    /**
+     * Initialize all the views
+     */
     private void init() {
         setContentView(R.layout.activity_history);
         enableMenuBarUpButton();
         initViews();
     }
 
+    /**
+     * Initialize jigsaw history list view
+     */
     private void initViews() {
         Log.d(TAG, "initializing history list view...");
         ListView lv = (ListView) findViewById(R.id.history_list);
@@ -61,20 +67,27 @@ public class JigsawHistoryActivity extends BaseJigsawActivity {
         task.execute();
 
         lv.setLongClickable(true);
-        lv.setOnItemLongClickListener(getOnItemLongClickListener());
-        lv.setOnItemClickListener(getOnItemClickListener());
+        lv.setOnItemLongClickListener(onItemLongClickListener());
+        lv.setOnItemClickListener(onItemClickListener());
     }
 
-    private OnItemLongClickListener getOnItemLongClickListener() {
+    /**
+     * Item long click listener for image click
+     */
+    private OnItemLongClickListener onItemLongClickListener() {
         return new OnItemLongClickListener() {
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            final int pos, long id) {
+                Log.d(TAG, "item long clicked element with id: " + id);
                 return true;
             }
         };
     }
 
-    private OnItemClickListener getOnItemClickListener() {
+    /**
+     * Item click listener for image click
+     */
+    private OnItemClickListener onItemClickListener() {
         return new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1,
