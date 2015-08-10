@@ -95,6 +95,8 @@ public class JigsawActivity extends BaseJigsawActivity {
 
     /**
      * Start edit mode when a view is clicked
+     *
+     * @param gridView the grid view
      */
     private JigsawGridView.OnItemLongClickListener onItemLongClickListener(
             final JigsawGridView gridView) {
@@ -110,6 +112,8 @@ public class JigsawActivity extends BaseJigsawActivity {
 
     /**
      * Stop edit mode when image is dropped
+     *
+     * @param gridView the grid view
      */
     private JigsawGridView.OnDropListener onDropListener(
             final JigsawGridView gridView) {
