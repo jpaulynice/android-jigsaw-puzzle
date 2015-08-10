@@ -21,6 +21,19 @@
               android:background="#ff080808"
               android:orientation="vertical"
               tools:context="com.jigdraw.draw.activity.JigsawActivity">
+    <LinearLayout
+            android:id="@+id/chron"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp">
+        <Chronometer
+                android:id="@+id/chronometer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#ffffff"
+                android:textSize="20sp"/>
+    </LinearLayout>
     <com.jigdraw.draw.views.JigsawGridView
             android:id="@+id/jigsaw_grid"
             android:layout_height="0dp"
@@ -33,18 +46,4 @@
             android:horizontalSpacing="1dp"
             android:verticalSpacing="1dp"
             />
-    <LinearLayout
-            android:id="@+id/chron"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center" android:layout_marginLeft="0dp"
-            android:layout_marginRight="0dp">
-        <Chronometer
-                android:id="@+id/chronometer"
-                android:format="%s"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="#ffffff"
-                android:textSize="40sp"/>
-    </LinearLayout>
 </LinearLayout>
