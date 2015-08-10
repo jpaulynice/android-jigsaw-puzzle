@@ -112,7 +112,7 @@ public class JigsawActivity extends BaseJigsawActivity {
     }
 
     /**
-     * Stop edit mode when image is dropped
+     * Listener to get hold of the drop event to stop the grid edit mode
      *
      * @param gridView the grid view
      * @return the drop listener
@@ -129,7 +129,8 @@ public class JigsawActivity extends BaseJigsawActivity {
     }
 
     /**
-     * Listener when drag starts and position changed
+     * Listener to get hold of the drag and position changed events
+     * 
      * @return the drag listener
      */
     private JigsawGridView.OnDragListener onDragListener() {
