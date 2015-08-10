@@ -64,7 +64,7 @@ public class JigsawActivity extends BaseJigsawActivity {
     /**
      * Initialize the chronometer
      */
-    private void initTimer(){
+    private void initTimer() {
         chronometer = (Chronometer) findViewById(R.id.chronometer);
         chronometer.setBase(SystemClock.elapsedRealtime());
         chronometer.start();
