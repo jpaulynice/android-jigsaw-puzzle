@@ -15,6 +15,7 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:bootstrap="http://schemas.android.com/apk/res-auto"
               xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
@@ -31,7 +32,7 @@
                 android:id="@+id/chronometer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="#ffffff"
+                android:textColor="#ffffff"
                 android:textSize="20sp"/>
     </LinearLayout>
     <com.jigdraw.draw.views.JigsawGridView
@@ -46,4 +47,42 @@
             android:horizontalSpacing="1dp"
             android:verticalSpacing="1dp"
             />
+    <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" android:layout_marginLeft="0dp"
+            android:layout_marginRight="0dp">
+        <com.beardedhen.androidbootstrap.FontAwesomeText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                bootstrap:fa_icon="fa-pause"
+                android:layout_margin="10dp"
+                android:textSize="20sp"
+                />
+        <com.beardedhen.androidbootstrap.FontAwesomeText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                bootstrap:fa_icon="fa-refresh"
+                android:layout_margin="10dp"
+                android:textSize="20sp"
+                />
+        <com.beardedhen.androidbootstrap.FontAwesomeText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                bootstrap:fa_icon="fa-rotate-left"
+                android:layout_margin="10dp"
+                android:textSize="20sp"
+                />
+        <com.beardedhen.androidbootstrap.FontAwesomeText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                bootstrap:fa_icon="fa-rotate-right"
+                android:layout_margin="10dp"
+                android:textSize="20sp"
+                />
+    </LinearLayout>
 </LinearLayout>

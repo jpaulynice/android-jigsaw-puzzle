@@ -47,6 +47,7 @@ dependencies {
     compile 'com.facebook.android:facebook-android-sdk:4.3.0'
     compile 'org.roboguice:roboguice:3.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
+    compile 'com.beardedhen:androidbootstrap:1.2.3'
     provided 'org.roboguice:roboblender:3.0'
 
     testCompile 'com.squareup.okhttp:mockwebserver:2.4.0'
