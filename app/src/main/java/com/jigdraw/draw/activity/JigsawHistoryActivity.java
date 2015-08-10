@@ -73,6 +73,8 @@ public class JigsawHistoryActivity extends BaseJigsawActivity {
 
     /**
      * Item long click listener for image click
+     *
+     * @return the item long click listener
      */
     private OnItemLongClickListener onItemLongClickListener() {
         return new OnItemLongClickListener() {
@@ -86,6 +88,8 @@ public class JigsawHistoryActivity extends BaseJigsawActivity {
 
     /**
      * Item click listener for image click
+     *
+     * @return the item click listener
      */
     private OnItemClickListener onItemClickListener() {
         return new OnItemClickListener() {
