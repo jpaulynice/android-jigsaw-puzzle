@@ -94,7 +94,7 @@ public class JigsawActivity extends BaseJigsawActivity {
     }
 
     /**
-     * Start edit mode when a view is clicked
+     * Listener to get hold of the click event to start the grid edit mode
      *
      * @param gridView the grid view
      * @return the item long click listener
