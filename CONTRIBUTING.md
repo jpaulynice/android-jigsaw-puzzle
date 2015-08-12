@@ -15,4 +15,4 @@ Currently using Android Studio 1.3 which is the official IDE for Android applica
 * [Boy Scout Rule](http://programmer.97things.oreilly.com/wiki/index.php/The_Boy_Scout_Rule)
 
 ### Code style:
-[Modified Google Code Style for IntelliJ](https://github.com/julesbond007/Android-Jigsaw-Puzzle/blob/master/codeStyle/intellij-java-style.xml).
+[Modified Google Code Style for IntelliJ](https://github.com/julesbond007/Android-Jigsaw-Puzzle/blob/master/codeStyle/intellij-java-style.xml)
