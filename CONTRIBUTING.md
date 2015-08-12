@@ -1,7 +1,7 @@
 #Thanks for wanting to contribute.
 Please follow the standard GitHub [fork & pull](https://help.github.com/articles/using-pull-requests/#fork--pull) approach to pull requests. Just fork the official repo, develop in a branch, and submit a PR!
 
-#IDE
+###IDE
 Currently using Android Studio 1.3 which is the official IDE for Android application development.
 
 ### General code standards:
