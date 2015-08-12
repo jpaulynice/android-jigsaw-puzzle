@@ -1,5 +1,9 @@
 #Thanks for your contribution!
-Gneral approach to pull requests: fork the repo, develop in your branch, and submit a PR!
+Gneral approach to pull requests: 
+* fork the repo
+* develop in your branch
+* submit a PR!
+
 More info: GitHub [fork & pull](https://help.github.com/articles/using-pull-requests/#fork--pull) 
 
 ###IDE
