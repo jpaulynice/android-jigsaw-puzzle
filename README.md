@@ -5,7 +5,7 @@ Android-Jigsaw-Puzzle
 
 This is an Android app where a user draws something and use it to generate and solve jigsaw puzzles of various difficulties (easy, medium, hard).  I have been slowly adding features and plan to complete it at some point.  
 
-I refactor a lot and try to keep my code simple, clean, and well tested.  I plan to add a code style and contributing template at some point, but if you have ideas how to improve it, please feel free to send me a pull request.
+I refactor a lot and try to keep my code simple, clean, and well tested.  I've added a contributing and code style templates so if you have ideas how to improve it, please feel free to send me a pull request.
 
 Thanks for looking!
 
