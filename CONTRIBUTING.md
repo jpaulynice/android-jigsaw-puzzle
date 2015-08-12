@@ -7,7 +7,7 @@ Gneral approach to pull requests:
 More info: GitHub [fork & pull](https://help.github.com/articles/using-pull-requests/#fork--pull) 
 
 ###IDE
-Currently using Android Studio 1.3 which is the official IDE for Android application development.
+Currently using [Android Studio](http://developer.android.com/tools/studio/index.html) v1.3 which is the official IDE for Android application development.
 
 ### General code standards:
 * [DRY](http://programmer.97things.oreilly.com/wiki/index.php/Don%27t_Repeat_Yourself)
