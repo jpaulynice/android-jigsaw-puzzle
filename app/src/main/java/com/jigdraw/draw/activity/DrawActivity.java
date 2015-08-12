@@ -236,7 +236,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         JigsawGenerator task = new JigsawGenerator(getApplicationContext(),
                 Difficulty.fromValue(which));
 
-        shortToast(getApplicationContext(), "Loading jigsaw puzzle...");
+        shortToast(getApplicationContext(), "Loading...");
         task.execute(bitmap.copy(bitmap.getConfig(), true));
         drawView.destroyDrawingCache();
     }
