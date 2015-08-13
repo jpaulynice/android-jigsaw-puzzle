@@ -52,6 +52,9 @@ public abstract class BaseJigsawActivity extends Activity {
         return false;
     }
 
+    /**
+     * Enable the go back to parent activity in menu bar
+     */
     public void enableMenuBarUpButton() {
         ActionBar bar = getActionBar();
         if (bar != null) {
