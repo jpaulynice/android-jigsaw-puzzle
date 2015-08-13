@@ -40,8 +40,8 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 
 /**
  * Main activity class represents all the activities that a user starts with
- * such as draw, choose to create a new drawing, save the current drawing,
- * choose eraser and brush sizes etc.
+ * such as draw, create a new drawing, save the current drawing, choose eraser,
+ * brush sizes and create a jigsaw puzzle.
  *
  * @author Jay Paulynice
  */
@@ -69,7 +69,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Initialize views
+     * Initialize all the views
      */
     private void initViews() {
         drawView = (DrawingView) findViewById(R.id.drawing);
@@ -94,7 +94,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Get the top level view buttons
+     * Get the top level view image buttons
      *
      * @return the top layout views
      */
@@ -103,7 +103,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Get the brush size views
+     * Get the brush size image buttons
      *
      * @return the top level views
      */
@@ -111,6 +111,13 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         return getLayoutChildren(R.id.all_brushes);
     }
 
+    /**
+     * Helper method to get all the views in a layout given 
+     * the layout id.
+     * 
+     * @param layoutId the id of the layout
+     * @return list of views in the layout
+     */
     private List<View> getLayoutChildren(final int layoutId) {
         List<View> views = new ArrayList<>();
         LinearLayout layout = (LinearLayout) findViewById(layoutId);
@@ -136,6 +143,9 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         }
     }
 
+    /**
+     * Handle the paint bucket click
+     */
     private void handleColorPick() {
         drawView.setErase(false);
         openColorPickerDialog(false);
@@ -149,7 +159,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Handle the new button click
+     * Handle the new button click and open dialog
      */
     private void openNewDrawingDialog() {
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
@@ -162,7 +172,8 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Handle the save button click
+     * Handle the create jigsaw button click and open dialog to choose 
+     * difficulty level
      */
     private void openCreateJigsawDialog() {
         CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
@@ -175,6 +186,11 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         builder.show();
     }
 
+    /**
+     * Create new dialog for color picker and show it
+     * 
+     * @param supportsAlpha whether to handle alpha
+     */
     private void openColorPickerDialog(boolean supportsAlpha) {
         Log.d(TAG, "show color picker dialog...");
         AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, drawView
@@ -182,6 +198,13 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         dialog.show();
     }
 
+    /**
+     * Call back to handle the positive and negative clicks on the 
+     * dialog.  On positive click start a new drawing and negative 
+     * click just cancel.
+     * 
+     * @return button call back
+     */
     private MaterialDialog.ButtonCallback getMDCallback() {
         return new MaterialDialog.ButtonCallback() {
             @Override
@@ -197,6 +220,12 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         };
     }
 
+    /**
+     * Call back to handle the create jigsaw puzzle after choosing a 
+     * difficulty level.
+     * 
+     * @return button call back
+     */
     private MaterialDialog.ListCallbackSingleChoice getMDListCallback() {
         return new MaterialDialog.ListCallbackSingleChoice() {
             @Override
@@ -208,6 +237,12 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         };
     }
 
+    /**
+     * Call back to handle the color picked and update the view and brush 
+     * size colors.
+     * 
+     * @return button call back
+     */
     private AmbilWarnaDialog.OnAmbilWarnaListener getColorPickerCallback() {
         return new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
