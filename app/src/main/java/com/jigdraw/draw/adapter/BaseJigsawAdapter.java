@@ -22,13 +22,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class BaseGridAdapter extends AbstractGridAdapter {
+public abstract class BaseJigsawAdapter extends AbstractAdapter {
     private Context context;
     private List<Object> items = new ArrayList<>();
 
     private int columns;
 
-    public BaseGridAdapter(Context context, List<?> items, int columnCount) {
+    public BaseJigsawAdapter(Context context, List<?> items, int columnCount) {
         this.context = context;
         this.columns = columnCount;
         init(items);
@@ -60,11 +60,6 @@ public abstract class BaseGridAdapter extends AbstractGridAdapter {
     @Override
     public int getColumnCount() {
         return columns;
-    }
-
-    @Override
-    public boolean canReorder(int position) {
-        return true;
     }
 
     protected Context getContext() {

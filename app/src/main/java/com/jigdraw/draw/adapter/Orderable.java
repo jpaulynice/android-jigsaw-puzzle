@@ -16,7 +16,7 @@
 
 package com.jigdraw.draw.adapter;
 
-public interface GridAdapter {
+public interface Orderable {
     void reorderItems(int originalPosition, int newPosition);
 
     int getColumnCount();

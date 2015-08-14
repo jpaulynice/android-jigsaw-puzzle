@@ -31,21 +31,26 @@ import java.util.List;
  *
  * @author Jay Paulynice
  */
-public class JigsawGridAdapter extends BaseGridAdapter {
+public class JigsawGridAdapter extends BaseJigsawAdapter {
     private Context context;
-    private List<Bitmap> tiles;
+    private List<Bitmap> items;
 
-    public JigsawGridAdapter(Context context, List<Bitmap> tiles, int count) {
-        super(context, tiles, count);
+    public JigsawGridAdapter(Context context, List<Bitmap> items, int count) {
+        super(context, items, count);
         this.context = context;
-        this.tiles = tiles;
+        this.items = items;
+    }
+
+    @Override
+    public boolean canReorder(int position) {
+        return true;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView view;
         if (convertView == null) {
-            Bitmap d = tiles.get(position);
+            Bitmap d = items.get(position);
 
             view = new ImageView(context);
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);

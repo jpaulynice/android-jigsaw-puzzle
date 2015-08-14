@@ -21,8 +21,8 @@ import android.widget.BaseAdapter;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class AbstractGridAdapter extends BaseAdapter implements
-        GridAdapter {
+public abstract class AbstractAdapter extends BaseAdapter implements
+        Orderable {
     public static final int INVALID_ID = -1;
     private int nextStableId = 0;
     private HashMap<Object, Integer> mIdMap = new HashMap<>();
