@@ -59,7 +59,8 @@ public class JigsawHistoryLoader extends AsyncTask<Long, Integer,
 
     @Override
     protected void onPostExecute(List<Bitmap> tiles) {
-        JigsawListAdapter adapter = new JigsawListAdapter(context, tiles);
+        JigsawListAdapter adapter = new JigsawListAdapter(context, tiles,
+                tiles.size());
         listView.setAdapter(adapter);
     }
 }

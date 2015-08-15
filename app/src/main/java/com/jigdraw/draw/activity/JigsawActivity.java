@@ -29,8 +29,16 @@ import com.jigdraw.draw.tasks.JigsawLoader;
 import com.jigdraw.draw.views.JigsawGridView;
 
 /**
- * Represents the jigsaw puzzle solving activity.  After a user creates a
- * drawing then selects the difficulty of the jigsaw and this activity starts.
+ * Represents the jigsaw puzzle solving activity.  A user creates a drawing 
+ * then selects a difficulty level (easy, medium, hard). On selecting ok, 
+ * this activity starts.  
+ * <p>
+ * To initialize the puzzle grid, we create an asynchronous task to load the 
+ * images from the database, randomize the views and render them in the grid.
+ * <p>
+ * The images are stored in the local SQLite DB as Base64 encoded strings.  
+ * In the future, the ideal thing would be to offload the data through a 
+ * REST API to a central MySQL, PostGreSQL or NoSql database.
  *
  * @author Jay Paulynice
  */
@@ -130,7 +138,7 @@ public class JigsawActivity extends BaseJigsawActivity {
 
     /**
      * Listener to get hold of the drag and position changed events
-     * 
+     *
      * @return the drag listener
      */
     private JigsawGridView.OnDragListener onDragListener() {

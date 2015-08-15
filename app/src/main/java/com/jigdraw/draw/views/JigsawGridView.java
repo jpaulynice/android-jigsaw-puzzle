@@ -45,7 +45,7 @@ import android.widget.GridView;
 import android.widget.ListAdapter;
 
 import com.jigdraw.draw.R;
-import com.jigdraw.draw.adapter.GridAdapter;
+import com.jigdraw.draw.adapter.OrderableAdapter;
 import com.jigdraw.draw.util.GridUtil;
 
 import java.util.ArrayList;
@@ -377,8 +377,8 @@ public class JigsawGridView extends GridView {
         }
     }
 
-    private GridAdapter getAdapterInterface() {
-        return ((GridAdapter) getAdapter());
+    private OrderableAdapter getAdapterInterface() {
+        return ((OrderableAdapter) getAdapter());
     }
 
     private long getId(int position) {
@@ -606,7 +606,7 @@ public class JigsawGridView extends GridView {
             final int originalPosition = getPositionForView(mMobileView);
             int targetPosition = getPositionForView(targetView);
 
-            final GridAdapter adapter = getAdapterInterface();
+            final OrderableAdapter adapter = getAdapterInterface();
             if (targetPosition == INVALID_POSITION
                     || !adapter.canReorder(originalPosition)
                     || !adapter.canReorder(targetPosition)) {

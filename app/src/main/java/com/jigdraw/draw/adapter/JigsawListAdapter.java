@@ -21,7 +21,6 @@ import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
@@ -32,35 +31,26 @@ import java.util.List;
  *
  * @author Jay Paulynice
  */
-public class JigsawListAdapter extends BaseAdapter {
+public class JigsawListAdapter extends BaseJigsawAdapter {
     private Context context;
-    private List<Bitmap> tiles;
+    private List<Bitmap> items;
 
-    public JigsawListAdapter(Context context, List<Bitmap> tiles) {
+    public JigsawListAdapter(Context context, List<Bitmap> items, int count) {
+        super(context, items, count);
         this.context = context;
-        this.tiles = tiles;
+        this.items = items;
     }
 
     @Override
-    public int getCount() {
-        return tiles.size();
-    }
-
-    @Override
-    public Object getItem(int position) {
-        return tiles.get(position);
-    }
-
-    @Override
-    public final long getItemId(int position) {
-        return position;
+    public boolean canReorder(int position) {
+        return false;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView view;
         if (convertView == null) {
-            Bitmap d = tiles.get(position);
+            Bitmap d = items.get(position);
             view = new ImageView(context);
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);
             view.setLayoutParams(new ListView.LayoutParams(d.getWidth(), d
@@ -71,9 +61,5 @@ public class JigsawListAdapter extends BaseAdapter {
         }
 
         return view;
-    }
-
-    protected Context getContext() {
-        return context;
     }
 }

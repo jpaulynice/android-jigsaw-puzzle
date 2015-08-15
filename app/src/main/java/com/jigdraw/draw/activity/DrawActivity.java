@@ -112,9 +112,8 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Helper method to get all the views in a layout given 
-     * the layout id.
-     * 
+     * Helper method to get all the views in a layout given the layout id.
+     *
      * @param layoutId the id of the layout
      * @return list of views in the layout
      */
@@ -172,7 +171,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Handle the create jigsaw button click and open dialog to choose 
+     * Handle the create jigsaw button click and open dialog to choose
      * difficulty level
      */
     private void openCreateJigsawDialog() {
@@ -188,7 +187,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
 
     /**
      * Create new dialog for color picker and show it
-     * 
+     *
      * @param supportsAlpha whether to handle alpha
      */
     private void openColorPickerDialog(boolean supportsAlpha) {
@@ -199,10 +198,9 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Call back to handle the positive and negative clicks on the 
-     * dialog.  On positive click start a new drawing and negative 
-     * click just cancel.
-     * 
+     * Call back to handle the positive and negative clicks on the dialog.  On
+     * positive click start a new drawing and negative click just cancel.
+     *
      * @return button call back
      */
     private MaterialDialog.ButtonCallback getMDCallback() {
@@ -221,9 +219,9 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Call back to handle the create jigsaw puzzle after choosing a 
-     * difficulty level.
-     * 
+     * Call back to handle the create jigsaw puzzle after choosing a difficulty
+     * level.
+     *
      * @return button call back
      */
     private MaterialDialog.ListCallbackSingleChoice getMDListCallback() {
@@ -238,9 +236,9 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Call back to handle the color picked and update the view and brush 
-     * size colors.
-     * 
+     * Call back to handle the color picked and update the view and brush size
+     * colors.
+     *
      * @return button call back
      */
     private AmbilWarnaDialog.OnAmbilWarnaListener getColorPickerCallback() {
