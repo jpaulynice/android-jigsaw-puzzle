@@ -27,7 +27,7 @@ import com.jigdraw.draw.model.enums.Difficulty;
  */
 public interface JigsawService {
     /**
-     * Create jisaw puzzle from given original image and difficulty level
+     * Create jigsaw puzzle from given original image and difficulty level
      *
      * @param original the original image to create jigsaw puzzle
      * @param level difficulty level
