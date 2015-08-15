@@ -1,5 +1,5 @@
 #Thanks for your contribution!
-Gneral approach to pull requests: 
+General approach to pull requests: 
 * fork the repo
 * develop in your branch
 * submit a PR!
