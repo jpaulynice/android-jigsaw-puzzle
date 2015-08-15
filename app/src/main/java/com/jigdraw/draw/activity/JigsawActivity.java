@@ -38,7 +38,7 @@ import com.jigdraw.draw.views.JigsawGridView;
  * <p>
  * The images are stored in the local SQLite DB as Base64 encoded strings.  
  * In the future, the ideal thing would be to offload the data through a 
- * REST API to a central MySQL, PostGreSQL or NoSql database.
+ * REST API to a central MySQL, PostGreSQL or NoSQL database.
  *
  * @author Jay Paulynice
  */
