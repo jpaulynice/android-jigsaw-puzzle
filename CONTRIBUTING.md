@@ -15,4 +15,6 @@ Currently using [Android Studio](http://developer.android.com/sdk/index.html) v1
 * [Boy Scout Rule](http://programmer.97things.oreilly.com/wiki/index.php/The_Boy_Scout_Rule)
 
 ### Code style:
-[Modified Google Code Style for IntelliJ](https://github.com/julesbond007/Android-Jigsaw-Puzzle/blob/master/codeStyle/intellij-java-style.xml)
+[Modified Google Code Style for IntelliJ](https://github.com/julesbond007/Android-Jigsaw-Puzzle/blob/master/codeStyle/intellij-java-style.xml) 
+
+Code style folder: /Library/Preferences/AndroidStudio1.3/codestyles
