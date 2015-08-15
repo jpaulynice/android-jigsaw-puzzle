@@ -130,7 +130,7 @@ public class JigsawActivity extends BaseJigsawActivity {
 
     /**
      * Listener to get hold of the drag and position changed events
-     * 
+     *
      * @return the drag listener
      */
     private JigsawGridView.OnDragListener onDragListener() {
