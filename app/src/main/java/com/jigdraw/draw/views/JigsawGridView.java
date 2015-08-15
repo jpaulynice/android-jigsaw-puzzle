@@ -16,6 +16,8 @@
 
 package com.jigdraw.draw.views;
 
+import static com.jigdraw.draw.util.Constants.*;
+
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
@@ -51,10 +53,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class JigsawGridView extends GridView {
-    private static final int INVALID_ID = -1;
-    private static final int MOVE_DURATION = 300;
-    private static final int SMOOTH_SCROLL_AMOUNT_AT_EDGE = 8;
-
     private BitmapDrawable mHoverCell;
     private Rect mHoverCellCurrentBounds;
     private Rect mHoverCellOriginalBounds;
