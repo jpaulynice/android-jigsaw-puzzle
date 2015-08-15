@@ -62,8 +62,4 @@ public class JigsawListAdapter extends BaseJigsawAdapter {
 
         return view;
     }
-
-    protected Context getContext() {
-        return context;
-    }
 }
