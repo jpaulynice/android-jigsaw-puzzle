@@ -175,10 +175,9 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * difficulty level
      */
     private void openCreateJigsawDialog() {
-        CharSequence levels[] = new CharSequence[]{"Easy", "Medium", "Hard"};
         MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
                 .title(R.string.level_difficulty)
-                .items(levels)
+                .items(new CharSequence[]{"Easy", "Medium", "Hard"})
                 .itemsCallbackSingleChoice(0, getMDListCallback())
                 .positiveText(R.string.action_ok)
                 .negativeText(R.string.action_cancel);
