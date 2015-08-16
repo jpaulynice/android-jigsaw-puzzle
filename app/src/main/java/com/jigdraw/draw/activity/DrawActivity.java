@@ -161,13 +161,13 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * Handle the new button click and open dialog
      */
     private void openNewDrawingDialog() {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(this);
-        builder.title(R.string.action_new_drawing)
+        new MaterialDialog.Builder(this)
+                .title(R.string.action_new_drawing)
                 .callback(getMDCallback())
                 .positiveText(R.string.action_ok)
                 .negativeText(R.string.action_cancel)
-                .content((R.string.action_new_q));
-        builder.show();
+                .content((R.string.action_new_q))
+                .show();
     }
 
     /**
@@ -175,13 +175,13 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * difficulty level
      */
     private void openCreateJigsawDialog() {
-        MaterialDialog.Builder builder = new MaterialDialog.Builder(this)
+        new MaterialDialog.Builder(this)
                 .title(R.string.level_difficulty)
                 .items(new CharSequence[]{"Easy", "Medium", "Hard"})
                 .itemsCallbackSingleChoice(0, getMDListCallback())
                 .positiveText(R.string.action_ok)
-                .negativeText(R.string.action_cancel);
-        builder.show();
+                .negativeText(R.string.action_cancel)
+                .show();
     }
 
     /**
