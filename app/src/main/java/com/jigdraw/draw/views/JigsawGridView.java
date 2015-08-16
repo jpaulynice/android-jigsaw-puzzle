@@ -16,7 +16,9 @@
 
 package com.jigdraw.draw.views;
 
-import static com.jigdraw.draw.util.Constants.*;
+import static com.jigdraw.draw.util.Constants.INVALID_ID;
+import static com.jigdraw.draw.util.Constants.MOVE_DURATION;
+import static com.jigdraw.draw.util.Constants.SMOOTH_SCROLL_AMOUNT_AT_EDGE;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -89,11 +91,13 @@ public class JigsawGridView extends GridView {
     private OnDragListener mDragListener;
 
     private OnItemClickListener mUserItemClickListener;
-    private OnItemClickListener mLocalItemClickListener = new OnItemClickListener() {
+    private OnItemClickListener mLocalItemClickListener = new
+            OnItemClickListener() {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
                                 long id) {
-            if (!isEditMode() && isEnabled() && mUserItemClickListener != null) {
+            if (!isEditMode() && isEnabled() && mUserItemClickListener !=
+                    null) {
                 mUserItemClickListener.onItemClick(parent, view, position, id);
             }
         }
@@ -123,9 +127,11 @@ public class JigsawGridView extends GridView {
             mCurrentFirstVisibleItem = firstVisibleItem;
             mCurrentVisibleItemCount = visibleItemCount;
 
-            mPreviousFirstVisibleItem = (mPreviousFirstVisibleItem == -1) ? mCurrentFirstVisibleItem
+            mPreviousFirstVisibleItem = (mPreviousFirstVisibleItem == -1) ?
+                    mCurrentFirstVisibleItem
                     : mPreviousFirstVisibleItem;
-            mPreviousVisibleItemCount = (mPreviousVisibleItemCount == -1) ? mCurrentVisibleItemCount
+            mPreviousVisibleItemCount = (mPreviousVisibleItemCount == -1) ?
+                    mCurrentVisibleItemCount
                     : mPreviousVisibleItemCount;
 
             checkAndHandleFirstVisibleCellChange();
@@ -245,8 +251,10 @@ public class JigsawGridView extends GridView {
                 int deltaX = mLastEventX - mDownX;
 
                 if (mCellIsMobile) {
-                    mHoverCellCurrentBounds.offsetTo(mHoverCellOriginalBounds.left
-                            + deltaX + mTotalOffsetX, mHoverCellOriginalBounds.top
+                    mHoverCellCurrentBounds.offsetTo(
+                            mHoverCellOriginalBounds.left
+                                    + deltaX + mTotalOffsetX,
+                            mHoverCellOriginalBounds.top
                             + deltaY + mTotalOffsetY);
                     mHoverCell.setBounds(mHoverCellCurrentBounds);
                     invalidate();
@@ -278,7 +286,9 @@ public class JigsawGridView extends GridView {
                 break;
 
             case MotionEvent.ACTION_POINTER_UP:
-                pointerIndex = (event.getAction() & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT;
+                pointerIndex = (event.getAction() & MotionEvent
+                        .ACTION_POINTER_INDEX_MASK) >> MotionEvent
+                        .ACTION_POINTER_INDEX_SHIFT;
                 final int pointerId = event.getPointerId(pointerIndex);
                 if (pointerId == mActivePointerId) {
                     touchEventsEnded();
@@ -353,7 +363,8 @@ public class JigsawGridView extends GridView {
     private void updateNeighborViewsForId(long itemId) {
         idList.clear();
         int draggedPos = getPositionForID(itemId);
-        for (int pos = getFirstVisiblePosition(); pos <= getLastVisiblePosition(); pos++) {
+        for (int pos = getFirstVisiblePosition(); pos <=
+                getLastVisiblePosition(); pos++) {
             if (draggedPos != pos && getAdapterInterface().canReorder(pos)) {
                 idList.add(getId(pos));
             }
@@ -481,7 +492,8 @@ public class JigsawGridView extends GridView {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private void animateBounds(final View mobileView) {
         TypeEvaluator<Rect> sBoundEvaluator = new TypeEvaluator<Rect>() {
-            public Rect evaluate(float fraction, Rect startValue, Rect endValue) {
+            public Rect evaluate(float fraction, Rect startValue, Rect
+                    endValue) {
                 return new Rect(interpolate(startValue.left, endValue.left,
                         fraction), interpolate(startValue.top, endValue.top,
                         fraction), interpolate(startValue.right,
@@ -662,17 +674,20 @@ public class JigsawGridView extends GridView {
                 && targetColumnRowPair.x > mobileColumnRowPair.x;
     }
 
-    private boolean above(Point targetColumnRowPair, Point mobileColumnRowPair) {
+    private boolean above(Point targetColumnRowPair, Point
+            mobileColumnRowPair) {
         return targetColumnRowPair.y < mobileColumnRowPair.y
                 && targetColumnRowPair.x == mobileColumnRowPair.x;
     }
 
-    private boolean below(Point targetColumnRowPair, Point mobileColumnRowPair) {
+    private boolean below(Point targetColumnRowPair, Point
+            mobileColumnRowPair) {
         return targetColumnRowPair.y > mobileColumnRowPair.y
                 && targetColumnRowPair.x == mobileColumnRowPair.x;
     }
 
-    private boolean right(Point targetColumnRowPair, Point mobileColumnRowPair) {
+    private boolean right(Point targetColumnRowPair, Point
+            mobileColumnRowPair) {
         return targetColumnRowPair.y == mobileColumnRowPair.y
                 && targetColumnRowPair.x > mobileColumnRowPair.x;
     }
@@ -748,7 +763,8 @@ public class JigsawGridView extends GridView {
 
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     private AnimatorSet createTranslationAnimations(View view, float startX,
-                                                    float endX, float startY, float endY) {
+                                                    float endX, float startY,
+                                                    float endY) {
         ObjectAnimator animX = ObjectAnimator.ofFloat(view, "translationX",
                 startX, endX);
         ObjectAnimator animY = ObjectAnimator.ofFloat(view, "translationY",
@@ -787,7 +803,8 @@ public class JigsawGridView extends GridView {
         }
 
         @Override
-        public void animateSwitchCell(int originalPosition, int targetPosition) {
+        public void animateSwitchCell(int originalPosition, int
+                targetPosition) {
             mTotalOffsetY += mDeltaY;
             mTotalOffsetX += mDeltaX;
         }
@@ -811,7 +828,8 @@ public class JigsawGridView extends GridView {
             private final int mTargetPosition;
 
             AnimateSwitchViewOnPreDrawListener(final View previousMobileView,
-                                               final int originalPosition, final int targetPosition) {
+                                               final int originalPosition,
+                                               final int targetPosition) {
                 mPreviousMobileView = previousMobileView;
                 mOriginalPosition = originalPosition;
                 mTargetPosition = targetPosition;
