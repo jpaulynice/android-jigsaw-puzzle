@@ -1,6 +1,5 @@
 package com.jigdraw.draw.util;
 
-
 public class Constants {
     public static final int INVALID_ID = -1;
     public static final int MOVE_DURATION = 300;
