@@ -25,7 +25,6 @@ import java.util.List;
 public abstract class BaseJigsawAdapter extends AbstractAdapter {
     private Context context;
     private List<Object> items = new ArrayList<>();
-
     private int columns;
 
     public BaseJigsawAdapter(Context context, List<?> items, int columnCount) {
