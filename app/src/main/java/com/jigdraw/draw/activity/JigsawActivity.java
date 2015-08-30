@@ -65,17 +65,8 @@ public class JigsawActivity extends BaseJigsawActivity {
     private void init() {
         setContentView(R.layout.activity_jigsaw);
         enableMenuBarUpButton();
-        initTimer();
         initViews();
-    }
-
-    /**
-     * Initialize the chronometer
-     */
-    private void initTimer() {
-        chronometer = (Chronometer) findViewById(R.id.chronometer);
-        chronometer.setBase(SystemClock.elapsedRealtime());
-        chronometer.start();
+        initTimer();
     }
 
     /**
@@ -99,6 +90,15 @@ public class JigsawActivity extends BaseJigsawActivity {
                 (gridView));
         gridView.setOnDropListener(onDropListener(gridView));
         gridView.setOnDragListener(onDragListener());
+    }
+    
+    /**
+     * Initialize the chronometer
+     */
+    private void initTimer() {
+        chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometer.setBase(SystemClock.elapsedRealtime());
+        chronometer.start();
     }
 
     /**
