@@ -19,7 +19,7 @@ package com.jigdraw.draw.adapter;
 import android.widget.BaseAdapter;
 
 import java.util.HashMap;
-import java.uti.Map;
+import java.util.Map;
 import java.util.List;
 
 public abstract class AbstractAdapter extends BaseAdapter implements
