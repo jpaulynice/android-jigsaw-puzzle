@@ -21,7 +21,7 @@ import android.widget.BaseAdapter;
 import java.util.HashMap;
 import java.util.List;
 
-public abstract class AbstractAdapter extends BaseAdapter implements
+public abstract class AbstractBaseAdapter extends BaseAdapter implements
         OrderableAdapter {
     public static final int INVALID_ID = -1;
     private int nextStableId = 0;

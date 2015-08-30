@@ -22,13 +22,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public abstract class BaseJigsawAdapter extends AbstractAdapter {
+public abstract class JigsawBaseAdapter extends AbstractBaseAdapter {
     private Context context;
     private List<Object> items = new ArrayList<>();
 
     private int columns;
 
-    public BaseJigsawAdapter(Context context, List<?> items, int columnCount) {
+    public JigsawBaseAdapter(Context context, List<?> items, int columnCount) {
         this.context = context;
         this.columns = columnCount;
         init(items);
