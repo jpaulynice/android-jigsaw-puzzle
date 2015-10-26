@@ -3,6 +3,7 @@ buildscript {
         jcenter()
         mavenCentral()
         mavenLocal()
+        maven { url "https://jitpack.io" }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:1.1.0'
@@ -14,5 +15,6 @@ allprojects {
         jcenter()
         mavenCentral()
         mavenLocal()
+        maven { url "https://jitpack.io" }
     }
 }

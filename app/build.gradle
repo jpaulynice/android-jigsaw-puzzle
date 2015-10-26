@@ -41,14 +41,17 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:appcompat-v7:22.2.1'
-    compile 'com.afollestad:material-dialogs:0.7.7.0'
+    compile 'com.android.support:appcompat-v7:23.1.0'
     compile 'com.github.yukuku:ambilwarna:2.0'
     compile 'com.facebook.android:facebook-android-sdk:4.3.0'
     compile 'org.roboguice:roboguice:3.0'
     compile 'com.squareup.okhttp:okhttp:2.4.0'
     compile 'com.beardedhen:androidbootstrap:1.2.3'
     provided 'org.roboguice:roboblender:3.0'
+
+    compile('com.afollestad.material-dialogs:core:0.8.4.2@aar') {
+        transitive = true
+    }
 
     testCompile 'com.squareup.okhttp:mockwebserver:2.4.0'
     testCompile 'junit:junit:4.12'
