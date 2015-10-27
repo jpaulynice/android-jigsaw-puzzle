@@ -5,13 +5,13 @@ android:
       - build-tools-23.0.1
       - android-23
 before_script:
-  - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
+  - echo no | android create avd --force -n test -t android-23 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 before_install:
     - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
-    - echo yes | android update sdk --filter android-18 --no-ui --force > /dev/null
-    - echo yes | android update sdk --filter sysimg-18 --no-ui --force > /dev/null
+    - echo yes | android update sdk --filter android-23 --no-ui --force > /dev/null
+    - echo yes | android update sdk --filter sysimg-23 --no-ui --force > /dev/null
     - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
     - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
