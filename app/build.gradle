@@ -49,7 +49,7 @@ dependencies {
     compile 'com.beardedhen:androidbootstrap:1.2.3'
     provided 'org.roboguice:roboblender:3.0'
 
-    compile('com.afollestad.material-dialogs:core:0.8.4.2@aar') {
+    compile('com.afollestad.material-dialogs:core:0.8.5.1@aar') {
         transitive = true
     }
 

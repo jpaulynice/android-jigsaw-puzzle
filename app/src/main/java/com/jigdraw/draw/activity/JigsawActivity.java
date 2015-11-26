@@ -156,4 +156,8 @@ public class JigsawActivity extends BaseJigsawActivity {
             }
         };
     }
+
+    public void stopTimer() {
+        chronometer.stop();
+    }
 }

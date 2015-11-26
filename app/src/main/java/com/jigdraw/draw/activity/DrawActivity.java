@@ -21,12 +21,14 @@ import static com.jigdraw.draw.util.ToastUtil.shortToast;
 import android.graphics.Bitmap;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.model.enums.Difficulty;
@@ -162,8 +164,9 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      */
     private void openNewDrawingDialog() {
         new MaterialDialog.Builder(this)
+                .onPositive(newDrawing())
+                .onNegative(cancelNewDrawing())
                 .title(R.string.action_new_drawing)
-                .callback(getMDCallback())
                 .positiveText(R.string.action_ok)
                 .negativeText(R.string.action_cancel)
                 .content((R.string.action_new_q))
@@ -177,7 +180,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     private void openCreateJigsawDialog() {
         new MaterialDialog.Builder(this)
                 .title(R.string.level_difficulty)
-                .items(new CharSequence[]{"Easy", "Medium", "Hard"})
+                .items("Easy", "Medium", "Hard")
                 .itemsCallbackSingleChoice(0, getMDListCallback())
                 .positiveText(R.string.action_ok)
                 .negativeText(R.string.action_cancel)
@@ -202,17 +205,22 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      *
      * @return button call back
      */
-    private MaterialDialog.ButtonCallback getMDCallback() {
-        return new MaterialDialog.ButtonCallback() {
+    private MaterialDialog.SingleButtonCallback newDrawing() {
+        return new MaterialDialog.SingleButtonCallback() {
             @Override
-            public void onPositive(MaterialDialog dialog) {
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
                 drawView.startNew();
                 dialog.dismiss();
             }
+        };
+    }
 
+    private MaterialDialog.SingleButtonCallback cancelNewDrawing() {
+        return new MaterialDialog.SingleButtonCallback() {
             @Override
-            public void onNegative(MaterialDialog dialog) {
-                dialog.cancel();
+            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                drawView.startNew();
+                dialog.dismiss();
             }
         };
     }
