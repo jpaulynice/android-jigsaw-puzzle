@@ -219,7 +219,6 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         return new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                drawView.startNew();
                 dialog.dismiss();
             }
         };
