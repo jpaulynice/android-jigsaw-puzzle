@@ -164,8 +164,8 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      */
     private void openNewDrawingDialog() {
         new MaterialDialog.Builder(this)
-                .onPositive(newDrawing())
-                .onNegative(cancelNewDrawing())
+                .onPositive(newDialogClick())
+                .onNegative(newDialogClick())
                 .title(R.string.action_new_drawing)
                 .positiveText(R.string.action_ok)
                 .negativeText(R.string.action_cancel)
@@ -205,20 +205,13 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      *
      * @return button call back
      */
-    private MaterialDialog.SingleButtonCallback newDrawing() {
+    private MaterialDialog.SingleButtonCallback newDialogClick() {
         return new MaterialDialog.SingleButtonCallback() {
             @Override
             public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                drawView.startNew();
-                dialog.dismiss();
-            }
-        };
-    }
-
-    private MaterialDialog.SingleButtonCallback cancelNewDrawing() {
-        return new MaterialDialog.SingleButtonCallback() {
-            @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                if (DialogAction.POSITIVE.equals(which)) {
+                    drawView.startNew();
+                }
                 dialog.dismiss();
             }
         };
