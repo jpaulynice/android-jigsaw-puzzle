@@ -57,6 +57,7 @@
                 android:layout_height="wrap_content"
                 android:textColor="#ffffff"
                 bootstrap:fa_icon="fa-pause"
+                android:onClick="playPauseTimer"
                 android:layout_margin="10dp"
                 android:textSize="20sp"
                 />
