@@ -32,9 +32,13 @@ import com.jigdraw.draw.views.JigsawGridView;
 /**
  * Represents the jigsaw puzzle solving activity.  A user creates a drawing then
  * selects a difficulty level (easy, medium, hard). On selecting ok, this
- * activity starts. <p> To initialize the puzzle grid, we create an asynchronous
+ * activity starts.
+ * <p>
+ * To initialize the puzzle grid, we create an asynchronous
  * task to load the images from the database, randomize them and render them in
- * the grid. <p> The images are stored in the local SQLite DB as Base64 encoded
+ * the grid.
+ * <p>
+ * The images are stored in the local SQLite DB as Base64 encoded
  * strings. In the future, the ideal thing would be to offload the data through
  * a REST API to a central MySQL, PostGreSQL or NoSQL database.
  *
