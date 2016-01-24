@@ -175,15 +175,23 @@ public class JigsawActivity extends BaseJigsawActivity {
     public void playPauseTimer(View view) {
         FontAwesomeText v = (FontAwesomeText) view;
         if (state == JigsawState.RUNNING) {
-            state = JigsawState.PAUSED;
-            v.setIcon("fa-play");
-            chronometer.stop();
-            elapsedTime = SystemClock.elapsedRealtime() - chronometer.getBase();
+            pause(v);
         } else {
-            state = JigsawState.RUNNING;
-            v.setIcon("fa-pause");
-            chronometer.setBase(SystemClock.elapsedRealtime() - elapsedTime);
-            chronometer.start();
+            restart(v);
         }
+    }
+
+    private void pause(final FontAwesomeText v) {
+        state = JigsawState.PAUSED;
+        v.setIcon("fa-play");
+        chronometer.stop();
+        elapsedTime = SystemClock.elapsedRealtime() - chronometer.getBase();
+    }
+
+    private void restart(final FontAwesomeText v) {
+        state = JigsawState.RUNNING;
+        v.setIcon("fa-pause");
+        chronometer.setBase(SystemClock.elapsedRealtime() - elapsedTime);
+        chronometer.start();
     }
 }
