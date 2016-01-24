@@ -26,6 +26,7 @@ import android.widget.Chronometer;
 import com.beardedhen.androidbootstrap.FontAwesomeText;
 import com.jigdraw.draw.R;
 import com.jigdraw.draw.model.LongParcelable;
+import com.jigdraw.draw.model.enums.JigsawState;
 import com.jigdraw.draw.tasks.JigsawLoader;
 import com.jigdraw.draw.views.JigsawGridView;
 
@@ -55,7 +56,7 @@ public class JigsawActivity extends BaseJigsawActivity {
     private Chronometer chronometer;
 
     /** Used to get current state of the chronometer play or pause */
-    private State state = State.RUNNING;
+    private JigsawState state = JigsawState.RUNNING;
 
     /** Need to keep track of time to reset the chronometer */
     private long elapsedTime = 0L;
@@ -173,22 +174,16 @@ public class JigsawActivity extends BaseJigsawActivity {
      */
     public void playPauseTimer(View view) {
         FontAwesomeText v = (FontAwesomeText) view;
-        if (state == State.RUNNING) {
-            state = State.PAUSED;
+        if (state == JigsawState.RUNNING) {
+            state = JigsawState.PAUSED;
             v.setIcon("fa-play");
             chronometer.stop();
             elapsedTime = SystemClock.elapsedRealtime() - chronometer.getBase();
         } else {
-            state = State.RUNNING;
+            state = JigsawState.RUNNING;
             v.setIcon("fa-pause");
             chronometer.setBase(SystemClock.elapsedRealtime() - elapsedTime);
             chronometer.start();
         }
-    }
-
-    public enum State {
-        RUNNING,
-
-        PAUSED
     }
 }
