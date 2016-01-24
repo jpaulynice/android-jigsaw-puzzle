@@ -30,16 +30,13 @@ import com.jigdraw.draw.tasks.JigsawLoader;
 import com.jigdraw.draw.views.JigsawGridView;
 
 /**
- * Represents the jigsaw puzzle solving activity.  A user creates a drawing 
- * then selects a difficulty level (easy, medium, hard). On selecting ok, 
- * this activity starts.
- * <p>
- * To initialize the puzzle grid, we create an asynchronous task to load the 
- * images from the database, randomize them and render them in the grid.
- * <p>
- * The images are stored in the local SQLite DB as Base64 encoded strings. 
- * In the future, the ideal thing would be to offload the data through a 
- * REST API to a central MySQL, PostGreSQL or NoSQL database.
+ * Represents the jigsaw puzzle solving activity.  A user creates a drawing then
+ * selects a difficulty level (easy, medium, hard). On selecting ok, this
+ * activity starts. <p> To initialize the puzzle grid, we create an asynchronous
+ * task to load the images from the database, randomize them and render them in
+ * the grid. <p> The images are stored in the local SQLite DB as Base64 encoded
+ * strings. In the future, the ideal thing would be to offload the data through
+ * a REST API to a central MySQL, PostGreSQL or NoSQL database.
  *
  * @author Jay Paulynice
  */
@@ -54,8 +51,9 @@ public class JigsawActivity extends BaseJigsawActivity {
     private Chronometer chronometer;
 
     /** Used to get current state of the chronometer play or pause */
-    private State state = State.PLAYING;
+    private State state = State.RUNNING;
 
+    /** Need to keep track of time to reset the chronometer */
     private long elapsedTime = 0L;
 
     @Override
@@ -97,7 +95,7 @@ public class JigsawActivity extends BaseJigsawActivity {
         gridView.setOnDropListener(onDropListener(gridView));
         gridView.setOnDragListener(onDragListener());
     }
-    
+
     /**
      * Initialize the chronometer
      */
@@ -163,15 +161,21 @@ public class JigsawActivity extends BaseJigsawActivity {
         };
     }
 
+    /**
+     * Get the play/pause view and update to pause if currently running
+     * otherwise update to running.
+     *
+     * @param view the view
+     */
     public void playPauseTimer(View view) {
         FontAwesomeText v = (FontAwesomeText) view;
-        if (state == State.PLAYING) {
+        if (state == State.RUNNING) {
             state = State.PAUSED;
             v.setIcon("fa-play");
             chronometer.stop();
             elapsedTime = SystemClock.elapsedRealtime() - chronometer.getBase();
         } else {
-            state = State.PLAYING;
+            state = State.RUNNING;
             v.setIcon("fa-pause");
             chronometer.setBase(SystemClock.elapsedRealtime() - elapsedTime);
             chronometer.start();
@@ -179,7 +183,7 @@ public class JigsawActivity extends BaseJigsawActivity {
     }
 
     public enum State {
-        PLAYING,
+        RUNNING,
 
         PAUSED
     }
