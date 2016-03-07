@@ -21,7 +21,10 @@ package com.jigdraw.draw.util;
  *
  * @author Jay Paulynice
  */
-public class DBUtil {
+public final class DBUtil {
+
+    private DBUtil() {}
+
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "jigsaw.db";
     public static final String JIGSAW_TABLE = "jigsaw_images";
