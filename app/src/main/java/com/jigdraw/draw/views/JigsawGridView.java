@@ -389,7 +389,7 @@ public class JigsawGridView extends GridView {
     }
 
     private OrderableAdapter getAdapterInterface() {
-        return ((OrderableAdapter) getAdapter());
+        return (OrderableAdapter) getAdapter();
     }
 
     private long getId(int position) {
@@ -578,7 +578,7 @@ public class JigsawGridView extends GridView {
             View view = getViewForId(id);
             if (view != null) {
                 Point targetColumnRowPair = getColumnAndRowForView(view);
-                if ((aboveRight(targetColumnRowPair, mobileColumnRowPair)
+                if (aboveRight(targetColumnRowPair, mobileColumnRowPair)
                         && deltaYTotal < view.getBottom()
                         && deltaXTotal > view.getLeft()
                         || aboveLeft(targetColumnRowPair, mobileColumnRowPair)
@@ -601,7 +601,7 @@ public class JigsawGridView extends GridView {
                         + mOverlapIfSwitchStraightLine || left(
                         targetColumnRowPair, mobileColumnRowPair)
                         && deltaXTotal < view.getRight()
-                        - mOverlapIfSwitchStraightLine)) {
+                        - mOverlapIfSwitchStraightLine) {
                     float xDiff = Math.abs(GridUtil.getViewX(view)
                             - GridUtil.getViewX(mMobileView));
                     float yDiff = Math.abs(GridUtil.getViewY(view)
