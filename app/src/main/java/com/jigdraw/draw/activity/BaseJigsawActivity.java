@@ -48,6 +48,8 @@ public abstract class BaseJigsawActivity extends Activity {
                 startActivity(new Intent(getApplicationContext(),
                         JigsawHistoryActivity.class));
                 return true;
+            default:
+                break;
         }
         return false;
     }

@@ -53,7 +53,7 @@ public class DBUtil {
     public static final String ORIGINAL_SELECTION_NULL = "original is null";
 
     /** all columns selection */
-    public static String[] ALL_COLUMNS = new String[]{ID_COLUMN, NAME_COLUMN,
+    public final static String[] ALL_COLUMNS = new String[]{ID_COLUMN, NAME_COLUMN,
             IMAGE_COLUMN, DESC_COLUMN, ORIGINAL_COLUMN};
 
     /** arguments to set for the prepared statements */

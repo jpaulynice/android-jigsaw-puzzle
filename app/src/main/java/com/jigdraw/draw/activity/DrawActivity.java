@@ -169,7 +169,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
                 .title(R.string.action_new_drawing)
                 .positiveText(R.string.action_ok)
                 .negativeText(R.string.action_cancel)
-                .content((R.string.action_new_q))
+                .content(R.string.action_new_q)
                 .show();
     }
 
