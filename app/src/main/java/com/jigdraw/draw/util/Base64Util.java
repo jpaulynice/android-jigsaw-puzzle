@@ -28,7 +28,10 @@ import java.io.ByteArrayOutputStream;
  *
  * @author Jay Paulynice
  */
-public class Base64Util {
+public final class Base64Util {
+
+    private Base64Util() {}
+
     /**
      * Convert bitmap to base 64 string
      *

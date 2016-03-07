@@ -18,7 +18,10 @@ package com.jigdraw.draw.util;
 
 import android.view.View;
 
-public class GridUtil {
+public final class GridUtil {
+
+    private GridUtil() {}
+
     public static float getViewX(View view) {
         return Math.abs((view.getRight() - view.getLeft()) / 2);
     }
