@@ -23,8 +23,6 @@ package com.jigdraw.draw.util;
  */
 public final class DBUtil {
 
-    private DBUtil() {}
-
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "jigsaw.db";
     public static final String JIGSAW_TABLE = "jigsaw_images";
@@ -58,6 +56,8 @@ public final class DBUtil {
     /** all columns selection */
     public final static String[] ALL_COLUMNS = new String[]{ID_COLUMN, NAME_COLUMN,
             IMAGE_COLUMN, DESC_COLUMN, ORIGINAL_COLUMN};
+
+    private DBUtil() {}
 
     /** arguments to set for the prepared statements */
     public static String[] getIdArguments(final Long id) {
