@@ -147,11 +147,9 @@ public class JigsawGridView extends GridView {
         }
 
         public void checkAndHandleFirstVisibleCellChange() {
-            if (mCurrentFirstVisibleItem != mPreviousFirstVisibleItem) {
-                if (mCellIsMobile && mMobileItemId != INVALID_ID) {
-                    updateNeighborViewsForId(mMobileItemId);
-                    handleCellSwitch();
-                }
+            if (mCurrentFirstVisibleItem != mPreviousFirstVisibleItem && (mCellIsMobile && mMobileItemId != INVALID_ID)) {
+                updateNeighborViewsForId(mMobileItemId);
+                handleCellSwitch();
             }
         }
 
@@ -160,11 +158,9 @@ public class JigsawGridView extends GridView {
                     + mCurrentVisibleItemCount;
             int previousLastVisibleItem = mPreviousFirstVisibleItem
                     + mPreviousVisibleItemCount;
-            if (currentLastVisibleItem != previousLastVisibleItem) {
-                if (mCellIsMobile && mMobileItemId != INVALID_ID) {
-                    updateNeighborViewsForId(mMobileItemId);
-                    handleCellSwitch();
-                }
+            if (currentLastVisibleItem != previousLastVisibleItem && (mCellIsMobile && mMobileItemId != INVALID_ID)) {
+                updateNeighborViewsForId(mMobileItemId);
+                handleCellSwitch();
             }
         }
 
@@ -268,20 +264,16 @@ public class JigsawGridView extends GridView {
             case MotionEvent.ACTION_UP:
                 touchEventsEnded();
 
-                if (mHoverCell != null) {
-                    if (mDropListener != null) {
-                        mDropListener.onActionDrop();
-                    }
+                if (mHoverCell != null && mDropListener != null) {
+                    mDropListener.onActionDrop();
                 }
                 break;
 
             case MotionEvent.ACTION_CANCEL:
                 touchEventsCancelled();
 
-                if (mHoverCell != null) {
-                    if (mDropListener != null) {
-                        mDropListener.onActionDrop();
-                    }
+                if (mHoverCell != null && mDropListener != null) {
+                    mDropListener.onActionDrop();
                 }
                 break;
 
@@ -312,10 +304,9 @@ public class JigsawGridView extends GridView {
 
     public void startEditMode(int position) {
         requestDisallowInterceptTouchEvent(true);
-        if (isPostHoneycomb())
-            if (position != -1) {
-                startDragAtPosition(position);
-            }
+        if (isPostHoneycomb() && position != -1) {
+            startDragAtPosition(position);
+        }
         mIsEditMode = true;
     }
 
