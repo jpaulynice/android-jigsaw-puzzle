@@ -43,7 +43,7 @@ public class DrawingView extends View {
     private int paintColor = 0xFF660000;
     private Canvas drawCanvas;
     private Bitmap canvasBitmap;
-    private float brushSize, lastBrushSize;
+    private float brushSize;
 
     /**
      * Create new drawing view with context and attributes and setting up the
@@ -62,7 +62,6 @@ public class DrawingView extends View {
      */
     private void init() {
         brushSize = getResources().getInteger(R.integer.medium_size);
-        lastBrushSize = brushSize;
         drawPath = new Path();
         drawPaint = new Paint();
         drawPaint.setColor(paintColor);
@@ -128,7 +127,6 @@ public class DrawingView extends View {
      * @param newSize the new color
      */
     public void setBrushSize(float newSize) {
-        lastBrushSize = brushSize;
         brushSize = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 newSize, getResources().getDisplayMetrics());
         drawPaint.setStrokeWidth(brushSize);
