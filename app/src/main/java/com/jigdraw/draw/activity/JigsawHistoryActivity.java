@@ -40,7 +40,7 @@ public class JigsawHistoryActivity extends BaseJigsawActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
-        Log.d(TAG, "Staring jigsaw history activity...");
+        Log.d(TAG, "Starting jigsaw history activity...");
         super.onCreate(savedInstanceState);
         init();
     }
