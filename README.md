@@ -2,6 +2,7 @@ Android-Jigsaw-Puzzle
 =====================
 
 [![Build Status](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle.svg)](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle)
+[![Coverage Status](https://coveralls.io/repos/github/julesbond007/Android-Jigsaw-Puzzle/badge.svg?branch=master)](https://coveralls.io/github/julesbond007/Android-Jigsaw-Puzzle?branch=master)
 
 Like to draw? Like to solve jigsaw puzzles? Try JigDraw!
 
