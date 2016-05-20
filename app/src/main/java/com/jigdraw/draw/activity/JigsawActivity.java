@@ -43,7 +43,7 @@ import com.jigdraw.draw.views.JigsawGridView;
  * strings. In the future, the ideal thing would be to offload the data through
  * a REST API to a central MySQL, PostGreSQL or NoSQL database.
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class JigsawActivity extends BaseJigsawActivity {
     /** The original image id to look up for jigsaw */

@@ -22,7 +22,7 @@ import android.widget.Toast;
 /**
  * Utils for toasting messages
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public final class ToastUtil {
 

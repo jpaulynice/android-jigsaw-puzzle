@@ -23,7 +23,7 @@ import com.jigdraw.draw.model.enums.Difficulty;
 /**
  * Simple interface for jigsaw manipulations.
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public interface JigsawService {
     /**

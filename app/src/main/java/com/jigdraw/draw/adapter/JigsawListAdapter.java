@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Adapter for our jigsaw puzzle drawing list history view
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class JigsawListAdapter extends JigsawBaseAdapter {
     private Context context;

@@ -33,7 +33,7 @@ import android.text.TextUtils;
 import com.jigdraw.draw.db.JigsawDB;
 
 /**
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class ImageProvider extends ContentProvider {
     static final String PROVIDER_NAME = "com.jigdraw.draw.provider.jigsaw";

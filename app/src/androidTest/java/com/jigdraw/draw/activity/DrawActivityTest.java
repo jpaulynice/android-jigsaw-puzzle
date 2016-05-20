@@ -23,7 +23,7 @@ import android.view.View;
 /**
  * Unit test for draw activity class
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class DrawActivityTest extends
         ActivityInstrumentationTestCase2<DrawActivity> {

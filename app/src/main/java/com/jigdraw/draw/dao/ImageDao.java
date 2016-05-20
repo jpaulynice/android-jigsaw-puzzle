@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * Simple interface for {@link ImageEntity} CRUD operations
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public interface ImageDao {
     /**

@@ -18,7 +18,7 @@ package com.jigdraw.draw.model.enums;
 /**
  * State of the jigsaw solving activity
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public enum JigsawState {
     RUNNING,

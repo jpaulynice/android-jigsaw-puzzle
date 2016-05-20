@@ -30,7 +30,7 @@ import com.jigdraw.draw.model.ImageEntity;
  * Utilities class to convert from {@link ImageEntity} to {@link ContentValues}
  * for database persistence.
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public final class EntityUtil {
 

@@ -32,7 +32,7 @@ import com.jigdraw.draw.tasks.JigsawHistoryLoader;
 /**
  * History activity to see list of jigsaw images created.
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class JigsawHistoryActivity extends BaseJigsawActivity {
     /** Class name for logging */

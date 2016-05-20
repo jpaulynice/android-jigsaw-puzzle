@@ -19,7 +19,7 @@ package com.jigdraw.draw.model.enums;
 /**
  * Jigsaw difficulty levels
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public enum Difficulty {
     EASY(2), MEDIUM(4), HARD(8);

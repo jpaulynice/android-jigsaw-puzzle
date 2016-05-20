@@ -45,7 +45,7 @@ import yuku.ambilwarna.AmbilWarnaDialog;
  * such as draw, create a new drawing, save the current drawing, choose eraser,
  * brush sizes and create a jigsaw puzzle.
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class DrawActivity extends BaseJigsawActivity implements OnClickListener {
     /** Class name for logging */

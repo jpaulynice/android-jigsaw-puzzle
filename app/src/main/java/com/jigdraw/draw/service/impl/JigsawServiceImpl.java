@@ -31,7 +31,7 @@ import java.util.UUID;
 /**
  * Default implementation for {@link com.jigdraw.draw.service.JigsawService}
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class JigsawServiceImpl implements JigsawService {
     /** Class name for logging */

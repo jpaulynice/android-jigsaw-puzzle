@@ -47,7 +47,7 @@ import java.util.List;
  * Default implementation for {@link com.jigdraw.draw.dao.ImageDao}. Provides
  * CRUD database operations for {@link com.jigdraw.draw.model.ImageEntity}
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class ImageDaoImpl implements ImageDao {
     /** Class name for logging */

@@ -22,7 +22,7 @@ import android.test.ApplicationTestCase;
 /**
  * Test application class
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {

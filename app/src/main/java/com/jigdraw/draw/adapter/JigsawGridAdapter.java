@@ -29,7 +29,7 @@ import java.util.List;
 /**
  * Adapter for our jigsaw puzzle grid view
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class JigsawGridAdapter extends JigsawBaseAdapter {
     private Context context;

@@ -28,7 +28,7 @@ import com.jigdraw.draw.R;
 /**
  * Base activity class for activities that share the menu bar
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public abstract class BaseJigsawActivity extends Activity {
     /** Class name for logging */

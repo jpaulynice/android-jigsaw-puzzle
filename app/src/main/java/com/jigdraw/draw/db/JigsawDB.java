@@ -31,7 +31,7 @@ import com.jigdraw.draw.util.DBUtil;
  * Database helper that extends the {@link SQLiteOpenHelper} for database
  * manipulations.
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class JigsawDB extends SQLiteOpenHelper {
     /** tag name for logging */

@@ -35,7 +35,7 @@ import java.util.List;
  * a list of {@link com.jigdraw.draw.model.ImageEntity} objects that were
  * created from an original image with id
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class JigsawLoader extends AsyncTask<Long, Integer, List<Bitmap>> {
     /** Image dao */

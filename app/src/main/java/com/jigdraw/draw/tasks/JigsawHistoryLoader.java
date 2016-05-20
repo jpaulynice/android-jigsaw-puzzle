@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * Async task to load a user's drawing history to show in the history list
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class JigsawHistoryLoader extends AsyncTask<Long, Integer,
         List<Bitmap>> {

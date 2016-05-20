@@ -25,7 +25,7 @@ import com.jigdraw.draw.model.LongParcelable;
 /**
  * Unit test for jigsaw activity class
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class JigsawActivityTest extends
         ActivityInstrumentationTestCase2<JigsawActivity> {

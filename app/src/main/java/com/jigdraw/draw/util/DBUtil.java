@@ -19,7 +19,7 @@ package com.jigdraw.draw.util;
 /**
  * Constants for database, table and columns
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public final class DBUtil {
 

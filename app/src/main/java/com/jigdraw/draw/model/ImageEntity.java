@@ -23,7 +23,7 @@ import com.jigdraw.draw.util.Base64Util;
 /**
  * Entity to encapsulate image attributes
  *
- * @author Jay Paulynice
+ * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class ImageEntity {
     private Bitmap image;
