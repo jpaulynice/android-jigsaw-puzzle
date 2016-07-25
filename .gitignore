@@ -1,4 +1,6 @@
 # Built application files
+*.apk
+*.DS_STORE
 
 # Files for the Dalvik VM
 *.dex

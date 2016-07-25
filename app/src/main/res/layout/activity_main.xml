@@ -20,7 +20,7 @@
               android:layout_height="match_parent"
               android:background="#ff080808"
               android:orientation="vertical"
-              tools:context=".MainActivity">
+              tools:context=".activity.DrawActivity">
 
     <LinearLayout
             android:id="@+id/top_options"
