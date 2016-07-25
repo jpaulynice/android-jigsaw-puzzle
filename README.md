@@ -4,6 +4,8 @@ Android-Jigsaw-Puzzle
 [![Build Status](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle.svg)](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle)
 [![Coverage Status](https://coveralls.io/repos/github/julesbond007/Android-Jigsaw-Puzzle/badge.svg?branch=master)](https://coveralls.io/github/julesbond007/Android-Jigsaw-Puzzle?branch=master)
 
+(https://coveralls.io/repos/github/julesbond007/Android-Jigsaw-Puzzle/docs/google-play-badge.png?branch=master)](https://coveralls.io/github/julesbond007/Android-Jigsaw-Puzzle?branch=master)
+
 Like to draw? Like to solve jigsaw puzzles? Try JigDraw!
 
 This is an Android app where a user draws something and use it to generate and solve jigsaw puzzles of various difficulties (easy, medium, hard).  I have been slowly adding features and plan to complete and release it at some point.  
