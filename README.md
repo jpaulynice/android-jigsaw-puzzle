@@ -4,9 +4,7 @@ Android-Jigsaw-Puzzle
 [![Build Status](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle.svg)](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle)
 [![Coverage Status](https://coveralls.io/repos/github/julesbond007/Android-Jigsaw-Puzzle/badge.svg?branch=master)](https://coveralls.io/github/julesbond007/Android-Jigsaw-Puzzle?branch=master)
 
-[![](https://coveralls.io/repos/github/julesbond007/Android-Jigsaw-Puzzle/docs/google-play-badge.png?branch=master)](https://play.google.com/store/apps/details?id=com.jigsawdraw)
-
-[<img src="https:github.com/julesbond0087/Android-Jigsaw-Puzzle/docs/google-play-badge.png">](http://google.com.au/)
+[<img src="https://github.com/julesbond0087/Android-Jigsaw-Puzzle/docs/google-play-badge.png">](https://play.google.com/store/apps/details?id=com.jigsawdraw
 
 Like to draw? Like to solve jigsaw puzzles? Try JigDraw!
 
