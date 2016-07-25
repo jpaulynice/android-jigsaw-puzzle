@@ -19,7 +19,7 @@ apply plugin: 'com.github.kt3k.coveralls'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '24.0.0'
+    buildToolsVersion '24.0.1'
 
     defaultConfig {
         applicationId "com.jigsawdraw"
@@ -27,6 +27,11 @@ android {
         targetSdkVersion 24
         versionCode 1
         versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        jackOptions {
+            enabled true
+        }
     }
     buildTypes {
         release {
@@ -40,6 +45,12 @@ android {
 
     lintOptions {
         abortOnError false
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+        encoding = 'UTF-8'
     }
 }
 
