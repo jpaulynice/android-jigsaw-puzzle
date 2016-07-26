@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
+<?xml version="1.0" encoding="utf-8"?><!--
   ~ Copyright (c) 2015. Jay Paulynice (jay.paulynice@gmail.com)
   ~
   ~ Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,11 +14,10 @@
   ~ limitations under the License.
   -->
 
-<manifest
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
         package="com.jigdraw.draw">
 
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
             android:allowBackup="true"
@@ -32,15 +30,14 @@
                 android:label="@string/app_name"
                 android:screenOrientation="portrait">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
         <provider
                 android:name=".provider.ImageProvider"
-                android:authorities="com.jigdraw.draw.provider.jigsaw">
-        </provider>
+                android:authorities="com.jigdraw.draw.provider.jigsaw"></provider>
 
         <activity
                 android:name=".activity.JigsawActivity"
@@ -49,7 +46,7 @@
                 android:parentActivityName=".activity.DrawActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".activity.DrawActivity"/>
+                    android:value=".activity.DrawActivity" />
         </activity>
 
         <activity
@@ -59,7 +56,7 @@
                 android:parentActivityName=".activity.DrawActivity">
             <meta-data
                     android:name="android.support.PARENT_ACTIVITY"
-                    android:value=".activity.DrawActivity"/>
+                    android:value=".activity.DrawActivity" />
         </activity>
     </application>
 

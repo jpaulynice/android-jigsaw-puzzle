@@ -15,12 +15,12 @@
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:background="#ff080808"
-              android:orientation="vertical"
-              tools:context=".activity.DrawActivity">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ff080808"
+        android:orientation="vertical"
+        tools:context=".activity.DrawActivity">
 
     <LinearLayout
             android:id="@+id/top_options"
@@ -28,6 +28,7 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:orientation="horizontal">
+
         <ImageButton
                 android:id="@+id/color_pick"
                 android:layout_width="wrap_content"
@@ -35,7 +36,7 @@
                 android:contentDescription="@string/options_paint"
                 android:background="@android:color/transparent"
                 android:src="@drawable/colors_pick"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp" />
 
         <ImageButton
                 android:id="@+id/new_btn"
@@ -44,7 +45,7 @@
                 android:contentDescription="@string/options_new"
                 android:background="@android:color/transparent"
                 android:src="@drawable/new_img"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp" />
 
         <ImageButton
                 android:id="@+id/erase_btn"
@@ -53,7 +54,7 @@
                 android:contentDescription="@string/options_erase"
                 android:background="@android:color/transparent"
                 android:src="@drawable/erase"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp" />
 
         <ImageButton
                 android:id="@+id/save_btn"
@@ -61,7 +62,7 @@
                 android:layout_height="fill_parent"
                 android:contentDescription="@string/options_jigsaw"
                 android:background="@android:color/transparent"
-                android:src="@drawable/jigsaw"/>
+                android:src="@drawable/jigsaw" />
     </LinearLayout>
 
     <!-- Custom View -->
@@ -74,7 +75,7 @@
             android:layout_marginRight="5dp"
             android:layout_marginTop="3dp"
             android:layout_weight="1"
-            android:background="#FFFFFFFF"/>
+            android:background="#FFFFFFFF" />
 
     <!-- Brush sizes -->
 
@@ -92,7 +93,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/brush_sml"
                 android:onClick="handleBrushSize"
-                android:src="@drawable/small"/>
+                android:src="@drawable/small" />
 
         <ImageButton
                 android:id="@+id/medium_brush"
@@ -102,7 +103,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/brush_med"
                 android:onClick="handleBrushSize"
-                android:src="@drawable/medium"/>
+                android:src="@drawable/medium" />
 
         <ImageButton
                 android:id="@+id/large_brush"
@@ -112,7 +113,7 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/brush_lrg"
                 android:onClick="handleBrushSize"
-                android:src="@drawable/large"/>
+                android:src="@drawable/large" />
 
         <ImageButton
                 android:id="@+id/largest_brush"
@@ -121,6 +122,6 @@
                 android:layout_weight="1"
                 android:contentDescription="@string/brush_lrgst"
                 android:onClick="handleBrushSize"
-                android:src="@drawable/largest"/>
+                android:src="@drawable/largest" />
     </LinearLayout>
 </LinearLayout>

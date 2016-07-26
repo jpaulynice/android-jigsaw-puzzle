@@ -3,8 +3,8 @@ sudo: false
 android:
     components:
       - tools
-      - build-tools-24.0.0
-      - android-23
+      - build-tools-24.0.1
+      - android-24
       - extra-android-m2repository
 before_script:
   - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a

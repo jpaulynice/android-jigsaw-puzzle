@@ -181,6 +181,15 @@ public class JigsawGridView extends GridView {
         init(context);
     }
 
+    public void init(Context context) {
+        super.setOnScrollListener(mScrollListener);
+        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+        mSmoothScrollAmountAtEdge = (int) (SMOOTH_SCROLL_AMOUNT_AT_EDGE
+                * metrics.density + 0.5f);
+        mOverlapIfSwitchStraightLine = getResources().getDimensionPixelSize(
+                R.dimen.dgv_overlap_if_switch_straight_line);
+    }
+
     public JigsawGridView(Context context, AttributeSet attrs) {
         super(context, attrs);
         init(context);
@@ -189,15 +198,6 @@ public class JigsawGridView extends GridView {
     public JigsawGridView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         init(context);
-    }
-
-    public void init(Context context) {
-        super.setOnScrollListener(mScrollListener);
-        DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-        mSmoothScrollAmountAtEdge = (int) (SMOOTH_SCROLL_AMOUNT_AT_EDGE
-                * metrics.density + 0.5f);
-        mOverlapIfSwitchStraightLine = getResources().getDimensionPixelSize(
-                R.dimen.dgv_overlap_if_switch_straight_line);
     }
 
     public static boolean isPreLollipop() {

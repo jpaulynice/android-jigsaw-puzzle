@@ -91,6 +91,14 @@ public class ImageEntity {
     }
 
     @Override
+    public int hashCode() {
+        int result = image.hashCode();
+        result = 31 * result + name.hashCode();
+        result = 31 * result + desc.hashCode();
+        return result;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o)
             return true;
@@ -101,14 +109,6 @@ public class ImageEntity {
 
         return desc.equals(entity.desc) && image.equals(entity.image)
                 && name.equals(entity.name);
-    }
-
-    @Override
-    public int hashCode() {
-        int result = image.hashCode();
-        result = 31 * result + name.hashCode();
-        result = 31 * result + desc.hashCode();
-        return result;
     }
 
     @Override
