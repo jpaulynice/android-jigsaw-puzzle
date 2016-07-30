@@ -1,9 +1,6 @@
 language: android
 jdk:
   - oraclejdk8
-env:
-  global:
-    - GRADLE_OPTS="-Xms128m"
 sudo: false
 android:
     components:
