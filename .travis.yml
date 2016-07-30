@@ -4,7 +4,7 @@ jdk:
 sudo: false
 env:
    global:
-     - GRADLE_OPTS="-Xms128m"
+     - GRADLE_OPTS="-Xms12048m"
 android:
     components:
       - tools
@@ -13,7 +13,6 @@ android:
       - extra-android-m2repository
       - extra-android-support
       - extra-google-m2repository
-      - sys-img-armeabi-v7a-android-24
 before_script:
   - echo no | android create avd --force -n test -t android-24 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
