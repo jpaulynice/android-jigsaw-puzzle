@@ -4,7 +4,7 @@ jdk:
 sudo: false
 env:
    global:
-     - GRADLE_OPTS="-Xmx1024m"
+     - GRADLE_OPTS="-Xms128m"
 android:
     components:
       - tools
