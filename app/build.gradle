@@ -54,18 +54,6 @@ android {
     }
 }
 
-if (System.env.TRAVIS == 'true') {
-    allprojects {
-        tasks.withType(GroovyCompile) {
-            groovyOptions.fork = false
-        }
-        tasks.withType(Test) {
-            maxParallelForks = 2
-            minHeapSize = '128m'
-        }
-    }
-}
-
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:24.1.1'
