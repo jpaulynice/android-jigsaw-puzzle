@@ -18,13 +18,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.github.kt3k.coveralls'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 23
     buildToolsVersion '24.0.1'
 
     defaultConfig {
         applicationId "com.jigsawdraw"
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
