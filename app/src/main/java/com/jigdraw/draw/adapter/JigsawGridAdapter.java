@@ -57,8 +57,8 @@ public class JigsawGridAdapter extends JigsawBaseAdapter {
 
         return view;
     }
-    
-    private ImageView newView(int position){
+
+    private ImageView newView(int position) {
         Bitmap d = items.get(position);
 
         ImageView view = new ImageView(context);
@@ -67,7 +67,7 @@ public class JigsawGridAdapter extends JigsawBaseAdapter {
                 .getHeight()));
         view.setPadding(1, 1, 1, 1);
         view.setImageDrawable(new BitmapDrawable(context.getResources(), d));
-        
+
         return view;
     }
 }

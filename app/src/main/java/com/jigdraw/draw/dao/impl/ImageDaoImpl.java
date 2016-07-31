@@ -44,8 +44,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Default implementation for {@link com.jigdraw.draw.dao.ImageDao}. Provides
- * CRUD database operations for {@link com.jigdraw.draw.model.ImageEntity}
+ * Default implementation for {@link com.jigdraw.draw.dao.ImageDao}. Provides CRUD database operations for {@link
+ * com.jigdraw.draw.model.ImageEntity}
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
@@ -76,8 +76,7 @@ public class ImageDaoImpl implements ImageDao {
 
     @Override
     public ImageEntity find(Long id) {
-        Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ID_SELECTION,
-                getIdArguments(id), null, null, null);
+        Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ID_SELECTION, getIdArguments(id), null, null, null);
         ImageEntity entity = getEntityFromCursor(cursor);
         cleanUp(cursor);
 
@@ -87,8 +86,7 @@ public class ImageDaoImpl implements ImageDao {
     @Override
     public List<ImageEntity> findTiles(Long id) {
         List<ImageEntity> entities = new ArrayList<>();
-        Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ORIGINAL_SELECTION,
-                getIdArguments(id), null, null, null);
+        Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ORIGINAL_SELECTION, getIdArguments(id), null, null, null);
         entities.addAll(getAllFromCursor(cursor));
         cleanUp(cursor);
 
@@ -102,8 +100,7 @@ public class ImageDaoImpl implements ImageDao {
         Log.d(TAG, "Updating entity with id: " + entity.getId());
         ContentValues cv = entityToContentValues(entity);
 
-        return db.update(JIGSAW_TABLE, cv, ID_SELECTION,
-                getIdArguments(entity.getId()));
+        return db.update(JIGSAW_TABLE, cv, ID_SELECTION, getIdArguments(entity.getId()));
     }
 
     @Override
@@ -114,9 +111,7 @@ public class ImageDaoImpl implements ImageDao {
 
     @Override
     public List<ImageEntity> getHistory() {
-        Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS,
-                ORIGINAL_SELECTION_NULL,
-                null, null, null, null);
+        Cursor cursor = db.query(JIGSAW_TABLE, ALL_COLUMNS, ORIGINAL_SELECTION_NULL, null, null, null, null);
 
         List<ImageEntity> entities = getAllFromCursor(cursor);
         cleanUp(cursor);
@@ -159,8 +154,7 @@ public class ImageDaoImpl implements ImageDao {
         Long id = cursor.getLong(getIndex(cursor, ID_COLUMN));
 
         Log.d(TAG, "image entity found with name: " + name);
-        ImageEntity entity = new ImageEntity(base64ToBitmap(base64String),
-                name, desc, originalId);
+        ImageEntity entity = new ImageEntity(base64ToBitmap(base64String), name, desc, originalId);
         entity.setId(id);
 
         return entity;

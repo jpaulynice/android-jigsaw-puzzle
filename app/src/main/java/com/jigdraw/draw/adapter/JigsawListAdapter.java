@@ -57,13 +57,12 @@ public class JigsawListAdapter extends JigsawBaseAdapter {
 
         return view;
     }
-    
-    private ImageView newView(int position){
+
+    private ImageView newView(int position) {
         Bitmap d = items.get(position);
         ImageView view = new ImageView(context);
         view.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        view.setLayoutParams(new ListView.LayoutParams(d.getWidth(), d
-                .getHeight()));
+        view.setLayoutParams(new ListView.LayoutParams(d.getWidth(), d.getHeight()));
         view.setImageDrawable(new BitmapDrawable(context.getResources(), d));
 
         return view;

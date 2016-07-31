@@ -28,8 +28,8 @@ import com.jigdraw.draw.service.JigsawService;
 import com.jigdraw.draw.service.impl.JigsawServiceImpl;
 
 /**
- * Class to generate jigsaw pieces and save the tiles in the sqlite database
- * asynchronously returning the id of the original image
+ * Class to generate jigsaw pieces and save the tiles in the sqlite database asynchronously returning the id of the
+ * original image
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */

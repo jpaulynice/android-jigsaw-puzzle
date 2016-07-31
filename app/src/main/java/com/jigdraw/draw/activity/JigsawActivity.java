@@ -31,17 +31,11 @@ import com.jigdraw.draw.tasks.JigsawLoader;
 import com.jigdraw.draw.views.JigsawGridView;
 
 /**
- * Represents the jigsaw puzzle solving activity.  A user creates a drawing then
- * selects a difficulty level (easy, medium, hard). On selecting ok, this
- * activity starts.
- * <p>
- * To initialize the puzzle grid, we create an asynchronous
- * task to load the images from the database, randomize them and render them in
- * the grid.
- * <p>
- * The images are stored in the local SQLite DB as Base64 encoded
- * strings. In the future, the ideal thing would be to offload the data through
- * a REST API to a central MySQL, PostGreSQL or NoSQL database.
+ * Represents the jigsaw puzzle solving activity.  A user creates a drawing then selects a difficulty level (easy,
+ * medium, hard). On selecting ok, this activity starts. <p> To initialize the puzzle grid, we create an asynchronous
+ * task to load the images from the database, randomize them and render them in the grid. <p> The images are stored in
+ * the local SQLite DB as Base64 encoded strings. In the future, the ideal thing would be to offload the data through a
+ * REST API to a central MySQL, PostGreSQL or NoSQL database.
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
@@ -83,20 +77,17 @@ public class JigsawActivity extends BaseJigsawActivity {
      */
     private void initViews() {
         Log.d(TAG, "initializing jigsaw grid view");
-        final JigsawGridView gridView = (JigsawGridView) findViewById(R.id
-                .jigsaw_grid);
+        final JigsawGridView gridView = (JigsawGridView) findViewById(R.id.jigsaw_grid);
 
         JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
-        LongParcelable longParcelable = getIntent().getExtras().getParcelable(
-                ORIGINAL_IMG_ID);
+        LongParcelable longParcelable = getIntent().getExtras().getParcelable(ORIGINAL_IMG_ID);
 
         if (longParcelable == null) {
             throw new IllegalArgumentException("Parcelable can not be null.");
         }
         task.execute(longParcelable.getData());
 
-        gridView.setOnItemLongClickListener(onItemLongClickListener
-                (gridView));
+        gridView.setOnItemLongClickListener(onItemLongClickListener(gridView));
         gridView.setOnDropListener(onDropListener(gridView));
         gridView.setOnDragListener(onDragListener());
     }
@@ -116,12 +107,10 @@ public class JigsawActivity extends BaseJigsawActivity {
      * @param gridView the grid view
      * @return the item long click listener
      */
-    private JigsawGridView.OnItemLongClickListener onItemLongClickListener(
-            final JigsawGridView gridView) {
+    private JigsawGridView.OnItemLongClickListener onItemLongClickListener(final JigsawGridView gridView) {
         return new AdapterView.OnItemLongClickListener() {
             @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view,
-                                           int position, long id) {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 gridView.startEditMode(position);
                 return true;
             }
@@ -158,17 +147,14 @@ public class JigsawActivity extends BaseJigsawActivity {
             }
 
             @Override
-            public void onDragPositionsChanged(int oldPosition,
-                                               int newPosition) {
-                Log.d(TAG, String.format("drag changed from %d to %d",
-                        oldPosition, newPosition));
+            public void onDragPositionsChanged(int oldPosition, int newPosition) {
+                Log.d(TAG, String.format("drag changed from %d to %d", oldPosition, newPosition));
             }
         };
     }
 
     /**
-     * Get the play/pause view and update to pause if currently running
-     * otherwise update to running.
+     * Get the play/pause view and update to pause if currently running otherwise update to running.
      *
      * @param view the view
      */

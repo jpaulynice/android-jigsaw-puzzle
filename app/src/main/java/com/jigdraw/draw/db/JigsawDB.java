@@ -28,8 +28,7 @@ import com.jigdraw.draw.util.DBUtil;
 
 
 /**
- * Database helper that extends the {@link SQLiteOpenHelper} for database
- * manipulations.
+ * Database helper that extends the {@link SQLiteOpenHelper} for database manipulations.
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
@@ -54,8 +53,7 @@ public class JigsawDB extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.d(TAG, "Upgrading database from " + oldVersion + "to " +
-                newVersion);
+        Log.d(TAG, "Upgrading database from " + oldVersion + "to " + newVersion);
         db.execSQL(DBUtil.DROP_JIGSAW_TABLE);
         onCreate(db);
     }

@@ -27,14 +27,15 @@ import android.content.ContentValues;
 import com.jigdraw.draw.model.ImageEntity;
 
 /**
- * Utilities class to convert from {@link ImageEntity} to {@link ContentValues}
- * for database persistence.
+ * Utilities class to convert from {@link ImageEntity} to {@link ContentValues} for database persistence.
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public final class EntityUtil {
 
-    private EntityUtil() {}
+    private EntityUtil() {
+        //
+    }
 
     /**
      * Convert the given image entity to content values

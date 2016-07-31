@@ -93,15 +93,15 @@ public class JigsawGridView extends GridView {
     private OnItemClickListener mUserItemClickListener;
     private OnItemClickListener mLocalItemClickListener = new
             OnItemClickListener() {
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position,
-                                long id) {
-            if (!isEditMode() && isEnabled() && mUserItemClickListener !=
-                    null) {
-                mUserItemClickListener.onItemClick(parent, view, position, id);
-            }
-        }
-    };
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position,
+                                        long id) {
+                    if (!isEditMode() && isEnabled() && mUserItemClickListener !=
+                            null) {
+                        mUserItemClickListener.onItemClick(parent, view, position, id);
+                    }
+                }
+            };
 
     private View mMobileView;
     private OnScrollListener mScrollListener = new OnScrollListener() {
@@ -251,7 +251,7 @@ public class JigsawGridView extends GridView {
                             mHoverCellOriginalBounds.left
                                     + deltaX + mTotalOffsetX,
                             mHoverCellOriginalBounds.top
-                            + deltaY + mTotalOffsetY);
+                                    + deltaY + mTotalOffsetY);
                     mHoverCell.setBounds(mHoverCellCurrentBounds);
                     invalidate();
                     handleCellSwitch();

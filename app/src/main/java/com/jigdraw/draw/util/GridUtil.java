@@ -20,7 +20,9 @@ import android.view.View;
 
 public final class GridUtil {
 
-    private GridUtil() {}
+    private GridUtil() {
+        //
+    }
 
     public static float getViewX(View view) {
         return Math.abs((view.getRight() - view.getLeft()) / 2);

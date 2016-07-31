@@ -23,14 +23,15 @@ import android.util.Base64;
 import java.io.ByteArrayOutputStream;
 
 /**
- * Utilities class for converting image from base 64 to bitmap and bitmap to
- * base 64
+ * Utilities class for converting image from base 64 to bitmap and bitmap to base 64
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public final class Base64Util {
 
-    private Base64Util() {}
+    private Base64Util() {
+        //
+    }
 
     /**
      * Convert bitmap to base 64 string

@@ -19,12 +19,11 @@ package com.jigdraw.draw.adapter;
 import android.widget.BaseAdapter;
 
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
-public abstract class AbstractBaseAdapter extends BaseAdapter implements
-        OrderableAdapter {
-    public static final int INVALID_ID = -1;
+public abstract class AbstractBaseAdapter extends BaseAdapter implements OrderableAdapter {
+    private static final int INVALID_ID = -1;
     private int nextStableId = 0;
     private Map<Object, Integer> mIdMap = new HashMap<>();
 
@@ -34,12 +33,10 @@ public abstract class AbstractBaseAdapter extends BaseAdapter implements
     }
 
     protected void addAllStableId(List<?> items) {
-        for (Object item : items) {
-            addStableId(item);
-        }
+        for (Object item : items) addStableId(item);
     }
 
-    protected void addStableId(Object item) {
+    private void addStableId(Object item) {
         mIdMap.put(item, nextStableId++);
     }
 

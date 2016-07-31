@@ -46,8 +46,7 @@ public class DrawingView extends View {
     private float brushSize;
 
     /**
-     * Create new drawing view with context and attributes and setting up the
-     * default parameters.
+     * Create new drawing view with context and attributes and setting up the default parameters.
      *
      * @param context the context
      * @param attrs the attributes

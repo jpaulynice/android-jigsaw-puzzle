@@ -20,8 +20,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 /**
- * Wrapper for a Long to pass into an intent and to be retrieved in the
- * sub-sequent activity.
+ * Wrapper for a Long to pass into an intent and to be retrieved in the sub-sequent activity.
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */

@@ -41,9 +41,8 @@ import java.util.List;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 /**
- * Main activity class represents all the activities that a user starts with
- * such as draw, create a new drawing, save the current drawing, choose eraser,
- * brush sizes and create a jigsaw puzzle.
+ * Main activity class represents all the activities that a user starts with such as draw, create a new drawing, save
+ * the current drawing, choose eraser, brush sizes and create a jigsaw puzzle.
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
@@ -174,8 +173,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Handle the create jigsaw button click and open dialog to choose
-     * difficulty level
+     * Handle the create jigsaw button click and open dialog to choose difficulty level
      */
     private void openCreateJigsawDialog() {
         new MaterialDialog.Builder(this)
@@ -200,8 +198,8 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Call back to handle the positive and negative clicks on the dialog.  On
-     * positive click start a new drawing and negative click just cancel.
+     * Call back to handle the positive and negative clicks on the dialog.  On positive click start a new drawing and
+     * negative click just cancel.
      *
      * @return button call back
      */
@@ -218,8 +216,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Call back to handle the create jigsaw puzzle after choosing a difficulty
-     * level.
+     * Call back to handle the create jigsaw puzzle after choosing a difficulty level.
      *
      * @return button call back
      */
@@ -235,8 +232,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     }
 
     /**
-     * Call back to handle the color picked and update the view and brush size
-     * colors.
+     * Call back to handle the color picked and update the view and brush size colors.
      *
      * @return button call back
      */

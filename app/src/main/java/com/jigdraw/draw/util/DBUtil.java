@@ -57,7 +57,8 @@ public final class DBUtil {
     public final static String[] ALL_COLUMNS = new String[]{ID_COLUMN, NAME_COLUMN,
             IMAGE_COLUMN, DESC_COLUMN, ORIGINAL_COLUMN};
 
-    private DBUtil() {}
+    private DBUtil() {
+    }
 
     /** arguments to set for the prepared statements */
     public static String[] getIdArguments(final Long id) {

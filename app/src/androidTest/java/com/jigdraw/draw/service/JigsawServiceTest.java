@@ -36,21 +36,21 @@ public class JigsawServiceTest extends AndroidTestCase {
 
     public void testCreateEasyJigsaw() {
         Long id = service.create(Bitmap.createBitmap(20, 20,
-                        Bitmap.Config.ARGB_8888),
+                Bitmap.Config.ARGB_8888),
                 Difficulty.EASY);
         assertNotNull(id);
     }
 
     public void testCreateMediumDiffJigsaw() {
         Long id = service.create(Bitmap.createBitmap(20, 20,
-                        Bitmap.Config.ARGB_8888),
+                Bitmap.Config.ARGB_8888),
                 Difficulty.MEDIUM);
         assertNotNull(id);
     }
 
     public void testCreateHardJigsaw() {
         Long id = service.create(Bitmap.createBitmap(20, 20,
-                        Bitmap.Config.ARGB_8888),
+                Bitmap.Config.ARGB_8888),
                 Difficulty.HARD);
         assertNotNull(id);
     }
