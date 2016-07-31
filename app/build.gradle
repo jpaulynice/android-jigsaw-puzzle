@@ -18,13 +18,13 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.github.kt3k.coveralls'
 
 android {
-    compileSdkVersion 24
+    compileSdkVersion 23
     buildToolsVersion '24.0.1'
 
     defaultConfig {
         applicationId "com.jigsawdraw"
         minSdkVersion 16
-        targetSdkVersion 24
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -51,18 +51,6 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
         encoding = 'UTF-8'
-    }
-}
-
-if (System.env.TRAVIS == 'true') {
-    allprojects {
-        tasks.withType(GroovyCompile) {
-            groovyOptions.fork = false
-        }
-        tasks.withType(Test) {
-            maxParallelForks = 2
-            minHeapSize = '128m'
-        }
     }
 }
 
