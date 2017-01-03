@@ -45,13 +45,11 @@ public abstract class BaseJigsawActivity extends Activity {
         Log.d(TAG, "menu item selected: " + item.getItemId());
         switch (item.getItemId()) {
             case R.id.menu_history:
-                startActivity(new Intent(getApplicationContext(),
-                        JigsawHistoryActivity.class));
+                startActivity(new Intent(getApplicationContext(), JigsawHistoryActivity.class));
                 return true;
             default:
-                break;
+                return false;
         }
-        return false;
     }
 
     /**
