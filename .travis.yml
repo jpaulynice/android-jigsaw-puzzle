@@ -24,7 +24,7 @@ before_install:
     - echo yes | android update sdk --no-ui --force --all --filter android-24 > /dev/null
     - echo yes | android update sdk --no-ui --force --all --filter sysimg-18 > /dev/null
     - echo yes | android update sdk --no-ui --force --all --filter extra-android-support > /dev/null
-    - echo yes | android update sdk --force --all --filter extra-android-m2repository > /dev/null
+    - echo yes | android update sdk --no-ui --force --all --filter extra-android-m2repository > /dev/null
     - echo yes | android update sdk --no-ui --force --all --filter build-tools-25.0.1 > /dev/null
 
 script:
