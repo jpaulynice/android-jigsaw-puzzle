@@ -71,8 +71,7 @@ public class JigsawServiceImpl implements JigsawService {
 
         for (int y = 0; y + tileHeight <= h; y += tileHeight) {
             for (int x = 0; x + tileWidth <= w; x += tileWidth) {
-                Bitmap tile = Bitmap.createBitmap(original, x, y, tileWidth,
-                        tileHeight);
+                Bitmap tile = Bitmap.createBitmap(original, x, y, tileWidth, tileHeight);
                 saveTile(tile, x, y, originalId);
             }
         }
@@ -86,11 +85,11 @@ public class JigsawServiceImpl implements JigsawService {
      * @param original image to save
      */
     private Long saveOriginal(Bitmap original) {
-        String originalName = UUID.randomUUID() + ".png";
-        String originalDesc = "original image " + originalName;
-        Log.d(TAG, "image name: " + originalName);
+        String name = UUID.randomUUID() + ".png";
+        String desc = "original image " + name;
+        Log.d(TAG, "image name: " + name);
 
-        return saveEntity(original, originalName, originalDesc, null);
+        return saveEntity(original, name, desc, null);
     }
 
     /**
@@ -115,8 +114,7 @@ public class JigsawServiceImpl implements JigsawService {
      * @param name the name
      * @param desc the description
      */
-    private Long saveEntity(Bitmap image, String name, String desc,
-                            Long originalId) {
+    private Long saveEntity(Bitmap image, String name, String desc, Long originalId) {
         return dao.create(new ImageEntity(image, name, desc, originalId));
     }
 }
