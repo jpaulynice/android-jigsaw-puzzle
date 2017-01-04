@@ -20,12 +20,12 @@ before_script:
   - adb shell input keyevent 82 &
 before_install:
     - chmod +x gradlew
-    - echo yes | android update sdk --filter --no-ui --force --all platform-tools > /dev/null
-    - echo yes | android update sdk --filter --no-ui --force --all android-24 > /dev/null
-    - echo yes | android update sdk --filter --no-ui --force --all sysimg-18 > /dev/null
-    - echo yes | android update sdk --filter --no-ui --force --all extra-android-support > /dev/null
-    - echo yes | android update sdk --filter extra-android-m2repository > /dev/null
-    - echo yes | android update sdk --filter --no-ui --force --all build-tools-25.0.1 > /dev/null
+    - echo yes | android update sdk --no-ui --force --all --filter platform-tools > /dev/null
+    - echo yes | android update sdk --no-ui --force --all --filter android-24 > /dev/null
+    - echo yes | android update sdk --no-ui --force --all --filter sysimg-18 > /dev/null
+    - echo yes | android update sdk --no-ui --force --all --filter extra-android-support > /dev/null
+    - echo yes | android update sdk --force --all --filter extra-android-m2repository > /dev/null
+    - echo yes | android update sdk --no-ui --force --all --filter build-tools-25.0.1 > /dev/null
 
 script:
   - ./gradlew clean build --stacktrace
