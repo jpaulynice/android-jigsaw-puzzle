@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class AbstractBaseAdapter extends BaseAdapter implements OrderableAdapter {
+abstract class AbstractBaseAdapter extends BaseAdapter implements OrderableAdapter {
     private static final int INVALID_ID = -1;
     private int nextStableId = 0;
     private Map<Object, Integer> mIdMap = new HashMap<>();
@@ -32,8 +32,8 @@ public abstract class AbstractBaseAdapter extends BaseAdapter implements Orderab
         return true;
     }
 
-    protected void addAllStableId(List<?> items) {
-        for (Object item : items) addStableId(item);
+    void addAllStableId(List<?> items) {
+        items.forEach(this::addStableId);
     }
 
     private void addStableId(Object item) {

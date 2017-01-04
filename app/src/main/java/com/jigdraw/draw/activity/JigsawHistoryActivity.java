@@ -20,8 +20,6 @@ import static com.jigdraw.draw.util.ToastUtil.shortToast;
 
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
@@ -77,12 +75,9 @@ public class JigsawHistoryActivity extends BaseJigsawActivity {
      * @return the item long click listener
      */
     private OnItemLongClickListener onItemLongClickListener() {
-        return new OnItemLongClickListener() {
-            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
-                                           final int pos, long id) {
-                Log.d(TAG, "item long clicked element with id: " + id);
-                return true;
-            }
+        return (arg0, arg1, pos, id) -> {
+            Log.d(TAG, "item long clicked element with id: " + id);
+            return true;
         };
     }
 
@@ -92,12 +87,6 @@ public class JigsawHistoryActivity extends BaseJigsawActivity {
      * @return the item click listener
      */
     private OnItemClickListener onItemClickListener() {
-        return new OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1,
-                                    final int pos, long id) {
-                Log.d(TAG, "clicked element with id: " + id);
-            }
-        };
+        return (arg0, arg1, pos, id) -> Log.d(TAG, "clicked element with id: " + id);
     }
 }

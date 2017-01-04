@@ -25,7 +25,6 @@ import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.animation.TypeEvaluator;
-import android.animation.ValueAnimator;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -146,14 +145,14 @@ public class JigsawGridView extends GridView {
             }
         }
 
-        public void checkAndHandleFirstVisibleCellChange() {
+        void checkAndHandleFirstVisibleCellChange() {
             if (mCurrentFirstVisibleItem != mPreviousFirstVisibleItem && (mCellIsMobile && mMobileItemId != INVALID_ID)) {
                 updateNeighborViewsForId(mMobileItemId);
                 handleCellSwitch();
             }
         }
 
-        public void checkAndHandleLastVisibleCellChange() {
+        void checkAndHandleLastVisibleCellChange() {
             int currentLastVisibleItem = mCurrentFirstVisibleItem
                     + mCurrentVisibleItemCount;
             int previousLastVisibleItem = mPreviousFirstVisibleItem
@@ -492,20 +491,15 @@ public class JigsawGridView extends GridView {
                         startValue.bottom, endValue.bottom, fraction));
             }
 
-            public int interpolate(int start, int end, float fraction) {
+            int interpolate(int start, int end, float fraction) {
                 return (int) (start + fraction * (end - start));
             }
         };
 
         ObjectAnimator hoverViewAnimator = ObjectAnimator.ofObject(mHoverCell,
                 "bounds", sBoundEvaluator, mHoverCellCurrentBounds);
-        hoverViewAnimator
-                .addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-                    @Override
-                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                        invalidate();
-                    }
-                });
+        hoverViewAnimator.addUpdateListener(valueAnimator -> invalidate());
+
         hoverViewAnimator.addListener(new AnimatorListenerAdapter() {
             @Override
             public void onAnimationEnd(Animator animation) {
@@ -788,7 +782,7 @@ public class JigsawGridView extends GridView {
         private int mDeltaY;
         private int mDeltaX;
 
-        public PreHoneycombCellAnimator(int deltaX, int deltaY) {
+        PreHoneycombCellAnimator(int deltaX, int deltaY) {
             mDeltaX = deltaX;
             mDeltaY = deltaY;
         }
@@ -806,7 +800,7 @@ public class JigsawGridView extends GridView {
         private int mDeltaY;
         private int mDeltaX;
 
-        public KitKatSwitchCellAnimator(int deltaX, int deltaY) {
+        KitKatSwitchCellAnimator(int deltaX, int deltaY) {
             mDeltaX = deltaX;
             mDeltaY = deltaY;
         }
@@ -862,7 +856,7 @@ public class JigsawGridView extends GridView {
         private int mDeltaY;
         private int mDeltaX;
 
-        public LSwitchCellAnimator(int deltaX, int deltaY) {
+        LSwitchCellAnimator(int deltaX, int deltaY) {
             mDeltaX = deltaX;
             mDeltaY = deltaY;
         }

@@ -20,7 +20,6 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Chronometer;
 
 import com.beardedhen.androidbootstrap.FontAwesomeText;
@@ -108,12 +107,9 @@ public class JigsawActivity extends BaseJigsawActivity {
      * @return the item long click listener
      */
     private JigsawGridView.OnItemLongClickListener onItemLongClickListener(final JigsawGridView gridView) {
-        return new AdapterView.OnItemLongClickListener() {
-            @Override
-            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-                gridView.startEditMode(position);
-                return true;
-            }
+        return (parent, view, position, id) -> {
+            gridView.startEditMode(position);
+            return true;
         };
     }
 
@@ -125,12 +121,9 @@ public class JigsawActivity extends BaseJigsawActivity {
      */
     private JigsawGridView.OnDropListener onDropListener(
             final JigsawGridView gridView) {
-        return new JigsawGridView.OnDropListener() {
-            @Override
-            public void onActionDrop() {
-                Log.d(TAG, "dropped element");
-                gridView.stopEditMode();
-            }
+        return () -> {
+            Log.d(TAG, "dropped element");
+            gridView.stopEditMode();
         };
     }
 

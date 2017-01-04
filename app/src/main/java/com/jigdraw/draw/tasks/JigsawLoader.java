@@ -26,9 +26,9 @@ import com.jigdraw.draw.dao.ImageDao;
 import com.jigdraw.draw.dao.impl.ImageDaoImpl;
 import com.jigdraw.draw.model.ImageEntity;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Class to load jigsaw pieces from the sqlite database asynchronously returning a list of {@link
@@ -56,13 +56,8 @@ public class JigsawLoader extends AsyncTask<Long, Integer, List<Bitmap>> {
     protected List<Bitmap> doInBackground(Long[] params) {
         List<ImageEntity> entities = dao.findTiles(params[0]);
         Collections.shuffle(entities);
-        List<Bitmap> tiles = new ArrayList<>();
 
-        for (ImageEntity entity : entities) {
-            tiles.add(entity.getImage());
-        }
-
-        return tiles;
+        return entities.stream().map(ImageEntity::getImage).collect(Collectors.toList());
     }
 
     @Override
