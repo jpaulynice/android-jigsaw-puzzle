@@ -25,7 +25,7 @@ before_install:
     - echo yes | android update sdk --filter sysimg-18 --no-ui --force > /dev/null
     - echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
     - echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
-    - echo yes | android update sdk --filter build-tools-25.0.2, android-25, extra-android-m2repository --no-ui > /dev/null
+    - echo yes | android update sdk --filter build-tools-25.0.2 > /dev/null
 
 script:
   - ./gradlew clean build --stacktrace
