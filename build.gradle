@@ -4,9 +4,11 @@ buildscript {
         mavenCentral()
         mavenLocal()
         maven { url "https://jitpack.io" }
+        maven { url "https://maven.google.com" }
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.3'
+        classpath 'com.android.tools.build:gradle:2.3.3'
         classpath 'org.kt3k.gradle.plugin:coveralls-gradle-plugin:2.4.0'
     }
 }
@@ -17,6 +19,7 @@ allprojects {
         mavenCentral()
         mavenLocal()
         maven { url "https://jitpack.io" }
+        maven { url "https://maven.google.com" }
     }
     
     if (System.env.TRAVIS == 'true') {
