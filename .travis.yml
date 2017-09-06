@@ -3,37 +3,55 @@ jdk:
   - oraclejdk8
 sudo: false
 env:
-   global:
-     - GRADLE_OPTS="-Xms2048m"
-     - ANDROID_API_LEVEL=24
-     - ANDROID_BUILD_TOOLS_VERSION=24.0.1
-     - ANDROID_ABI=armeabi-v7a
+  matrix:
+    - TEST=unit
+    - TEST=android ANDROID_TARGET=android-19 ANDROID_ABI=armeabi-v7a
+    - TEST=android ANDROID_TARGET=android-21 ANDROID_ABI=armeabi-v7a
+    - TEST=android ANDROID_TARGET=android-22 ANDROID_ABI=armeabi-v7a
+  global:
+    - ADB_INSTALL_TIMEOUT=10
+    - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
+    
 android:
     components:
-     - tools # to get the new `repository-11.xml`
-     - platform-tools
-     - tools # to install Android SDK tools
-     - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-     - android-$ANDROID_API_LEVEL
-     - extra-android-m2repository
-     - extra-google-m2repository
-     - android-$EMULATOR_API_LEVEL
-     - sys-img-armeabi-v7a-android-24
-before_script:
-  - echo no | android create avd --force -n test --target android-24 -t android-24 --abi armeabi-v7a &
-  - emulator -avd test -memory 4000 -noskin -noaudio -cache-size 400 -netfast -no-window -no-boot-anim &
+    - tools
+    - platform-tools
+    - tools
+    # looking for update
+    - build-tools-25.0.2
+    - build-tools-24.0.1
+    - build-tools-23.0.2
+    - android-22
+    - android-23
+    - android-24
+    - android-25
+    - extra-android-m2repository
+    - extra
+    # Specify at least one system image,
+    # if you need to run emulator(s) during your tests
+    - sys-img-armeabi-v7a-android-19
+    - sys-img-armeabi-v7a-android-21
+    - sys-img-armeabi-v7a-android-22
 
-  - android-wait-for-emulator
-  - adb shell input keyevent 82 &
+before_script:
+  - android list targets
+  - ./gradlew clean
+  - ./create_avd.sh
+
+licenses:
+  - 'android-sdk-preview-license-.+'
+  - 'android-sdk-preview-license-52d11cd2'
+  - 'android-sdk-license-.+'
+  - 'google-gdk-license-.+'
 
 before_install:
-    - chmod +x gradlew
-    - echo yes | android update sdk --no-ui --force --all --filter platform-tools > /dev/null
-    - echo yes | android update sdk --no-ui --force --all --filter android-24 > /dev/null
-    - echo yes | android update sdk --no-ui --force --all --filter sysimg-18 > /dev/null
-    - echo yes | android update sdk --no-ui --force --all --filter extra-android-support > /dev/null
-    - echo yes | android update sdk --no-ui --force --all --filter extra-android-m2repository > /dev/null
-    - echo yes | android update sdk --no-ui --force --all --filter build-tools-24.0.1 > /dev/null
+  - chmod +x gradlew
+  - echo yes | android update sdk --no-ui --force --all --filter platform-tools > /dev/null
+  - echo yes | android update sdk --no-ui --force --all --filter android-24 > /dev/null
+  - echo yes | android update sdk --no-ui --force --all --filter sysimg-18 > /dev/null
+  - echo yes | android update sdk --no-ui --force --all --filter extra-android-support > /dev/null
+  - echo yes | android update sdk --no-ui --force --all --filter extra-android-m2repository > /dev/null
+  - echo yes | android update sdk --no-ui --force --all --filter build-tools-24.0.1 > /dev/null
 
 script:
-  - ./gradlew clean build --stacktrace
+  - ./building.sh
