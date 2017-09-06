@@ -18,7 +18,7 @@ android:
      - extra-android-m2repository
      - extra-google-m2repository
      - android-$EMULATOR_API_LEVEL
-     - sys-img-armeabi-v7a-google_apis-$EMULATOR_API_LEVEL
+     - sys-img-armeabi-v7a-android-25
 before_script:
   - echo no | android create avd --force -n test -t android-25 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
