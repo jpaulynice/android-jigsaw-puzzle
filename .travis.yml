@@ -5,8 +5,8 @@ sudo: false
 env:
    global:
      - GRADLE_OPTS="-Xms2048m"
-     - ANDROID_API_LEVEL=25
-     - ANDROID_BUILD_TOOLS_VERSION=25.0.2
+     - ANDROID_API_LEVEL=24
+     - ANDROID_BUILD_TOOLS_VERSION=24.0.1
      - ANDROID_ABI=armeabi-v7a
 android:
     components:
@@ -18,20 +18,20 @@ android:
      - extra-android-m2repository
      - extra-google-m2repository
      - android-$EMULATOR_API_LEVEL
-     - sys-img-armeabi-v7a-android-25
+     - sys-img-armeabi-v7a-android-24
 before_script:
-  - echo no | android create avd --force -n test -t android-25 --abi armeabi-v7a
+  - echo no | android create avd --force -n test --target android-24 -t android-24 --abi armeabi-v7a
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
 before_install:
     - chmod +x gradlew
     - echo yes | android update sdk --no-ui --force --all --filter platform-tools > /dev/null
-    - echo yes | android update sdk --no-ui --force --all --filter android-25 > /dev/null
+    - echo yes | android update sdk --no-ui --force --all --filter android-24 > /dev/null
     - echo yes | android update sdk --no-ui --force --all --filter sysimg-18 > /dev/null
     - echo yes | android update sdk --no-ui --force --all --filter extra-android-support > /dev/null
     - echo yes | android update sdk --no-ui --force --all --filter extra-android-m2repository > /dev/null
-    - echo yes | android update sdk --no-ui --force --all --filter build-tools-25.0.2 > /dev/null
+    - echo yes | android update sdk --no-ui --force --all --filter build-tools-24.0.1 > /dev/null
 
 script:
   - ./gradlew clean build --stacktrace
