@@ -56,7 +56,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.android.support:support-core-utils:26.0.1"
+    compile 'com.android.support:support-core-utils:26.0.1'
     compile 'com.github.yukuku:ambilwarna:2.0.1'
     compile 'com.facebook.android:facebook-android-sdk:4.13.2'
     compile 'org.roboguice:roboguice:4.0.0'
