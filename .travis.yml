@@ -54,4 +54,4 @@ before_install:
   - echo yes | android update sdk --no-ui --force --all --filter build-tools-24.0.1 > /dev/null
 
 script:
-  - ./building.sh
+  - ./build.sh
