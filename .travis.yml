@@ -20,10 +20,12 @@ android:
      - android-$EMULATOR_API_LEVEL
      - sys-img-armeabi-v7a-android-24
 before_script:
-  - echo no | android create avd --force -n test --target android-24 -t android-24 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
+  - echo no | android create avd --force -n test --target android-24 -t android-24 --abi armeabi-v7a &
+  - emulator -avd test -memory 4000 -noskin -noaudio -cache-size 400 -netfast -no-window -no-boot-anim &
+
   - android-wait-for-emulator
   - adb shell input keyevent 82 &
+
 before_install:
     - chmod +x gradlew
     - echo yes | android update sdk --no-ui --force --all --filter platform-tools > /dev/null
