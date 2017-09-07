@@ -23,7 +23,7 @@ android:
 before_script:
   - android list targets
   - ./gradlew clean
-  - ./create_avd.sh
+  - ./create_svd.sh
 
 licenses:
     - 'android-sdk-preview-license-.+'
