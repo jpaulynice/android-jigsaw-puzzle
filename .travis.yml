@@ -38,6 +38,10 @@ before_script:
   - ./gradlew clean
   - ./create_avd.sh
 
+licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 
 before_install:
   - chmod +x gradlew
