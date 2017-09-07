@@ -32,6 +32,7 @@ licenses:
 
 before_install:
   - chmod +x gradlew
+  - chmod +x create_svd.sh
   - echo yes | android update sdk --no-ui --force --all --filter platform-tools > /dev/null
   - echo yes | android update sdk --no-ui --force --all --filter android-26 > /dev/null
   - echo yes | android update sdk --no-ui --force --all --filter sysimg-18 > /dev/null
