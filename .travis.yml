@@ -18,6 +18,7 @@ android:
     - platform-tools
     - tools
     # looking for update
+    - build-tools-26.0.1
     - build-tools-25.0.2
     - build-tools-24.0.1
     - build-tools-23.0.2
@@ -35,7 +36,7 @@ android:
 
 before_script:
   - android list targets
-  - ./gradlew clean
+  - gradle clean
   - ./create_avd.sh
 
 
