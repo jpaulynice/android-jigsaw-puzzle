@@ -36,7 +36,7 @@ android:
 
 before_script:
   - android list targets
-  - gradle clean
+  - ./gradlew clean
   - ./create_avd.sh
 
 
