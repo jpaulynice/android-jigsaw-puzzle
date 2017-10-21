@@ -21,7 +21,6 @@ import static com.jigdraw.draw.util.ToastUtil.shortToast;
 import android.graphics.Bitmap;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -73,7 +72,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * Initialize all the views
      */
     private void initViews() {
-        drawView = (DrawingView) findViewById(R.id.drawing);
+        drawView = findViewById(R.id.drawing);
         drawView.setBrushSize(getResources().getInteger(R.integer.medium_size));
 
         for (View v : getTopOptions()) {
@@ -120,7 +119,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      */
     private List<View> getLayoutChildren(final int layoutId) {
         List<View> views = new ArrayList<>();
-        LinearLayout layout = (LinearLayout) findViewById(layoutId);
+        LinearLayout layout = findViewById(layoutId);
         int count = layout.getChildCount();
         for (int i = 0; i < count; i++) {
             views.add(layout.getChildAt(i));
@@ -204,14 +203,11 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * @return button call back
      */
     private MaterialDialog.SingleButtonCallback newDialogClick() {
-        return new MaterialDialog.SingleButtonCallback() {
-            @Override
-            public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                if (DialogAction.POSITIVE.equals(which)) {
-                    drawView.startNew();
-                }
-                dialog.dismiss();
+        return (dialog, which) -> {
+            if (DialogAction.POSITIVE.equals(which)) {
+                drawView.startNew();
             }
+            dialog.dismiss();
         };
     }
 
@@ -221,13 +217,9 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * @return button call back
      */
     private MaterialDialog.ListCallbackSingleChoice getMDListCallback() {
-        return new MaterialDialog.ListCallbackSingleChoice() {
-            @Override
-            public boolean onSelection(MaterialDialog dialog, View view,
-                                       int which, CharSequence text) {
-                createJigsaw(which);
-                return true;
-            }
+        return (dialog, view, which, text) -> {
+            createJigsaw(which);
+            return true;
         };
     }
 
