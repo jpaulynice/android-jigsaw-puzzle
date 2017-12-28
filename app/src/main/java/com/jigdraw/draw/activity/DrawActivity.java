@@ -72,7 +72,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * Initialize all the views
      */
     private void initViews() {
-        drawView = findViewById(R.id.drawing);
+        drawView = (DrawingView) findViewById(R.id.drawing);
         drawView.setBrushSize(getResources().getInteger(R.integer.medium_size));
 
         for (View v : getTopOptions()) {
@@ -119,7 +119,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      */
     private List<View> getLayoutChildren(final int layoutId) {
         List<View> views = new ArrayList<>();
-        LinearLayout layout = findViewById(layoutId);
+        LinearLayout layout = (LinearLayout) findViewById(layoutId);
         int count = layout.getChildCount();
         for (int i = 0; i < count; i++) {
             views.add(layout.getChildAt(i));

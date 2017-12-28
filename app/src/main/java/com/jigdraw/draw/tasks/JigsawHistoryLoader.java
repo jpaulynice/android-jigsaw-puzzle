@@ -47,7 +47,7 @@ public class JigsawHistoryLoader extends AsyncTask<Long, Integer,
     }
 
     @Override
-    protected List<Bitmap> doInBackground(Long[] params) {
+    protected List<Bitmap> doInBackground(Bitmap... params) {
         List<ImageEntity> data = dao.getHistory();
         return data.stream().map(ImageEntity::getImage).collect(Collectors.toList());
     }

@@ -53,7 +53,7 @@ public class JigsawLoader extends AsyncTask<Long, Integer, List<Bitmap>> {
     }
 
     @Override
-    protected List<Bitmap> doInBackground(Long[] params) {
+    protected List<Bitmap> doInBackground(Bitmap... params) {
         List<ImageEntity> entities = dao.findTiles(params[0]);
         Collections.shuffle(entities);
 
