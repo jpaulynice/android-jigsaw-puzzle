@@ -56,7 +56,7 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:support-core-utils:25.0.2'
+    compile 'com.android.support:support-core-utils:26.0.1'
     compile 'com.github.yukuku:ambilwarna:2.0.1'
     compile 'com.facebook.android:facebook-android-sdk:4.13.2'
     compile 'org.roboguice:roboguice:4.0.0'
@@ -76,7 +76,7 @@ dependencies {
     }
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
     androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support:support-annotations:25.0.2'
+    androidTestCompile 'com.android.support:support-annotations:26.0.1'
 }
 
 coveralls {
