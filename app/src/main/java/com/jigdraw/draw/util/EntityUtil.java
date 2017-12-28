@@ -33,9 +33,7 @@ import com.jigdraw.draw.model.ImageEntity;
  */
 public final class EntityUtil {
 
-    private EntityUtil() {
-        //
-    }
+    private EntityUtil() {}
 
     /**
      * Convert the given image entity to content values
