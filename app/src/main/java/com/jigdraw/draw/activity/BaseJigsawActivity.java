@@ -30,7 +30,7 @@ import com.jigdraw.draw.R;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public abstract class BaseJigsawActivity extends Activity {
+abstract class BaseJigsawActivity extends Activity {
     /** Class name for logging */
     private static final String TAG = "BaseJigsawActivity";
 
