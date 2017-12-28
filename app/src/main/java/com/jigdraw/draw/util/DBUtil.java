@@ -31,6 +31,8 @@ public final class DBUtil {
     public static final String IMAGE_COLUMN = "img";
     public static final String DESC_COLUMN = "desc";
     public static final String ORIGINAL_COLUMN = "original";
+    
+    private DBUtil() {}
 
     /** create jigsaw_images table */
     public static final String CREATE_JIGSAW_TABLE = "create table if not"
@@ -56,9 +58,6 @@ public final class DBUtil {
     /** all columns selection */
     public final static String[] ALL_COLUMNS = new String[]{ID_COLUMN, NAME_COLUMN,
             IMAGE_COLUMN, DESC_COLUMN, ORIGINAL_COLUMN};
-
-    private DBUtil() {
-    }
 
     /** arguments to set for the prepared statements */
     public static String[] getIdArguments(final Long id) {
