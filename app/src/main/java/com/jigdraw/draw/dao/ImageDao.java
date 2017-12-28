@@ -25,7 +25,7 @@ import java.util.List;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-interface ImageDao {
+public interface ImageDao {
     /**
      * Save an image entity
      *

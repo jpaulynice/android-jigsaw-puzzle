@@ -21,7 +21,7 @@ allprojects {
         maven { url "https://jitpack.io" }
         maven { url "https://maven.google.com" }
     }
-    
+
     if (System.env.TRAVIS == 'true') {
         tasks.withType(GroovyCompile) {
             groovyOptions.fork = false
