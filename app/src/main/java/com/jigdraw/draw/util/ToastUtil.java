@@ -26,9 +26,7 @@ import android.widget.Toast;
  */
 public final class ToastUtil {
 
-    private ToastUtil() {
-        //
-    }
+    private ToastUtil() {}
 
     /**
      * Create short toast and show message
