@@ -5,7 +5,7 @@ sudo: false
 env:
   matrix:
     - TEST=unit
-    - TEST=android ANDROID_TARGET=android-26 ANDROID_ABI=armeabi-v7a
+    - TEST=android ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
   global:
     - ADB_INSTALL_TIMEOUT=10
     - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
@@ -14,11 +14,11 @@ android:
     components:
     - tools
     - platform-tools
-    - build-tools-26.0.2
-    - android-26
+    - build-tools-25.0.2
+    - android-25
     - extra-android-m2repository
     - extra
-    - sys-img-armeabi-v7a-android-26
+    - sys-img-armeabi-v7a-android-25
 
 before_script:
   - android list targets
@@ -35,11 +35,11 @@ before_install:
   - chmod +x create_svd.sh
   - chmod +x build.sh
   - echo yes | android update sdk --no-ui --force --all --filter platform-tools > /dev/null
-  - echo yes | android update sdk --no-ui --force --all --filter android-26 > /dev/null
+  - echo yes | android update sdk --no-ui --force --all --filter android-25 > /dev/null
   - echo yes | android update sdk --no-ui --force --all --filter sysimg-18 > /dev/null
   - echo yes | android update sdk --no-ui --force --all --filter extra-android-support > /dev/null
   - echo yes | android update sdk --no-ui --force --all --filter extra-android-m2repository > /dev/null
-  - echo yes | android update sdk --no-ui --force --all --filter build-tools-26.0.1 > /dev/null
+  - echo yes | android update sdk --no-ui --force --all --filter build-tools-25.0.2 > /dev/null
 
 script:
   - ./build.sh
