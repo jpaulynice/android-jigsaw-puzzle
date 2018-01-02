@@ -51,19 +51,19 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'com.android.support:cardview-v7:26.0.1'
-    compile 'com.github.yukuku:ambilwarna:2.0.1'
-    compile 'com.beardedhen:androidbootstrap:1.2.3'
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'com.android.support:cardview-v7:26.0.1'
+    implementation 'com.github.yukuku:ambilwarna:2.0.1'
+    implementation 'com.beardedhen:androidbootstrap:1.2.3'
 
-    compile('com.afollestad.material-dialogs:core:0.9.4.7@aar') {
+    implementation('com.afollestad.material-dialogs:core:0.9.4.7@aar') {
         transitive = true
     }
 
-    testCompile 'junit:junit:4.12'
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1'
-    androidTestCompile 'com.android.support.test:runner:1.0.1'
-    androidTestCompile 'com.android.support:support-annotations:26.0.1'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation 'com.android.support.test:runner:1.0.1'
+    androidTestImplementation 'com.android.support:support-annotations:26.0.1'
 }
 
 coveralls {
