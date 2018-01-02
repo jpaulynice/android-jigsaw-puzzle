@@ -11,19 +11,17 @@ env:
     - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
 
 android:
-    components:
-      - tools
-      - platform-tools
-      - build-tools-25.0.2
-      - android-25
-      - extra-android-m2repository
-      - extra
-      - sys-img-armeabi-v7a-android-25
+  components:
+    - build-tools-26.0.2
+    - android-26
+    - sys-img-armeabi-v7a-android-tv-l
+    - add-on
+    - extra
 
-    licenses:
-      - 'android-sdk-preview-license-.+'
-      - 'android-sdk-license-.+'
-      - 'google-gdk-license-.+'
+  licenses:
+    - 'android-sdk-preview-license-.+'
+    - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 
 before_script:
   - android list targets
