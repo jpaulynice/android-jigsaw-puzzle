@@ -5,7 +5,7 @@ sudo: false
 env:
   matrix:
     - TEST=unit
-    - TEST=android ANDROID_TARGET=android-25 ANDROID_ABI=armeabi-v7a
+    - TEST=android ANDROID_TARGET=android-26 ANDROID_ABI=google_apis/armeabi-v7a
   global:
     - ADB_INSTALL_TIMEOUT=10
     - GRADLE_OPTS="-Xmx512m -XX:MaxPermSize=512m"
