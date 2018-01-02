@@ -13,7 +13,7 @@ I've added a [contributing](https://github.com/julesbond007/Android-Jigsaw-Puzzl
 
 Thanks for looking!
 
-####Demo:
+#### Demo:
 ![Settings Window](https://raw.github.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/screenshots/demo.gif)
 
 Improved UI...added color picker and better dialogs
