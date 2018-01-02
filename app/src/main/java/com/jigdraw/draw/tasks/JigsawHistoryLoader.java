@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class JigsawHistoryLoader extends AsyncTask<Long, Integer,
+public class JigsawHistoryLoader extends AsyncTask<Bitmap, Integer,
         List<Bitmap>> {
     private ImageDao dao;
     private Context context;

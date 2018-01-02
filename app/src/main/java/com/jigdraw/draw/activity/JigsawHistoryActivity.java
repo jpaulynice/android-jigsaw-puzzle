@@ -57,7 +57,7 @@ public class JigsawHistoryActivity extends BaseJigsawActivity {
      */
     private void initViews() {
         Log.d(TAG, "initializing history list view...");
-        ListView lv = findViewById(R.id.history_list);
+        ListView lv = (ListView) findViewById(R.id.history_list);
         JigsawHistoryLoader task = new JigsawHistoryLoader
                 (getApplicationContext(), lv);
 
