@@ -25,7 +25,7 @@ import java.util.Map;
 abstract class AbstractBaseAdapter extends BaseAdapter implements OrderableAdapter {
     private static final int INVALID_ID = -1;
     private int nextStableId = 0;
-    private Map<Object, Integer> mIdMap = new HashMap<>();
+    private Map<Object, Long> mIdMap = new HashMap<>();
 
     @Override
     public final boolean hasStableIds() {
@@ -41,7 +41,7 @@ abstract class AbstractBaseAdapter extends BaseAdapter implements OrderableAdapt
     }
 
     @Override
-    public final Integer getItemId(int position) {
+    public final Long getItemId(int position) {
         if (position < 0 || position >= mIdMap.size()) {
             return INVALID_ID;
         }
