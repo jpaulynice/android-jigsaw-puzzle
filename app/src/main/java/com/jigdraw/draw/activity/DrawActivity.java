@@ -98,7 +98,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      *
      * @return the top layout views
      */
-    public List<View> getTopOptions() {
+    private List<View> getTopOptions() {
         return getLayoutChildren(R.id.top_options);
     }
 
@@ -107,7 +107,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      *
      * @return the top level views
      */
-    public List<View> getBrushes() {
+    private List<View> getBrushes() {
         return getLayoutChildren(R.id.all_brushes);
     }
 
@@ -266,7 +266,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      *
      * @param view the current brush view
      */
-    public void handleBrushSize(View view) {
+    private void handleBrushSize(View view) {
         float bSize = getResources().getInteger(R.integer.medium_size);
         if (view.getId() == R.id.small_brush) {
             bSize = getResources().getInteger(R.integer.small_size);
