@@ -98,7 +98,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      *
      * @return the top layout views
      */
-    private List<View> getTopOptions() {
+    public List<View> getTopOptions() {
         return getLayoutChildren(R.id.top_options);
     }
 
