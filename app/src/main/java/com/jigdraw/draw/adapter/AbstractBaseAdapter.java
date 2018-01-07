@@ -24,7 +24,7 @@ import java.util.Map;
 
 abstract class AbstractBaseAdapter extends BaseAdapter implements OrderableAdapter {
     private static final int INVALID_ID = -1;
-    private int nextStableId = 0;
+    private Long nextStableId = 0L;
     private Map<Object, Long> mIdMap = new HashMap<>();
 
     @Override
