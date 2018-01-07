@@ -41,7 +41,7 @@ abstract class AbstractBaseAdapter extends BaseAdapter implements OrderableAdapt
     }
 
     @Override
-    public final Long getItemId(int position) {
+    public final long getItemId(int position) {
         if (position < 0 || position >= mIdMap.size()) {
             return INVALID_ID;
         }
