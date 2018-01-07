@@ -107,7 +107,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      *
      * @return the top level views
      */
-    private List<View> getBrushes() {
+    public List<View> getBrushes() {
         return getLayoutChildren(R.id.all_brushes);
     }
 
