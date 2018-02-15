@@ -137,7 +137,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
             handleEraseButton();
         } else if (view.getId() == R.id.new_btn) {
             openNewDrawingDialog();
-        } else if (view.getId() == R.id.save_btn) {
+        } else if (view.getId() == R.id.create_jigsaw) {
             openCreateJigsawDialog();
         }
     }
@@ -178,7 +178,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         new MaterialDialog.Builder(this)
                 .title(R.string.level_difficulty)
                 .items("Easy", "Medium", "Hard")
-                .itemsCallbackSingleChoice(0, getMDListCallback())
+                .itemsCallbackSingleChoice(-1, getMDListCallback())
                 .positiveText(R.string.action_ok)
                 .negativeText(R.string.action_cancel)
                 .show();
@@ -267,15 +267,20 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * @param view the current brush view
      */
     public void handleBrushSize(View view) {
-        float bSize = getResources().getInteger(R.integer.medium_size);
-        if (view.getId() == R.id.small_brush) {
-            bSize = getResources().getInteger(R.integer.small_size);
-        } else if (view.getId() == R.id.large_brush) {
-            bSize = getResources().getInteger(R.integer.large_size);
-        } else if (view.getId() == R.id.largest_brush) {
-            bSize = getResources().getInteger(R.integer.largest_size);
-        }
         drawView.setErase(false);
-        drawView.setBrushSize(bSize);
+
+        switch(view.getId()) {
+            case R.id.small_brush:
+                drawView.setBrushSize(getResources().getInteger(R.integer.small_size));
+                break;
+            case R.id.large_brush:
+                drawView.setBrushSize(getResources().getInteger(R.integer.large_size));
+                break;
+            case R.id.largest_brush:
+                drawView.setBrushSize(getResources().getInteger(R.integer.largest_size));
+                break;
+            default:
+                drawView.setBrushSize(getResources().getInteger(R.integer.medium_size));
+        }
     }
 }
