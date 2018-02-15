@@ -266,7 +266,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      *
      * @param view the current brush view
      */
-    private void handleBrushSize(View view) {
+    public void handleBrushSize(View view) {
         float bSize = getResources().getInteger(R.integer.medium_size);
         if (view.getId() == R.id.small_brush) {
             bSize = getResources().getInteger(R.integer.small_size);
