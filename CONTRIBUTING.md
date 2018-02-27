@@ -1,4 +1,4 @@
-#Thanks for your contribution!
+### Thanks for your contribution!
 General approach to pull requests: 
 * fork the repo
 * develop in your branch
@@ -6,7 +6,7 @@ General approach to pull requests:
 
 More info: GitHub [fork & pull](https://help.github.com/articles/using-pull-requests/#fork--pull) 
 
-###IDE
+### IDE
 Currently using [Android Studio](http://developer.android.com/sdk/index.html) v1.3 which is the official IDE for Android application development.
 
 ### General code standards:
