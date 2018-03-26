@@ -76,7 +76,7 @@ public class JigsawActivity extends BaseJigsawActivity {
      */
     private void initViews() {
         Log.d(TAG, "initializing jigsaw grid view");
-        final JigsawGridView gridView = (JigsawGridView) findViewById(R.id.jigsaw_grid);
+        final JigsawGridView gridView = findViewById(R.id.jigsaw_grid);
 
         JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
         LongParcelable longParcelable = getIntent().getExtras().getParcelable(ORIGINAL_IMG_ID);
@@ -95,7 +95,7 @@ public class JigsawActivity extends BaseJigsawActivity {
      * Initialize the chronometer
      */
     private void initTimer() {
-        chronometer = (Chronometer) findViewById(R.id.chronometer);
+        chronometer = findViewById(R.id.chronometer);
         chronometer.setBase(SystemClock.elapsedRealtime());
         chronometer.start();
     }

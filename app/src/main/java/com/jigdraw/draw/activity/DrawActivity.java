@@ -72,7 +72,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      * Initialize all the views
      */
     private void initViews() {
-        drawView = (DrawingView) findViewById(R.id.drawing);
+        drawView = findViewById(R.id.drawing);
         drawView.setBrushSize(getResources().getInteger(R.integer.medium_size));
 
         for (View v : getTopOptions()) {
@@ -119,7 +119,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      */
     private List<View> getLayoutChildren(final int layoutId) {
         List<View> views = new ArrayList<>();
-        LinearLayout layout = (LinearLayout) findViewById(layoutId);
+        LinearLayout layout = findViewById(layoutId);
         int count = layout.getChildCount();
         for (int i = 0; i < count; i++) {
             views.add(layout.getChildAt(i));
@@ -147,7 +147,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      */
     private void handleColorPick() {
         drawView.setErase(false);
-        openColorPickerDialog(false);
+        openColorPickerDialog();
     }
 
     /**
@@ -178,7 +178,10 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         new MaterialDialog.Builder(this)
                 .title(R.string.level_difficulty)
                 .items("Easy", "Medium", "Hard")
-                .itemsCallbackSingleChoice(-1, getMDListCallback())
+                .itemsCallbackSingleChoice(0, (dialog, view, which, text) -> {
+                    createJigsaw(which);
+                    return true;
+                })
                 .positiveText(R.string.action_ok)
                 .negativeText(R.string.action_cancel)
                 .show();
@@ -187,12 +190,11 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     /**
      * Create new dialog for color picker and show it
      *
-     * @param supportsAlpha whether to handle alpha
      */
-    private void openColorPickerDialog(boolean supportsAlpha) {
+    private void openColorPickerDialog() {
         Log.d(TAG, "show color picker dialog...");
         AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, drawView
-                .getPaintColor(), supportsAlpha, getColorPickerCallback());
+                .getPaintColor(), false, getColorPickerCallback());
         dialog.show();
     }
 
@@ -208,18 +210,6 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
                 drawView.startNew();
             }
             dialog.dismiss();
-        };
-    }
-
-    /**
-     * Call back to handle the create jigsaw puzzle after choosing a difficulty level.
-     *
-     * @return button call back
-     */
-    private MaterialDialog.ListCallbackSingleChoice getMDListCallback() {
-        return (dialog, view, which, text) -> {
-            createJigsaw(which);
-            return true;
         };
     }
 

@@ -17,8 +17,7 @@
 package com.jigdraw.draw.activity;
 
 import android.app.ActionBar;
-import android.app.Activity;
-import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -30,7 +29,7 @@ import com.jigdraw.draw.R;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-abstract class BaseJigsawActivity extends Activity {
+abstract class BaseJigsawActivity extends AppCompatActivity {
     /** Class name for logging */
     private static final String TAG = "BaseJigsawActivity";
 
