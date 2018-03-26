@@ -1,4 +1,4 @@
-Android-Jigsaw-Puzzle [![Build Status](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle.svg?branch=master)](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle)
+Android-Jigsaw-Puzzle [![Build Status](https://travis-ci.org/julesbond007/android-jigsaw-puzzle.svg?branch=master)](https://travis-ci.org/julesbond007/android-jigsaw-puzzle)
 =====================
 
 [<img width="300px" src="https://raw.githubusercontent.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/google-play-badge.png">](https://play.google.com/store/apps/details?id=com.jigsawdraw)
