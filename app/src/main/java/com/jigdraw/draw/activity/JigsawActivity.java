@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2015. Jay Paulynice (jay.paulynice@gmail.com)
+ * Copyright (c) 2018. Jay Paulynice (jay.paulynice@gmail.com)
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -79,12 +79,14 @@ public class JigsawActivity extends BaseJigsawActivity {
         final JigsawGridView gridView = findViewById(R.id.jigsaw_grid);
 
         JigsawLoader task = new JigsawLoader(getApplicationContext(), gridView);
-        LongParcelable longParcelable = getIntent().getExtras().getParcelable(ORIGINAL_IMG_ID);
+        Bundle bundle = getIntent().getExtras();
 
-        if (longParcelable == null) {
-            throw new IllegalArgumentException("Parcelable can not be null.");
+        if(bundle != null) {
+            LongParcelable parcelable = bundle.getParcelable(ORIGINAL_IMG_ID);
+            if(parcelable != null) {
+                task.execute(parcelable.getData());
+            }
         }
-        task.execute(longParcelable.getData());
 
         gridView.setOnItemLongClickListener(onItemLongClickListener(gridView));
         gridView.setOnDropListener(onDropListener(gridView));
