@@ -48,14 +48,7 @@ public class JigsawGridAdapter extends JigsawBaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView view;
-        if (convertView == null) {
-            view = newView(position);
-        } else {
-            view = (ImageView) convertView;
-        }
-
-        return view;
+        return convertView == null ? newView(position) : (ImageView) convertView;
     }
 
     private ImageView newView(int position) {
@@ -63,8 +56,7 @@ public class JigsawGridAdapter extends JigsawBaseAdapter {
 
         ImageView view = new ImageView(context);
         view.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        view.setLayoutParams(new GridView.LayoutParams(d.getWidth(), d
-                .getHeight()));
+        view.setLayoutParams(new GridView.LayoutParams(d.getWidth(), d.getHeight()));
         view.setPadding(1, 1, 1, 1);
         view.setImageDrawable(new BitmapDrawable(context.getResources(), d));
 
