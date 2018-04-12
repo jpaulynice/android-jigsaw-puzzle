@@ -131,14 +131,18 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     @Override
     public void onClick(View view) {
         Log.d(TAG, "view id clicked: " + view.getId());
-        if (view.getId() == R.id.color_pick) {
-            handleColorPick();
-        } else if (view.getId() == R.id.erase_btn) {
-            handleEraseButton();
-        } else if (view.getId() == R.id.new_btn) {
-            openNewDrawingDialog();
-        } else if (view.getId() == R.id.create_jigsaw) {
-            openCreateJigsawDialog();
+        switch(view.getId()) {
+            case R.id.color_pick:
+                handleColorPick();
+                break;
+            case R.id.erase_btn:
+                handleEraseButton();
+                break;
+            case R.id.new_btn:
+                openNewDrawingDialog();
+                break;
+            default:
+                openCreateJigsawDialog();
         }
     }
 
@@ -193,8 +197,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      */
     private void openColorPickerDialog() {
         Log.d(TAG, "show color picker dialog...");
-        AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, drawView
-                .getPaintColor(), false, getColorPickerCallback());
+        AmbilWarnaDialog dialog = new AmbilWarnaDialog(this, drawView.getPaintColor(), false, getColorPickerCallback());
         dialog.show();
     }
 
@@ -243,8 +246,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         drawView.setDrawingCacheEnabled(true);
         Bitmap bitmap = drawView.getDrawingCache();
 
-        JigsawGenerator task = new JigsawGenerator(getApplicationContext(),
-                Difficulty.fromValue(which));
+        JigsawGenerator task = new JigsawGenerator(getApplicationContext(), Difficulty.fromValue(which));
 
         shortToast(getApplicationContext(), "Loading...");
         task.execute(bitmap.copy(bitmap.getConfig(), true));
