@@ -1,5 +1,7 @@
 Android-Jigsaw-Puzzle
 =====================
+<img src="https://user-images.githubusercontent.com/38007519/39422727-ce0211b8-4c98-11e8-8d5d-764043416121.png">
+
 
 [<img width="300px" src="https://raw.githubusercontent.com/julesbond007/Android-Jigsaw-Puzzle/master/docs/google-play-badge.png">](https://play.google.com/store/apps/details?id=com.jigsawdraw)
 
