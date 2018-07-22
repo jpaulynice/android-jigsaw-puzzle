@@ -891,11 +891,8 @@ public class JigsawGridView extends GridView {
         }
 
         @Override
-        public void animateSwitchCell(final int originalPosition,
-                                      final int targetPosition) {
-            getViewTreeObserver().addOnPreDrawListener(
-                    new AnimateSwitchViewOnPreDrawListener(originalPosition,
-                            targetPosition));
+        public void animateSwitchCell(final int originalPosition, final int targetPosition) {
+            getViewTreeObserver().addOnPreDrawListener(new AnimateSwitchViewOnPreDrawListener(originalPosition, targetPosition));
         }
     }
 }

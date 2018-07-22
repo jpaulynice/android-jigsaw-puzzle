@@ -23,8 +23,7 @@
     <string name="action_reset">Reset</string>
     <string name="action_undo">Undo</string>
     <string name="action_redo">Redo</string>
-    <string name="action_new_q">New drawing (you will lose the current
-        drawing)?
+    <string name="action_new_q">You will lose the current drawing. Continue?
     </string>
 
     <string name="brush_sml">Small</string>
@@ -32,7 +31,7 @@
     <string name="brush_lrg">Large</string>
     <string name="brush_lrgst">Largest</string>
 
-    <string name="level_difficulty">Difficulty</string>
+    <string name="level_difficulty">Choose a difficulty level:</string>
     <string name="level_easy">Easy</string>
     <string name="level_med">Medium</string>
     <string name="level_hard">Hard</string>
