@@ -52,6 +52,11 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     /** Custom view for drawing */
     private DrawingView drawView;
 
+    /**
+     * View of selected brush
+     */
+    private View selectedBrush;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         Log.d(TAG, "Starting draw activity...");
@@ -74,6 +79,8 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
     private void initViews() {
         drawView = findViewById(R.id.drawing);
         drawView.setBrushSize(getResources().getInteger(R.integer.medium_size));
+        setSelectedBrush(R.id.medium_brush);
+        setEraseSelected(false);
 
         for (View v : getTopOptions()) {
             v.setOnClickListener(this);
@@ -151,6 +158,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      */
     private void handleColorPick() {
         drawView.setErase(false);
+        setEraseSelected(false);
         openColorPickerDialog();
     }
 
@@ -159,6 +167,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      */
     private void handleEraseButton() {
         drawView.setErase(true);
+        setEraseSelected(true);
     }
 
     /**
@@ -260,8 +269,10 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      */
     public void handleBrushSize(View view) {
         drawView.setErase(false);
+        setEraseSelected(false);
+        setSelectedBrush(view.getId());
 
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.small_brush:
                 drawView.setBrushSize(getResources().getInteger(R.integer.small_size));
                 break;
@@ -273,6 +284,34 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
                 break;
             default:
                 drawView.setBrushSize(getResources().getInteger(R.integer.medium_size));
+        }
+    }
+
+    /**
+     * change background of current brush view
+     *
+     * @param id the id of current brush view
+     */
+    private void setSelectedBrush(int id) {
+        if (selectedBrush != null) {
+            selectedBrush.setBackground(getDrawable(R.drawable.btn_default_normal_holo_dark));
+        }
+        selectedBrush = findViewById(id);
+        selectedBrush.setBackground(getDrawable(R.drawable.btn_default_normal_holo_light));
+    }
+
+    /**
+     * change background of erase and color buttons
+     *
+     * @param selected the state of erase button
+     */
+    private void setEraseSelected(boolean selected){
+        if(selected){
+            findViewById(R.id.erase_btn).setBackgroundColor(getColor(android.R.color.darker_gray));
+            findViewById(R.id.color_pick).setBackgroundColor(getColor(android.R.color.transparent));
+        } else {
+            findViewById(R.id.erase_btn).setBackgroundColor(getColor(android.R.color.transparent));
+            findViewById(R.id.color_pick).setBackgroundColor(getColor(android.R.color.darker_gray));
         }
     }
 }
