@@ -36,7 +36,9 @@ import com.jigdraw.draw.db.JigsawDB;
 /**
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class ImageProvider extends ContentProvider {
+public class ImageProvider
+        extends ContentProvider {
+
     static final String PROVIDER_NAME = "com.jigdraw.draw.provider.jigsaw";
     static final String URL = "content://" + PROVIDER_NAME + "/jigsaw_images";
     static final Uri CONTENT_URI = Uri.parse(URL);

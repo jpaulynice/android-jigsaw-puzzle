@@ -38,7 +38,7 @@ public enum Difficulty {
             case 2:
                 return HARD;
             default:
-                throw new IllegalArgumentException("Unknown level");
+                throw new IllegalArgumentException("Unknown difficulty level selected.");
         }
     }
 

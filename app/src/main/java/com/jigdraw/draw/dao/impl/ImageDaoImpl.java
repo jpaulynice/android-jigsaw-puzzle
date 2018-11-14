@@ -49,7 +49,9 @@ import java.util.List;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class ImageDaoImpl implements ImageDao {
+public class ImageDaoImpl
+        implements ImageDao {
+
     /** Class name for logging */
     private static final String TAG = "ImageDaoImpl";
 

@@ -31,7 +31,9 @@ import java.util.List;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class JigsawGridAdapter extends JigsawBaseAdapter {
+public class JigsawGridAdapter
+        extends JigsawBaseAdapter {
+
     private Context context;
     private List<Bitmap> items;
 

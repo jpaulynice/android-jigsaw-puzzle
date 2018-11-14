@@ -45,7 +45,9 @@ import yuku.ambilwarna.AmbilWarnaDialog;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class DrawActivity extends BaseJigsawActivity implements OnClickListener {
+public class DrawActivity
+        extends BaseJigsawActivity
+        implements OnClickListener {
     /** Class name for logging */
     private static final String TAG = "DrawActivity";
 
@@ -82,7 +84,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
         setSelectedBrush(R.id.medium_brush);
         setEraseSelected(false);
 
-        for (View v : getTopOptions()) {
+        for (View v : getMenuOptions()) {
             v.setOnClickListener(this);
         }
     }
@@ -105,7 +107,7 @@ public class DrawActivity extends BaseJigsawActivity implements OnClickListener 
      *
      * @return the top layout views
      */
-    public List<View> getTopOptions() {
+    public List<View> getMenuOptions() {
         return getLayoutChildren(R.id.top_options);
     }
 

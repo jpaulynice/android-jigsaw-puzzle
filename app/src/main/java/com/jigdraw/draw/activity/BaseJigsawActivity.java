@@ -29,7 +29,8 @@ import com.jigdraw.draw.R;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-abstract class BaseJigsawActivity extends AppCompatActivity {
+abstract class BaseJigsawActivity
+        extends AppCompatActivity {
     /** Class name for logging */
     private static final String TAG = "BaseJigsawActivity";
 

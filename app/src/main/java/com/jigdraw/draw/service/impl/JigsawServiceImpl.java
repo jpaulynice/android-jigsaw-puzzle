@@ -33,7 +33,9 @@ import java.util.UUID;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class JigsawServiceImpl implements JigsawService {
+public class JigsawServiceImpl
+        implements JigsawService {
+
     /** Class name for logging */
     private static final String TAG = "JigsawServiceImpl";
 

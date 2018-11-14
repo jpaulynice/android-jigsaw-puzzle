@@ -53,7 +53,9 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class JigsawGridView extends GridView {
+public class JigsawGridView
+        extends GridView {
+
     private BitmapDrawable mHoverCell;
     private Rect mHoverCellCurrentBounds;
     private Rect mHoverCellOriginalBounds;

@@ -37,7 +37,9 @@ import com.jigdraw.draw.R;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class DrawingView extends View {
+public class DrawingView
+        extends View {
+
     private Path drawPath;
     private Paint drawPaint, canvasPaint;
     private int paintColor = 0xFF660000;

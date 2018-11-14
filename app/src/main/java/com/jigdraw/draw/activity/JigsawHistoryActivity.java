@@ -32,7 +32,9 @@ import com.jigdraw.draw.tasks.JigsawHistoryLoader;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class JigsawHistoryActivity extends BaseJigsawActivity {
+public class JigsawHistoryActivity
+        extends BaseJigsawActivity {
+
     /** Class name for logging */
     private static final String TAG = "JigsawHistoryActivity";
 

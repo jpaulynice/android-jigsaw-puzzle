@@ -22,7 +22,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-abstract class JigsawBaseAdapter extends AbstractBaseAdapter {
+abstract class JigsawBaseAdapter
+        extends AbstractBaseAdapter {
+
     private Context context;
     private List<Object> items = new ArrayList<>();
     private int columns;

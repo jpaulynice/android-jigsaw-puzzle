@@ -32,7 +32,9 @@ import com.jigdraw.draw.util.DBUtil;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class JigsawDB extends SQLiteOpenHelper {
+public class JigsawDB
+        extends SQLiteOpenHelper {
+
     /** tag name for logging */
     private static final String TAG = "JigsawDB";
 

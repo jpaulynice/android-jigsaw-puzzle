@@ -22,7 +22,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-abstract class AbstractBaseAdapter extends BaseAdapter implements OrderableAdapter {
+abstract class AbstractBaseAdapter
+        extends BaseAdapter
+        implements OrderableAdapter {
+
     private static final int INVALID_ID = -1;
     private Long nextStableId = 0L;
     private Map<Object, Long> mIdMap = new HashMap<>();

@@ -38,7 +38,9 @@ import com.jigdraw.draw.views.JigsawGridView;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class JigsawActivity extends BaseJigsawActivity {
+public class JigsawActivity
+        extends BaseJigsawActivity {
+
     /** The original image id to look up for jigsaw */
     public static final String ORIGINAL_IMG_ID = "originalId";
 

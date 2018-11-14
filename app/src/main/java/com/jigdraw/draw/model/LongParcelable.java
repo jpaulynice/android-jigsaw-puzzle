@@ -24,7 +24,9 @@ import android.os.Parcelable;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class LongParcelable implements Parcelable {
+public class LongParcelable
+        implements Parcelable {
+
     public static final Parcelable.Creator<LongParcelable> CREATOR = new
             Parcelable.Creator<LongParcelable>() {
                 @Override

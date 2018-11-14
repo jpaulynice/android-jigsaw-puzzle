@@ -33,7 +33,9 @@ import com.jigdraw.draw.service.impl.JigsawServiceImpl;
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class JigsawGenerator extends AsyncTask<Bitmap, Integer, Long> {
+public class JigsawGenerator
+        extends AsyncTask<Bitmap, Integer, Long> {
+
     /** Jigsaw service */
     private JigsawService service;
 
