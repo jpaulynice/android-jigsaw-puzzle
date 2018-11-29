@@ -32,6 +32,7 @@ before_script:
   - ./create_svd.sh
 
 before_install:
+  - yes | sdkmanager "platforms;android-28"
   - chmod +x gradlew
   - chmod +x create_svd.sh
   - chmod +x build.sh
