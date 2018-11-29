@@ -1,6 +1,6 @@
 Android-Jigsaw-Puzzle
 =====================
-[![Build Status](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle.svg?branch=master)](https://travis-ci.org/julesbond007/Android-Jigsaw-Puzzle)
+[![Build Status](https://travis-ci.org/julesbond007/android-jigsaw-puzzle.svg?branch=master)](https://travis-ci.org/julesbond007/https://travis-ci.org/julesbond007/android-jigsaw-puzzle)
 
 
 <img src="https://user-images.githubusercontent.com/38007519/39422727-ce0211b8-4c98-11e8-8d5d-764043416121.png">
