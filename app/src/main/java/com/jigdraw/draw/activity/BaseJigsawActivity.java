@@ -17,7 +17,8 @@
 package com.jigdraw.draw.activity;
 
 import android.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
