@@ -1,10 +1,10 @@
 #!/bin/bash
 
 echo "ASSEMBLE ANDROIDTEST..."
-./gradlew assembleAndroidTest
+./gradlew connectedAndroidTest
 retval=$?
 if [ $retval -ne 0 ]; then
-    echo "error on assembleTest, exit code: "$retval
+    echo "error on connectedAndroidTest, exit code: "$retval
     exit $retval
 fi
 ./gradlew clean
