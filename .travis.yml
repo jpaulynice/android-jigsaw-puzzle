@@ -29,13 +29,13 @@ android:
 before_script:
   - android list targets
   - ./gradlew clean
-  - ./create_svd.sh
+  - ./build-scripts/create_svd.sh
 
 before_install:
   - yes | sdkmanager "platforms;android-28"
   - chmod +x gradlew
-  - chmod +x create_svd.sh
-  - chmod +x build.sh
+  - chmod +x build-scripts/create_svd.sh
+  - chmod +x build-scripts/build.sh
   - echo yes | android update sdk --no-ui --force --all --filter platform-tools > /dev/null
   - echo yes | android update sdk --no-ui --force --all --filter android-26 > /dev/null
   - echo yes | android update sdk --no-ui --force --all --filter sysimg-18 > /dev/null
@@ -44,4 +44,4 @@ before_install:
   - echo yes | android update sdk --no-ui --force --all --filter build-tools-26.0.2 > /dev/null
 
 script:
-  - ./build.sh
+  - ./build-scripts/build.sh
