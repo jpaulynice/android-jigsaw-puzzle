@@ -16,44 +16,52 @@
 
 package com.jigdraw.draw.activity;
 
-import android.test.ActivityInstrumentationTestCase2;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 import android.view.View;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Unit test for draw activity class
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class DrawActivityTest extends
-        ActivityInstrumentationTestCase2<DrawActivity> {
+@RunWith(AndroidJUnit4.class)
+public class DrawActivityTest {
     private static final String TAG = "DrawActivityTest";
     private DrawActivity activity;
 
-    public DrawActivityTest() {
-        super(DrawActivity.class);
+    @Rule
+    public ActivityTestRule<DrawActivity> mActivityRule = new ActivityTestRule<>(DrawActivity.class);
 
+    @Before
+    public void init() {
+        activity = mActivityRule.getActivity();
     }
 
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
-        activity = getActivity();
-    }
-
+    @Test
     public void testActivityNotNull() {
         Log.d(TAG, "testing activity not null...");
         assertNotNull(activity);
     }
 
+    @Test
     public void testControlsVisible() {
         Log.d(TAG, "testing ui controls visible...");
-        for (View v : activity.getTopOptions()) {
-            assertTrue(View.VISIBLE == v.getVisibility());
+        for (View v : activity.getMenuOptions()) {
+            assertEquals(View.VISIBLE, v.getVisibility());
         }
 
         for (View b : activity.getBrushes()) {
-            assertTrue(View.VISIBLE == b.getVisibility());
+            assertEquals(View.VISIBLE, b.getVisibility());
         }
     }
 }

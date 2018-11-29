@@ -16,22 +16,30 @@
 
 package com.jigdraw.draw.activity;
 
-import android.test.ActivityInstrumentationTestCase2;
 
-public class JigsawHistoryActivityTest
-        extends ActivityInstrumentationTestCase2<JigsawHistoryActivity> {
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static org.junit.Assert.assertNotNull;
+
+@RunWith(AndroidJUnit4.class)
+public class JigsawHistoryActivityTest {
     private JigsawHistoryActivity activity;
 
-    public JigsawHistoryActivityTest() {
-        super(JigsawHistoryActivity.class);
+    @Rule
+    public ActivityTestRule<JigsawHistoryActivity> mActivityRule = new ActivityTestRule<>(JigsawHistoryActivity.class);
+
+    @Before
+    public void init() {
+        activity = mActivityRule.getActivity();
     }
 
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
-        activity = getActivity();
-    }
-
+    @Test
     public void testActivityNotNull() {
         assertNotNull(activity);
     }

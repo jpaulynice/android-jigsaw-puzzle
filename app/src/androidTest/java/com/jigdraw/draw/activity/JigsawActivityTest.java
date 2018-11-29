@@ -16,36 +16,35 @@
 
 package com.jigdraw.draw.activity;
 
-import android.content.Intent;
-import android.test.ActivityInstrumentationTestCase2;
-import android.test.RenamingDelegatingContext;
+import android.support.test.rule.ActivityTestRule;
+import android.support.test.runner.AndroidJUnit4;
 
-import com.jigdraw.draw.model.LongParcelable;
+
+import org.junit.Before;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Unit test for jigsaw activity class
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
-public class JigsawActivityTest extends
-        ActivityInstrumentationTestCase2<JigsawActivity> {
+@RunWith(AndroidJUnit4.class)
+public class JigsawActivityTest {
     private JigsawActivity activity;
 
-    public JigsawActivityTest() {
-        super(JigsawActivity.class);
+    @Rule
+    public ActivityTestRule<JigsawActivity> mActivityRule = new ActivityTestRule<>(JigsawActivity.class);
+
+    @Before
+    public void init() {
+        activity = mActivityRule.getActivity();
     }
 
-    @Override
-    public void setUp() throws Exception {
-        super.setUp();
-        RenamingDelegatingContext context = new RenamingDelegatingContext
-                (this.getInstrumentation().getTargetContext()
-                        .getApplicationContext(), "test_");
-        setActivityIntent(new Intent(context, JigsawActivity.class).putExtra(
-                "originalId", new LongParcelable(1L)));
-        activity = getActivity();
-    }
-
+    @Test
     public void testActivityNotNull() {
         assertNotNull(activity);
     }
