@@ -15,6 +15,7 @@
  */
 
 apply plugin: 'com.android.application'
+apply plugin: 'jacoco'
 apply plugin: 'com.github.kt3k.coveralls'
 
 android {
@@ -75,6 +76,6 @@ coveralls {
 }
 
 tasks.coveralls {
-    dependsOn 'connectedAndroidTest'
+    dependsOn 'assembleAndroidTest'
     onlyIf { System.env.'CI' }
 }
