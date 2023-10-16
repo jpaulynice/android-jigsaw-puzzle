@@ -18,6 +18,7 @@ package com.jigdraw.draw.activity;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.widget.Chronometer;
 
 
 import org.junit.Before;
@@ -26,6 +27,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.assertNotNull;
+
+import com.jigdraw.draw.R;
 
 /**
  * Unit test for jigsaw activity class
@@ -47,5 +50,11 @@ public class JigsawActivityTest {
     @Test
     public void testActivityNotNull() {
         assertNotNull(activity);
+    }
+
+    @Test
+    public void testChronometer() {
+        Chronometer chronometer = activity.findViewById(R.id.chronometer);
+        assertNotNull(chronometer);
     }
 }

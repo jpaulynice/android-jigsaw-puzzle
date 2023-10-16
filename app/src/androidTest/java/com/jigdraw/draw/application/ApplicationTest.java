@@ -16,11 +16,31 @@
 
 package com.jigdraw.draw.application;
 
+import static org.junit.Assert.assertNotNull;
+
+import android.app.Application;
+
+import org.junit.Before;
+import org.junit.Test;
+
 /**
  * Test application class
  *
  * @author Jay Paulynice (jay.paulynice@gmail.com)
  */
 public class ApplicationTest {
+
+    private Application application;
+
+    @Before
+    public void setUp() {
+        application = new Application();
+    }
+
+    @Test
+    public void testApplicationInitialization() {
+        assertNotNull(application);
+    }
+
 
 }
